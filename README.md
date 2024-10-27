@@ -1,4 +1,4 @@
-# Octorrent
+# cctorrent.org
 
 This is the repository backing www.octorrent.org.
 
