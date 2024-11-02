@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`forums.octorrent.org started`);
+	console.log(`octorrent.org started`);
 });
 
 
