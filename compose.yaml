@@ -9,9 +9,11 @@ services:
     environment:
       NODE_ENV: production
     restart: always
+    volumes:
+      - ./env:/env
     networks:
       octorrent:
-        ipv4_address: 10.0.1.2
+        ipv4_address: 10.5.0.2
     #profiles:
     #  - donotstart
 
@@ -25,9 +27,11 @@ services:
     environment:
       NODE_ENV: production
     restart: always
+    volumes:
+      - ./env:/env
     networks:
       octorrent:
-        ipv4_address: 10.0.1.3
+        ipv4_address: 10.5.0.3
     #profiles:
     #  - donotstart
 
@@ -38,4 +42,4 @@ networks:
     attachable: true
     ipam:
      config:
-       - subnet: 10.0.1.0/24
+       - subnet: 10.5.0.0/24
