@@ -1,0 +1,113 @@
+:root {
+    --primary: #994ce0;
+    --secondary: #6b339e;
+
+    --background: #141414;
+    --background: #242424;
+    --background: #343434;
+    
+    --text-primary: #e6e6e6;
+    --text-secondary: #b3b3b3;
+
+    --white: #efefef;
+    --black: #000000;
+    
+    --ripple: #666666;
+    --good: #53bd39;
+    --error: #f55442;
+}
+
+html {
+    color: var(--text-primary);
+    background-color: var(--background);
+    font-size: 1em;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--primary) transparent;
+}
+
+::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+}
+
+::selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+body {
+    min-width: var(--width);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+
+header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-width: var(--min-width);
+    background: var(--text-primary);
+    backdrop-filter: blur(3px);
+    z-index: 10;
+}
+
+nav {
+    height: 80px;
+    padding: 5px var(--padding);
+    white-space: nowrap;
+}
+
+header ul {
+    display: flex;
+    align-items: center;
+    column-gap: 40px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+header li {
+    display: inline-block;
+    height: 80px;
+}
+
+header li a {
+    display: block;
+    height: 80px;
+    line-height: 80px;
+    vertical-align: middle;
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header li.home a {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+header li span {
+    color: var(--primary);
+}
+
+
+filler {
+    flex: 1 1 1e-09px;
+}
+
+form {
+    margin: 0;
+}
+

@@ -8,6 +8,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname+'/views');
+
+app.use(express.static('./public'));
 /*
 app.use((req, res, next) => {
 	next();
@@ -16,7 +18,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`octorrent.org started`);
+	console.log(`forums.octorrent.org started`);
 });
 
 
