@@ -152,7 +152,7 @@ section {
 }
 
 sidebar {
-    position: absolute;
+    position: sticky;
     top: 80px;
     display: block;
     border-right: solid 1px var(--background-secondary);
