@@ -160,7 +160,8 @@ sidebar {
     padding: 30px 0;
 }
 
-sidebar a {
+sidebar a,
+        sidebar label {
     display: block;
     padding: 6px 20px;
     cursor: pointer;
@@ -168,6 +169,23 @@ sidebar a {
 
 sidebar a[selected] {
     background-color: #343434;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+sidebar input[type='checkbox'] {
+    display: none;
+}
+
+sidebar container {
+    display: block;
+    max-height: 0px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+sidebar input[type='checkbox']:checked + label + container {
+    max-height: 600px;
 }
 
 table {
@@ -205,6 +223,7 @@ table tr[pinned] td > a:before {
     content: '';
     width: 1em;
     height: 1em;
+    margin-right: 0.2em;
     background-image: url(../icons/ic_pin.svg);
     background-size: cover;
     background-repeat: no-repeat;
