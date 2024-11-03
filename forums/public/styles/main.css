@@ -148,15 +148,16 @@ section {
 	width: var(--width);
 	min-width: calc(var(--min-width) - 80px);
 	padding: 0px 15%;
-    min-height: calc(100vh - 80px);
+    min-height: calc(200vh - 80px);
 }
 
 sidebar {
-    position: sticky;
+    position: absolute;
+    top: 80px;
     display: block;
     border-right: solid 1px var(--background-secondary);
     width: 250px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 140px);
     padding: 30px 0;
 }
 
@@ -164,5 +165,6 @@ sidebar a {
     display: block;
     padding: 6px 20px;
     background-color: #343434;
+    cursor: pointer;
 }
 
