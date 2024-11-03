@@ -1,5 +1,5 @@
 :root {
-    --width: 70%;
+    --width: 80%;
     --min-width: 800px;
 
     --primary: #994ce0;
@@ -19,7 +19,7 @@
     --good: #53bd39;
     --error: #f55442;
 }
-
+/*
 @media(max-width:1500px) {
 	:root {
 		--width: 80% !important;
@@ -30,7 +30,7 @@
 		padding: 0px 10% !important;
 	}
 }
-
+*/
 @media(max-width:1200px) {
 	:root {
 		--width: 90% !important;
@@ -90,7 +90,7 @@ header {
     top: 0;
 	width: var(--width);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0px 15%;
+	padding: 0px 10%;
     background-color: var(--text-primary);
     z-index: 10;
 }
@@ -142,18 +142,17 @@ form {
 }
 
 section {
-    display: block;
+    display: flex;
     position: relative;
     top: 80px;
 	width: var(--width);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0px 15%;
-    min-height: calc(200vh - 80px);
+    align-items: start;
+	padding: 0px 10%;
+    gap: 30px;
 }
 
 sidebar {
-    position: sticky;
-    top: 80px;
     display: block;
     border-right: solid 1px var(--background-secondary);
     width: 250px;
@@ -164,7 +163,59 @@ sidebar {
 sidebar a {
     display: block;
     padding: 6px 20px;
-    background-color: #343434;
     cursor: pointer;
 }
+
+sidebar a[selected] {
+    background-color: #343434;
+}
+
+table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+thead tr {
+    border-bottom: solid 4px var(--background-shimmer);
+}
+
+table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px 0;
+}
+
+table .replies,
+        table .views,
+        table .activity {
+    width: 100px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+table td {
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+table td > a {
+    display: block;
+    margin-bottom: 5px;
+}
+
+table td categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+table td div {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
 
