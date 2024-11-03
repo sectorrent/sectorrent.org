@@ -96,28 +96,24 @@ header {
 }
 
 nav {
-    height: 80px;
     white-space: nowrap;
 }
 
 header ul {
     display: flex;
+    height: 80px;
     align-items: center;
-    column-gap: 40px;
+    column-gap: 20px;
     padding: 0 20px;
     margin: 0 auto;
 }
 
 header li {
     display: inline-block;
-    height: 80px;
 }
 
 header li a {
     display: block;
-    height: 80px;
-    line-height: 80px;
-    vertical-align: middle;
     color: var(--black);
     text-decoration: none;
     cursor: pointer;
@@ -126,6 +122,12 @@ header li a {
 header li.home a {
     font-weight: 700;
     font-size: 1.8em;
+}
+
+header li.button a {
+    padding: 10px 15px;
+    color: var(--text-primary);
+    background-color: var(--primary);
 }
 
 header li span {
