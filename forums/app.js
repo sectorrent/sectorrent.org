@@ -23,3 +23,7 @@ server.listen(80, () => {
 
 
 app.get('/', mainController.getHome);
+app.get('/signin', mainController.getSignIn);
+app.get('/signup', mainController.getSignUp);
+app.get('/forgot-password', mainController.getForgotPassword);
+app.get('/reset-password', mainController.getResetPassword);
