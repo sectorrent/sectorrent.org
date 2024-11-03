@@ -42,7 +42,7 @@ services:
     image: octorrent_org_forums
     container_name: forums
     environment:
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV:-production}
     restart: always
     volumes:
       - ./env:/env
