@@ -186,6 +186,10 @@ sidebar a[type]:before,
     background-position: center;
 }
 
+sidebar a[type='topics']:before {
+    background-image: url(../icons/ic_layers.svg);
+}
+
 sidebar a[type='more']:before {
     background-image: url(../icons/ic_menu.svg);
 }
