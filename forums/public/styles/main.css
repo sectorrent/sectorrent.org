@@ -200,6 +200,17 @@ table td {
     border-bottom: solid 1px var(--background-secondary);
 }
 
+table tr[pinned] td > a:before {
+    display: inline-block;
+    content: '';
+    width: 1em;
+    height: 1em;
+    background-image: url(../icons/ic_pin.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 table td > a {
     display: block;
     margin-bottom: 5px;
