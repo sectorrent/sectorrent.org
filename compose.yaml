@@ -1,4 +1,21 @@
 services:
+  nginx:
+    build:
+      context: ./nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    restart: always
+    networks:
+      octorrent:
+        ipv4_address: 10.5.0.2
+    #profiles:
+    #  - donotstart
+
   web:
     build:
       context: ./www
@@ -13,7 +30,7 @@ services:
       - ./env:/env
     networks:
       octorrent:
-        ipv4_address: 10.5.0.2
+        ipv4_address: 10.5.0.3
     #profiles:
     #  - donotstart
 
@@ -31,7 +48,7 @@ services:
       - ./env:/env
     networks:
       octorrent:
-        ipv4_address: 10.5.0.3
+        ipv4_address: 10.5.0.4
     #profiles:
     #  - donotstart
 
