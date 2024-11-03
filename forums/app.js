@@ -23,6 +23,11 @@ server.listen(80, () => {
 
 
 app.get('/', mainController.getHome);
+app.get('/latest', mainController.getLatest);
+app.get('/top', mainController.getTop);
+app.get('/c/:category', mainController.getCategory);
+app.get('/t/:thread', mainController.getThread);
+
 app.get('/signin', mainController.getSignIn);
 app.get('/signup', mainController.getSignUp);
 app.get('/forgot-password', mainController.getForgotPassword);
