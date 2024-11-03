@@ -53,7 +53,7 @@ html {
     color: var(--text-primary);
     background-color: var(--background);
     font-size: 1em;
-    font-family: monospace;
+    font-family: sans-serif;
     scroll-behavior: smooth;
     scrollbar-color: var(--primary) transparent;
 }
@@ -157,5 +157,12 @@ sidebar {
     border-right: solid 1px var(--background-secondary);
     width: 250px;
     height: calc(100vh - 80px);
+    padding: 30px 0;
+}
+
+sidebar a {
+    display: block;
+    padding: 6px 20px;
+    background-color: #343434;
 }
 
