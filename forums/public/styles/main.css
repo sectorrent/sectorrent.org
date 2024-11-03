@@ -1,10 +1,13 @@
 :root {
+    --width: 70%;
+    --min-width: 800px;
+
     --primary: #994ce0;
     --secondary: #6b339e;
 
     --background: #141414;
-    --background: #242424;
-    --background: #343434;
+    --background-secondary: #242424;
+    --background-shimmer: #343434;
     
     --text-primary: #e6e6e6;
     --text-secondary: #b3b3b3;
@@ -15,6 +18,35 @@
     --ripple: #666666;
     --good: #53bd39;
     --error: #f55442;
+}
+
+@media(max-width:1500px) {
+	:root {
+		--width: 80% !important;
+	}
+
+	header,
+            section {
+		padding: 0px 10% !important;
+	}
+}
+
+@media(max-width:1200px) {
+	:root {
+		--width: 90% !important;
+	}
+
+	header,
+            section {
+		padding: 0px 5% !important;
+	}
+}
+
+@media(max-width:800px) {
+	header,
+            section {
+		padding: 0px 40px !important;
+	}
 }
 
 html {
@@ -48,25 +80,23 @@ html {
 }
 
 body {
-    min-width: var(--width);
+    min-width: var(--min-width);
     margin: 0;
-    overflow-x: hidden;
 }
 
 
 header {
     position: fixed;
-    top: 0px;
-    width: 100%;
-    min-width: var(--min-width);
-    background: var(--text-primary);
-    backdrop-filter: blur(3px);
+    top: 0;
+	width: var(--width);
+	min-width: calc(var(--min-width) - 80px);
+	padding: 0px 15%;
+    background-color: var(--text-primary);
     z-index: 10;
 }
 
 nav {
     height: 80px;
-    padding: 5px var(--padding);
     white-space: nowrap;
 }
 
@@ -109,5 +139,19 @@ filler {
 
 form {
     margin: 0;
+}
+
+section {
+    display: block;
+	width: var(--width);
+	min-width: calc(var(--min-width) - 80px);
+	padding: 0px 15%;
+}
+
+sidebar {
+    display: block;
+    border-right: solid 1px var(--background-secondary);
+    width: 200px;
+    height: 100vh;
 }
 
