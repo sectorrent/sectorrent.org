@@ -197,6 +197,8 @@ sidebar a,
     display: flex;
     align-items: center;
     gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
     padding: 6px 20px;
     transition: background-color 0.3s;
     cursor: pointer;
