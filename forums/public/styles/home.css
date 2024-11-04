@@ -24,7 +24,6 @@ list-head,
 list row {
     display: flex;
     align-items: center;
-    gap: 20px;
 }
 
 list-head {
@@ -39,6 +38,12 @@ cell {
 
 list cell:nth-child(1) {
     flex: 1;
+}
+
+list-body cell:nth-child(2) {
+    width: 50px;
+    color: var(--text-secondary);
+    text-align: center;
 }
 
 list-body row {
