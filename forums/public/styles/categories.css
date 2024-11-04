@@ -1,13 +1,13 @@
-table {
+section table {
     flex: 1;
     border-collapse: collapse;
 }
 
-thead tr {
+section thead tr {
     border-bottom: solid 4px var(--background-shimmer);
 }
 
-table th {
+section table th {
     color: var(--text-secondary);
     font-size: 1em;
     font-weight: normal;
@@ -15,20 +15,20 @@ table th {
     padding: 20px 0;
 }
 
-table .replies,
-        table .views,
-        table .activity {
+section table .replies,
+        section table .views,
+        section table .activity {
     width: 100px;
     color: var(--text-secondary);
     text-align: center;
 }
 
-table td {
+section table td {
     padding: 20px 0;
     border-bottom: solid 1px var(--background-secondary);
 }
 
-table tr[pinned] td > a:before {
+section table tr[pinned] td > a:before {
     display: inline-block;
     content: '';
     width: 1em;
@@ -40,12 +40,12 @@ table tr[pinned] td > a:before {
     background-position: center;
 }
 
-table td > a {
+section table td > a {
     display: block;
     margin-bottom: 5px;
 }
 
-table td categories {
+section table td categories {
     display: flex;
     gap: 10px;
     color: var(--text-secondary);
@@ -53,7 +53,7 @@ table td categories {
     margin-bottom: 10px;
 }
 
-table td categories a {
+section table td categories a {
     display: flex;
     gap: 5px;
     align-items: center;
@@ -61,16 +61,16 @@ table td categories a {
     cursor: pointer;
 }
 
-table td categories a:hover {
+section table td categories a:hover {
     color: var(--text-primary);
 }
 
-table td categories a span {
+section table td categories a span {
     width: 12px;
     height: 12px;
 }
 
-table td div {
+section table td div {
     color: var(--text-secondary);
     font-size: 0.9em;
 }
