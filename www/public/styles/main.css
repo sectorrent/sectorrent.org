@@ -224,6 +224,7 @@ footer ul {
 
 footer li {
     display: block;
+    padding: 2px 0;
 }
 
 footer li a {
