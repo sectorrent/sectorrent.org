@@ -1,3 +1,38 @@
 <%- include('../fragments/header') %>
 
+            <content type='sub'>
+                <h1>Have an Account?</h1>
+                <h2>Sign In and make a comment!</h2>
+                <a class='button' href='/signin'>Sign In</a>
+            </content>
+            <content type='main'>
+                <h1>Welcome!</h1>
+                <h2>Let's create your account</h2>
+                <form action='https://api.octorrent.org/signup' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                    <field>
+                        <input-field title='First Name'>
+                            <input type='text' name='fname' required placeholder='First Name' onkeypress='formAdjust(event)' />
+                        </input-field>
+                        <input-field title='Last Name'>
+                            <input type='text' name='lname' required placeholder='Last Name' onkeypress='formAdjust(event)' />
+                        </input-field>
+                    </field>
+                    <input-field title='Email'>
+                        <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <input-field title='Username'>
+                        <input type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <input-field title='Password'>
+                        <input type='password' name='password' required placeholder='Password' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <input-field title='Retype Password'>
+                        <input type='password' name='rpassword' required placeholder='Retype Password' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <response></response>
+                    <input type='submit' value='Sign Up' />
+                </form>
+            </content>
+            <iframe name='hiddenFrame'></iframe>
+
 <%- include('../fragments/footer') %>

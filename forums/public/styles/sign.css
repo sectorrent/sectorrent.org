@@ -1,5 +1,163 @@
-iframe {
+@media(max-width:1200px) {
+	content[type='main'] {
+        width: 100% !important;
+	}
+
+	content[type='sub'] {
+		display: none;
+	}
+}
+
+iframe[name='hiddenFrame'] {
     display: none;
 }
 
+section {
+    width: 100%;
+    padding: 0 !important;
+    min-height: calc(100vh - 80px);
+    align-items: unset;
+    gap: 0;
+}
+
+content {
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+    align-items: center;
+	text-align: center;
+    gap: 20px;
+}
+
+content[type='main'] {
+    width: 65%;
+}
+
+content[type='sub'] {
+    width: 35%;
+    background-color: var(--background-secondary);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+h2 {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+}
+
+form {
+    display: flex;
+	flex-direction: column;
+    width: 500px;
+    margin-top: 20px;
+    gap: 30px;
+}
+
+
+field {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+input-field {
+	position: relative;
+    display: block;
+	width: 100%;
+}
+
+input-field:before {
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    padding: 0 10px;
+	content: attr(title);
+    background-color: var(--background);
+    font-size: 0.8em;
+	transition: color 0.3s;
+}
+
+input-field:focus-within:before {
+    color: var(--primary);
+}
+
+input[type='email'],
+        input[type='password'],
+        input[type='tel'],
+        input[type='text'] {
+	display: block;
+	width: calc(100% - 32px);;
+	padding: 15px;
+	font-size: 0.8em;
+	border: none;
+	color: var(--text-primary);
+	background-color: transparent;
+	border: solid 1px var(--text-secondary);
+	transition: border 0.3s;
+	outline: none;
+}
+
+input[type='email']:focus,
+        input[type='password']:focus,
+        input[type='tel']:focus,
+        input[type='text']:focus {
+	border: solid 1px var(--primary);
+}
+
+field input-field:nth-child(1) {
+	margin-right: 10px;
+}
+
+field input-field:nth-child(2) {
+	margin-left: 10px;
+}
+
+input[type='submit'] {
+	display: block;
+	padding: 10px 30px;
+	font-size: 1.2em;
+	font-family: sans-serif;
+	border: none;
+	margin: 0px auto;
+	color: var(--white);
+	background-color: var(--primary);
+    border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+input[type='submit']:hover,
+        a.button:hover {
+	background-color: var(--secondary);
+}
+
+response {
+	display: none;
+	font-weight: 0.8em;
+	margin: 0px auto;
+	color: var(--primary);
+	overflow: hidden;
+}
+
+response:not(:empty) {
+	display: block;
+}
+
+a.button {
+	display: block;
+	padding: 10px 30px;
+	font-size: 1.2em;
+	font-family: sans-serif;
+	color: var(--white);
+	background-color: var(--primary);
+    border-radius: 5px;
+    text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
 
