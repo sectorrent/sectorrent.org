@@ -93,6 +93,13 @@ header {
 	padding: 0px 10%;
     background-color: var(--text-primary);
     z-index: 10;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 
 nav {
@@ -167,6 +174,13 @@ sidebar {
     padding: 30px 0;
     color: var(--text-secondary);
     border-right: solid 1px var(--background-secondary);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 
 sidebar a,
@@ -238,12 +252,11 @@ sidebar input[type='checkbox']:checked + label:before {
 
 sidebar container {
     display: block;
-    max-height: 0px;
-    transition: max-height 0.3s;
+    height: 0px;
     overflow: hidden;
 }
 
 sidebar input[type='checkbox']:checked + label + container {
-    max-height: 600px;
+    height: fit-content;
 }
 
