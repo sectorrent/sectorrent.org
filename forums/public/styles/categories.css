@@ -63,7 +63,7 @@ section table td {
     border-bottom: solid 1px var(--background-secondary);
 }
 
-section table tr[pinned] td > a:before {
+section table tr[pinned] td > a:first-child:before {
     display: inline-block;
     content: '';
     width: 1em;
@@ -77,6 +77,12 @@ section table tr[pinned] td > a:before {
 
 section table td > a {
     display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+section table tr td > a:first-child {
     margin-bottom: 5px;
 }
 
@@ -91,6 +97,8 @@ section table td categories {
 section table td categories a {
     display: flex;
     gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
     align-items: center;
     transition: color 0.3s;
     cursor: pointer;
