@@ -1,63 +1,86 @@
 <%- include('../fragments/header') %>
 <%- include('../fragments/sidebar') %>
 
-            <lists>
-                <list>
-                    <list-head>
-                        <row>
-                            <cell>Category</cell>
-                            <cell>Topics</cell>
-                        </row>
-                    </list-head>
-                    <list-body>
-                        <row style='border-left: solid 6px #0088CC'>
-                            <cell>
-                                <a>TOR</a>
-                                <div>
-                                    The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
-                                </div>
-                            </cell>
-                            <cell>1</cell>
-                        </row>
-                        <row style='border-left: solid 6px #652D90'>
-                            <cell>
-                                <a>TOR</a>
-                                <div>
-                                    The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
-                                </div>
-                            </cell>
-                            <cell>1</cell>
-                        </row>
-                    </list-body>
-                </list>
-                <list>
-                    <list-head>
-                        <row>
-                            <cell>Latest</cell>
-                            <cell>Topics</cell>
-                        </row>
-                    </list-head>
-                    <list-body>
-                        <row style='border-left: solid 6px #0088CC'>
-                            <cell>
-                                <a>TOR</a>
-                                <div>
-                                    The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
-                                </div>
-                            </cell>
-                            <cell>1</cell>
-                        </row>
-                        <row style='border-left: solid 6px #652D90'>
-                            <cell>
-                                <a>TOR</a>
-                                <div>
-                                    The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
-                                </div>
-                            </cell>
-                            <cell>1</cell>
-                        </row>
-                    </list-body>
-                </list>
-            </lists>
+            <content>
+                <nav>
+                    <ul>
+                        <li selected>
+                            <a href='/'>Categories</a>
+                        </li>
+                        <li>
+                            <a href='/latest'>Latest</a>
+                        </li>
+                        <li>
+                            <a href='/top'>Top</a>
+                        </li>
+                    </ul>
+                </nav>
+                <lists>
+                    <list>
+                        <list-head>
+                            <row>
+                                <cell>Category</cell>
+                                <cell>Topics</cell>
+                            </row>
+                        </list-head>
+                        <list-body>
+                            <row style='border-left: solid 6px #0088CC'>
+                                <cell>
+                                    <a href='/c/news'>
+                                        <title>TOR</title>
+                                        <div>
+                                            The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                                        </div>
+                                    </a>
+                                </cell>
+                                <cell>1</cell>
+                            </row>
+                            <row style='border-left: solid 6px #652D90'>
+                                <cell>
+                                    <a href='/c/feedback'>
+                                        <title>TOR</title>
+                                        <div>
+                                            The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                                        </div>
+                                    </a>
+                                </cell>
+                                <cell>1</cell>
+                            </row>
+                        </list-body>
+                    </list>
+                    <list>
+                        <list-head>
+                            <row>
+                                <cell>Latest</cell>
+                                <cell>Topics</cell>
+                            </row>
+                        </list-head>
+                        <list-body>
+                            <row style='border-left: solid 6px #0088CC'>
+                                <cell>
+                                    <a href='/c/news'>
+                                        <title>TOR</title>
+                                        <div>
+                                            The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                                        </div>
+                                    </a>
+                                </cell>
+                                <cell>1</cell>
+                            </row>
+                            <row style='border-left: solid 6px #652D90'>
+                                <cell>
+                                    <a href='/c/feedback'>
+                                        <title>TOR</title>
+                                        <div>
+                                            The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                                        </div>
+                                    </a>
+                                </cell>
+                                <cell>1</cell>
+                            </row>
+                        </list-body>
+                    </list>
+                </lists>
+            </content>
 
 <%- include('../fragments/footer') %>

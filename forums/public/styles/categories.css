@@ -1,3 +1,38 @@
+content nav {
+    display: block;
+    padding: 20px 0 10px 0;
+}
+
+content ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+content li {
+    display: block;
+}
+
+content li a {
+    padding: 10px;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+content li a:hover {
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+}
+
+content li[selected] a {
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--primary);
+    border-bottom: solid 2px var(--primary);
+}
+
 section table {
     flex: 1;
     border-collapse: collapse;
