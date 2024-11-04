@@ -126,8 +126,14 @@ header li.home a {
 
 header li.button a {
     padding: 10px 15px;
+    border-radius: 5px;
     color: var(--text-primary);
     background-color: var(--primary);
+    transition: background-color 0.3s;
+}
+
+header li.button a:hover {
+    background-color: var(--secondary);
 }
 
 header li span {
