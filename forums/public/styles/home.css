@@ -1,0 +1,76 @@
+table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+thead tr {
+    border-bottom: solid 4px var(--background-shimmer);
+}
+
+table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px 0;
+}
+
+table .replies,
+        table .views,
+        table .activity {
+    width: 100px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+table td {
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+table tr[pinned] td > a:before {
+    display: inline-block;
+    content: '';
+    width: 1em;
+    height: 1em;
+    margin-right: 0.2em;
+    background-image: url(../icons/ic_pin.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+table td > a {
+    display: block;
+    margin-bottom: 5px;
+}
+
+table td categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+table td categories a {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+table td categories a:hover {
+    color: var(--text-primary);
+}
+
+table td categories a span {
+    width: 12px;
+    height: 12px;
+}
+
+table td div {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}

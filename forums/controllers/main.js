@@ -6,7 +6,7 @@ exports.getHome = async (req, res) => {
 		page: 'home',
 		uniqid: uuidv4,
 		styles: [
-			'main'
+			'home'
 		]
 	});
 };
@@ -17,7 +17,6 @@ exports.getLatest = async (req, res) => {
 		page: 'latest',
 		uniqid: uuidv4,
 		styles: [
-			'main'
 		]
 	});
 };
@@ -28,7 +27,6 @@ exports.getTop = async (req, res) => {
 		page: 'top',
 		uniqid: uuidv4,
 		styles: [
-			'main'
 		]
 	});
 };
@@ -39,7 +37,6 @@ exports.getCategory = async (req, res) => {
 		page: 'category',
 		uniqid: uuidv4,
 		styles: [
-			'main'
 		]
 	});
 };
@@ -50,7 +47,6 @@ exports.getThread = async (req, res) => {
 		page: 'thread',
 		uniqid: uuidv4,
 		styles: [
-			'main'
 		]
 	});
 };
@@ -61,7 +57,6 @@ exports.getSignIn = async (req, res) => {
 		page: 'signin',
 		uniqid: uuidv4,
 		styles: [
-			'main',
 			'sign'
 		]
 	});
@@ -73,7 +68,6 @@ exports.getSignUp = async (req, res) => {
 		page: 'signup',
 		uniqid: uuidv4,
 		styles: [
-			'main',
 			'sign'
 		]
 	});
@@ -85,7 +79,6 @@ exports.getForgotPassword = async (req, res) => {
 		page: 'forgot-password',
 		uniqid: uuidv4,
 		styles: [
-			'main',
 			'sign'
 		]
 	});
@@ -97,7 +90,6 @@ exports.getResetPassword = async (req, res) => {
 		page: 'reset-password',
 		uniqid: uuidv4,
 		styles: [
-			'main',
 			'sign'
 		]
 	});
