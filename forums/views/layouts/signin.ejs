@@ -1,3 +1,16 @@
 <%- include('../fragments/header') %>
 
+            <form action='https://api.octorrent.org/signin' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                <input-field>
+                    <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' />
+                </input-field>
+                <input-field>
+                    <input type='password' name='password' required placeholder='Password' onkeypress='formAdjust(event)' />
+                </input-field>
+                <response></response>
+                <input type='submit' value='Sign In' />
+            </form>
+
+            <iframe name='hiddenFrame'></iframe>
+
 <%- include('../fragments/footer') %>

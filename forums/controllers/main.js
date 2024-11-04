@@ -61,7 +61,8 @@ exports.getSignIn = async (req, res) => {
 		page: 'signin',
 		uniqid: uuidv4,
 		styles: [
-			'main'
+			'main',
+			'sign'
 		]
 	});
 };
@@ -72,7 +73,8 @@ exports.getSignUp = async (req, res) => {
 		page: 'signup',
 		uniqid: uuidv4,
 		styles: [
-			'main'
+			'main',
+			'sign'
 		]
 	});
 };
@@ -83,7 +85,8 @@ exports.getForgotPassword = async (req, res) => {
 		page: 'forgot-password',
 		uniqid: uuidv4,
 		styles: [
-			'main'
+			'main',
+			'sign'
 		]
 	});
 };
@@ -94,7 +97,8 @@ exports.getResetPassword = async (req, res) => {
 		page: 'reset-password',
 		uniqid: uuidv4,
 		styles: [
-			'main'
+			'main',
+			'sign'
 		]
 	});
 };
