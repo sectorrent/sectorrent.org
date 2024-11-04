@@ -17,6 +17,7 @@ exports.getLatest = async (req, res) => {
 		page: 'latest',
 		uniqid: uuidv4,
 		styles: [
+			'categories'
 		]
 	});
 };
@@ -27,6 +28,7 @@ exports.getTop = async (req, res) => {
 		page: 'top',
 		uniqid: uuidv4,
 		styles: [
+			'categories'
 		]
 	});
 };
@@ -37,6 +39,7 @@ exports.getCategory = async (req, res) => {
 		page: 'category',
 		uniqid: uuidv4,
 		styles: [
+			'categories'
 		]
 	});
 };
