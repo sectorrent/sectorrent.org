@@ -38,15 +38,23 @@
 
 	header,
             section {
-		padding: 0px 5% !important;
+		padding: 0 5% !important;
 	}
+
+    footer {
+        padding: 80px 5% 20px 5% !important;
+    }
 }
 
 @media(max-width:800px) {
 	header,
             section {
-		padding: 0px 40px !important;
+		padding: 0 40px !important;
 	}
+
+    footer {
+        padding: 80px 40px 20px 40px !important;
+    }
 }
 
 html {
@@ -265,26 +273,53 @@ footer {
     position: relative;
     display: block;
     top: 80px;
-    width: 100%;
+	width: var(--width);
     min-width: var(--min-width);
-    padding: 80px 0 20px;
+    padding: 80px 10% 20px 10%;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
 }
 
-footer table {
-    table-layout: fixed;
-    width: var(--width);
-    margin: 0 auto 60px;
+footer nav {
+    display: flex;
+    margin-bottom: 60px;
 }
 
-footer th,
-        footer td {
-    text-align: left;
+footer nav div {
+    flex: 1;
 }
 
-footer td a {
+footer nav div[type='social'] svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+footer nav div[type='social'] a:hover svg {
+    fill: var(--primary);
+}
+
+footer title {
+    display: block;
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+footer li {
+    display: block;
+}
+
+footer li a {
     font-size: 0.8em;
     color: var(--text-secondary);
     text-decoration: none;
@@ -292,13 +327,13 @@ footer td a {
     cursor: pointer;
 }
 
-footer td a:hover {
+footer li a:hover {
     color: var(--primary);
 }
 
 footer year {
     display: block;
-    width: var(--width);
+    width: 100%;
     height: 30px;
     padding-top: 20px;
     margin: auto;

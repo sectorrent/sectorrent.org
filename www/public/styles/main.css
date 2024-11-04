@@ -38,15 +38,23 @@
 
 	header,
             section {
-		padding: 0px 5% !important;
+		padding: 0 5% !important;
 	}
+
+    footer {
+        padding: 80px 5% 20px 5% !important;
+    }
 }
 
 @media(max-width:800px) {
 	header,
             section {
-		padding: 0px 40px !important;
+		padding: 0 40px !important;
 	}
+
+    footer {
+        padding: 80px 40px 20px 40px !important;
+    }
 }
 
 html {
@@ -167,124 +175,58 @@ section {
     gap: 30px;
 }
 
-sidebar {
-    display: block;
-    width: 250px;
-    height: calc(100vh - 140px);
-    padding: 30px 0;
-    color: var(--text-secondary);
-    border-right: solid 1px var(--background-secondary);
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                supported by Chrome, Edge, Opera and Firefox */
-}
-
-sidebar a,
-        sidebar label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 20px;
-    transition: background-color 0.3s;
-    cursor: pointer;
-}
-
-sidebar label {
-    color: var(--text-primary);
-}
-
-sidebar a[type]:before,
-        sidebar label:before {
-    display: inline-block;
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-sidebar a[type='topics']:before {
-    background-image: url(../icons/ic_layers.svg);
-}
-
-sidebar a[type='more']:before {
-    background-image: url(../icons/ic_menu.svg);
-}
-
-sidebar a[type='all']:before {
-    background-image: url(../icons/ic_list.svg);
-}
-
-sidebar a[selected] {
-    background-color: #343434;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-sidebar a:hover,
-        sidebar label:hover {
-    background-color: #343434;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-sidebar a span {
-    width: 16px;
-    height: 16px;
-}
-
-sidebar input[type='checkbox'] {
-    display: none;
-}
-
-sidebar label:before {
-    background-image: url(../icons/ic_less.svg);
-}
-
-sidebar input[type='checkbox']:checked + label:before {
-    background-image: url(../icons/ic_more.svg);
-}
-
-sidebar container {
-    display: block;
-    height: 0px;
-    overflow: hidden;
-}
-
-sidebar input[type='checkbox']:checked + label + container {
-    height: fit-content;
-}
-
 
 footer {
     position: relative;
     display: block;
     top: 80px;
-    width: 100%;
+	width: var(--width);
     min-width: var(--min-width);
-    padding: 80px 0 20px;
+    padding: 80px 10% 20px 10%;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
 }
 
-footer table {
-    table-layout: fixed;
-    width: var(--width);
-    margin: 0 auto 60px;
+footer nav {
+    display: flex;
+    margin-bottom: 60px;
 }
 
-footer th,
-        footer td {
-    text-align: left;
+footer nav div {
+    flex: 1;
 }
 
-footer td a {
+footer nav div[type='social'] svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+footer nav div[type='social'] a:hover svg {
+    fill: var(--primary);
+}
+
+footer title {
+    display: block;
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+footer li {
+    display: block;
+}
+
+footer li a {
     font-size: 0.8em;
     color: var(--text-secondary);
     text-decoration: none;
@@ -292,13 +234,13 @@ footer td a {
     cursor: pointer;
 }
 
-footer td a:hover {
+footer li a:hover {
     color: var(--primary);
 }
 
 footer year {
     display: block;
-    width: var(--width);
+    width: 100%;
     height: 30px;
     padding-top: 20px;
     margin: auto;

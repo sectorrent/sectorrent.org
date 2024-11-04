@@ -38,12 +38,12 @@ content[type='sub'] {
     background-color: var(--background-secondary);
 }
 
-h1 {
+section h1 {
     margin: 0;
     font-size: 2.5em;
 }
 
-h2 {
+section h2 {
     margin: 0;
     color: var(--text-secondary);
     font-size: 1em;
