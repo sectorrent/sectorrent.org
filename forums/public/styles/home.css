@@ -1,0 +1,57 @@
+@media(max-width:1000px) {
+    list {
+        width: 100% !important;
+    }
+}
+
+lists {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+list {
+    display: block;
+    width: calc(50% - 20px);
+}
+
+list-head,
+        list-body {
+    display: block;
+}
+
+list row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+list-head {
+    color: var(--text-secondary);
+    padding: 20px 0;
+    border-bottom: solid 4px var(--background-shimmer);
+}
+
+cell {
+    display: block;
+}
+
+list cell:nth-child(1) {
+    flex: 1;
+}
+
+list-body row {
+    padding: 20px 0 20px 20px;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+list-body a {
+    display: block;
+    margin-bottom: 5px;
+}
+
+list-body div {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
