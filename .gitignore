@@ -3,3 +3,5 @@
 /env
 /www/config.json
 /forums/config.json
+/database/data
+/database/keyfile

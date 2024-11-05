@@ -11,7 +11,7 @@ Users
 ```json
 {
     "email": "ted.bundy@octorrent.org",
-    "username": "Ted_Bundy"
+    "username": "Ted_Bundy",
     "fname": "Ted",
     "lname": "Bundy",
     "password": "BLOWFISH_HASH",
