@@ -6,3 +6,4 @@
 /forums/config.json
 /database/data
 /database/keyfile
+/nginx/certs
