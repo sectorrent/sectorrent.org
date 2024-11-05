@@ -10,7 +10,7 @@
         "secret": "${TOKEN_SECRET}"
     },
     "database": {
-        "host": "admin-${SERVER}.${DOMAIN}",
+        "host": "db.${DOMAIN}",
         "port": ${DB_PORT},
         "replica_set": ${DB_REPLICA},
         "user": "${DB_USER}",
