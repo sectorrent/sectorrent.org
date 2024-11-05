@@ -30,6 +30,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     networks:
       - lan
+    profiles:
+      - donotstart
 
   web:
     build:
