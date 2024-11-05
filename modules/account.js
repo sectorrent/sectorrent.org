@@ -2,7 +2,7 @@ const { ObjectId, Long } = require('mongodb');
 const jwt = require('./jwt');
 const bcrypt = require('bcryptjs');
 const FieldError = require('./field_error');
-const session = require('./session');
+//const session = require('./session');
 const mailer = require('./mailer');
 const middleware = require('./middleware');
 const form = require('./form');
@@ -119,6 +119,7 @@ exports.signIn = async (req, res) => {
 	req.session.signature = token.split('.')[2];
 	req.session.secret = data.password;
 
+	/*
 	const ip = session.getUserIP(req);
 
 	session.getLocation(req, ip).then(async (location) => {
@@ -155,6 +156,7 @@ exports.signIn = async (req, res) => {
 			});
 		});
 	});
+	*/
 
 	return {
 		message: 'Signed in!',
@@ -353,6 +355,7 @@ exports.signUp = async (req, res) => {
 		req.session.signature = token.split('.')[2];
 		req.session.secret = password;
 	
+		/*
 		const ip = session.getUserIP(req);
 	
 		session.getLocation(req, ip).then(async (location) => {
@@ -382,6 +385,7 @@ exports.signUp = async (req, res) => {
 				});
 			});
 		});
+		*/
 	
 		return {
 			message: 'Signed up!',
@@ -604,6 +608,7 @@ exports.resetPassword = async (req, res, id) => {
 	req.session.signature = token.split('.')[2];
 	req.session.secret = password;
 
+	/*
 	const ip = session.getUserIP(req);
 
 	session.getLocation(req, ip).then(async (location) => {
@@ -640,6 +645,7 @@ exports.resetPassword = async (req, res, id) => {
 			});
 		});
 	});
+	*/
 
 	return {
 		message: 'Changes saved.',
