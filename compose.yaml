@@ -16,23 +16,20 @@ services:
     #profiles:
     #  - donotstart
 
-#  database:
-#    build:
-#      context: ./database
-#    image: mongo
-#    container_name: database
-#    ports:
-#      - 27017:27017
-#    volumes:
-#      - ./data/db:/data/db
-#      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-#    restart: always
-#    environment:
-#      - MONGO_INITDB_ROOT_USERNAME=admin
-#      - MONGO_INITDB_ROOT_PASSWORD=
-#    networks:
-#      octorrent:
-#        ipv4_address: 10.5.0.10
+  database:
+    image: mongo
+    container_name: database
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/data/db:/data/db
+    #  - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - lan
 
   web:
     build:
@@ -78,3 +75,5 @@ networks:
     ipam:
      config:
        - subnet: 10.5.0.0/24
+  lan:
+    driver: bridge
