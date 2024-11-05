@@ -1,0 +1,20 @@
+{
+    "general": {
+        "project_name": "${PROJECT_NAME}",
+        "domain": "${DOMAIN}",
+        "http_port": ${HTTP_PORT},
+        "server": "${RUNTIME}-${SERVER}",
+        "version": ${VERSION}
+    },
+    "token": {
+        "secret": "${TOKEN_SECRET}"
+    },
+    "database": {
+        "host": "admin-${SERVER}.${DOMAIN}",
+        "port": ${DB_PORT},
+        "replica_set": ${DB_REPLICA},
+        "user": "${DB_USER}",
+        "password": "${DB_PWD}",
+        "database": "${DB_NAME}"
+    }
+}

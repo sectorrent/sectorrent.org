@@ -69,6 +69,24 @@ services:
     #profiles:
     #  - donotstart
 
+  api:
+    build:
+      context: ./api
+      args:
+        RUNTIME: ${RUNTIME}
+    image: octorrent_org_api
+    container_name: api
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+    restart: always
+    volumes:
+      - ./env:/env
+    networks:
+      octorrent:
+        ipv4_address: 10.5.0.5
+    #profiles:
+    #  - donotstart
+
 networks:
   octorrent:
     #external: true
