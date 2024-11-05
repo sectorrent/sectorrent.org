@@ -44,7 +44,9 @@ Threads
     "categories": [
         ObjectId("asdasdasd")
     ],
-    "created": 1000000
+    "created": 1000000,
+    "views": 0,
+    
 }
 ```
 
@@ -55,6 +57,7 @@ Comments
 {
     "thread": ObjectId("asdasdasd"),
     "user": ObjectId("asdasdasd"),
+    "reply": ObjectId("asdasdasd"),
     "content": "",
     "pinned": true,
     "created": 1000000
