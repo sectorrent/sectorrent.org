@@ -50,6 +50,7 @@ exports.getThread = async (req, res) => {
 		page: 'thread',
 		uniqid: uuidv4,
 		styles: [
+			'thread'
 		]
 	});
 };

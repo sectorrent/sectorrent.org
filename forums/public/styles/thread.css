@@ -1,0 +1,43 @@
+content {
+    display: block;
+    width: 100%;
+}
+
+content div {
+    padding: 20px 0;
+}
+
+content div:not(:last-child) {
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+}
+
+categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+}
+
+categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+categories a:hover {
+    color: var(--text-primary);
+}
+
+categories a span {
+    width: 12px;
+    height: 12px;
+}
