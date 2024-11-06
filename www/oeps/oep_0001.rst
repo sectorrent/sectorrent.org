@@ -1,0 +1,16 @@
+:OEP: 1
+:Title: The OcTorrent Enhancement Proposal Process 
+:Version: $Revision$
+:Last-Modified: $Date$
+:Author:  Brad Eagle <brad@bradeagle.com>
+:Status:  Active 
+:Type:    Process
+:Created: 6-Nov-2024
+
+What is OcTorrent
+=================
+
+OcTorrent is an extension of the BitTorrent DHT protocol. We will have
+OEPs (OcTorrent Extension Protocol), similar to BEPs with BitTorrent.
+
+
