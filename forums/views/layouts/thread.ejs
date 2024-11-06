@@ -2,18 +2,33 @@
 <%- include('../fragments/sidebar') %>
 
             <content>
-                <div>
+                <thread-header>
                     <h1>TOR</h1>
                     <categories>
                         <a href='/c/news'><span style='background-color: #0088CC'></span>News</a>
                         <a href='/c/feedback'><span style='background-color: #652D90'></span>Feedback</a>
                     </categories>
-                </div>
-                <div>
+                </thread-header>
+                <question>
+                    <question-header>
+                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        <h3>Octo</h3>
+
+                        <date>
+                            Nov 6, 2024
+                        </date>
+                    </question-header>
                     The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
-                </div>
+                </question>
                 <div>
+                    <views>
+                        1K
+                    </views>
                 </div>
+
+
+
+                <textarea placeholder='Write a comment'></textarea>
             </content>
 
 <%- include('../fragments/footer') %>
