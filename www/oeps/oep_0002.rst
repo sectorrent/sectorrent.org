@@ -70,8 +70,8 @@ if the signature is valid we will add this node to the routing table
 with a 50% trust, each time we add a new node we will take the previous
 nodes trust and half it.
 
-Example if we ask the 50% trust node for nodes
-that new node is valid its trust will be 25%.
+Example: If we ask the node that is trusted at 50% for a new valid node,
+the subsequent node will inherit a trust of 25%.
 
 Nodes can gain trust by residing within a different country than
 your country. If Alice is from the USA and Bob is within Russia
