@@ -155,8 +155,9 @@ the node should generate the secret via diffi helmen key based
 off the generated private key and the given public key.
 
 At this point both the server and client can communicate securely
-without evesdropping. The next thing the client should do is let
-the relay know where to go to next. We will handle this by sending:
+without evesdropping via AES/CTR/NoPadding. The next thing the client
+should do is let the relay know where to go to next. We will handle this
+by sending:
 
 ::
   Address Type
