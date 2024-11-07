@@ -59,13 +59,10 @@ exports.getOEP = async (req, res) => {
 			data: marked.parse(markdown)
 		});
 		res.end();
+		return;
 	}
 
-	res.render('layouts/errors/404', {
-		title: '404 Page',
-		page: 'error',
-		uniqid: uuidv4
-	});
+	this.getError(req, res, 404);
 };
 
 exports.getBEP = async (req, res) => {
@@ -85,10 +82,15 @@ exports.getBEP = async (req, res) => {
 			data: marked.parse(markdown)
 		});
 		res.end();
+		return;
 	}
 
-	res.render('layouts/errors/404', {
-		title: '404 Page',
+	this.getError(req, res, 404);
+};
+
+exports.getError = async (req, res, error) => {
+	res.render('layouts/errors/'+error, {
+		title: error+' Page',
 		page: 'error',
 		uniqid: uuidv4
 	});
