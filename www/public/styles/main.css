@@ -164,17 +164,6 @@ form {
     margin: 0;
 }
 
-section {
-    display: flex;
-    position: relative;
-    top: 80px;
-	width: var(--width);
-	min-width: calc(var(--min-width) - 80px);
-    align-items: start;
-	padding: 0px 10%;
-    gap: 30px;
-}
-
 
 footer {
     position: relative;

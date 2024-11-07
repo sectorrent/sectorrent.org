@@ -5,6 +5,15 @@
         <title>OcTorrent</title>
         <link rel='shortcut icon' href='/favicon.svg'>
         <link rel='stylesheet' href='/styles/main.css'>
+<%
+    if(typeof styles !== 'undefined'){
+        for(const style of styles){
+%>
+        <link rel='stylesheet' href='/styles/<%= style %>.css'>
+<%
+        }
+    }
+%>
 
         <!meta name='title' content='' />
         <!meta name='description' content='' />
@@ -26,7 +35,6 @@
     </head>
 
     <body>
-
         <header>
             <nav>
                 <ul>

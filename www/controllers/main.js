@@ -4,7 +4,7 @@ exports.getHome = async (req, res) => {
 		page: 'home',
 		//uniqid: uuidv4,
 		styles: [
-			'main'
+			'home'
 		]
 	});
 };
