@@ -58,9 +58,14 @@ exports.getOEP = async (req, res) => {
 			],
 			data: marked.parse(markdown)
 		});
+		res.end();
 	}
 
-	res.status(404);
+	res.render('layouts/errors/404', {
+		title: '404 Page',
+		page: 'error',
+		uniqid: uuidv4
+	});
 };
 
 exports.getBEP = async (req, res) => {
@@ -79,7 +84,12 @@ exports.getBEP = async (req, res) => {
 			],
 			data: marked.parse(markdown)
 		});
+		res.end();
 	}
 
-	res.status(404);
+	res.render('layouts/errors/404', {
+		title: '404 Page',
+		page: 'error',
+		uniqid: uuidv4
+	});
 };

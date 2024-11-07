@@ -132,6 +132,13 @@ section[type='contributions'] container commit date {
     font-size: 0.8em;
 }
 
-section[type='contributions'] container commit user {
+section[type='contributions'] container commit a {
+    color: var(--text-secondary);
+    text-decoration: none;
     font-size: 0.8em;
+    transition: color 0.3s;
+}
+
+section[type='contributions'] container commit a:hover {
+    color: var(--primary);
 }
