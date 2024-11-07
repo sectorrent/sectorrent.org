@@ -52,3 +52,5 @@ server.listen(80, () => {
 
 
 app.get('/', mainController.getHome);
+app.get('/beps/:id', mainController.getBEP);
+app.get('/oeps/:id', mainController.getOEP);

@@ -1,0 +1,48 @@
+@media(max-width:1200px) {
+	section {
+		padding: 40px 5% !important;
+	}
+}
+
+@media(max-width:800px) {
+	section {
+		padding: 40px 40px !important;
+	}
+}
+
+section {
+    display: block;
+    position: relative;
+    top: 80px;
+    width: var(--width);
+	padding: 40px 10%;
+    line-height: 1.6em;
+    color: var(--text-secondary);
+}
+
+h1, h2, strong {
+    color: var(--text-primary);
+}
+
+section pre {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+}
+
+section code {
+    padding: 5px;
+    color: var(--text-primary);
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+}
+
+section a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+section a:hover {
+    color: var(--secondary);
+}

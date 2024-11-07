@@ -1,4 +1,8 @@
 const github = require('../modules/github');
+const marked = require('marked');
+const fs = require('fs');
+const path = require('path');
+
 //const commits = github.getRecentCommits();
 const commits = [
 	{
@@ -35,4 +39,46 @@ exports.getHome = async (req, res) => {
 			commits: commits
 		}
 	});
+};
+
+exports.getOEP = async (req, res) => {
+    const id = req.params.id;
+	const p = path.resolve('./eps/octorrent/oep_'+id+'.md');
+
+	if(fs.existsSync(p)){
+		const markdown = fs.readFileSync(p, 'utf-8');
+
+		res.render('layouts/eps', {
+			title: 'OEP Page',
+			page: 'oeps',
+			//uniqid: uuidv4,
+			styles: [
+				'eps'
+			],
+			data: marked.parse(markdown)
+		});
+	}
+
+	res.status(404);
+};
+
+exports.getBEP = async (req, res) => {
+    const id = req.params.id;
+	const p = path.resolve('./eps/bittorrent/bep_'+id+'.md');
+
+	if(fs.existsSync(p)){
+		const markdown = fs.readFileSync(p, 'utf-8');
+
+		res.render('layouts/eps', {
+			title: 'BEP Page',
+			page: 'beps',
+			//uniqid: uuidv4,
+			styles: [
+				'eps'
+			],
+			data: marked.parse(markdown)
+		});
+	}
+
+	res.status(404);
 };
