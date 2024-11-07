@@ -139,6 +139,21 @@ header li a,
     cursor: pointer;
 }
 
+header li label.header:after {
+    display: inline-block;
+    content: url(/icons/ic_more.svg);
+    height: 24px;
+    padding: 3px 0px;
+    vertical-align: middle;
+    margin-left: 0.2em;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+header li input[type='radio']:checked ~ label:after {
+    transform: rotate(180deg);
+}
+
 header li input[type='radio']:checked ~ label.header, header li[selected] {
     background-color: var(--text-secondary);
 }

@@ -46,3 +46,25 @@ section a {
 section a:hover {
     color: var(--secondary);
 }
+
+section table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+section thead tr {
+    border-bottom: solid 2px var(--background-shimmer);
+}
+
+section table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px;
+}
+
+section table td {
+    padding: 20px;
+    border-bottom: solid 1px var(--background-secondary);
+}
