@@ -1,12 +1,61 @@
 <%- include('../fragments/header') %>
 
-        <section class='header'>
-            <h1>Resources for P2P developers</h1>
-            A Secure & Anonymous Torrent Protocol
+        <section type='header'>
+            <h1>Resources for <u>P2P</u> developers</h1>
+            <description>Securely & Anonymously Torrent!</description>
         </section>
 
-        <section>
-            
+        <section type='news'>
+            <h2>News</h2>
+
+            <container>
+                <article>
+                    <h3>TOR</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>TOR</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>TOR</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>TOR</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+            </container>
+        </section>
+
+        <section type='contributions'>
+            <h2>Recent Contributions</h2>
+
+            <container>
+<%
+    for(const commit of data.commits){
+%>
+                <commit>
+                    <div>
+                        <div>
+                            <%= commit.message %>
+                        </div>
+                        <user><%= commit.author.name %></user>
+                    </div>
+                    <date>4 months ago</date>
+                </commit>
+<%
+    }
+%>
+            </container>
         </section>
 
 <%- include('../fragments/footer') %>

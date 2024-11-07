@@ -36,8 +36,7 @@
 		--width: 90% !important;
 	}
 
-	header,
-            section {
+	header {
 		padding: 0 5% !important;
 	}
 
@@ -47,8 +46,7 @@
 }
 
 @media(max-width:800px) {
-	header,
-            section {
+	header {
 		padding: 0 40px !important;
 	}
 
