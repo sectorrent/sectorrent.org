@@ -1,8 +1,19 @@
 const github = require('../modules/github');
 const { v4: uuidv4 } = require('uuid');
 const marked = require('marked');
+const markedHighlight = require('marked-highlight');
+const hljs = require('highlight.js');
 const fs = require('fs');
 const path = require('path');
+
+marked.use(markedHighlight.markedHighlight({
+	emptyLangClass: 'hljs',
+	langPrefix: 'hljs language-', // Highlight.js CSS class prefix
+    highlight(code, lang) {
+		const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+		return hljs.highlight(code, { language }).value;
+    }
+}));
 
 //const commits = github.getRecentCommits();
 const commits = [
