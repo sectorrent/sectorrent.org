@@ -125,6 +125,10 @@ header li {
     display: inline-block;
 }
 
+header li[selected] {
+    background-color: var(--text-secondary);
+}
+
 header li a,
         header li label.header {
     position: relative;

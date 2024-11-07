@@ -1,4 +1,5 @@
 const github = require('../modules/github');
+const { v4: uuidv4 } = require('uuid');
 const marked = require('marked');
 const fs = require('fs');
 const path = require('path');
@@ -31,7 +32,7 @@ exports.getHome = async (req, res) => {
 	res.render('layouts/home', {
 		title: 'Home Page',
 		page: 'home',
-		//uniqid: uuidv4,
+		uniqid: uuidv4,
 		styles: [
 			'home'
 		],
@@ -51,7 +52,7 @@ exports.getOEP = async (req, res) => {
 		res.render('layouts/eps', {
 			title: 'OEP Page',
 			page: 'oeps',
-			//uniqid: uuidv4,
+			uniqid: uuidv4,
 			styles: [
 				'eps'
 			],
@@ -72,7 +73,7 @@ exports.getBEP = async (req, res) => {
 		res.render('layouts/eps', {
 			title: 'BEP Page',
 			page: 'beps',
-			//uniqid: uuidv4,
+			uniqid: uuidv4,
 			styles: [
 				'eps'
 			],

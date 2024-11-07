@@ -43,8 +43,8 @@
                             OcTorrent<span>.org</span>
                         </a>
                     </li>
-                    <li>
-                        <input id='3bb48ee5-637b-45bd-afcd-dc0df95af31a' name='header' type='radio'>
+                    <li<% if(page == 'oeps' || page == 'beps'){ %> selected<% } %>>
+                        <input id='<% const uuid = uniqid(); %><%= uuid %>' name='header' type='radio'>
                         <dropdown-container>
                             <dropdown>
                                 <links>
@@ -54,7 +54,7 @@
                                 </links>
                             </dropdown>
                         </dropdown-container>
-                        <label class='header' for='3bb48ee5-637b-45bd-afcd-dc0df95af31a'>Extension Protocols</label>
+                        <label class='header' for='<%= uuid %>'>Extension Protocols</label>
                         <label class='close-header' for='close'></label>
                         <label class='header-close-hover' for='close'></label>
                     </li>
