@@ -8,7 +8,7 @@ const path = require('path');
 
 marked.use(markedHighlight.markedHighlight({
 	emptyLangClass: 'hljs',
-	langPrefix: 'hljs language-', // Highlight.js CSS class prefix
+	langPrefix: 'hljs language-',
     highlight(code, lang) {
 		const language = hljs.getLanguage(lang) ? lang : 'plaintext';
 		return hljs.highlight(code, { language }).value;
