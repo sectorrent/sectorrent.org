@@ -36,7 +36,7 @@ exports.getRecentCommits = async (config) => {
 
 	let response = await axios.post(graphUrl, payload, {
 		headers: {
-			'Authorization': `bearer ${config.github.token}`,
+			'Authorization': `bearer ${config.token.github}`,
 			'Content-Type': 'application/json'
 		}
 	});
