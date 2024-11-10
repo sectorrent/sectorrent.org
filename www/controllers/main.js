@@ -15,7 +15,8 @@ marked.use(markedHighlight.markedHighlight({
     }
 }));
 
-//const commits = github.getRecentCommits();
+const commits = github.getRecentCommits();
+/*
 const commits = [
 	{
 	  message: 'Create README.md',
@@ -38,7 +39,7 @@ const commits = [
 	  author: { name: 'DrBrad', email: 'brad@bradeagle.com' }
 	}
 ];
-
+*/
 exports.getHome = async (req, res) => {
 	res.render('layouts/home', {
 		title: 'Home Page',
