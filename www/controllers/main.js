@@ -17,7 +17,7 @@ marked.use(markedHighlight.markedHighlight({
     }
 }));
 
-const commits = github.getRecentCommits(config);
+github.getRecentCommits(config);
 /*
 const commits = [
 	{
@@ -51,7 +51,7 @@ exports.getHome = async (req, res) => {
 			'home'
 		],
 		data: {
-			commits: commits
+			commits: res.locals.config.github_commits
 		}
 	});
 };
