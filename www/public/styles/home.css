@@ -122,6 +122,10 @@ section[type='contributions'] container commit:nth-child(odd) {
     background-color: var(--background-secondary);
 }
 
+section[type='contributions'] container commit > div {
+    flex: 1;
+}
+
 section[type='contributions'] container commit div div {
     color: var(--text-primary);
     margin-bottom: 5px;
@@ -130,7 +134,6 @@ section[type='contributions'] container commit div div {
 section[type='contributions'] container commit date {
     display: block;
     width: fit-content;
-    margin-left: auto;
     font-size: 0.8em;
 }
 
