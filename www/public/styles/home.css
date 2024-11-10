@@ -133,7 +133,6 @@ section[type='contributions'] container commit div div {
 
 section[type='contributions'] container commit date {
     display: block;
-    width: fit-content;
     font-size: 0.8em;
 }
 
