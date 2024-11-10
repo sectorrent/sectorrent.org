@@ -3,7 +3,7 @@ const axios = require('axios');
 const graphUrl = 'https://api.github.com/graphql';
 const githubUrl = 'https://api.github.com/repos/';
 
-exports.getRecentCommits = async () => {
+exports.getRecentCommits = async (config) => {
 	const query = `query {
 	organization(login: "octorrent") {
 		repositories(first: 100) {
