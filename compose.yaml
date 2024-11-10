@@ -25,12 +25,17 @@ services:
     volumes:
       - ./database/data/db:/data/db
       - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - lan
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-    networks:
-      - lan
+    command:
+     - /bin/sh
+     - -c
+     - |
+      mongod --bind_ip_all
     #profiles:
     #  - donotstart
 
