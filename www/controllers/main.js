@@ -43,7 +43,7 @@ const commits = [
 ];
 */
 exports.getHome = async (req, res) => {
-	res.render('layouts/home', {
+	res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/home', {
 		title: 'Home Page',
 		page: 'home',
 		uniqid: uuidv4,
@@ -63,7 +63,7 @@ exports.getOEP = async (req, res) => {
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');
 
-		res.render('layouts/eps', {
+		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/eps', {
 			title: 'OEP Page',
 			page: 'oeps',
 			uniqid: uuidv4,
@@ -86,7 +86,7 @@ exports.getBEP = async (req, res) => {
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');
 
-		res.render('layouts/eps', {
+		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/eps', {
 			title: 'BEP Page',
 			page: 'beps',
 			uniqid: uuidv4,

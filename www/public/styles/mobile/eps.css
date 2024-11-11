@@ -1,0 +1,139 @@
+@media(max-width:1200px) {
+	section {
+		padding: 40px 5% !important;
+	}
+}
+
+@media(max-width:800px) {
+	section {
+		padding: 40px 40px !important;
+	}
+}
+
+section {
+    display: block;
+    position: relative;
+    top: 80px;
+    width: var(--width);
+	padding: 40px 10%;
+    line-height: 1.6em;
+    color: var(--text-secondary);
+}
+
+h1, h2, strong {
+    color: var(--text-primary);
+}
+
+section a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+section a:hover {
+    color: var(--secondary);
+}
+
+section table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+section thead tr {
+    border-bottom: solid 2px var(--background-shimmer);
+}
+
+section table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px;
+}
+
+section table td {
+    padding: 20px;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+section pre {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+    border-left: solid 3px var(--primary);
+}
+
+section code {
+    padding: 5px;
+    color: var(--text-primary);
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+}
+
+.css .hljs-class,
+        .css .hljs-id,
+        .css .hljs-pseudo,
+        .hljs-attribute,
+        .hljs-regexp,
+        .hljs-tag,
+        .hljs-variable,
+        .html .hljs-doctype,
+        .ruby .hljs-constant,
+        .xml .hljs-doctype,
+        .xml .hljs-pi,
+        .xml .hljs-tag .hljs-title {
+	color: #ff9da4;
+}
+
+.hljs-built_in,
+        .hljs-constant,
+        .hljs-literal,
+        .hljs-number,
+        .hljs-params,
+        .hljs-pragma,
+        .hljs-preprocessor {
+	color: #ffc58f;
+}
+
+.css .hljs-rule .hljs-attribute,
+        .ruby .hljs-class .hljs-title {
+	color: #ffeead;
+}
+
+.hljs-header,
+        .hljs-inheritance,
+        .hljs-name,
+        .hljs-string,
+        .hljs-value,
+        .ruby .hljs-symbol,
+        .xml .hljs-cdata {
+    color: #00a67d;
+}
+
+.coffeescript .hljs-title,
+        .hljs-function,
+        .javascript .hljs-title,
+        .perl .hljs-sub,
+        .python .hljs-decorator,
+        .python .hljs-title,
+        .ruby .hljs-function .hljs-title,
+        .ruby .hljs-title .hljs-keyword {
+	color: #9e5c3b;
+}
+
+.hljs-keyword,
+        .javascript .hljs-function {
+	color: #ebbbff;
+}
+
+.hljs-attr {
+    color: #df3079;
+}
+
+.hljs-meta {
+    color: #8c7e45;
+}
+
+.hljs-comment {
+    color: var(--text-secondary);
+}

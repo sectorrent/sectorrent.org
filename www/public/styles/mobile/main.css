@@ -1,0 +1,372 @@
+:root {
+    --width: 80%;
+
+    --primary: #994ce0;
+    --secondary: #6b339e;
+
+    --background: #141414;
+    --background-secondary: #242424;
+    --background-shimmer: #343434;
+    
+    --text-primary: #e6e6e6;
+    --text-secondary: #b3b3b3;
+
+    --white: #efefef;
+    --black: #000000;
+    
+    --ripple: #666666;
+    --good: #53bd39;
+    --error: #f55442;
+}
+/*
+@media(max-width:1500px) {
+	:root {
+		--width: 80% !important;
+	}
+
+	header,
+            section {
+		padding: 0px 10% !important;
+	}
+}
+*/
+@media(max-width:1200px) {
+	:root {
+		--width: 90% !important;
+	}
+
+	header {
+		padding: 0 5% !important;
+	}
+
+    footer {
+        padding: 80px 5% 20px 5% !important;
+    }
+}
+
+@media(max-width:800px) {
+	header {
+		padding: 0 40px !important;
+	}
+
+    footer {
+        padding: 80px 40px 20px 40px !important;
+    }
+}
+
+html {
+    color: var(--text-primary);
+    background-color: var(--background);
+    font-size: 1em;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--primary) transparent;
+}
+
+::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+}
+
+::selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+body {
+    margin: 0;
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+	width: var(--width);
+	padding: 0px 10%;
+    background-color: var(--text-primary);
+    z-index: 10;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+nav {
+    white-space: nowrap;
+}
+
+header ul {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+header li {
+    display: inline-block;
+}
+
+header li[selected] {
+    background-color: var(--text-secondary);
+}
+
+header li a,
+        header li label.header {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    color: var(--black);
+    padding: 25px 15px;
+    text-decoration: none;
+    z-index: 2;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+header li label.header:after {
+    display: inline-block;
+    content: url(/icons/ic_more.svg);
+    height: 24px;
+    padding: 3px 0px;
+    vertical-align: middle;
+    margin-left: 0.2em;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+header li input[type='radio']:checked ~ label:after {
+    transform: rotate(180deg);
+}
+
+header li input[type='radio']:checked ~ label.header, header li[selected] {
+    background-color: var(--text-secondary);
+}
+
+header li.home a {
+    font-weight: 700;
+    font-size: 1.8em;
+}
+
+header li.button a {
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: var(--text-primary);
+    background-color: var(--primary);
+    transition: background-color 0.3s;
+}
+
+header li.button a:hover {
+    background-color: var(--secondary);
+}
+
+header li span {
+    color: var(--primary);
+}
+
+header li input[type='radio']:checked ~ dropdown-container {
+    top: 100%;
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.2s step-start, z-index 0.2s step-end, top 0.2s, opacity 0.2s;
+}
+
+
+header li input[type='radio']:checked ~ label.close-header {
+    display: block;
+}
+
+header li label.close-header {
+    display: none;
+    position: absolute;
+    top: -110px;
+    left: 0px;
+    right: 0px;
+    height: calc(100vh + 110px);
+    z-index: 1;
+}
+
+
+
+
+header li input[type='radio']:checked ~ label.header-close-hover {
+    display: block;
+}
+
+header li label.header-close-hover {
+    position: relative;
+    display: none;
+    margin-top: -80px;
+    width: 100%;
+    height: 80px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+
+header li dropdown-container {
+    display: block;
+    position: absolute;
+    top: calc(100% + -300px);
+    left: 0px;
+    right: 0px;
+    /* height: 300px; */
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--text-primary);
+    transition: visibility 0.2s step-end, top 0.2s, opacity 0.2s;
+    z-index: -1;
+}
+
+header li input[type='radio']:checked ~ dropdown-container {
+    top: 100%;
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.2s step-start, z-index 0.2s step-end, top 0.2s, opacity 0.2s;
+}
+
+header li dropdown {
+    display: flex;
+    width: var(--width);
+    height: 100%;
+    margin: auto;
+}
+
+header li dropdown links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0px;
+    background-color: var(--text-primary);
+}
+
+header li dropdown links h3 {
+    display: block;
+    color: var(--black);
+    margin-bottom: 0.5em;
+    font-weight: 800;
+    font-size: 1.5em;
+}
+
+header li dropdown links a {
+    display: block;
+    color: var(--background);
+    text-decoration: none;
+    padding: 8px 0px;
+    transition: color 0.2s;
+}
+
+header li dropdown links a:hover {
+    color: var(--primary);
+}
+
+
+filler {
+    flex: 1 1 1e-09px;
+}
+
+form {
+    margin: 0;
+}
+
+header ul input[type='radio'] {
+    display: none;
+}
+
+
+footer {
+    position: relative;
+    display: block;
+    top: 80px;
+	width: var(--width);
+    padding: 80px 10% 20px 10%;
+    font-size: 1em;
+    background-color: var(--black);
+    border-top: solid 3px var(--primary);
+}
+
+footer nav {
+    display: flex;
+    margin-bottom: 60px;
+}
+
+footer nav div {
+    flex: 1;
+}
+
+footer nav div[type='social'] svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+footer nav div[type='social'] a:hover svg {
+    fill: var(--primary);
+}
+
+footer title {
+    display: block;
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+footer li {
+    display: block;
+    padding: 2px 0;
+}
+
+footer li a {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+footer li a:hover {
+    color: var(--primary);
+}
+
+footer year {
+    display: block;
+    width: 100%;
+    height: 30px;
+    padding-top: 20px;
+    margin: auto;
+    color: var(--white);
+    border-top: solid 1px var(--white);
+    line-height: 30px;
+    font-size: 0.8em;
+}
+
+footer year span {
+    color: var(--primary);
+}

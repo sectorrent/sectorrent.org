@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>OcTorrent</title>
+        <link rel='shortcut icon' href='/favicon.svg'>
+        <link rel='stylesheet' href='/styles/desktop/main.css'>
+<%
+    if(typeof styles !== 'undefined'){
+        for(const style of styles){
+%>
+        <link rel='stylesheet' href='/styles/desktop/<%= style %>.css'>
+<%
+        }
+    }
+%>
+
+        <!meta name='title' content='' />
+        <!meta name='description' content='' />
+        <!meta name='keywords' content='' />
+
+        <!meta name='description' content=''>
+
+        <!meta name='twitter:title' content='' />
+        <!meta name='twitter:description' content='' />
+        <!meta name='twitter:image' content='' />
+        <!meta name='twitter:card' content='summary'>
+
+        <!meta property='og:title' content='' />
+        <!meta property='og:description' content='' />
+        <!meta property='og:type' content='website' />
+        <!meta property='og:url' content='https://' />
+        <!meta property='og:image' content='' />
+        <!meta name='theme-color' content='#'>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li class='home'>
+                        <a href='/'>
+                            OcTorrent<span>.org</span>
+                        </a>
+                    </li>
+                    <li<% if(page == 'oeps' || page == 'beps'){ %> selected<% } %>>
+                        <input id='<% const uuid = uniqid(); %><%= uuid %>' name='header' type='radio'>
+                        <dropdown-container>
+                            <dropdown>
+                                <links>
+                                    <h3>Extension Protocols</h3>
+                                    <a href='/beps/0000'>BitTorrent EPs (Archive)</a>
+                                    <a href='/oeps/0000'>OcTorrent EPs</a>
+                                </links>
+                            </dropdown>
+                        </dropdown-container>
+                        <label class='header' for='<%= uuid %>'>Extension Protocols</label>
+                        <label class='close-header' for='close'></label>
+                        <label class='header-close-hover' for='close'></label>
+                    </li>
+                    <li>
+                        <a href='https://forums.octorrent.org'>Forums</a>
+                    </li>
+                    <input id='close' name='header' type='radio'>
+                </ul>
+            </nav>
+        </header>
+        

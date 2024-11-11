@@ -1,0 +1,86 @@
+<%- include('../../fragments/mobile/header') %>
+<%
+    function timeAgo(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const seconds = Math.floor((now-date)/1000);
+    
+        const intervals = {
+            year: 31536000,
+            month: 2592000,
+            week: 604800,
+            day: 86400,
+            hour: 3600,
+            minute: 60,
+            second: 1,
+        };
+
+        for(const [key, value] of Object.entries(intervals)){
+            const count = Math.floor(seconds/value);
+            if(count >= 1){
+                return `${count} ${key}${count > 1 ? 's' : ''} ago`;
+            }
+        }
+
+        return 'just now';
+    }
+%>
+        <section type='header'>
+            <h1>Resources for <u>P2P</u> developers</h1>
+            <description>Securely & Anonymously Torrent!</description>
+        </section>
+
+        <section type='news'>
+            <h2>News</h2>
+
+            <container>
+                <article>
+                    <h3>OcTorrent</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>OcTorrent</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>OcTorrent</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+                <article>
+                    <h3>OcTorrent</h3>
+                    <div>
+                        The DHT bootstrap server can be used as an introducer to the octorrent DHT network. Like the ones running at router.octorrent.com.
+                    </div>
+                </article>
+            </container>
+        </section>
+
+        <section type='contributions'>
+            <h2>Recent Contributions</h2>
+
+            <container>
+<%
+    for(const commit of data.commits){
+%>
+                <commit>
+                    <div>
+                        <div>
+                            <%= commit.message %>
+                        </div>
+                        <a href='https://github.com/<%= commit.author.name %>'><%= commit.author.name %></a>
+                    </div>
+                    <date><%= timeAgo(commit.committedDate) %></date>
+                </commit>
+<%
+    }
+%>
+            </container>
+        </section>
+
+<%- include('../../fragments/mobile/footer') %>

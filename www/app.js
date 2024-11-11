@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const fs = require('fs');
+const useragent = require('express-useragent');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const cookies = require('cookie-parser');
@@ -44,12 +45,9 @@ app.use((req, res, next) => {
 	next();
 });
 
-const server = http.createServer(app);
 
-server.listen(80, () => {
-	console.log(`octorrent.org started`);
-});
 
+app.use(useragent.express());
 
 app.get('/', mainController.getHome);
 app.get('/beps/:id', mainController.getBEP);
@@ -57,4 +55,13 @@ app.get('/oeps/:id', mainController.getOEP);
 
 app.get('*', (req, res) => {
 	mainController.getError(req, res, 404)
+});
+
+
+
+
+const server = http.createServer(app);
+
+server.listen(80, () => {
+	console.log(`octorrent.org started`);
 });

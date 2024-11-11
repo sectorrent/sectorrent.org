@@ -1,0 +1,148 @@
+@media(max-width:1200px) {
+	section[type='header'] {
+		padding: 140px 5% !important;
+	}
+
+	section {
+		padding: 40px 5% !important;
+	}
+
+    section:nth-of-type(2) {
+        padding: 80px 5% 40px 5% !important;
+    }
+    
+    section:last-of-type {
+        padding: 40px 5% 80px 5% !important;
+    }
+}
+
+@media(max-width:800px) {
+	section[type='header'] {
+		padding: 140px 40px !important;
+	}
+
+	section {
+		padding: 40px 40px !important;
+	}
+
+    section:nth-of-type(2) {
+        padding: 80px 40px 40px 40px !important;
+    }
+    
+    section:last-of-type {
+        padding: 40px 40px 80px 40px !important;
+    }
+}
+
+section {
+    display: block;
+    position: relative;
+    top: 80px;
+    width: var(--width);
+	padding: 40px 10%;
+}
+
+section[type='header'] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	padding: 140px 10%;
+    background-color: var(--background-secondary);
+}
+
+section:nth-of-type(2) {
+	padding: 80px 10% 40px 10%;
+}
+
+section:last-of-type {
+	padding: 40px 10% 80px 10%;
+}
+
+section h1 {
+    font-size: 2.5em;
+    margin: 0 0 15px 0;
+}
+
+section h2 {
+    font-size: 1.2em;
+    font-weight: normal;
+    margin: 0 0 15px 0;
+}
+
+section h3 {
+    color: var(--text-primary);
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0 0 10px 0;
+}
+
+u {
+    text-decoration: none;
+    border-bottom: solid 1px var(--primary);
+}
+
+description {
+    display: block;
+    font-size: 1.5em;
+    color: var(--text-secondary);
+}
+
+
+section[type='news'] container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+section[type='news'] container article {
+    display: block;
+    width: calc(50% - 52px);
+    padding: 20px;
+    color: var(--text-secondary);
+    border: solid 1px var(--text-primary);
+    border-radius: 5px;
+}
+
+
+section[type='contributions'] container {
+    display: block;
+}
+
+section[type='contributions'] container commit {
+    display: flex;
+    width: calc(100% - 40px);
+    gap: 20px;
+    padding: 20px;
+    color: var(--text-secondary);
+    border-radius: 5px;
+}
+
+section[type='contributions'] container commit:nth-child(odd) {
+    background-color: var(--background-secondary);
+}
+
+section[type='contributions'] container commit > div {
+    flex: 1;
+}
+
+section[type='contributions'] container commit div div {
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+section[type='contributions'] container commit date {
+    display: block;
+    font-size: 0.8em;
+}
+
+section[type='contributions'] container commit a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8em;
+    transition: color 0.3s;
+}
+
+section[type='contributions'] container commit a:hover {
+    color: var(--primary);
+}

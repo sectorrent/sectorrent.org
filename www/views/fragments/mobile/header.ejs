@@ -4,16 +4,17 @@
         <meta charset='utf-8'>
         <title>OcTorrent</title>
         <link rel='shortcut icon' href='/favicon.svg'>
-        <link rel='stylesheet' href='/styles/main.css'>
+        <link rel='stylesheet' href='/styles/mobile/main.css'>
 <%
     if(typeof styles !== 'undefined'){
         for(const style of styles){
 %>
-        <link rel='stylesheet' href='/styles/<%= style %>.css'>
+        <link rel='stylesheet' href='/styles/mobile/<%= style %>.css'>
 <%
         }
     }
 %>
+        <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'>
 
         <!meta name='title' content='' />
         <!meta name='description' content='' />
