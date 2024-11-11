@@ -39,30 +39,7 @@
         <header>
             <nav>
                 <ul>
-                    <li class='home'>
-                        <a href='/'>
-                            OcTorrent<span>.org</span>
-                        </a>
-                    </li>
-                    <li<% if(page == 'oeps' || page == 'beps'){ %> selected<% } %>>
-                        <input id='<% const uuid = uniqid(); %><%= uuid %>' name='header' type='radio'>
-                        <dropdown-container>
-                            <dropdown>
-                                <links>
-                                    <h3>Extension Protocols</h3>
-                                    <a href='/beps/0000'>BitTorrent EPs (Archive)</a>
-                                    <a href='/oeps/0000'>OcTorrent EPs</a>
-                                </links>
-                            </dropdown>
-                        </dropdown-container>
-                        <label class='header' for='<%= uuid %>'>Extension Protocols</label>
-                        <label class='close-header' for='close'></label>
-                        <label class='header-close-hover' for='close'></label>
-                    </li>
-                    <li>
-                        <a href='https://forums.octorrent.org'>Forums</a>
-                    </li>
-                    <input id='close' name='header' type='radio'>
+                    <li class='home'></li>
                 </ul>
             </nav>
         </header>

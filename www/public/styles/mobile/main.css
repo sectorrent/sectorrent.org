@@ -1,5 +1,5 @@
 :root {
-    --width: 80%;
+    --width: calc(100% - 40px);
 
     --primary: #994ce0;
     --secondary: #6b339e;
@@ -30,29 +30,6 @@
 	}
 }
 */
-@media(max-width:1200px) {
-	:root {
-		--width: 90% !important;
-	}
-
-	header {
-		padding: 0 5% !important;
-	}
-
-    footer {
-        padding: 80px 5% 20px 5% !important;
-    }
-}
-
-@media(max-width:800px) {
-	header {
-		padding: 0 40px !important;
-	}
-
-    footer {
-        padding: 80px 40px 20px 40px !important;
-    }
-}
 
 html {
     color: var(--text-primary);
@@ -93,7 +70,7 @@ header {
     position: fixed;
     top: 0;
 	width: var(--width);
-	padding: 0px 10%;
+	padding: 0px 20px;
     background-color: var(--text-primary);
     z-index: 10;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -111,7 +88,7 @@ nav {
 
 header ul {
     display: flex;
-    height: 80px;
+    height: 60px;
     align-items: center;
     column-gap: 20px;
     padding: 0;
@@ -298,7 +275,7 @@ footer {
     display: block;
     top: 80px;
 	width: var(--width);
-    padding: 80px 10% 20px 10%;
+    padding: 80px 20px 20px 20px;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
