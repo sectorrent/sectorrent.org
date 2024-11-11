@@ -275,7 +275,7 @@ footer {
     display: block;
     top: 60px;
 	width: var(--width);
-    padding: 20px;
+    padding: 40px 20px 20px 20px;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
@@ -283,7 +283,7 @@ footer {
 
 footer nav {
     display: flex;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 footer nav div {
