@@ -48,6 +48,7 @@ section[type='header'] {
     align-items: center;
     justify-content: center;
 	padding: 140px 10%;
+    text-align: center;
     background-color: var(--background-secondary);
 }
 

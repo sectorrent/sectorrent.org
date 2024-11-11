@@ -11,16 +11,17 @@ section[type='header'] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-	padding: 140px 20px;
+	padding: 40px 20px;
+    text-align: center;
     background-color: var(--background-secondary);
 }
 
 section:nth-of-type(2) {
-	padding: 80px 20px 40px 20px;
+	padding: 40px 20px 20px 20px;
 }
 
 section:last-of-type {
-	padding: 40px 20px 80px 20px;
+	padding: 20px 20px 40px 20px;
 }
 
 section h1 {
@@ -61,7 +62,7 @@ section[type='news'] container {
 
 section[type='news'] container article {
     display: block;
-    width: calc(50% - 52px);
+    width: calc(100% - 42px);
     padding: 20px;
     color: var(--text-secondary);
     border: solid 1px var(--text-primary);
