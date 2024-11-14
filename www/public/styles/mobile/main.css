@@ -99,161 +99,10 @@ header li {
     display: inline-block;
 }
 
-header li[selected] {
-    background-color: var(--text-secondary);
-}
-
-header li a,
-        header li label.header {
-    position: relative;
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    color: var(--black);
-    padding: 25px 15px;
-    text-decoration: none;
-    z-index: 2;
-    transition: background-color 0.2s;
-    cursor: pointer;
-}
-
-header li label.header:after {
-    display: inline-block;
-    content: url(/icons/ic_more.svg);
-    height: 24px;
-    padding: 3px 0px;
-    vertical-align: middle;
-    margin-left: 0.2em;
-    transform: rotate(0deg);
-    transition: transform 0.2s;
-}
-
-header li input[type='radio']:checked ~ label:after {
-    transform: rotate(180deg);
-}
-
-header li input[type='radio']:checked ~ label.header, header li[selected] {
-    background-color: var(--text-secondary);
-}
-
-header li.home a {
-    font-weight: 700;
-    font-size: 1.8em;
-}
-
-header li.button a {
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: var(--text-primary);
-    background-color: var(--primary);
-    transition: background-color 0.3s;
-}
-
-header li.button a:hover {
-    background-color: var(--secondary);
-}
-
-header li span {
-    color: var(--primary);
-}
-
-header li input[type='radio']:checked ~ dropdown-container {
-    top: 100%;
-    z-index: 2;
-    opacity: 1;
-    visibility: visible;
-    transition: visibility 0.2s step-start, z-index 0.2s step-end, top 0.2s, opacity 0.2s;
-}
-
-
-header li input[type='radio']:checked ~ label.close-header {
+header li svg {
     display: block;
-}
-
-header li label.close-header {
-    display: none;
-    position: absolute;
-    top: -110px;
-    left: 0px;
-    right: 0px;
-    height: calc(100vh + 110px);
-    z-index: 1;
-}
-
-
-
-
-header li input[type='radio']:checked ~ label.header-close-hover {
-    display: block;
-}
-
-header li label.header-close-hover {
-    position: relative;
-    display: none;
-    margin-top: -80px;
-    width: 100%;
-    height: 80px;
-    z-index: 2;
-    cursor: pointer;
-}
-
-
-
-header li dropdown-container {
-    display: block;
-    position: absolute;
-    top: calc(100% + -300px);
-    left: 0px;
-    right: 0px;
-    /* height: 300px; */
-    opacity: 0;
-    visibility: hidden;
-    background-color: var(--text-primary);
-    transition: visibility 0.2s step-end, top 0.2s, opacity 0.2s;
-    z-index: -1;
-}
-
-header li input[type='radio']:checked ~ dropdown-container {
-    top: 100%;
-    z-index: 2;
-    opacity: 1;
-    visibility: visible;
-    transition: visibility 0.2s step-start, z-index 0.2s step-end, top 0.2s, opacity 0.2s;
-}
-
-header li dropdown {
-    display: flex;
-    width: var(--width);
-    height: 100%;
-    margin: auto;
-}
-
-header li dropdown links {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px 0px;
-    background-color: var(--text-primary);
-}
-
-header li dropdown links h3 {
-    display: block;
-    color: var(--black);
-    margin-bottom: 0.5em;
-    font-weight: 800;
-    font-size: 1.5em;
-}
-
-header li dropdown links a {
-    display: block;
-    color: var(--background);
-    text-decoration: none;
-    padding: 8px 0px;
-    transition: color 0.2s;
-}
-
-header li dropdown links a:hover {
-    color: var(--primary);
+    width: 40px;
+    height: 40px;
 }
 
 
@@ -275,7 +124,7 @@ footer {
     display: block;
     top: 60px;
 	width: var(--width);
-    padding: 40px 20px 20px 20px;
+    padding: 40px 20px;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
