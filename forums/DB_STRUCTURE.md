@@ -10,7 +10,7 @@ Users
 - Ensure we have unique usernames - case insensitive
 ```json
 {
-    "email": "ted.bundy@octorrent.org",
+    "email": "ted.bundy@sectorrent.org",
     "username": "Ted_Bundy",
     "fname": "Ted",
     "lname": "Bundy",

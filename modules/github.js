@@ -5,7 +5,7 @@ const githubUrl = 'https://api.github.com/repos/';
 
 exports.getRecentCommits = async (config) => {
 	const query = `query {
-	organization(login: "octorrent") {
+	organization(login: "sectorrent") {
 		repositories(first: 100) {
 			nodes {
 				name

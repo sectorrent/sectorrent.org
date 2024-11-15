@@ -12,7 +12,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: always
     networks:
-      octorrent:
+      sectorrent:
         ipv4_address: 10.5.0.2
     #profiles:
     #  - donotstart
@@ -44,7 +44,7 @@ services:
       context: ./www
       args:
         RUNTIME: ${RUNTIME}
-    image: octorrent_org_www
+    image: sectorrent_org_www
     container_name: www
     environment:
       NODE_ENV: production
@@ -53,7 +53,7 @@ services:
       - ./env:/env
       - ./modules:/usr/src/app/modules
     networks:
-      octorrent:
+      sectorrent:
         ipv4_address: 10.5.0.3
     #profiles:
     #  - donotstart
@@ -63,7 +63,7 @@ services:
       context: ./forums
       args:
         RUNTIME: ${RUNTIME}
-    image: octorrent_org_forums
+    image: sectorrent_org_forums
     container_name: forums
     environment:
       NODE_ENV: ${NODE_ENV:-production}
@@ -72,7 +72,7 @@ services:
       - ./env:/env
       - ./modules:/usr/src/app/modules
     networks:
-      octorrent:
+      sectorrent:
         ipv4_address: 10.5.0.4
     #profiles:
     #  - donotstart
@@ -82,7 +82,7 @@ services:
       context: ./api
       args:
         RUNTIME: ${RUNTIME}
-    image: octorrent_org_api
+    image: sectorrent_org_api
     container_name: api
     environment:
       NODE_ENV: ${NODE_ENV:-production}
@@ -91,13 +91,13 @@ services:
       - ./env:/env
       - ./modules:/usr/src/app/modules
     networks:
-      octorrent:
+      sectorrent:
         ipv4_address: 10.5.0.5
     #profiles:
     #  - donotstart
 
 networks:
-  octorrent:
+  sectorrent:
     #external: true
     driver: bridge
     attachable: true

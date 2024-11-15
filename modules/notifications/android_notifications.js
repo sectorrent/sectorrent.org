@@ -41,7 +41,7 @@ exports.send = async (subscription, payload, config, serverToken) => {
     payload.message.android = {
         notification: {
             channel_id: '69420',
-            click_action: 'com.octorrent.android.ui.MainActivity'
+            click_action: 'com.sectorrent.android.ui.MainActivity'
         }
     };
 
