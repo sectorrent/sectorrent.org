@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`api.sectorrent.org started`);
+	console.log(`api.${config.general.domain} started`);
 });
 
 app.use([

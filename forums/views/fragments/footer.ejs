@@ -6,13 +6,13 @@
                     <title>NAVIGATION</title>
                     <ul>
                         <li>
-                            <a href='https://sectorrent.org'>Home</a>
+                            <a href='https://<%= config.general.domain %>'>Home</a>
                         </li>
                         <li>
-                            <a href='https://sectorrent.org/beps/0000'>BEPs</a>
+                            <a href='https://<%= config.general.domain %>/beps/0000'>BEPs</a>
                         </li>
                         <li>
-                            <a href='https://sectorrent.org/seps/0000'>SEPs</a>
+                            <a href='https://<%= config.general.domain %>/seps/0000'>SEPs</a>
                         </li>
                     </ul>
                 </div>
@@ -55,7 +55,7 @@
                     </a>
                 </div>
             </nav>
-            <year>Copyright © 2024 <b>SecTorrent<span>.org</span></b></year>
+            <year>Copyright © 2024 <b><%= config.general.project_name %><span>.org</span></b></year>
         </footer>
     </body>
 </html>

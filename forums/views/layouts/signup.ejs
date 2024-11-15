@@ -8,7 +8,7 @@
             <content type='main'>
                 <h1>Welcome!</h1>
                 <h2>Let's create your account</h2>
-                <form action='https://api.sectorrent.org/signup' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                <form action='https://api.<%= config.general.domain %>/signup' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
                     <field>
                         <input-field title='First Name'>
                             <input type='text' name='fname' required placeholder='First Name' onkeypress='formAdjust(event)' />

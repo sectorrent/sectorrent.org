@@ -63,5 +63,5 @@ app.get('*', (req, res) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`sectorrent.org started`);
+	console.log(`${config.general.domain} started`);
 });

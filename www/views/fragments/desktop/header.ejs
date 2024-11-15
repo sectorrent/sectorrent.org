@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title>SecTorrent</title>
+        <title><%= config.general.project_name %></title>
         <link rel='shortcut icon' href='/favicon.svg'>
         <link rel='stylesheet' href='/styles/desktop/main.css'>
 <%
@@ -40,7 +40,7 @@
                 <ul>
                     <li class='home'>
                         <a href='/'>
-                            SecTorrent<span>.org</span>
+                            <%= config.general.project_name %><span>.org</span>
                         </a>
                     </li>
                     <li<% if(page == 'seps' || page == 'beps'){ %> selected<% } %>>
@@ -59,7 +59,7 @@
                         <label class='header-close-hover' for='close'></label>
                     </li>
                     <li>
-                        <a href='https://forums.sectorrent.org'>Forums</a>
+                        <a href='https://forums.<%= config.general.domain %>'>Forums</a>
                     </li>
                     <input id='close' name='header' type='radio'>
                 </ul>
