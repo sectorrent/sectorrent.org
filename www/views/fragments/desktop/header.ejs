@@ -43,14 +43,14 @@
                             SecTorrent<span>.org</span>
                         </a>
                     </li>
-                    <li<% if(page == 'oeps' || page == 'beps'){ %> selected<% } %>>
+                    <li<% if(page == 'seps' || page == 'beps'){ %> selected<% } %>>
                         <input id='<% const uuid = uniqid(); %><%= uuid %>' name='header' type='radio'>
                         <dropdown-container>
                             <dropdown>
                                 <links>
                                     <h3>Extension Protocols</h3>
                                     <a href='/beps/0000'>BitTorrent EPs (Archive)</a>
-                                    <a href='/oeps/0000'>SecTorrent EPs</a>
+                                    <a href='/seps/0000'>SecTorrent EPs</a>
                                 </links>
                             </dropdown>
                         </dropdown-container>

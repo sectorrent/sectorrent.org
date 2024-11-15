@@ -51,7 +51,7 @@ app.use(useragent.express());
 
 app.get('/', mainController.getHome);
 app.get('/beps/:id', mainController.getBEP);
-app.get('/oeps/:id', mainController.getOEP);
+app.get('/seps/:id', mainController.getSEP);
 
 app.get('*', (req, res) => {
 	mainController.getError(req, res, 404)

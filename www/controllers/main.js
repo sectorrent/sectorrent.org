@@ -56,16 +56,16 @@ exports.getHome = async (req, res) => {
 	});
 };
 
-exports.getOEP = async (req, res) => {
+exports.getSEP = async (req, res) => {
     const id = req.params.id;
-	const p = path.resolve('./eps/sectorrent/oep_'+id+'.md');
+	const p = path.resolve('./eps/sectorrent/sep_'+id+'.md');
 
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');
 
 		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/eps', {
-			title: 'OEP Page',
-			page: 'oeps',
+			title: 'SEP Page',
+			page: 'seps',
 			uniqid: uuidv4,
 			styles: [
 				'eps'
