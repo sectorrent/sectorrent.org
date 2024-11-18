@@ -1,4 +1,3 @@
-const github = require('../modules/github');
 const { v4: uuidv4 } = require('uuid');
 const marked = require('marked');
 const markedHighlight = require('marked-highlight');
@@ -17,7 +16,6 @@ marked.use(markedHighlight.markedHighlight({
     }
 }));
 
-github.getRecentCommits(config);
 /*
 const commits = [
 	{

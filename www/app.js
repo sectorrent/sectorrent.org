@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const cookies = require('cookie-parser');
 const mongo = require('./modules/mongo');
+const github = require('./modules/github');
 
 const mainController = require('./controllers/main');
 
@@ -39,6 +40,7 @@ app.use(cookies());
 
 mongo.connectDatabase(config.database);
 global.mongo = mongo;
+github.getRecentCommits(config);
 
 app.use((req, res, next) => {
 	res.locals.config = config;
