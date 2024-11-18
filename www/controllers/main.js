@@ -5,8 +5,6 @@ const hljs = require('highlight.js');
 const fs = require('fs');
 const path = require('path');
 
-const config = require('../config.json');
-
 marked.use(markedHighlight.markedHighlight({
 	emptyLangClass: 'hljs',
 	langPrefix: 'hljs language-',
