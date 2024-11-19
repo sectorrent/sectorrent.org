@@ -194,7 +194,7 @@ exports.parse = (markdown) => {
                     if(isHeaderRow){
                         tableHtml += '<thead><tr>';
                         filteredCells.forEach(cell => {
-                            bodyHtml += '<th>'+markDownText(cell)+'</th>';
+                            tableHtml += '<th>'+markDownText(cell)+'</th>';
                         });
                         tableHtml += '</tr></thead>';
                         isHeaderRow = false;
