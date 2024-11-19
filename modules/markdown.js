@@ -1,34 +1,27 @@
-const validTags = [
-    'br',
-    'strong',
-    'em',
-    's',
-    'strike',
-    'sup',
-    'sub',
-    'p',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'ul',
-    'li',
-    'ol',
-    'dl',
-    'dt',
-    'dd',
-    'img',
-    'pre',
-    'code',
-    'hr',
-    'div',
-    'span',
-    'a'
-];
-
 exports.parse = (markdown) => {
+    if(markdown.includes('<')){
+        let cursor = 0;
+
+        while(markdown.includes('<', cursor)){
+            const start = markdown.indexOf('<', cursor);
+            const end = markdown.indexOf('>', start+1);
+            
+            if(end === -1){
+                break;
+            }
+            
+            let tagText = markdown.substring(start+1, end);
+            if(tagText.includes('<')){
+                let subCursor = 0;
+                while(tagText.includes('<', subCursor)){
+                    const start = tagText.indexOf('<', cursor);
+                    tagText = tagText.slice(0, start)+'&lt;'+tagText.slice(start+1);
+                }
+            }
+            markdown = markdown.slice(0, start)+`&lt;${tagText}&gt;`+markdown.slice(end+1);
+        }
+    }
+
     const paragraphs = markdown.split('\n\n');
     let inCodeBlock = false;
 
@@ -39,6 +32,10 @@ exports.parse = (markdown) => {
         
         while(i < lines.length){
             let line = lines[i];
+
+            if(line.endsWith('  ')){
+                line = line.slice(0, line.length-2)+'<br>';
+            }
             
             //HANDLE CODE BLOCKS
             if(line.startsWith('```')){
@@ -57,23 +54,6 @@ exports.parse = (markdown) => {
             }
             
             if(inCodeBlock){
-                if(line.includes('<')){
-                    let cursor = 0;
-        
-                    while(line.includes('<', cursor)){
-                        const start = line.indexOf('<', cursor);
-                        const end = line.indexOf('>', start+1);
-                        
-                        if(end === -1){
-                            break;
-                        }
-                        
-                        const tagText = line.substring(start+1, end);
-                        line = line.slice(0, start)+`&lt;${tagText}&gt;`+line.slice(end+1);
-                        cursor = start+`&lt;${tagText}&gt;`.length;
-                    }
-                }
-
                 processedLines.push(line);
                 i++;
                 continue;
@@ -91,35 +71,6 @@ exports.parse = (markdown) => {
                 processedLines.push(`<blockquote>${line.slice(2)}</blockquote>`);
                 i++;
                 continue;
-            }
-
-            //HANDLE VALID TAGS
-            if(line.includes('<')){
-                let cursor = 0;
-
-                while(line.includes('<', cursor)){
-                    const start = line.indexOf('<', cursor);
-                    const end = line.indexOf('>', start+1);
-                    
-                    if(end === -1){
-                        break;
-                    }
-                    
-                    const tagText = line.substring(start+1, end);
-
-                    if(validTags.includes(tagText.split(' ')[0].toLowerCase())){
-                        cursor = start+`<${tagText}>`.length;
-                        continue;
-                    }
-
-                    if(validTags.includes(tagText.split(' ')[0].toLowerCase().slice(1))){
-                        cursor = start+`</${tagText}>`.length;
-                        continue;
-                    }
-
-                    line = line.slice(0, start)+`&lt;${tagText}&gt;`+line.slice(end+1);
-                    cursor = start+`&lt;${tagText}&gt;`.length;
-                }
             }
 
             //HANDLE UNDERLINES FOR H1 & H2
@@ -223,7 +174,6 @@ exports.parse = (markdown) => {
             return tableHtml;
         }
 
-
         //HANDLE LIST WRAPPING
         const isList = processedLines.every(line => line.startsWith('<li>'));
         if(isList){
@@ -242,6 +192,25 @@ exports.parse = (markdown) => {
 };
 
 function markDownText(line){
+    //HANDLE IMAGES
+    while(line.includes('![') && line.includes('](')){
+        const startText = line.indexOf('![');
+        const endText = line.indexOf('](', startText);
+        const startUrl = line.indexOf('(', endText);
+        const endUrl = line.indexOf(')', startUrl);
+
+        if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
+            const linkText = line.substring(startText+1, endText);
+            const url = line.substring(startUrl+1, endUrl);
+            const linkHtml = `<img src="${url}">`;
+
+            line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
+
+        }else{
+            break;
+        }
+    }
+
     //HANDLE LINKS
     while(line.includes('[') && line.includes('](')){
         const startText = line.indexOf('[');
