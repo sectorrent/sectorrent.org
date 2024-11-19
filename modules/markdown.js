@@ -81,15 +81,15 @@ exports.parse = (markdown) => {
                     nextLine = lines[i+1].trim();
 
                     if(/^=+$/.test(nextLine)){
-                        lines[i+1] = '';
-                        processedLines.push(`<h1>${line}</h1>`);
-                        i++;
+                        const slug = line.split(/\s/).join('-').toLowerCase();
+                        processedLines.push(`<h1 id='${slug}'>${line}</h1>`);
+                        i += 2;
                         continue;
     
                     }else if(/^-+$/.test(nextLine)){
-                        lines[i+1] = '';
-                        processedLines.push(`<h2>${line}</h2>`);
-                        i++;
+                        const slug = line.split(/\s/).join('-').toLowerCase();
+                        processedLines.push(`<h2 id='${slug}'>${line}</h2>`);
+                        i += 2;
                         continue;
                     }
                 }
@@ -97,17 +97,20 @@ exports.parse = (markdown) => {
 
             //HANDLE HEADERS
             if(line.startsWith('### ')){
-                processedLines.push(`<h3>${line.slice(4)}</h3>`);
+                const slug = line.slice(4).split(/\s/).join('-').toLowerCase();
+                processedLines.push(`<h3 id='${slug}'>${line.slice(4)}</h3>`);
                 i++;
                 continue;
 
             }else if(line.startsWith('## ')){
-                processedLines.push(`<h2>${line.slice(3)}</h2>`);
+                const slug = line.slice(3).split(/\s/).join('-').toLowerCase();
+                processedLines.push(`<h2 id='${slug}'>${line.slice(3)}</h2>`);
                 i++;
                 continue;
 
             }else if(line.startsWith('# ')){
-                processedLines.push(`<h1>${line.slice(2)}</h1>`);
+                const slug = line.slice(2).split(/\s/).join('-').toLowerCase();
+                processedLines.push(`<h1 id='${slug}'>${line.slice(2)}</h1>`);
                 i++;
                 continue;
             }
