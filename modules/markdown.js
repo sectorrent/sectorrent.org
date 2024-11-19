@@ -33,18 +33,26 @@ exports.parse = (markdown) => {
 
     const htmlParagraphs = paragraphs.map((paragraph) => {
         const lines = paragraph.split('\n');
-        let processedLines = lines.map((line, i, allLines) => {
+        let processedLines = [];
+        let i = 0;
+        
+        while(i < lines.length){
+            let line = lines[i];
+            
             //HANDLE CODE BLOCKS
             if(line.startsWith('```')){
                 inCodeBlock = !inCodeBlock;
 
                 if(inCodeBlock){
-                    const previousLine = allLines[i+1];
-                    allLines[i+1] = '';
-                    return '<pre><code>'+previousLine;
+                    const previousLine = lines[i+1];
+                    processedLines.push('<pre><code>'+previousLine);
+                    i += 2;
+                    continue;
                 }
 
-                return '</code></pre>';
+                processedLines[processedLines.length-1] = processedLines[processedLines.length-1]+'</code></pre>';
+                i++;
+                continue;
             }
             
             if(inCodeBlock){
@@ -65,17 +73,23 @@ exports.parse = (markdown) => {
                     }
                 }
 
-                return line;
+                processedLines.push(line);
+                i++;
+                continue;
             }
 
             //HANDLE BULLET LISTS
             if(line.startsWith('- ')){
-                return `<li>${line.slice(2)}</li>`;
+                processedLines.push(`<li>${line.slice(2)}</li>`);
+                i++;
+                continue;
             }
 
             //HANDLE BLOCKQUOTES
             if(line.startsWith('> ')){
-                return `<blockquote>${line.slice(2)}</blockquote>`;
+                processedLines.push(`<blockquote>${line.slice(2)}</blockquote>`);
+                i++;
+                continue;
             }
 
             //HANDLE VALID TAGS
@@ -103,32 +117,42 @@ exports.parse = (markdown) => {
             }
 
             //HANDLE UNDERLINES FOR H1 & H2
-            if(i < allLines.length){
-                let nextLine = allLines[i+1];
+            if(i < lines.length){
+                let nextLine = lines[i+1];
 
                 if(typeof nextLine != 'undefined'){
-                    nextLine = allLines[i+1].trim();
+                    nextLine = lines[i+1].trim();
 
                     if(/^=+$/.test(nextLine)){
-                        allLines[i+1] = '';
-                        return `<h1>${line}</h1>`;
+                        lines[i+1] = '';
+                        processedLines.push(`<h1>${line}</h1>`);
+                        i++;
+                        continue;
     
                     }else if(/^-+$/.test(nextLine)){
-                        allLines[i+1] = '';
-                        return `<h2>${line}</h2>`;
+                        lines[i+1] = '';
+                        processedLines.push(`<h2>${line}</h2>`);
+                        i++;
+                        continue;
                     }
                 }
             }
 
             //HANDLE HEADERS
             if(line.startsWith('### ')){
-                return `<h3>${line.slice(4)}</h3>`;
+                processedLines.push(`<h3>${line.slice(4)}</h3>`);
+                i++;
+                continue;
 
             }else if(line.startsWith('## ')){
-                return `<h2>${line.slice(3)}</h2>`;
+                processedLines.push(`<h2>${line.slice(3)}</h2>`);
+                i++;
+                continue;
 
             }else if(line.startsWith('# ')){
-                return `<h1>${line.slice(2)}</h1>`;
+                processedLines.push(`<h1>${line.slice(2)}</h1>`);
+                i++;
+                continue;
             }
 
             line = markDownText(line);
@@ -148,8 +172,9 @@ exports.parse = (markdown) => {
                 }
             }
 
-            return line;
-        });
+            processedLines.push(line);
+            i++;
+        }
 
         //HANDLE TABLE
         if(lines.some((line) => line.startsWith('|'))){
