@@ -24,7 +24,8 @@ const validTags = [
     'code',
     'hr',
     'div',
-    'span'
+    'span',
+    'a'
 ];
 
 exports.parse = (markdown) => {
@@ -239,7 +240,7 @@ function markDownText(line){
     //HANDLE LINKS
     while(line.includes('[') && line.includes('](')){
         const startText = line.indexOf('[');
-        const endText = line.indexOf(']', startText);
+        const endText = line.indexOf('(', startText)-1;
         const startUrl = line.indexOf('(', endText);
         const endUrl = line.indexOf(')', startUrl);
 
