@@ -1,10 +1,12 @@
 const { v4: uuidv4 } = require('uuid');
-const marked = require('marked');
-const markedHighlight = require('marked-highlight');
-const hljs = require('highlight.js');
+const marked = require('../modules/markdown');
+//const marked = require('marked');
+//const markedHighlight = require('marked-highlight');
+//const hljs = require('highlight.js');
 const fs = require('fs');
 const path = require('path');
 
+/*
 marked.use(markedHighlight.markedHighlight({
 	emptyLangClass: 'hljs',
 	langPrefix: 'hljs language-',
