@@ -245,7 +245,7 @@ function markDownText(line){
     //HANDLE LINKS
     while(line.includes('[') && line.includes('](')){
         const startText = line.indexOf('[');
-        const endText = line.indexOf('(', startText)-1;
+        const endText = line.indexOf('](', startText);
         const startUrl = line.indexOf('(', endText);
         const endUrl = line.indexOf(')', startUrl);
 
