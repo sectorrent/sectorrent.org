@@ -68,6 +68,50 @@ exports.parse = (markdown) => {
                 return line;
             }
 
+            // HANDLE BULLET LISTS
+            if(line.startsWith('- ')){
+                return `<li>${line.slice(2)}</li>`;
+            }
+
+            //HANDLE TABLE
+            if(line.startsWith('|')){
+                let tableHtml = '<table>';
+                let isHeaderRow = true;
+                let bodyHtml = '';
+            
+                lines.forEach((tableLine, index) => {
+                    if(tableLine.startsWith('|')){
+                        const cells = tableLine.split('|').map(cell => cell.trim());
+                        const filteredCells = cells.filter(cell => cell !== '');
+
+                        if(index > 0 && filteredCells.every(cell => /^-+$/.test(cell))){
+                            return;
+                        }
+            
+                        if(isHeaderRow){
+                            tableHtml += '<thead><tr>';
+                            filteredCells.forEach(cell => {
+                                tableHtml += `<th>${cell}</th>`;
+                            });
+                            tableHtml += '</tr></thead>';
+                            isHeaderRow = false;
+                        }else{
+                            bodyHtml += '<tr>';
+                            filteredCells.forEach(cell => {
+                                bodyHtml += `<td>${cell}</td>`;
+                            });
+                            bodyHtml += '</tr>';
+                        }
+                    }
+                });
+            
+                if(bodyHtml){
+                    tableHtml += `<tbody>${bodyHtml}</tbody>`;
+                }
+                tableHtml += '</table>';
+                return tableHtml;
+            }
+
             //HANDLE VALID TAGS
             if(line.includes('<')){
                 let cursor = 0;
@@ -188,8 +232,13 @@ exports.parse = (markdown) => {
             return line;
         });
 
-        const joinedLines = processedLines.join('\n');
+        // HANDLE LIST WRAPPING
+        const isList = processedLines.every(line => line.startsWith('<li>'));
+        if(isList){
+            return `<ul>${processedLines.join('')}</ul>`;
+        }
 
+        const joinedLines = processedLines.join('\n');
         if(!inCodeBlock && !joinedLines.startsWith('<h') && !joinedLines.startsWith('<pre>')){
             return `<p>${joinedLines}</p>`;
         }
