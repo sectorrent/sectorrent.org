@@ -68,48 +68,14 @@ exports.parse = (markdown) => {
                 return line;
             }
 
-            // HANDLE BULLET LISTS
+            //HANDLE BULLET LISTS
             if(line.startsWith('- ')){
                 return `<li>${line.slice(2)}</li>`;
             }
 
-            //HANDLE TABLE
-            if(line.startsWith('|')){
-                let tableHtml = '<table>';
-                let isHeaderRow = true;
-                let bodyHtml = '';
-            
-                lines.forEach((tableLine, index) => {
-                    if(tableLine.startsWith('|')){
-                        const cells = tableLine.split('|').map(cell => cell.trim());
-                        const filteredCells = cells.filter(cell => cell !== '');
-
-                        if(index > 0 && filteredCells.every(cell => /^-+$/.test(cell))){
-                            return;
-                        }
-            
-                        if(isHeaderRow){
-                            tableHtml += '<thead><tr>';
-                            filteredCells.forEach(cell => {
-                                tableHtml += `<th>${cell}</th>`;
-                            });
-                            tableHtml += '</tr></thead>';
-                            isHeaderRow = false;
-                        }else{
-                            bodyHtml += '<tr>';
-                            filteredCells.forEach(cell => {
-                                bodyHtml += `<td>${cell}</td>`;
-                            });
-                            bodyHtml += '</tr>';
-                        }
-                    }
-                });
-            
-                if(bodyHtml){
-                    tableHtml += `<tbody>${bodyHtml}</tbody>`;
-                }
-                tableHtml += '</table>';
-                return tableHtml;
+            //HANDLE BLOCKQUOTES
+            if(line.startsWith('> ')){
+                return `<blockquote>${line.slice(2)}</blockquote>`;
             }
 
             //HANDLE VALID TAGS
@@ -165,54 +131,7 @@ exports.parse = (markdown) => {
                 return `<h1>${line.slice(2)}</h1>`;
             }
 
-            //HANDLE LINKS
-            while(line.includes('[') && line.includes('](')){
-                const startText = line.indexOf('[');
-                const endText = line.indexOf(']', startText);
-                const startUrl = line.indexOf('(', endText);
-                const endUrl = line.indexOf(')', startUrl);
-
-                if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
-                    const linkText = line.substring(startText+1, endText);
-                    const url = line.substring(startUrl+1, endUrl);
-                    const linkHtml = `<a href="${url}">${linkText}</a>`;
-
-                    line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
-
-                }else{
-                    break;
-                }
-            }
-
-            //HANDLE BOLD
-            if(line.includes('**')){
-                while(line.includes('**')){
-                    const start = line.indexOf('**');
-                    const end = line.indexOf('**', start+2);
-
-                    if(end === -1){
-                        break;
-                    }
-
-                    const boldText = line.substring(start+2, end);
-                    line = line.slice(0, start)+`<strong>${boldText}</strong>`+line.slice(end + 2);
-                }
-            }
-
-            //HANDLE ITALIC
-            if(line.includes('*')){
-                while(line.includes('*')){
-                    const start = line.indexOf('*');
-                    const end = line.indexOf('*', start+1);
-
-                    if(end === -1){
-                        break;
-                    }
-
-                    const italicText = line.substring(start+1, end);
-                    line = line.slice(0, start)+`<em>${italicText}</em>`+line.slice(end + 1);
-                }
-            }
+            line = markDownText(line);
 
             //HANDLE EXAMPLE
             if(line.includes('`')){
@@ -232,6 +151,48 @@ exports.parse = (markdown) => {
             return line;
         });
 
+        //HANDLE TABLE
+        if(lines.some((line) => line.startsWith('|'))){
+            let tableHtml = '<table>';
+            let isHeaderRow = true;
+            let bodyHtml = '';
+        
+            lines.forEach((tableLine, index) => {
+                if(tableLine.startsWith('|')){
+                    const cells = tableLine.split('|').map(cell => cell.trim());
+                    const filteredCells = cells.filter(cell => cell !== '');
+
+                    if(index > 0 && filteredCells.every(cell => /^-+$/.test(cell))){
+                        return;
+                    }
+        
+                    if(isHeaderRow){
+                        tableHtml += '<thead><tr>';
+                        filteredCells.forEach(cell => {
+                            bodyHtml += '<th>'+markDownText(cell)+'</th>';
+                        });
+                        tableHtml += '</tr></thead>';
+                        isHeaderRow = false;
+
+                    }else{
+                        bodyHtml += '<tr>';
+                        filteredCells.forEach(cell => {
+                            bodyHtml += '<td>'+markDownText(cell)+'</td>';
+                        });
+                        bodyHtml += '</tr>';
+                    }
+                }
+            });
+        
+            if(bodyHtml){
+                tableHtml += `<tbody>${bodyHtml}</tbody>`;
+            }
+            
+            tableHtml += '</table>';
+            return tableHtml;
+        }
+
+
         // HANDLE LIST WRAPPING
         const isList = processedLines.every(line => line.startsWith('<li>'));
         if(isList){
@@ -248,3 +209,56 @@ exports.parse = (markdown) => {
 
     return htmlParagraphs.join('\n\n');
 };
+
+function markDownText(line){
+    //HANDLE LINKS
+    while(line.includes('[') && line.includes('](')){
+        const startText = line.indexOf('[');
+        const endText = line.indexOf(']', startText);
+        const startUrl = line.indexOf('(', endText);
+        const endUrl = line.indexOf(')', startUrl);
+
+        if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
+            const linkText = line.substring(startText+1, endText);
+            const url = line.substring(startUrl+1, endUrl);
+            const linkHtml = `<a href="${url}">${linkText}</a>`;
+
+            line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
+
+        }else{
+            break;
+        }
+    }
+
+    //HANDLE BOLD
+    if(line.includes('**')){
+        while(line.includes('**')){
+            const start = line.indexOf('**');
+            const end = line.indexOf('**', start+2);
+
+            if(end === -1){
+                break;
+            }
+
+            const boldText = line.substring(start+2, end);
+            line = line.slice(0, start)+`<strong>${boldText}</strong>`+line.slice(end + 2);
+        }
+    }
+
+    //HANDLE ITALIC
+    if(line.includes('*')){
+        while(line.includes('*')){
+            const start = line.indexOf('*');
+            const end = line.indexOf('*', start+1);
+
+            if(end === -1){
+                break;
+            }
+
+            const italicText = line.substring(start+1, end);
+            line = line.slice(0, start)+`<em>${italicText}</em>`+line.slice(end + 1);
+        }
+    }
+
+    return line;
+}
