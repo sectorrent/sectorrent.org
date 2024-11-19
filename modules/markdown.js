@@ -218,7 +218,7 @@ exports.parse = (markdown) => {
         }
 
 
-        // HANDLE LIST WRAPPING
+        //HANDLE LIST WRAPPING
         const isList = processedLines.every(line => line.startsWith('<li>'));
         if(isList){
             return `<ul>${processedLines.join('')}</ul>`;
