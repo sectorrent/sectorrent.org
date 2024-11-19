@@ -112,6 +112,11 @@ exports.parse = (markdown) => {
                         continue;
                     }
 
+                    if(validTags.includes(tagText.split(' ')[0].toLowerCase().slice(1))){
+                        cursor = start+`</${tagText}>`.length;
+                        continue;
+                    }
+
                     line = line.slice(0, start)+`&lt;${tagText}&gt;`+line.slice(end+1);
                     cursor = start+`&lt;${tagText}&gt;`.length;
                 }
