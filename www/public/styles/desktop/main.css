@@ -318,6 +318,11 @@ footer nav div {
     flex: 1;
 }
 
+footer nav div[type='social'] {
+    display: flex;
+    gap: 20px;
+}
+
 footer nav div[type='social'] svg {
     display: block;
     width: 40px;
