@@ -82,3 +82,10 @@ section code {
     border-radius: 5px;
     background-color: var(--background-secondary);
 }
+
+section blockquote {
+    display: block;
+    margin: 0;
+    padding: 0 15px;
+    border-left: solid 2px var(--background-shimmer);
+}
