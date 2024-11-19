@@ -4,23 +4,11 @@ exports.parse = (markdown) => {
 
         while(markdown.includes('<', cursor)){
             const start = markdown.indexOf('<', cursor);
-            const end = markdown.indexOf('>', start+1);
-            
-            if(end === -1){
-                break;
-            }
-            
-            let tagText = markdown.substring(start+1, end);
-            if(tagText.includes('<')){
-                let subCursor = 0;
-                while(tagText.includes('<', subCursor)){
-                    const start = tagText.indexOf('<', cursor);
-                    tagText = tagText.slice(0, start)+'&lt;'+tagText.slice(start+1);
-                }
-            }
-            markdown = markdown.slice(0, start)+`&lt;${tagText}&gt;`+markdown.slice(end+1);
+            markdown = markdown.slice(0, start)+'&lt;'+markdown.slice(start+1);
         }
     }
+
+    markdown = wrapEmails(wrapLinks(markdown));
 
     const paragraphs = markdown.split('\n\n');
     let inCodeBlock = false;
@@ -60,9 +48,24 @@ exports.parse = (markdown) => {
             }
 
             //HANDLE BULLET LISTS
-            if(line.startsWith('- ')){
-                processedLines.push(`<li>${line.slice(2)}</li>`);
-                i++;
+            if(/^[-+*] /.test(line)){
+                let listItems = [];
+                while(i < lines.length && /^[-+*] /.test(lines[i])){
+                    listItems.push(`<li>${lines[i].slice(2)}</li>`);
+                    i++;
+                }
+                processedLines.push(`<ul>${listItems.join('')}</ul>`);
+                continue;
+            }
+
+            //HANDLE NUMBERED
+            if(/^\d+\.\s/.test(line)){
+                let listItems = [];
+                while(i < lines.length && /^\d+\.\s/.test(lines[i])){
+                    listItems.push(`<li>${lines[i].slice(lines[i].indexOf(' ')+1)}</li>`);
+                    i++;
+                }
+                processedLines.push(`<ol>${listItems.join('')}</ol>`);
                 continue;
             }
 
@@ -194,6 +197,20 @@ exports.parse = (markdown) => {
     return htmlParagraphs.join('\n\n');
 };
 
+function wrapLinks(input){
+    var urlRegex = /(https?:\/\/[^\s]+)/gi;
+    return input.replace(urlRegex, function(url){
+        return `<a href="${url}">${url}</a>`;
+    });
+}
+
+function wrapEmails(input){
+    var emailRegex = /([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+    return input.replace(emailRegex, function(url){
+        return `<a href="mailto:${url}">${url}</a>`;
+    });
+}
+
 function markDownText(line){
     //HANDLE IMAGES
     while(line.includes('![') && line.includes('](')){
@@ -203,8 +220,10 @@ function markDownText(line){
         const endUrl = line.indexOf(')', startUrl);
 
         if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
-            const linkText = line.substring(startText+1, endText);
             const url = line.substring(startUrl+1, endUrl);
+            if(url.includes('"')){
+                break;
+            }
             const linkHtml = `<img src="${url}">`;
 
             line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
@@ -224,6 +243,9 @@ function markDownText(line){
         if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
             const linkText = line.substring(startText+1, endText);
             const url = line.substring(startUrl+1, endUrl);
+            if(url.includes('"')){
+                break;
+            }
             const linkHtml = `<a href="${url}">${linkText}</a>`;
 
             line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
