@@ -1,18 +1,41 @@
 content {
-    display: block;
+    display: flex;
     width: 100%;
+    gap: 30px;
+    flex-direction: column;
 }
 
-content thread-header,
-        content question,
-        content thread-info {
+content thread-header {
     display: block;
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-content div:not(:last-child) {
-    border-bottom: solid 1px var(--background-shimmer);
+content question,
+        content comment {
+    display: flex;
+    gap: 10px;
+}
+
+content question-inner,
+        content comment-inner,
+        content reply {
+    display: block;
+    flex: 1;
+    border: solid 1px var(--background-shimmer);
+    border-radius: 10px;
+}
+
+comments {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+
+content question-inner > div,
+        content comment-inner > div {
+    padding: 10px;
 }
 
 h1 {
@@ -51,11 +74,15 @@ content question-header,
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 8px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--background-secondary);
+    border-bottom: solid 1px var(--background-shimmer);
 }
 
-content question-header img,
-        content comment-header img {
+content question img,
+        content comment img {
     display: block;
     width: 40px;
     height: 40px;
@@ -65,32 +92,14 @@ content question-header img,
 
 content question-header h3,
         content comment-header h3 {
-    font-size: 1.2em;
+    font-size: 1em;
     margin: 0;
 }
 
 content date {
     display: block;
     color: var(--text-secondary);
-    margin-left: auto;
-}
-
-
-comments {
-    display: block;
-}
-
-comment {
-    display: block;
-    padding: 20px 0;
-    border-bottom: solid 1px var(--background-shimmer);
-}
-
-content reply {
-    display: block;
-    border: solid 1px var(--background-shimmer);
-    border-radius: 10px;
-    margin-top: 20px;
+    font-size: 0.8em;
 }
 
 content reply-header {
@@ -125,6 +134,7 @@ content reply-header button {
     display: block;
     background: transparent;
     border: 0;
+    padding: 0;
     cursor: pointer;
 }
 
