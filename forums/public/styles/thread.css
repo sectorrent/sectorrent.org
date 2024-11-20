@@ -77,7 +77,7 @@ content question-header,
     display: flex;
     gap: 10px;
     align-items: center;
-    padding: 8px 10px;
+    padding: 7px 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: var(--background-secondary);
