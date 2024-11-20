@@ -12,14 +12,12 @@ content thread-header {
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-content question,
-        content comment {
+content comment {
     display: flex;
     gap: 10px;
 }
 
-content question-inner,
-        content comment-inner,
+content comment-inner,
         content reply {
     display: block;
     flex: 1;
@@ -36,8 +34,7 @@ comments {
 }
 
 
-content question-inner > div,
-        content comment-inner > div {
+content comment-inner > div {
     padding: 10px;
 }
 
@@ -72,8 +69,7 @@ categories a span {
     height: 12px;
 }
 
-content question-header,
-        content comment-header {
+content comment-header {
     display: flex;
     height: 39px;
     gap: 10px;
@@ -85,8 +81,7 @@ content question-header,
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-content question img,
-        content comment img {
+content comment img {
     display: block;
     width: 40px;
     height: 40px;
@@ -94,21 +89,18 @@ content question img,
     background-color: var(--background-shimmer);
 }
 
-content question-header h3,
-        content comment-header h3 {
+content comment-header h3 {
     font-size: 1em;
     margin: 0;
 }
 
-content question-header date,
-        content comment-header date {
+content comment-header date {
     display: block;
     color: var(--text-secondary);
     font-size: 0.8em;
 }
 
-content question-header button,
-        content comment-header button {
+content comment-header button {
     display: block;
     background: transparent;
     border: 0;
@@ -154,8 +146,7 @@ content reply-header button {
     cursor: pointer;
 }
 
-content question-header svg,
-        content comment-header svg,
+content comment-header svg,
         content reply-header svg {
     display: block;
     width: 24px;
@@ -164,8 +155,7 @@ content question-header svg,
     transition: fill 0.3s;
 }
 
-content question-header button:hover svg,
-        content comment-header button:hover svg,
+content comment-header button:hover svg,
         content reply-header button:hover svg {
     fill: var(--primary);
 }

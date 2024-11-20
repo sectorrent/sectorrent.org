@@ -12,7 +12,8 @@ content {
 
 content nav {
     display: block;
-    padding: 20px 0 10px 0;
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-shimmer);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -34,22 +35,24 @@ content li {
 }
 
 content li a {
-    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px 20px;
     color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
-}
-
-content li a:hover {
-    border-radius: 5px;
+    border: solid 1px var(--background-shimmer);
     background-color: var(--background-secondary);
 }
 
+content li a:hover {
+    background-color: var(--background-shimmer);
+}
+
 content li[selected] a {
-    border-radius: 0;
-    background-color: transparent;
-    color: var(--primary);
-    border-bottom: solid 2px var(--primary);
+    color: var(--background);
+    background-color: var(--primary);
+    border: solid 1px var(--secondary);
 }
 
 lists {
