@@ -30,7 +30,7 @@ exports.signIn = async (req, res) => {
 			required: true,
             min: 6,
             max: 51
-        },
+        }/*,
 		{
             key: 'captcha',
             type: 'STRING',
@@ -38,11 +38,11 @@ exports.signIn = async (req, res) => {
 			pattern: /^[a-zA-Z0-9]+$/,
             min: 2,
             max: 10
-		}
+		}*/
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
-
+/*
 	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
 		throw new Error('No captcha found.');
 	}
@@ -50,7 +50,7 @@ exports.signIn = async (req, res) => {
 	if(crypto.createHmac('sha256', res.locals.config.token.captcha).update(req.body.captcha.toLowerCase()).digest('hex') != req.cookies.captcha){
 		throw new Error('Captcha is invalid.');
 	}
-
+*/
 	req.body.email = req.body.email.toLowerCase().trim();
 
 	const data = await global.mongo.getDatabase().collection('users').findOne(
@@ -216,7 +216,7 @@ exports.signUp = async (req, res) => {
 			required: true,
             min: 6,
             max: 51
-        },
+        }/*,
 		{
             key: 'captcha',
             type: 'STRING',
@@ -224,11 +224,11 @@ exports.signUp = async (req, res) => {
 			pattern: /^[a-zA-Z0-9]+$/,
             min: 2,
             max: 10
-		}
+		}*/
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
-
+/*
 	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
 		throw new Error('No captcha found.');
 	}
@@ -236,7 +236,7 @@ exports.signUp = async (req, res) => {
 	if(crypto.createHmac('sha256', res.locals.config.token.captcha).update(req.body.captcha.toLowerCase()).digest('hex') != req.cookies.captcha){
 		throw new Error('Captcha is invalid.');
 	}
-
+*/
 	if(req.body.password != req.body.rpassword){
 		throw new FieldError([
 			{
@@ -389,7 +389,7 @@ exports.signUp = async (req, res) => {
 	
 		return {
 			message: 'Signed up!',
-			link: '/profile'
+			link: '/'
 		};
 
 	}catch(error){
@@ -485,7 +485,7 @@ exports.forgotPassword = async (req, res) => {
 
 	return {
 		message: 'Password reset email sent!',
-		link: '/signin'
+		link: '/'
 	};
 };
 

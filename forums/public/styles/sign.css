@@ -140,7 +140,7 @@ response {
 	display: none;
 	font-weight: 0.8em;
 	margin: 0px auto;
-	color: var(--primary);
+	color: var(--error);
 	overflow: hidden;
 }
 

@@ -44,6 +44,32 @@ server.listen(80, () => {
 	console.log(`api.${config.general.domain} started`);
 });
 
+
+
+app.use((req, res, next) => {
+	res.setHeader('Content-Type', 'application/json; charset=utf-8');
+	console.log('ORIGIN');
+
+	const origin = req.headers.origin;
+	if(origin){
+		res.setHeader('Access-Control-Allow-Origin', origin);
+	}else{
+		res.setHeader('Access-Control-Allow-Origin', 'https://'+res.locals.config.general.domain);
+	}
+
+	//res.setHeader('Access-Control-Allow-Origin', [  ]);
+	res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+
+	if(req.method === 'OPTIONS'){
+		res.sendStatus(200);
+		return;
+	}
+
+	next();
+});
+
 app.use([
 	'/signin',
 	'/signup',
@@ -69,3 +95,10 @@ app.get('/signout', mainController.getSignOut);
 
 app.post('/forgot-password', express.json(), mainController.postForgotPassword);
 app.put('/reset-password', express.json(), mainController.putResetPassword);
+
+app.get('*', (req, res) => {
+	res.json({
+		status: 404,
+		status_message: 'Endpoint not found!'
+	});
+});
