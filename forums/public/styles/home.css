@@ -4,6 +4,12 @@
     }
 }
 
+content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 content nav {
     display: block;
     padding: 20px 0 10px 0;
@@ -55,7 +61,9 @@ lists {
 
 list {
     display: block;
-    width: calc(50% - 20px);
+    width: calc(50% - 22px);
+    border: solid 1px var(--background-shimmer);
+    border-radius: 10px;
 }
 
 list-head,
@@ -63,15 +71,20 @@ list-head,
     display: block;
 }
 
-list row {
-    display: flex;
-    align-items: center;
-}
-
 list-head {
     color: var(--text-secondary);
-    padding: 20px 0;
-    border-bottom: solid 4px var(--background-shimmer);
+    height: 39px;
+    padding: 0 10px;
+    background-color: var(--background-secondary);
+    border-bottom: solid 1px var(--background-shimmer);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+list row {
+    display: flex;
+    height: inherit;
+    align-items: center;
 }
 
 cell {
@@ -89,9 +102,17 @@ list-body cell:nth-child(2) {
 }
 
 list-body row {
-    padding: 20px 0 20px 20px;
+    padding: 10px 0 10px 10px;
+}
+
+list-body row:not(:last-child) {
     border-bottom: solid 1px var(--background-secondary);
 }
+
+list-body row:last-child {
+    border-bottom-left-radius: 10px;
+}
+
 
 list-body a {
     display: block;
