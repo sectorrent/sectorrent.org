@@ -44,7 +44,6 @@ content li a:hover {
 }
 
 content li[selected] a {
-    color: var(--background);
     background-color: var(--primary);
 }
 
