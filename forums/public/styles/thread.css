@@ -30,6 +30,8 @@ comments {
     display: flex;
     gap: 30px;
     flex-direction: column;
+    padding-bottom: 30px;
+    border-bottom: solid 1px var(--background-shimmer);
 }
 
 
@@ -96,10 +98,21 @@ content question-header h3,
     margin: 0;
 }
 
-content date {
+content question-header date,
+        content comment-header date {
     display: block;
     color: var(--text-secondary);
     font-size: 0.8em;
+}
+
+content question-header button,
+        content comment-header button {
+    display: block;
+    background: transparent;
+    border: 0;
+    margin-left: auto;
+    padding: 0;
+    cursor: pointer;
 }
 
 content reply-header {
@@ -138,14 +151,19 @@ content reply-header button {
     cursor: pointer;
 }
 
-content reply-header svg {
+content question-header svg,
+        content comment-header svg,
+        content reply-header svg {
     display: block;
     width: 24px;
     height: 24px;
     fill: var(--text-primary);
+    transition: fill 0.3s;
 }
 
-content reply-header button:hover svg {
+content question-header button:hover svg,
+        content comment-header button:hover svg,
+        content reply-header button:hover svg {
     fill: var(--primary);
 }
 
