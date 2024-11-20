@@ -101,7 +101,7 @@ section[type='news'] container article {
     width: calc(50% - 52px);
     padding: 20px;
     color: var(--text-secondary);
-    border: solid 1px var(--text-primary);
+    border: solid 1px var(--background-shimmer);
     border-radius: 5px;
 }
 

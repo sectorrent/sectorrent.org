@@ -109,6 +109,10 @@ content comment-header button {
     cursor: pointer;
 }
 
+content input[type='radio'] {
+    display: none;
+}
+
 content reply-header {
     display: flex;
     height: 39px;
@@ -124,19 +128,22 @@ content reply-header {
 content reply-header label {
     display: block;
     padding: 10px 10px 11px 10px;
+    margin: 0 -1px -1px -1px;
+    border-top: solid 1px transparent;
+    border-left: solid 1px transparent;
+    border-right: solid 1px transparent;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    margin: 0 -1px -1px -1px;
     cursor: pointer;
 }
 
-content reply-header label:nth-child(1) {
+content reply input[type='radio'][radio='reply-write']:checked ~ reply-header label[name='reply-write'],
+        content reply input[type='radio'][radio='reply-preview']:checked ~ reply-header label[name='reply-preview'] {
     border-top: solid 1px var(--background-shimmer);
     border-left: solid 1px var(--background-shimmer);
     border-right: solid 1px var(--background-shimmer);
     background-color: var(--background);
 }
-
 
 content reply-header button {
     display: block;
@@ -160,7 +167,9 @@ content comment-header button:hover svg,
     fill: var(--primary);
 }
 
-content textarea {
+
+content reply textarea {
+    display: none;
     width: calc(100% - 42px);
     min-height: 150px;
     color: var(--text-primary);
@@ -175,6 +184,20 @@ content textarea {
     outline: none;
 }
 
-content textarea:focus {
+content reply textarea:focus {
     border: solid 1px var(--primary);
+}
+
+preview {
+    display: none;
+    min-height: 150px;
+    padding: 20px;
+    overflow-x: auto;
+    resize: vertical;
+}
+
+
+content reply input[type='radio'][radio='reply-write']:checked ~ textarea,
+        content reply input[type='radio'][radio='reply-preview']:checked ~ preview {
+    display: block;
 }

@@ -55,9 +55,11 @@
                 </comments>
 
                 <reply>
+                    <input id='<% const writeId = uniqid(); %><%= writeId %>' name='reply-radio' radio='reply-write' type='radio' checked>
+                    <input id='<% const previewId = uniqid(); %><%= previewId %>' name='reply-radio' radio='reply-preview' type='radio'>
                     <reply-header>
-                        <label>Write</label>
-                        <label>Preview</label>
+                        <label name='reply-write' for='<%= writeId %>'>Write</label>
+                        <label name='reply-preview' for='<%= previewId %>'>Preview</label>
                         <filler></filler>
                         <button id='button-bold'>
                             <svg viewBox='0 0 24 24'>
@@ -96,6 +98,7 @@
                         </button>
                     </reply-header>
                     <textarea placeholder='Write a comment using Markdown.'></textarea>
+                    <preview></preview>
                 </reply>
             </content>
 
