@@ -98,6 +98,7 @@ input[type='email'],
 	color: var(--text-primary);
 	background-color: transparent;
 	border: solid 1px var(--text-secondary);
+	border-radius: 5px;
 	transition: border 0.3s;
 	outline: none;
 }
