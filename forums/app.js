@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const cookies = require('cookie-parser');
 const mongo = require('./modules/mongo');
+const middleware = require('./modules/middleware');
 
 const mainController = require('./controllers/main');
 
@@ -39,8 +40,9 @@ app.use(cookies());
 mongo.connectDatabase(config.database);
 global.mongo = mongo;
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
 	res.locals.config = config;
+	res.locals.isSignedIn = await middleware.isSignedIn(req, config.token.secret);
 	next();
 });
 

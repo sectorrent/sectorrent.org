@@ -44,6 +44,9 @@
                         </a>
                     </li>
                     <filler></filler>
+<%
+    if(!isSignedIn){
+%>
                     <li class='button'>
                         <a href='/signup'>
                             Sign Up
@@ -54,6 +57,9 @@
                             Sign In
                         </a>
                     </li>
+<%
+    }
+%>
                 </ul>
             </nav>
         </header>
