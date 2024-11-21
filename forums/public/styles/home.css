@@ -58,12 +58,12 @@ lists {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 20px;
 }
 
 list {
     display: block;
-    width: calc(50% - 22px);
+    width: calc(50% - 12px);
     height: fit-content;
     border: solid 1px var(--background-shimmer);
     border-radius: 10px;
