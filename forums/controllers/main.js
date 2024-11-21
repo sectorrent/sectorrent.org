@@ -1,4 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
+const forums = require('../modules/forums');
+const markdown = require('../modules/markdown');
 
 exports.getHome = async (req, res) => {
 	res.render('layouts/home', {
@@ -45,16 +47,24 @@ exports.getCategory = async (req, res) => {
 };
 
 exports.getThread = async (req, res) => {
-	res.render('layouts/thread', {
-		title: 'Thread Page',
-		page: 'thread',
-		uniqid: uuidv4,
-		styles: [
-			'thread'
-		],
-		data: {
-			
-		}
+	const id = (req.params.id) ? req.params.id : '';
+    console.log('ID: '+id);
+	
+	forums.getThread(req, id).then((data) => {
+		data.content = markdown.parse(data.content);
+
+		res.render('layouts/thread', {
+			title: 'Thread Page',
+			page: 'thread',
+			uniqid: uuidv4,
+			styles: [
+				'thread'
+			],
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
 };
 

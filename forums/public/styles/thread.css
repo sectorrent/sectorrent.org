@@ -33,12 +33,7 @@ comments {
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-
-content comment-inner > div {
-    padding: 10px;
-}
-
-h1 {
+thread-header h1 {
     margin: 0 0 10px 0;
     font-size: 1.5em;
 }
@@ -167,6 +162,10 @@ content comment-header button:hover svg,
     fill: var(--primary);
 }
 
+preview {
+    display: block;
+    padding: 10px;
+}
 
 content reply textarea {
     display: none;
@@ -188,7 +187,7 @@ content reply textarea:focus {
     border: solid 1px var(--primary);
 }
 
-preview {
+content reply preview {
     display: none;
     min-height: 150px;
     padding: 20px;
@@ -200,4 +199,75 @@ preview {
 content reply input[type='radio'][radio='reply-write']:checked ~ textarea,
         content reply input[type='radio'][radio='reply-preview']:checked ~ preview {
     display: block;
+}
+
+
+preview h1,
+        preview h2,
+        preview h3,
+        preview h4,
+        preview h5,
+        preview h6 {
+    color: var(--text-primary);
+    border-bottom: solid 1px var(--background-shimmer);
+    padding: 15px 0;
+}
+
+preview strong {
+    color: var(--text-primary);
+}
+
+preview a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+preview a:hover {
+    color: var(--secondary);
+}
+
+preview table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+preview thead tr {
+    border-bottom: solid 2px var(--background-shimmer);
+}
+
+preview table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px;
+}
+
+preview table td {
+    padding: 20px;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+preview pre {
+    display: block;
+    width: calc(100% - 10px);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+    overflow: auto;
+}
+
+preview code {
+    padding: 5px;
+    color: var(--text-primary);
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+}
+
+preview blockquote {
+    display: block;
+    margin: 0;
+    padding: 0 15px;
+    border-left: solid 2px var(--background-shimmer);
 }

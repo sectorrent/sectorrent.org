@@ -27,6 +27,8 @@ exports.getThread = async (req, id) => {
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
+	data = data[0];
+
     return data;
 };
 

@@ -3,7 +3,7 @@
 
             <content>
                 <thread-header>
-                    <h1>SecTorrent</h1>
+                    <h1><%= data.title %></h1>
                     <categories>
                         <a href='/c/news'><span style='background-color: #0088CC'></span>News</a>
                         <a href='/c/feedback'><span style='background-color: #652D90'></span>Feedback</a>
@@ -26,9 +26,9 @@
                                     </svg>
                                 </button>
                             </comment-header>
-                            <div>
-                                The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                            </div>
+                            <preview>
+                                <%- data.content %>
+                            </preview>
                         </comment-inner>
                     </comment>
 
@@ -47,9 +47,9 @@
                                     </svg>
                                 </button>
                             </comment-header>
-                            <div>
+                            <preview>
                                 Test comment - hello world!
-                            </div>
+                            </preview>
                         </comment-inner>
                     </comment>
                 </comments>
