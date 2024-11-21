@@ -71,7 +71,7 @@ preview {
 editor textarea {
     display: none;
     width: calc(100% - 42px);
-    min-height: 150px;
+    min-height: 148px;
     color: var(--text-primary);
     background: transparent;
     border: solid 1px var(--background-shimmer);
