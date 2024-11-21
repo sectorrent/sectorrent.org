@@ -3,10 +3,20 @@
 
             <content>
                 <thread-header>
-                    <h1><%= data.title %></h1>
+                    <h1><%= data.thread.title %></h1>
                     <categories>
-                        <a href='/c/news'><span style='background-color: #0088CC'></span>News</a>
-                        <a href='/c/feedback'><span style='background-color: #652D90'></span>Feedback</a>
+<%
+    const mappedCategories = {};
+    data.categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+
+    for(const category of data.thread.categories){
+%>
+                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+<%
+    }
+%>
                     </categories>
                 </thread-header>
 
@@ -27,7 +37,7 @@
                                 </button>
                             </comment-header>
                             <preview>
-                                <%- data.content %>
+                                <%- data.thread.content %>
                             </preview>
                         </comment-inner>
                     </comment>
