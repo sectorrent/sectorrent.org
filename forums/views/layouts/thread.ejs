@@ -16,7 +16,7 @@
 
     for(const category of data.thread.categories){
 %>
-                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
 <%
     }
 %>
