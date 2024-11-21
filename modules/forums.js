@@ -121,11 +121,79 @@ exports.getCategory = async (req, slug) => {
     return data;
 };
 
+//SORT BY SLUG
 exports.getLatest = async (req) => {
+	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $project: {
+                _id: true,
+                title: true,
+                slug: true,
+                color: true
+            }
+        }
+    ]).toArray();
+
+	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        }
+    ]).toArray();
+
+	if(threads.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    return {
+        categories,
+        threads
+    };
 };
 
+//SORT BY SLUG
 exports.getTop = async (req) => {
+	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $project: {
+                _id: true,
+                title: true,
+                slug: true,
+                color: true
+            }
+        }
+    ]).toArray();
 
+    //MAKE THIS SORT BY MOST RECENT COMMENT...
+	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        }
+    ]).toArray();
+
+	if(threads.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    return {
+        categories,
+        threads
+    };
 };
 
 exports.getThread = async (req, id) => {

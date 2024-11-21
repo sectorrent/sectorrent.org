@@ -13,6 +13,10 @@
                         <li selected>
                             <a href='/top'>Top</a>
                         </li>
+                        <filler></filler>
+                        <li>
+                            <a href='/thread'>New Thread</a>
+                        </li>
                     </ul>
                 </nav>
                 <table>
@@ -25,40 +29,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr pinned>
+<%
+    const mappedCategories = {};
+    data.categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+
+    for(const thread of data.threads){
+%>
+                        <tr<% if(thread.pinned){ %> pinned<% } %>>
                             <td>
-                                <a href='/t/tor'>SecTorrent</a>
+                                <a href='/t/<%= thread._id.toString() %>'><%= thread.title %></a>
                                 <categories>
-                                    <a href='/c/news'><span style='background-color: #0088CC'></span>News</a>
-                                    <a href='/c/feedback'><span style='background-color: #652D90'></span>Feedback</a>
+<%
+        for(const category of thread.categories){
+%>
+                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+<%
+        }
+%>
                                 </categories>
-                                <a href='/t/tor'>
-                                    <div>
-                                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                    </div>
+                                <a href='/t/<%= thread._id.toString() %>'>
+                                    <div><%= thread.content.substr(0, 160) %></div>
                                 </a>
                             </td>
                             <td class='replies'>1</td>
-                            <td class='views'>1</td>
+                            <td class='views'><%= thread.views %></td>
                             <td class='activity'>1</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a href='/t/tor'>SecTorrent</a>
-                                <categories>
-                                    <a href='/c/news'><span style='background-color: #0088CC'></span>News</a>
-                                    <a href='/c/feedback'><span style='background-color: #652D90'></span>Feedback</a>
-                                </categories>
-                                <a href='/t/tor'>
-                                    <div>
-                                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                    </div>
-                                </a>
-                            </td>
-                            <td class='replies'>1</td>
-                            <td class='views'>1</td>
-                            <td class='activity'>1</td>
-                        </tr>
+<%
+    }
+%>
                     </tbody>
                 </table>
             </content>

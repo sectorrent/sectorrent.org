@@ -20,24 +20,36 @@ exports.getHome = async (req, res) => {
 };
 
 exports.getLatest = async (req, res) => {
-	res.render('layouts/latest', {
-		title: 'Latest Page',
-		page: 'latest',
-		uniqid: uuidv4,
-		styles: [
-			'categories'
-		]
+	forums.getLatest(req).then((data) => {
+		res.render('layouts/latest', {
+			title: 'Latest Page',
+			page: 'latest',
+			uniqid: uuidv4,
+			styles: [
+				'categories'
+			],
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
 };
 
 exports.getTop = async (req, res) => {
-	res.render('layouts/top', {
-		title: 'Top Page',
-		page: 'top',
-		uniqid: uuidv4,
-		styles: [
-			'categories'
-		]
+	forums.getTop(req).then((data) => {
+		res.render('layouts/top', {
+			title: 'Top Page',
+			page: 'top',
+			uniqid: uuidv4,
+			styles: [
+				'categories'
+			],
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
 };
 
