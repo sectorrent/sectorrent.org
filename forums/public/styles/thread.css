@@ -211,6 +211,7 @@ preview h1,
     color: var(--text-primary);
     border-bottom: solid 1px var(--background-shimmer);
     padding: 15px 0;
+    margin: 0;
 }
 
 preview strong {
@@ -251,7 +252,8 @@ preview table td {
 
 preview pre {
     display: block;
-    width: calc(100% - 10px);
+    /*width: calc(100% - 10px);*/
+    width: 300px;
     padding: 5px;
     border-radius: 5px;
     background-color: var(--background-secondary);

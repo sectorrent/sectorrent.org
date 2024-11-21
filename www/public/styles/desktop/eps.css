@@ -33,6 +33,7 @@ preview h1,
     color: var(--text-primary);
     border-bottom: solid 1px var(--background-shimmer);
     padding: 15px 0;
+    margin: 0;
 }
 
 preview strong {
