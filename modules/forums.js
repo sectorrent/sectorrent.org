@@ -233,6 +233,35 @@ exports.getThread = async (req, id) => {
             $match: {
                 _id: id
             }
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                let: {
+                    threadId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$threadId', '$thread']
+                            }
+                        }
+                    },
+                    {
+                        $sort: {
+                            created: -1
+                        }
+                    },
+                    {
+                        $skip: 0
+                    },
+                    {
+                        $limit: 20
+                    }
+                ],
+                as: 'comments'
+            }
         }
     ]).toArray();
 

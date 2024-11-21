@@ -76,6 +76,8 @@ content comment-header {
 }
 
 content comment img {
+    position: sticky;
+    top: 90px;
     display: block;
     width: 40px;
     height: 40px;

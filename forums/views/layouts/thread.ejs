@@ -1,5 +1,8 @@
 <%- include('../fragments/header') %>
 <%- include('../fragments/sidebar') %>
+<%
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+%>
 
             <content>
                 <thread-header>
@@ -27,9 +30,7 @@
                         <comment-inner>
                             <comment-header>
                                 <h3>Octo</h3>
-                                <date>
-                                    Nov 6, 2024
-                                </date>
+                                <date><% const date = new Date(data.thread.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                                 <button>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
@@ -41,16 +42,16 @@
                             </preview>
                         </comment-inner>
                     </comment>
-
+<%
+    for(const comment of data.thread.comments){
+%>
                     <comment>
                         <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
 
                         <comment-inner>
                             <comment-header>
                                 <h3>Octo</h3>
-                                <date>
-                                    Nov 6, 2024
-                                </date>
+                                <date><% const date = new Date(comment.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                                 <button>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
@@ -58,10 +59,13 @@
                                 </button>
                             </comment-header>
                             <preview>
-                                Test comment - hello world!
+                                <%- comment.content %>
                             </preview>
                         </comment-inner>
                     </comment>
+<%
+    }
+%>
                 </comments>
 
                 <editor>
