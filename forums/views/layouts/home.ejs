@@ -20,7 +20,7 @@
                     </ul>
                 </nav>
                 <lists>
-                    <list>
+                    <list type='categories'>
                         <list-head>
                             <row>
                                 <cell>Category</cell>
@@ -45,25 +45,40 @@
 %>
                         </list-body>
                     </list>
-                    <list>
+                    <list type='latest'>
                         <list-head>
                             <row>
                                 <cell>Latest</cell>
-                                <cell>Topics</cell>
                             </row>
                         </list-head>
                         <list-body>
 <%
-    for(const category of data.threads){
+    const mappedCategories = {};
+    data.categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+
+    for(const thread of data.latest){
 %>
-                            <row style='border-left: solid 6px <%= category.color %>'>
+                            <row>
                                 <cell>
-                                    <a href='/c/<%= category.slug %>'>
-                                        <h2><%= category.title %></h2>
-                                        <div><%= category.description %></div>
+                                    <a href='/t/<%= thread._id.toString() %>'>
+                                        <h2><%= thread.title %></h2>
+                                    </a>
+                                    <categories>
+<%
+        for(const category of thread.categories){
+%>
+                                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+<%
+        }
+%>
+                                    </categories>
+                                    <a href='/t/<%= thread._id.toString() %>'>
+                                        <div><%= thread.content.substr(0, 160) %></div>
                                     </a>
                                 </cell>
-                                <cell><%= category.threads %></cell>
+                                <cell>0</cell>
                             </row>
 <%
     }

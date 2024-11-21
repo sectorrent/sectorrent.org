@@ -135,3 +135,30 @@ list-body div {
     color: var(--text-secondary);
     font-size: 0.9em;
 }
+
+list-body categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+list-body categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+list-body categories a:hover {
+    color: var(--text-primary);
+}
+
+list-body categories a span {
+    width: 12px;
+    height: 12px;
+}

@@ -3,7 +3,7 @@ const forums = require('../modules/forums');
 const markdown = require('../modules/markdown');
 
 exports.getHome = async (req, res) => {
-	forums.getCategories(req).then((data) => {
+	forums.getHome(req).then((data) => {
 		res.render('layouts/home', {
 			title: 'Home Page',
 			page: 'home',
@@ -73,6 +73,18 @@ exports.getCategory = async (req, res) => {
 	});
 };
 
+exports.getNewThread = async (req, res) => {
+	res.render('layouts/new_thread', {
+		title: 'New Thread Page',
+		page: 'new-thread',
+		uniqid: uuidv4,
+		styles: [
+			'editor',
+			'new-thread'
+		]
+	});
+};
+
 exports.getThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
@@ -84,6 +96,7 @@ exports.getThread = async (req, res) => {
 			page: 'thread',
 			uniqid: uuidv4,
 			styles: [
+				'editor',
 				'thread'
 			],
 			data

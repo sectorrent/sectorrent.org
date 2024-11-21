@@ -58,7 +58,10 @@ server.listen(80, () => {
 app.get('/', mainController.getHome);
 app.get('/latest', mainController.getLatest);
 app.get('/top', mainController.getTop);
+//app.get('/:slug/latest', mainController.getLatest);
+//app.get('/:slug/top', mainController.getTop);
 app.get('/c/:slug', mainController.getCategory);
+app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
 
 app.get('/signin', mainController.getSignIn);

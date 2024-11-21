@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const TypError = require('./type_error');
 
-exports.getCategories = async (req) => {
+exports.getHome = async (req) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
@@ -38,7 +38,9 @@ exports.getCategories = async (req) => {
                     },
                     {
                         $addFields: {
-                            threads: { $size: "$threads" }
+                            threads: {
+                                $size: '$threads'
+                            }
                         }
                     }
                 ]
@@ -46,11 +48,27 @@ exports.getCategories = async (req) => {
         }
     ]).toArray();
 
-	if(data.length < 1){
+
+	let latest = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        }
+    ]).toArray();
+
+	if(data.length < 1 || latest.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
     
     data = data[0];
+    data.latest = latest;
 
     return data;
 };
