@@ -3,13 +3,19 @@ const forums = require('../modules/forums');
 const markdown = require('../modules/markdown');
 
 exports.getHome = async (req, res) => {
-	res.render('layouts/home', {
-		title: 'Home Page',
-		page: 'home',
-		uniqid: uuidv4,
-		styles: [
-			'home'
-		]
+	forums.getCategories(req).then((data) => {
+		res.render('layouts/home', {
+			title: 'Home Page',
+			page: 'home',
+			uniqid: uuidv4,
+			styles: [
+				'home'
+			],
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
 };
 
@@ -36,6 +42,8 @@ exports.getTop = async (req, res) => {
 };
 
 exports.getCategory = async (req, res) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
 	res.render('layouts/category', {
 		title: 'Category Page',
 		page: 'category',
@@ -48,7 +56,6 @@ exports.getCategory = async (req, res) => {
 
 exports.getThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
-    console.log('ID: '+id);
 	
 	forums.getThread(req, id).then((data) => {
 		data.content = markdown.parse(data.content);

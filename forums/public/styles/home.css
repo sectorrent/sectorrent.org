@@ -6,6 +6,7 @@
 
 content {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 20px;
 }
@@ -63,6 +64,7 @@ lists {
 list {
     display: block;
     width: calc(50% - 22px);
+    height: fit-content;
     border: solid 1px var(--background-shimmer);
     border-radius: 10px;
 }

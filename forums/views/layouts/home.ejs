@@ -24,28 +24,21 @@
                             </row>
                         </list-head>
                         <list-body>
-                            <row style='border-left: solid 6px #0088CC'>
+<%
+    for(const category of data){
+%>
+                            <row style='border-left: solid 6px <%= category.color %>'>
                                 <cell>
-                                    <a href='/c/news'>
-                                        <h2>SecTorrent</h2>
-                                        <div>
-                                            The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                        </div>
+                                    <a href='/c/<%= category.slug %>'>
+                                        <h2><%= category.title %></h2>
+                                        <div><%= category.description %></div>
                                     </a>
                                 </cell>
-                                <cell>1</cell>
+                                <cell><%= category.threads %></cell>
                             </row>
-                            <row style='border-left: solid 6px #652D90'>
-                                <cell>
-                                    <a href='/c/feedback'>
-                                        <h2>SecTorrent</h2>
-                                        <div>
-                                            The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                        </div>
-                                    </a>
-                                </cell>
-                                <cell>1</cell>
-                            </row>
+<%
+    }
+%>
                         </list-body>
                     </list>
                     <list>
@@ -56,28 +49,21 @@
                             </row>
                         </list-head>
                         <list-body>
-                            <row style='border-left: solid 6px #0088CC'>
+<%
+    for(const category of data){
+%>
+                            <row style='border-left: solid 6px <%= category.color %>'>
                                 <cell>
-                                    <a href='/c/news'>
-                                        <h2>SecTorrent</h2>
-                                        <div>
-                                            The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                        </div>
+                                    <a href='/c/<%= category.slug %>'>
+                                        <h2><%= category.title %></h2>
+                                        <div><%= category.description %></div>
                                     </a>
                                 </cell>
-                                <cell>1</cell>
+                                <cell><%= category.threads %></cell>
                             </row>
-                            <row style='border-left: solid 6px #652D90'>
-                                <cell>
-                                    <a href='/c/feedback'>
-                                        <h2>SecTorrent</h2>
-                                        <div>
-                                            The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                                        </div>
-                                    </a>
-                                </cell>
-                                <cell>1</cell>
-                            </row>
+<%
+    }
+%>
                         </list-body>
                     </list>
                 </lists>
