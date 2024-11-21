@@ -45,8 +45,7 @@ Threads
         ObjectId("asdasdasd")
     ],
     "created": 1000000,
-    "views": 0,
-    
+    "views": 0
 }
 ```
 

@@ -51,7 +51,10 @@ exports.getThread = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'thread'
-		]
+		],
+		data: {
+			
+		}
 	});
 };
 
