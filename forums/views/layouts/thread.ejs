@@ -67,7 +67,9 @@
     }
 %>
                 </comments>
-
+<%
+    if(isSignedIn){
+%>
                 <editor>
                     <input id='<% const writeId = uniqid(); %><%= writeId %>' name='editor-radio' radio='editor-write' type='radio' checked>
                     <input id='<% const previewId = uniqid(); %><%= previewId %>' name='editor-radio' radio='editor-preview' type='radio'>
@@ -114,6 +116,9 @@
                     <textarea placeholder='Write a comment using Markdown.'></textarea>
                     <preview></preview>
                 </editor>
+<%
+    }
+%>
             </content>
 
 <%- include('../fragments/footer') %>
