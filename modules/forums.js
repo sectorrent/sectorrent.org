@@ -234,6 +234,7 @@ exports.getThread = async (req, id) => {
                 _id: id
             }
         },
+        pipeUser(req),
         {
             $lookup: {
                 from: 'comments',
@@ -258,9 +259,37 @@ exports.getThread = async (req, id) => {
                     },
                     {
                         $limit: 20
+                    },
+                    pipeUser(req),
+                    {
+                        $project: {
+                            _id: true,
+                            content: true,
+                            created: true,
+                            pinned: true,
+                            user: {
+                                $first: '$user'
+                            },
+                        }
                     }
                 ],
                 as: 'comments'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                locked: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: {
+                    $first: '$user'
+                },
+                comments: true
             }
         }
     ]).toArray();
@@ -287,3 +316,31 @@ exports.deleteComment = async (req, id) => {
 
 exports.getComments = async (req) => {
 };
+
+function pipeUser(req, v = '$user'){
+    return {
+        $lookup: {
+            from: 'users',
+            let: {
+                userId: v
+            },
+            pipeline: [
+                {
+                    $match: {
+                        $expr: {
+                            $eq: ['$$userId', '$_id']
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        _id: true,
+                        username: true,
+                        avatar: true
+                    }
+                }
+            ],
+            as: 'user'
+        }
+    };
+}
