@@ -1,5 +1,5 @@
 :root {
-    --width: 80%;
+    --width: 80;
     --min-width: 800px;
 
     --primary: #994ce0;
@@ -33,7 +33,7 @@
 */
 @media(max-width:1200px) {
 	:root {
-		--width: 90% !important;
+		--width: 90 !important;
 	}
 
 	header,
@@ -96,7 +96,7 @@ body {
 header {
     position: fixed;
     top: 0;
-	width: var(--width);
+	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
 	padding: 0px 10%;
     background-color: var(--text-primary);
@@ -168,7 +168,7 @@ section {
     display: flex;
     position: relative;
     top: 80px;
-	width: var(--width);
+	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
     align-items: start;
 	padding: 0px 10%;
@@ -278,7 +278,7 @@ footer {
     position: relative;
     display: block;
     top: 80px;
-	width: var(--width);
+	width: calc(var(--width) * 1%);
     min-width: var(--min-width);
     padding: 80px 10% 20px 10%;
     font-size: 1em;

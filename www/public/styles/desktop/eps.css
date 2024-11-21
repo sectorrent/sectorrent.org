@@ -74,7 +74,7 @@ preview table td {
 
 preview pre {
     display: block;
-    width: calc(100% - 10px);
+    width: calc(var(--width) * 1vw);
     padding: 5px;
     border-radius: 5px;
     background-color: var(--background-secondary);
