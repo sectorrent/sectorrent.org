@@ -4,17 +4,6 @@ const markdown = require('../modules/markdown');
 
 exports.getHome = async (req, res) => {
 	forums.getCategories(req).then((data) => {
-		/*
-		const categories = {};
-		for(const category of data.categories){
-			categories[category._id.toString()] = {
-				title: category.title,
-				slug: category.slug,
-				color: category.color
-			};
-		}
-		data.categories = categories;*/
-
 		res.render('layouts/home', {
 			title: 'Home Page',
 			page: 'home',
@@ -57,17 +46,6 @@ exports.getCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 
 	forums.getCategory(req, slug).then((data) => {
-		/*
-		const categories = {};
-		for(const category of data.categories){
-			categories[category._id.toString()] = {
-				title: category.title,
-				slug: category.slug,
-				color: category.color
-			};
-		}
-		data.categories = categories;*/
-
 		res.render('layouts/category', {
 			title: 'Category Page',
 			page: 'category',
@@ -87,7 +65,6 @@ exports.getThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
 	forums.getThread(req, id).then((data) => {
-		console.log(data);
 		data.thread.content = markdown.parse(data.thread.content);
 
 		res.render('layouts/thread', {
