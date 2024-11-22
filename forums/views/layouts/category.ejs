@@ -1,3 +1,9 @@
+<%
+    const mappedCategories = {};
+    data.categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+%>
 <%- include('../fragments/header') %>
 <%- include('../fragments/sidebar') %>
 
@@ -33,11 +39,6 @@
                     </thead>
                     <tbody>
 <%
-    const mappedCategories = {};
-    data.categories.forEach((category, index) => {
-        mappedCategories[category._id.toString()] = index;
-    });
-
     for(const thread of data.threads){
 %>
                         <tr<% if(thread.pinned){ %> pinned<% } %>>
@@ -47,7 +48,7 @@
 <%
         for(const category of thread.categories){
 %>
-                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span class='<%= data.categories[mappedCategories[category]].slug %>'></span><%= data.categories[mappedCategories[category]].title %></a>
 <%
         }
 %>

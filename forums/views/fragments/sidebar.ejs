@@ -1,3 +1,14 @@
+<%
+    for(const category of data.categories){
+%>
+        <style nonce='<%= nonce %>'>
+            span.<%= category.slug %> {
+                background-color: <%= category.color %>;
+            }
+        </style>
+<%
+    }
+%>
         <sidebar>
             <a href='/' type='topics' selected>Topics</a>
             <a href='/' type='more'>More</a><br>
@@ -7,7 +18,7 @@
 <%
     for(const category of data.categories){
 %>
-                <a href='/c/<%= category.slug %>'><span style='background-color: <%= category.color %>'></span><%= category.title %></a>
+                <a href='/c/<%= category.slug %>'><span class='<%= category.slug %>'></span><%= category.title %></a>
 <%
     }
 %>

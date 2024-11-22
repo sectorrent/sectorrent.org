@@ -1,5 +1,23 @@
+<%
+    const mappedCategories = {};
+    data.categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+%>
 <%- include('../fragments/header') %>
 <%- include('../fragments/sidebar') %>
+
+<%
+    for(const category of data.categories){
+%>
+        <style nonce='<%= nonce %>'>
+            row.<%= category.slug %> {
+                border-left: solid 6px <%= category.color %>;
+            }
+        </style>
+<%
+    }
+%>
 
             <content>
                 <nav>
@@ -37,7 +55,7 @@
 <%
     for(const category of data.threads){
 %>
-                            <row style='border-left: solid 6px <%= category.color %>'>
+                            <row class='<%= category.slug %>'>
                                 <cell>
                                     <a href='/c/<%= category.slug %>'>
                                         <h2><%= category.title %></h2>
@@ -59,11 +77,6 @@
                         </list-head>
                         <list-body>
 <%
-    const mappedCategories = {};
-    data.categories.forEach((category, index) => {
-        mappedCategories[category._id.toString()] = index;
-    });
-
     for(const thread of data.latest){
 %>
                             <row>
@@ -75,7 +88,7 @@
 <%
         for(const category of thread.categories){
 %>
-                                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span style='background-color: <%= data.categories[mappedCategories[category]].color %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span class='<%= data.categories[mappedCategories[category]].slug %>'></span><%= data.categories[mappedCategories[category]].title %></a>
 <%
         }
 %>

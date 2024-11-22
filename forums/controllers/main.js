@@ -154,3 +154,19 @@ exports.getResetPassword = async (req, res) => {
 		]
 	});
 };
+
+function generateCSP(){
+
+
+/*
+app.use((req, res, next) => {
+    //const nonce = crypto.randomBytes(16).toString('base64');
+	const nonce = '123123';
+
+    res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'`);
+
+    res.locals.nonce = nonce;
+    next();
+});
+*/
+}

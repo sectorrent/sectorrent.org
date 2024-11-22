@@ -49,6 +49,23 @@ app.use((req, res, next) => {
 
 
 
+
+
+const server = http.createServer(app);
+
+server.listen(80, () => {
+	console.log(`${config.general.domain} started`);
+});
+
+app.use((req, res, next) => {
+    const nonce = crypto.randomBytes(16).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'`);
+
+    res.locals.nonce = nonce;
+    next();
+});
+
 app.use(useragent.express());
 
 app.get('/', mainController.getHome);
@@ -57,13 +74,4 @@ app.get('/seps/:id', mainController.getSEP);
 
 app.get('*', (req, res) => {
 	mainController.getError(req, res, 404);
-});
-
-
-
-
-const server = http.createServer(app);
-
-server.listen(80, () => {
-	console.log(`${config.general.domain} started`);
 });
