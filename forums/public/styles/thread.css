@@ -76,10 +76,17 @@ content comment-header {
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-content comment img,
-        content reply img {
+content comment > a,
+        content reply > a {
     position: sticky;
     top: 90px;
+    display: block;
+    height: fit-content;
+    cursor: pointer;
+}
+
+content comment > a > img,
+        content reply > a > img {
     display: block;
     width: 50px;
     height: 50px;
@@ -90,6 +97,18 @@ content comment img,
 content comment-header h3 {
     font-size: 1em;
     margin: 0;
+}
+
+content comment-header a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+content comment-header a:hover {
+    color: var(--primary);
 }
 
 content comment-header date {

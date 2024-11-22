@@ -26,11 +26,15 @@
 
                 <comments>
                     <comment>
-                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        <a href='/u/<%= data.thread.user.username %>'>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        </a>
     
                         <comment-inner>
                             <comment-header>
-                                <h3><%= data.thread.user.username %></h3>
+                                <h3>
+                                    <a href='/u/<%= data.thread.user.username %>'><%= data.thread.user.username %></a>
+                                </h3>
                                 <date><% const date = new Date(data.thread.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                                 <button>
                                     <svg viewBox='0 0 24 24'>
@@ -47,11 +51,15 @@
     for(const comment of data.thread.comments){
 %>
                     <comment>
-                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        <a href='/u/<%= comment.user.username %>'>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        </a>
 
                         <comment-inner>
                             <comment-header>
-                                <h3><%= comment.user.username %></h3>
+                                <h3>
+                                    <a href='/u/<%= comment.user.username %>'><%= comment.user.username %></a>
+                                </h3>
                                 <date><% const date = new Date(comment.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                                 <button>
                                     <svg viewBox='0 0 24 24'>
@@ -72,7 +80,9 @@
     if(isSignedIn){
 %>
                 <reply>
-                    <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                    <a href='/u/'>
+                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                    </a>
 
                     <editor>
                         <input id='<% const writeId = uniqid(); %><%= writeId %>' name='editor-radio' radio='editor-write' type='radio' checked>
