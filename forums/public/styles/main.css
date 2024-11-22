@@ -170,6 +170,7 @@ section {
     top: 80px;
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
+    min-height: calc(100vh - 80px);
     align-items: start;
 	padding: 0px 10%;
     gap: 30px;
