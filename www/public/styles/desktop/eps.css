@@ -95,3 +95,42 @@ preview blockquote {
     padding: 0 15px;
     border-left: solid 2px var(--background-shimmer);
 }
+
+preview pre[language='java'] span.code-keyword {
+    color: #a26140;
+}
+
+preview pre[language='java'] span.code-comment {
+    color: #565757;
+}
+
+preview pre[language='java'] span.code-string {
+    color: #567f46;
+}
+
+preview pre[language='java'] span.code-number {
+    color: #257e86;
+}
+
+
+
+
+preview pre[language='json'] span.code-punctuation {
+    color: #da70d6;
+}
+
+preview pre[language='json'] span.code-string {
+    color: #78d3e9;
+}
+
+preview pre[language='json'] span.code-number {
+    color: #b5cea8;
+}
+
+preview pre[language='json'] span.code-boolean {
+    color: #2b69c5;
+}
+
+preview pre[language='json'] span.code-null {
+    color: #2b69c5;
+}

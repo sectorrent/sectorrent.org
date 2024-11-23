@@ -305,6 +305,10 @@ function tokenizeLine(language, line){
             tokens = tokenizeJava(line);
             break;
 
+        case 'json':
+            tokens = tokenizeJson(line);
+            break;
+
         default:
             return line;
     }
@@ -358,6 +362,49 @@ function tokenizeJava(line){
     let match;
     let lastIndex = 0;
 
+    const tokens = [];
+
+    while((match = regex.exec(line)) !== null){
+        const value = match[0];
+        const type = Object.keys(types).find((key) => types[key].test(value)) || 'text';
+
+        if(match.index > lastIndex){
+            const plainText = line.slice(lastIndex, match.index);
+            tokens.push({
+                type: 'text',
+                value: plainText,
+            });
+        }
+
+        tokens.push({ type, value });
+
+        lastIndex = regex.lastIndex;
+    }
+
+    if(lastIndex < line.length){
+        tokens.push({
+            type: 'text',
+            value: line.slice(lastIndex),
+        });
+    }
+
+    return tokens;
+}
+
+function tokenizeJson(line){
+    const regex = /"(?:[^"\\]|\\.)*"|\b(?:true|false|null)\b|\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b|[{}\[\]:,]|[\s]+/g;
+
+    const types = {
+        string: /"(?:[^"\\]|\\.)*"/,
+        boolean: /\b(?:true|false)\b/,
+        null: /\bnull\b/,
+        number: /\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/,
+        punctuation: /[{}\[\]:,]/,
+        text: /[\s]+/,
+    };
+
+    let match;
+    let lastIndex = 0;
     const tokens = [];
 
     while((match = regex.exec(line)) !== null){
