@@ -48,7 +48,6 @@ server.listen(80, () => {
 
 app.use((req, res, next) => {
 	res.setHeader('Content-Type', 'application/json; charset=utf-8');
-	console.log('ORIGIN');
 
 	const origin = req.headers.origin;
 	if(origin){
