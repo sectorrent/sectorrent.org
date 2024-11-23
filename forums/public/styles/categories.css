@@ -140,7 +140,7 @@ section table tr[pinned] td > a:first-child:before {
     width: 1em;
     height: 1em;
     margin-right: 0.2em;
-    background-image: url(../icons/ic_pin.svg);
+    background-image: url(/icons/ic_pin.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

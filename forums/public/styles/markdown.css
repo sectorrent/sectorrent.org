@@ -58,12 +58,28 @@ preview pre {
 
 preview pre:before {
     position: sticky;
+    top: 0;
     left: 0;
     display: block;
     content: attr(language);
     padding: 5px 10px;
     font-family: sans-serif;
     background-color: var(--background-shimmer);
+}
+
+preview pre copy {
+    position: sticky;
+    top: 0;
+    left: calc(100% - 34px);
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-top: calc(-24px - 0.4em);;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(/icons/ic_copy.svg);
+    cursor: pointer;
 }
 
 preview code {

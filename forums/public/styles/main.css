@@ -172,6 +172,7 @@ section {
 	min-width: calc(var(--min-width) - 80px);
     min-height: calc(100vh - 80px);
     align-items: start;
+    color: var(--text-secondary);
 	padding: 0px 10%;
     line-height: 1.6em;
     gap: 30px;
@@ -226,15 +227,15 @@ sidebar a[type]:before,
 }
 
 sidebar a[type='topics']:before {
-    background-image: url(../icons/ic_layers.svg);
+    background-image: url(/icons/ic_layers.svg);
 }
 
 sidebar a[type='more']:before {
-    background-image: url(../icons/ic_menu.svg);
+    background-image: url(/icons/ic_menu.svg);
 }
 
 sidebar a[type='all']:before {
-    background-image: url(../icons/ic_list.svg);
+    background-image: url(/icons/ic_list.svg);
 }
 
 sidebar a[selected] {
@@ -258,11 +259,11 @@ sidebar input[type='checkbox'] {
 }
 
 sidebar label:before {
-    background-image: url(../icons/ic_less.svg);
+    background-image: url(/icons/ic_less.svg);
 }
 
 sidebar input[type='checkbox']:checked + label:before {
-    background-image: url(../icons/ic_more.svg);
+    background-image: url(/icons/ic_more.svg);
 }
 
 sidebar container {

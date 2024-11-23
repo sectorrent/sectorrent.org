@@ -34,7 +34,7 @@ exports.parse = (markdown) => {
                 if(inCodeBlock){
                     codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
                     const previousLine = lines[i+1];
-                    codeLines.push(`<pre language='${codeLanguage}'><code>`+tokenizeLine(codeLanguage, previousLine));
+                    codeLines.push(`<pre language='${codeLanguage}'><copy></copy><code>`+tokenizeLine(codeLanguage, previousLine));
                     i += 2;
                     continue;
                 }
