@@ -36,6 +36,7 @@ comments {
 
 thread-header h1 {
     margin: 0 0 10px 0;
+    color: var(--text-primary);
     font-size: 1.5em;
 }
 

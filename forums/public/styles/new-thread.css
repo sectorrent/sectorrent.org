@@ -12,6 +12,7 @@ thread-header {
 
 thread-header h1 {
     margin: 0;
+    color: var(--text-primary);
     font-size: 1.5em;
 }
 
