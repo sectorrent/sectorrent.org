@@ -132,6 +132,10 @@ reply-inner {
     flex: 1;
 }
 
+reply-inner preview pre {
+    width: calc((var(--width)* 1vw) - 400px);
+}
+
 form {
     display: flex;
 	flex-direction: column;

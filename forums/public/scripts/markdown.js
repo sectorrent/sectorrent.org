@@ -336,6 +336,10 @@ function tokenizeLine(language, line){
             tokens = tokenizeRust(line);
             break;
 
+        case 'json':
+            tokens = tokenizeJson(line);
+            break;
+
         default:
             return line;
     }

@@ -65,6 +65,7 @@ preview pre {
     position: relative;
     display: block;
     width: calc(var(--width) * 1vw);
+    max-height: 400px;
     border-radius: 5px;
     background-color: var(--background-secondary);
     font-family: monospace;
@@ -84,7 +85,7 @@ preview pre:before {
 
 preview pre copy {
     position: sticky;
-    top: 0;
+    top: 6px;
     left: calc(100% - 34px);
     display: block;
     width: 24px;

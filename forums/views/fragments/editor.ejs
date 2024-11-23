@@ -52,7 +52,7 @@
 
         document.getElementById('<%= previewId %>').onchange = function(event){
             if(event.target.checked){
-                preview.innerHTML = markdownToHtml(textArea.value);
+                preview.innerHTML = markdownToHtml(textarea.value);
             }
         };
     </script>
