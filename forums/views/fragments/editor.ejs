@@ -1,7 +1,7 @@
 
 <editor>
     <input id='<% const writeId = uniqid(); %><%= writeId %>' name='editor-radio' radio='editor-write' type='radio' checked>
-    <input id='<% const previewId = uniqid(); %><%= previewId %>' name='editor-radio' radio='editor-preview' type='radio'>
+    <input id='<% const previewId = uniqid(); %><%= previewId %>' name='editor-radio' radio='editor-preview' type='radio' onchange='onPreviewSelected(this)'>
     <editor-header>
         <label name='editor-write' for='<%= writeId %>'>Write</label>
         <label name='editor-preview' for='<%= previewId %>'>Preview</label>
@@ -44,4 +44,19 @@
     </editor-header>
     <textarea placeholder='Write a comment using Markdown.'></textarea>
     <preview></preview>
+
+    <script nonce='<%= nonce %>'>
+        const editor = document.querySelector('editor');
+        const textarea = editor.querySelector('textarea');
+        const preview = editor.querySelector('preview');
+
+        document.getElementById('<%= previewId %>').onchange = function(event){
+            if(event.target.checked){
+                preview.innerHTML = markdownToHtml(textArea.value);
+            }
+        };
+    </script>
+
+    <script src='/scripts/markdown.js'></script>
+    <script src='/scripts/editor.js'></script>
 </editor>

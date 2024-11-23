@@ -58,7 +58,7 @@ server.listen(80, () => {
 app.use((req, res, next) => {
     const nonce = crypto.randomBytes(16).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-    res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'`);
+    res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'; script-src 'self' 'nonce-${nonce}'`);
 
     res.locals.nonce = nonce;
     next();
