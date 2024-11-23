@@ -12,6 +12,8 @@ exports.parse = (markdown) => {
 
     const paragraphs = markdown.split('\n\n');
     let inCodeBlock = false;
+    let codeLanguage;
+    let codeLines = [];
 
     const htmlParagraphs = paragraphs.map((paragraph) => {
         const lines = paragraph.split('\n');
@@ -30,19 +32,23 @@ exports.parse = (markdown) => {
                 inCodeBlock = !inCodeBlock;
 
                 if(inCodeBlock){
+                    codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
                     const previousLine = lines[i+1];
-                    processedLines.push('<pre><code>'+previousLine);
+                    codeLines.push(`<pre language='${codeLanguage}'><code>`+tokenizeLine(codeLanguage, previousLine));
                     i += 2;
                     continue;
                 }
 
-                processedLines[processedLines.length-1] = processedLines[processedLines.length-1]+'</code></pre>';
+                codeLanguage = '';
+                codeLines[codeLines.length-1] += '</code></pre>'+line.slice(3);
+                processedLines.push.apply(processedLines, codeLines);
+                codeLines = [];
                 i++;
                 continue;
             }
             
             if(inCodeBlock){
-                processedLines.push(line);
+                codeLines.push(tokenizeLine(codeLanguage, line));
                 i++;
                 continue;
             }
@@ -191,6 +197,10 @@ exports.parse = (markdown) => {
             return `<p>${joinedLines}</p>`;
         }
 
+        if(inCodeBlock){
+            codeLines.push('');
+        }
+
         return joinedLines;
     });
 
@@ -286,4 +296,70 @@ function markDownText(line){
     }
 
     return line;
+}
+
+function tokenizeLine(language, line){
+    let tokens;
+    switch(language){
+        case 'java':
+            tokens = tokenizeJava(line);
+            break;
+
+        default:
+            return line;
+    }
+    
+    return tokens
+        .map(({ type, value }) => {
+            const className = `code-${type}`;
+            const escapedValue = value
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+            return `<span class='${className}'>${escapedValue}</span>`;
+        })
+        .join('');
+}
+
+function tokenizeJava(line){
+    const regex = /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,]|\n/g;
+
+    const types = {
+        keyword: /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b/,
+        comment: /\/\/[^\n]*|\/\*[\s\S]*?\*\//,
+        string: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'/,
+        number: /\b\d+\b/,
+        punctuation: /[{}();,]/
+    };
+
+    let match;
+    let lastIndex = 0;
+
+    const tokens = [];
+
+    while((match = regex.exec(line)) !== null){
+        const value = match[0];
+        const type = Object.keys(types).find((key) => types[key].test(value)) || 'text';
+
+        if(match.index > lastIndex){
+            const plainText = line.slice(lastIndex, match.index);
+            tokens.push({
+                type: 'text',
+                value: plainText,
+            });
+        }
+
+        tokens.push({ type, value });
+
+        lastIndex = regex.lastIndex;
+    }
+
+    if(lastIndex < line.length){
+        tokens.push({
+            type: 'text',
+            value: line.slice(lastIndex),
+        });
+    }
+
+    return tokens;
 }
