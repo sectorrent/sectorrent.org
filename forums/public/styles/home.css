@@ -39,11 +39,13 @@ content li a {
     display: block;
     border-radius: 5px;
     padding: 10px 20px;
+    font-size: 1em;
     color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
     border: solid 1px var(--background-shimmer);
     background-color: var(--background-secondary);
+	transition: background-color 0.3s;
 }
 
 content li a:hover {

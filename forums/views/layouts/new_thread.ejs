@@ -10,8 +10,33 @@
                 </a>
 
                 <thread-inner>
-                    <%- include('../fragments/editor') %>
+                    <form action='https://api.<%= config.general.domain %>/thread' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                        <input-field title='Title'>
+                            <input type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
+                        </input-field>
+
+                        <selector-header>
+                            <input name='category' type='hidden' value='0' />
+                            <input id='category-selector-toggle' type='checkbox' class='fl-select'>
+
+                            <label id='category-selector' for='category-selector-toggle' label='Select Category'>
+                                <fl-options>
+                                    <fl-option value='0'>Select Category</fl-option>
+                                    <fl-option value='1'>Hello World</fl-option>
+                                </fl-options>
+                            </label>
+                        </selector-header>
+
+                        <%- include('../fragments/editor') %>
+
+                        <response></response>
+                        
+                        <input type='submit' value='Submit' />
+                    </form>
                 </thread-inner>
             </thread>
+            <iframe name='hiddenFrame'></iframe>
+
+            <script src='/scripts/thread.js'></script>
 
 <%- include('../fragments/footer') %>

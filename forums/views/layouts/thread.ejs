@@ -84,7 +84,17 @@
                         <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
                     </a>
 
-                    <%- include('../fragments/editor') %>
+                    <reply-inner>
+                        <form action='https://api.<%= config.general.domain %>/comment' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                            <%- include('../fragments/editor') %>
+
+                            <response></response>
+                            
+                            <input type='submit' value='Comment' />
+                        </form>
+
+                        <iframe name='hiddenFrame'></iframe>
+                    </reply-inner>
                 </reply>
 <%
     }

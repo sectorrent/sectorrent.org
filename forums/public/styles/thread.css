@@ -126,3 +126,49 @@ content comment-header button {
     padding: 0;
     cursor: pointer;
 }
+
+reply-inner {
+    display: block;
+    flex: 1;
+}
+
+form {
+    display: flex;
+	flex-direction: column;
+    gap: 30px;
+}
+
+iframe[name='hiddenFrame'] {
+    display: none;
+}
+
+response {
+	display: none;
+	font-size: 0.8em;
+	margin: 0px auto;
+	color: var(--error);
+	overflow: hidden;
+}
+
+response:not(:empty) {
+	display: block;
+}
+
+input[type='submit'] {
+    display: block;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 11px 20px;
+    margin-left: auto;
+    font-size: 1em;
+    color: var(--text-primary);
+	border: none;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--primary);
+	transition: background-color 0.3s;
+}
+
+input[type='submit']:hover {
+    background-color: var(--secondary);
+}
