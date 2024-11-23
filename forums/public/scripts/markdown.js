@@ -332,6 +332,10 @@ function tokenizeLine(language, line){
             tokens = tokenizeJava(line);
             break;
 
+        case 'rust':
+            tokens = tokenizeRust(line);
+            break;
+
         default:
             return line;
     }
@@ -357,6 +361,49 @@ function tokenizeJava(line){
         string: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'/,
         number: /\b\d+\b/,
         punctuation: /[{}();,]/
+    };
+
+    let match;
+    let lastIndex = 0;
+
+    const tokens = [];
+
+    while((match = regex.exec(line)) !== null){
+        const value = match[0];
+        const type = Object.keys(types).find((key) => types[key].test(value)) || 'text';
+
+        if(match.index > lastIndex){
+            const plainText = line.slice(lastIndex, match.index);
+            tokens.push({
+                type: 'text',
+                value: plainText,
+            });
+        }
+
+        tokens.push({ type, value });
+
+        lastIndex = regex.lastIndex;
+    }
+
+    if(lastIndex < line.length){
+        tokens.push({
+            type: 'text',
+            value: line.slice(lastIndex),
+        });
+    }
+
+    return tokens;
+}
+
+function tokenizeRust(line){
+    const regex = /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,|&:<>=_\-+*/%^!~?^,]/g;
+
+    const types = {
+        keyword: /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b/,
+        comment: /\/\/[^\n]*|\/\*[\s\S]*?\*\//,
+        string: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'/,
+        number: /\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/,
+        punctuation: /[{}();,|&:<>=_\-+*/%^!~?^,]/,
     };
 
     let match;
