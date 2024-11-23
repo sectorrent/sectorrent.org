@@ -395,37 +395,53 @@ function tokenizeJson(line){
     const regex = /"(?:[^"\\]|\\.)*"|\b(?:true|false|null)\b|\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b|[{}\[\]:,]|[\s]+/g;
 
     const types = {
+        key: /"(?:[^"\\]|\\.)*"/,
         string: /"(?:[^"\\]|\\.)*"/,
         boolean: /\b(?:true|false)\b/,
         null: /\bnull\b/,
         number: /\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/,
         punctuation: /[{}\[\]:,]/,
-        text: /[\s]+/,
+        whitespace: /[\s]+/,
     };
 
     let match;
     let lastIndex = 0;
     const tokens = [];
+    let tokenId = 0;
+    let isKey = true;
 
     while((match = regex.exec(line)) !== null){
         const value = match[0];
-        const type = Object.keys(types).find((key) => types[key].test(value)) || 'text';
+        let type = 'text';
+
+        if(types.key.test(value)){
+            type = isKey ? 'key' : 'string';
+            isKey = !isKey;
+        }else{
+            type = Object.keys(types).find((key) => types[key].test(value)) || 'text';
+        }
 
         if(match.index > lastIndex){
             const plainText = line.slice(lastIndex, match.index);
             tokens.push({
+                id: `text_${tokenId++}`,
                 type: 'text',
                 value: plainText,
             });
         }
 
-        tokens.push({ type, value });
+        tokens.push({
+            id: `${type}_${tokenId++}`,
+            type,
+            value,
+        });
 
         lastIndex = regex.lastIndex;
     }
 
     if(lastIndex < line.length){
         tokens.push({
+            id: `text_${tokenId++}`,
             type: 'text',
             value: line.slice(lastIndex),
         });

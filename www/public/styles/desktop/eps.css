@@ -119,8 +119,12 @@ preview pre[language='json'] span.code-punctuation {
     color: #da70d6;
 }
 
-preview pre[language='json'] span.code-string {
+preview pre[language='json'] span.code-key {
     color: #78d3e9;
+}
+
+preview pre[language='json'] span.code-string {
+    color: #b25b30;
 }
 
 preview pre[language='json'] span.code-number {
