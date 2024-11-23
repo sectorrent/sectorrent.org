@@ -92,7 +92,7 @@ editor textarea:focus {
 
 editor preview {
     display: none;
-    min-height: 150px;
+    min-height: 170px;
     padding: 10px;
     overflow-x: auto;
     resize: vertical;
