@@ -23,6 +23,8 @@ editor-header {
 
 editor-header label {
     display: block;
+    height: 19px;
+    line-height: 19px;
     padding: 10px 10px 11px 10px;
     margin: 0 -1px -1px -1px;
     border-top: solid 1px transparent;
@@ -100,76 +102,4 @@ editor preview {
 editor input[type='radio'][radio='editor-write']:checked ~ textarea,
         editor input[type='radio'][radio='editor-preview']:checked ~ preview {
     display: block;
-}
-
-
-preview h1,
-        preview h2,
-        preview h3,
-        preview h4,
-        preview h5,
-        preview h6 {
-    color: var(--text-primary);
-    border-bottom: solid 1px var(--background-shimmer);
-    padding: 15px 0;
-    margin: 0;
-}
-
-preview strong {
-    color: var(--text-primary);
-}
-
-preview a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-preview a:hover {
-    color: var(--secondary);
-}
-
-preview table {
-    flex: 1;
-    border-collapse: collapse;
-}
-
-preview thead tr {
-    border-bottom: solid 2px var(--background-shimmer);
-}
-
-preview table th {
-    color: var(--text-secondary);
-    font-size: 1em;
-    font-weight: normal;
-    text-align: left;
-    padding: 20px;
-}
-
-preview table td {
-    padding: 20px;
-    border-bottom: solid 1px var(--background-secondary);
-}
-
-preview pre {
-    display: block;
-    width: calc((var(--width) * 1vw) - 380px);
-    padding: 5px;
-    border-radius: 5px;
-    background-color: var(--background-secondary);
-    overflow: auto;
-}
-
-preview code {
-    padding: 5px;
-    color: var(--text-primary);
-    border-radius: 5px;
-    background-color: var(--background-secondary);
-}
-
-preview blockquote {
-    display: block;
-    margin: 0;
-    padding: 0 15px;
-    border-left: solid 2px var(--background-shimmer);
 }

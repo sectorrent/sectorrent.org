@@ -73,9 +73,10 @@ input-field {
 
 input-field:before {
     position: absolute;
-    top: -6px;
+    top: -0.4em;
     left: 10px;
     padding: 0 10px;
+    line-height: 0.8em;
 	content: attr(title);
     background-color: var(--background);
     font-size: 0.8em;
@@ -91,7 +92,8 @@ input[type='email'],
         input[type='tel'],
         input[type='text'] {
 	display: block;
-	width: calc(100% - 32px);;
+	width: calc(100% - 32px);
+    height: 18px;
 	padding: 15px;
 	font-size: 0.8em;
 	border: none;
@@ -151,6 +153,8 @@ response:not(:empty) {
 a.button {
     display: block;
     width: fit-content;
+    height: 18px;
+    line-height: 18px;
     border-radius: 5px;
     padding: 11px 20px;
     font-size: 1em;

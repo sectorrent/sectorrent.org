@@ -173,6 +173,7 @@ section {
     min-height: calc(100vh - 80px);
     align-items: start;
 	padding: 0px 10%;
+    line-height: 1.6em;
     gap: 30px;
 }
 

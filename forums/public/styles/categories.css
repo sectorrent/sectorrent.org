@@ -31,6 +31,8 @@ content li {
 
 content li a {
     display: block;
+    height: 18px;
+    line-height: 18px;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
@@ -111,6 +113,8 @@ tbody tr:last-child td:last-child {
 section table th {
     /*
     color: var(--text-secondary);*/
+    height: 18px;
+    line-height: 18px;
     font-size: 1em;
     font-weight: normal;
     text-align: left;

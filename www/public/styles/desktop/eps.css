@@ -82,6 +82,18 @@ preview pre {
     overflow: auto;
 }
 
+preview pre:before {
+    display: block;
+    content: attr(language);
+    padding: 10px;
+    margin: -5px -5px 5px -5px;
+    background-color: var(--background-shimmer);
+}
+
+preview pre code {
+    display: block;
+}
+
 preview code {
     padding: 5px;
     color: var(--text-primary);
@@ -97,44 +109,35 @@ preview blockquote {
 }
 
 preview pre[language='java'] span.code-keyword {
-    color: #a26140;
+    color: #ff7b72;
 }
 
 preview pre[language='java'] span.code-comment {
-    color: #565757;
+    color: #9198a1;
 }
 
 preview pre[language='java'] span.code-string {
-    color: #567f46;
+    color: #a5d6ff;
 }
 
 preview pre[language='java'] span.code-number {
-    color: #257e86;
+    color: #79c0ff;
 }
 
 
 
 
-preview pre[language='json'] span.code-punctuation {
-    color: #da70d6;
-}
 
 preview pre[language='json'] span.code-key {
-    color: #78d3e9;
+    color: #7ee787;
 }
 
 preview pre[language='json'] span.code-string {
-    color: #b25b30;
+    color: #a5d6ff;
 }
 
-preview pre[language='json'] span.code-number {
-    color: #b5cea8;
-}
-
-preview pre[language='json'] span.code-boolean {
-    color: #2b69c5;
-}
-
-preview pre[language='json'] span.code-null {
-    color: #2b69c5;
+preview pre[language='json'] span.code-number,
+        preview pre[language='json'] span.code-boolean,
+        preview pre[language='json'] span.code-null {
+    color: #79c0ff;
 }

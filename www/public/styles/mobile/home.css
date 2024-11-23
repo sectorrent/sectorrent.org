@@ -4,6 +4,7 @@ section {
     top: 60px;
     width: var(--width);
 	padding: 40px 20px;
+    line-height: 1.6em;
 }
 
 section[type='header'] {
@@ -12,6 +13,7 @@ section[type='header'] {
     align-items: center;
     justify-content: center;
 	padding: 40px 20px;
+    line-height: unset;
     text-align: center;
     background-color: var(--background-secondary);
 }

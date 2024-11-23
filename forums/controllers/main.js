@@ -80,6 +80,7 @@ exports.getNewThread = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'editor',
+			'markdown',
 			'new-thread'
 		]
 	});
@@ -101,6 +102,7 @@ exports.getThread = async (req, res) => {
 			uniqid: uuidv4,
 			styles: [
 				'editor',
+				'markdown',
 				'thread'
 			],
 			data

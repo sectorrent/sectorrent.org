@@ -1,18 +1,3 @@
-section {
-    display: block;
-    position: relative;
-    top: 60px;
-    width: var(--width);
-    min-height: calc(100vh - 140px);
-	padding: 40px 10%;
-    line-height: 1.6em;
-    color: var(--text-secondary);
-}
-
-preview {
-    display: block;
-}
-
 preview h1,
         preview h2,
         preview h3,
@@ -63,7 +48,7 @@ preview table td {
 
 preview pre {
     display: block;
-    width: calc(100vw - 40px);
+    width: calc((var(--width) * 1vw) - 380px);
     padding: 5px;
     border-radius: 5px;
     background-color: var(--background-secondary);
