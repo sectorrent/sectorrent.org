@@ -62,24 +62,24 @@ preview table td {
 }
 
 preview pre {
+    position: relative;
     display: block;
-    width: calc(100vw - 40px);
+    width: calc(var(--width) * 1vw);
     padding: 5px;
     border-radius: 5px;
     background-color: var(--background-secondary);
+    font-family: monospace;
     overflow: auto;
 }
 
 preview pre:before {
+    position: sticky;
+    left: 0;
     display: block;
     content: attr(language);
-    padding: 10px;
-    margin: -5px -5px 5px -5px;
+    padding: 5px 10px;
+    font-family: sans-serif;
     background-color: var(--background-shimmer);
-}
-
-preview pre code {
-    display: block;
 }
 
 preview code {
@@ -87,6 +87,12 @@ preview code {
     color: var(--text-primary);
     border-radius: 5px;
     background-color: var(--background-secondary);
+    font-family: monospace;
+}
+
+preview pre code {
+    display: block;
+    padding: 10px;
 }
 
 preview blockquote {
