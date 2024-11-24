@@ -253,7 +253,7 @@ function markDownText(line){
         if(startText !== -1 && endText !== -1 && startUrl !== -1 && endUrl !== -1){
             const linkText = line.substring(startText+1, endText);
             const url = line.substring(startUrl+1, endUrl);
-            if(url.includes('"')){
+            if(!/(?<!\()https?:\/\/[^\s]+/.test(url)){
                 break;
             }
             const linkHtml = `<a href="${url}">${linkText}</a>`;
