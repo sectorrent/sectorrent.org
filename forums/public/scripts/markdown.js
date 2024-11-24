@@ -145,6 +145,10 @@ function markdownToHtml(markdown){
             i++;
         }
 
+        if(inCodeBlock){
+            codeLines.push('');
+        }
+
         //HANDLE TABLE
         if(lines.some((line) => line.startsWith('|'))){
             let tableHtml = '<table>';
@@ -195,10 +199,6 @@ function markdownToHtml(markdown){
         const joinedLines = processedLines.join('\n');
         if(!inCodeBlock && !joinedLines.startsWith('<h') && !joinedLines.startsWith('<pre>')){
             return `<p>${joinedLines}</p>`;
-        }
-
-        if(inCodeBlock){
-            codeLines.push('');
         }
 
         return joinedLines;
