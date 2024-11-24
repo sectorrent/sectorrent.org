@@ -1,11 +1,13 @@
 textarea.addEventListener('keydown', function(e){
-    if(e.key === 'Tab'){
-        e.preventDefault();
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-
-        textarea.value = textarea.value.substring(0, start)+'    '+textarea.value.substring(end);
-        textarea.selectionStart = textarea.selectionEnd = start+4;
+    switch(e.key){
+        case 'Tab':
+            e.preventDefault();
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+    
+            textarea.value = textarea.value.substring(0, start)+'\t'+textarea.value.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start+1;
+            break;
     }
 });
 
