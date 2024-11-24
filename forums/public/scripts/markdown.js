@@ -53,6 +53,28 @@ function markdownToHtml(markdown){
                 continue;
             }
 
+            //HANDLE SPACES
+            if(line.includes('$~')){
+                let insideDollar = false;
+                let result = '';
+
+                for(let i = 0; i < line.length; i++){
+                    const char = line.charAt(i);
+
+                    if(char === '$'){
+                        insideDollar = !insideDollar;
+
+                    }else if(insideDollar && char === '~'){
+                        result += '&nbsp;';
+
+                    }else{
+                        result += char;
+                    }
+                }
+
+                line = result;
+            }
+
             //HANDLE BULLET LISTS
             if(/^[-+*] /.test(line)){
                 let listItems = [];
