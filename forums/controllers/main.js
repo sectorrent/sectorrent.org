@@ -21,12 +21,25 @@ exports.getHome = async (req, res) => {
 
 exports.getLatest = async (req, res) => {
 	forums.getLatest(req).then((data) => {
+		if(data.threads.length < 1){
+			res.render('layouts/error/empty_category', {
+				title: 'Category Page',
+				page: 'category',
+				uniqid: uuidv4,
+				styles: [
+					'category'
+				],
+				data
+			});
+			return;
+		}
+
 		res.render('layouts/latest', {
 			title: 'Latest Page',
 			page: 'latest',
 			uniqid: uuidv4,
 			styles: [
-				'categories'
+				'category'
 			],
 			data
 		});
@@ -38,12 +51,25 @@ exports.getLatest = async (req, res) => {
 
 exports.getTop = async (req, res) => {
 	forums.getTop(req).then((data) => {
+		if(data.threads.length < 1){
+			res.render('layouts/error/empty_category', {
+				title: 'Category Page',
+				page: 'category',
+				uniqid: uuidv4,
+				styles: [
+					'category'
+				],
+				data
+			});
+			return;
+		}
+
 		res.render('layouts/top', {
 			title: 'Top Page',
 			page: 'top',
 			uniqid: uuidv4,
 			styles: [
-				'categories'
+				'category'
 			],
 			data
 		});
@@ -58,12 +84,25 @@ exports.getCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 
 	forums.getCategory(req, slug).then((data) => {
+		if(data.threads.length < 1){
+			res.render('layouts/error/empty_category', {
+				title: 'Category Page',
+				page: 'category',
+				uniqid: uuidv4,
+				styles: [
+					'category'
+				],
+				data
+			});
+			return;
+		}
+
 		res.render('layouts/category', {
 			title: 'Category Page',
 			page: 'category',
 			uniqid: uuidv4,
 			styles: [
-				'categories'
+				'category'
 			],
 			data
 		});

@@ -1,0 +1,29 @@
+<%- include('../../fragments/header') %>
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <nav>
+                    <ul>
+                        <li selected>
+                            <a href='/latest'>Latest</a>
+                        </li>
+                        <li>
+                            <a href='/top'>Top</a>
+                        </li>
+<%
+    if(isSignedIn){
+%>
+                        <filler></filler>
+                        <li>
+                            <a href='/thread'>New Thread</a>
+                        </li>
+<%
+    }
+%>
+                    </ul>
+                </nav>
+
+
+            </content>
+
+<%- include('../../fragments/footer') %>

@@ -134,23 +134,24 @@ section table td {
     /*border-bottom: solid 1px var(--background-secondary);*/
 }
 
-section table tr[pinned] td > a:first-child:before {
-    display: inline-block;
-    content: '';
-    width: 1em;
-    height: 1em;
-    margin-right: 0.2em;
-    background-image: url(/icons/ic_pin.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 section table td > a {
     display: block;
     color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
+}
+
+section table td > a:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+section table td > a > svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: var(--text-primary);
 }
 
 section table td categories {
