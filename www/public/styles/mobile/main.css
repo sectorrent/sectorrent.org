@@ -62,7 +62,8 @@ header {
     top: 0;
 	width: var(--width);
 	padding: 0px 20px;
-    background-color: var(--text-primary);
+    color: var(--text-primary);
+    background-color: var(--black);
     z-index: 10;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

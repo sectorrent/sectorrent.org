@@ -103,7 +103,8 @@ header {
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
 	padding: 0px 15%;
-    background-color: var(--text-primary);
+    color: var(--text-primary);
+    background-color: var(--black);
     z-index: 10;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -133,7 +134,7 @@ header li {
 
 header li a {
     display: block;
-    color: var(--black);
+    color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
 }
@@ -146,7 +147,6 @@ header li.home a {
 header li.button a {
     padding: 10px 15px;
     border-radius: 5px;
-    color: var(--text-primary);
     background-color: var(--primary);
     transition: background-color 0.3s;
 }

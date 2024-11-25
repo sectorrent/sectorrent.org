@@ -100,7 +100,8 @@ header {
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
 	padding: 0px 15%;
-    background-color: var(--text-primary);
+    color: var(--text-primary);
+    background-color: var(--black);
     z-index: 10;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -138,7 +139,7 @@ header li a,
     display: inline-block;
     height: 30px;
     line-height: 30px;
-    color: var(--black);
+    color: var(--text-primary);
     padding: 25px 15px;
     text-decoration: none;
     z-index: 2;
@@ -162,7 +163,7 @@ header li input[type='radio']:checked ~ label:after {
 }
 
 header li input[type='radio']:checked ~ label.header, header li[selected] {
-    background-color: var(--text-secondary);
+    background-color: var(--background-secondary);
 }
 
 header li.home a {
@@ -237,7 +238,7 @@ header li dropdown-container {
     /* height: 300px; */
     opacity: 0;
     visibility: hidden;
-    background-color: var(--text-primary);
+    background-color: var(--black);
     transition: visibility 0.2s step-end, top 0.2s, opacity 0.2s;
     z-index: -1;
 }
@@ -263,12 +264,11 @@ header li dropdown links {
     justify-content: center;
     min-width: 300px;
     padding: 40px 0px;
-    background-color: var(--text-primary);
 }
 
 header li dropdown links h3 {
     display: block;
-    color: var(--black);
+    color: var(--text-primary);
     margin-bottom: 0.5em;
     font-weight: 800;
     font-size: 1.5em;
@@ -276,7 +276,7 @@ header li dropdown links h3 {
 
 header li dropdown links a {
     display: block;
-    color: var(--background);
+    color: var(--text-secondary);
     text-decoration: none;
     padding: 8px 0px;
     transition: color 0.2s;
