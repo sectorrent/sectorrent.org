@@ -141,16 +141,7 @@ exports.getCategory = async (req, slug) => {
 
 //SORT BY SLUG
 exports.getLatest = async (req) => {
-	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $project: {
-                _id: true,
-                title: true,
-                slug: true,
-                color: true
-            }
-        }
-    ]).toArray();
+	let categories = this.getCategories(req);
 
 	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
         {
@@ -178,16 +169,7 @@ exports.getLatest = async (req) => {
 
 //SORT BY SLUG
 exports.getTop = async (req) => {
-	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $project: {
-                _id: true,
-                title: true,
-                slug: true,
-                color: true
-            }
-        }
-    ]).toArray();
+	let categories = this.getCategories(req);
 
     //MAKE THIS SORT BY MOST RECENT COMMENT...
 	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
@@ -217,16 +199,7 @@ exports.getTop = async (req) => {
 exports.getThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
-	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $project: {
-                _id: true,
-                title: true,
-                slug: true,
-                color: true
-            }
-        }
-    ]).toArray();
+	let categories = this.getCategories(req);
 
 	let thread = await global.mongo.getDatabase().collection('threads').aggregate([
         {
@@ -301,6 +274,23 @@ exports.getThread = async (req, id) => {
     return {
         categories,
         thread: thread[0]
+    };
+};
+
+exports.getCategories = async (req) => {
+	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $project: {
+                _id: true,
+                title: true,
+                slug: true,
+                color: true
+            }
+        }
+    ]).toArray();
+
+    return {
+        categories
     };
 };
 

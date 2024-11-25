@@ -1,28 +1,31 @@
-section {
+content {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    padding-bottom: 20px;
     flex-direction: column;
-    margin-bottom: 30px;
 }
 
-thread-header {
+content thread-header {
     display: block;
     width: 100%;
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-thread-header h1 {
+content thread-header h1 {
     margin: 0;
     color: var(--text-primary);
     font-size: 1.5em;
 }
 
-thread {
+content thread {
     display: flex;
     width: 100%;
     gap: 20px;
 }
 
-thread > a {
+content thread > a {
     position: sticky;
     top: 90px;
     display: block;
@@ -30,7 +33,7 @@ thread > a {
     cursor: pointer;
 }
 
-thread > a > img {
+content thread > a > img {
     display: block;
     width: 50px;
     height: 50px;
@@ -38,7 +41,7 @@ thread > a > img {
     background-color: var(--background-shimmer);
 }
 
-thread-inner {
+content thread-inner {
     display: block;
     flex: 1;
 }
@@ -197,12 +200,19 @@ fl-options {
 }
 
 fl-option {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 13px 18px;
 }
 
 fl-option:hover {
     background-color: var(--background-secondary);
+}
+
+fl-option span {
+    width: 16px;
+    height: 16px;
 }
 
 response {

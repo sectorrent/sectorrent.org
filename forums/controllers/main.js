@@ -113,16 +113,23 @@ exports.getCategory = async (req, res) => {
 };
 
 exports.getNewThread = async (req, res) => {
-	res.render('layouts/new_thread', {
-		title: 'New Thread Page',
-		page: 'new-thread',
-		uniqid: uuidv4,
-		styles: [
-			'editor',
-			'markdown',
-			'new-thread'
-		]
+	forums.getCategories(req).then((data) => {
+		res.render('layouts/new_thread', {
+			title: 'New Thread Page',
+			page: 'new-thread',
+			uniqid: uuidv4,
+			styles: [
+				'editor',
+				'markdown',
+				'new-thread'
+			],
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
+
 };
 
 exports.getThread = async (req, res) => {
