@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 
 
 (async function initalize(){
-	global.github = await github.getRecentCommits(config);
+	global.github_commits = await github.getRecentCommits(config);
 }());
 
 const server = http.createServer(app);

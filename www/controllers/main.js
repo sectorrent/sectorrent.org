@@ -49,7 +49,7 @@ exports.getHome = async (req, res) => {
 			'home'
 		],
 		data: {
-			commits: res.locals.config.github_commits
+			commits: global.github_commits
 		}
 	});
 };
