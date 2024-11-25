@@ -25,7 +25,7 @@
                                     <fl-options>
                                         <fl-option value='0'>Select Category</fl-option>
 <%
-    for(const category of data.categories){
+    for(const category of categories){
 %>
                                         <fl-option value='1'><span class='<%= category.slug %>'></span><%= category.title %></fl-option>
 <%

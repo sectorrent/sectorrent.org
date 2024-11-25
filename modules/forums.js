@@ -1,49 +1,48 @@
 const { ObjectId } = require('mongodb');
 const TypError = require('./type_error');
 
+exports.getCategories = async () => {
+	global.categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $project: {
+                _id: true,
+                title: true,
+                slug: true,
+                color: true
+            }
+        }
+    ]).toArray();
+
+    return categories;
+};
+
 exports.getHome = async (req) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
-		{
-			$facet: {
-                categories: [
+	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $lookup: {
+                from: 'threads',
+                let: {
+                    categoryId: '$_id'
+                },
+                pipeline: [
                     {
-                        $project: {
-                            _id: true,
-                            title: true,
-                            slug: true,
-                            color: true
-                        }
-                    }
-                ],
-                threads: [
-                    {
-                        $lookup: {
-                            from: 'threads',
-                            let: {
-                                categoryId: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $in: ['$$categoryId', '$categories']
-                                        }
-                                    }
-                                }
-                            ],
-                            as: 'threads'
-                        }
-                    },
-                    {
-                        $addFields: {
-                            threads: {
-                                $size: '$threads'
+                        $match: {
+                            $expr: {
+                                $in: ['$$categoryId', '$categories']
                             }
                         }
                     }
-                ]
+                ],
+                as: 'threads'
+            }
+        },
+        {
+            $addFields: {
+                threads: {
+                    $size: '$threads'
+                }
             }
         }
     ]).toArray();
@@ -63,69 +62,53 @@ exports.getHome = async (req) => {
         }
     ]).toArray();
 
-	if(data.length < 1 || latest.length < 1){
+	if(categories.length < 1 || latest.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
-    
-    data = data[0];
-    data.latest = latest;
 
-    return data;
+    return {
+        categories,
+        latest
+    };
 };
 
 exports.getCategory = async (req, slug) => {
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
-		{
-			$facet: {
-                categories: [
-                    {
-                        $project: {
-                            _id: true,
-                            title: true,
-                            slug: true,
-                            color: true
-                        }
-                    }
-                ],
-                threads: [
+        {
+            $match: {
+                slug: slug
+            }
+        },
+        {
+            $lookup: {
+                from: 'threads',
+                let: {
+                    categoryId: '$_id'
+                },
+                pipeline: [
                     {
                         $match: {
-                            slug: slug
+                            $expr: {
+                                $in: ['$$categoryId', '$categories']
+                            }
                         }
                     },
                     {
-                        $lookup: {
-                            from: 'threads',
-                            let: {
-                                categoryId: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $in: ['$$categoryId', '$categories']
-                                        }
-                                    }
-                                },
-                                {
-                                    $skip: 0
-                                },
-                                {
-                                    $limit: 20
-                                }
-                            ],
-                            as: 'threads'
-                        }
+                        $skip: 0
                     },
                     {
-                        $unwind: '$threads'
-                    },
-                    {
-                        $replaceRoot: {
-                            newRoot: '$threads'
-                        }
+                        $limit: 20
                     }
-                ]
+                ],
+                as: 'threads'
+            }
+        },
+        {
+            $unwind: '$threads'
+        },
+        {
+            $replaceRoot: {
+                newRoot: '$threads'
             }
         }
     ]).toArray();
@@ -133,17 +116,13 @@ exports.getCategory = async (req, slug) => {
 	if(data.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
-    
-    data = data[0];
 
     return data;
 };
 
 //SORT BY SLUG
 exports.getLatest = async (req) => {
-	let categories = this.getCategories(req);
-
-	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
+	let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $sort: {
                 created: -1
@@ -157,22 +136,17 @@ exports.getLatest = async (req) => {
         }
     ]).toArray();
 
-	if(threads.length < 1){
+	if(data.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
-    return {
-        categories,
-        threads
-    };
+    return data;
 };
 
 //SORT BY SLUG
 exports.getTop = async (req) => {
-	let categories = this.getCategories(req);
-
     //MAKE THIS SORT BY MOST RECENT COMMENT...
-	let threads = await global.mongo.getDatabase().collection('threads').aggregate([
+	let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $sort: {
                 created: -1
@@ -186,22 +160,17 @@ exports.getTop = async (req) => {
         }
     ]).toArray();
 
-	if(threads.length < 1){
+	if(data.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
-    return {
-        categories,
-        threads
-    };
+    return data;
 };
 
 exports.getThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
-	let categories = this.getCategories(req);
-
-	let thread = await global.mongo.getDatabase().collection('threads').aggregate([
+	let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $match: {
                 _id: id
@@ -267,31 +236,13 @@ exports.getThread = async (req, id) => {
         }
     ]).toArray();
 
-	if(thread.length < 1){
+	if(data.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
-    return {
-        categories,
-        thread: thread[0]
-    };
-};
+    data = data[0];
 
-exports.getCategories = async (req) => {
-	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $project: {
-                _id: true,
-                title: true,
-                slug: true,
-                color: true
-            }
-        }
-    ]).toArray();
-
-    return {
-        categories
-    };
+    return data;
 };
 
 exports.postComment = async (req) => {

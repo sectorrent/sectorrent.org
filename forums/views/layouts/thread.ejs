@@ -1,6 +1,6 @@
 <%
     const mappedCategories = {};
-    data.categories.forEach((category, index) => {
+    categories.forEach((category, index) => {
         mappedCategories[category._id.toString()] = index;
     });
 %>
@@ -12,12 +12,12 @@
 
             <content>
                 <thread-header>
-                    <h1><%= data.thread.title %></h1>
+                    <h1><%= data.title %></h1>
                     <categories>
 <%
-    for(const category of data.thread.categories){
+    for(const category of data.categories){
 %>
-                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span class='<%= data.categories[mappedCategories[category]].slug %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                        <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
 <%
     }
 %>
@@ -26,16 +26,16 @@
 
                 <comments>
                     <comment>
-                        <a href='/u/<%= data.thread.user.username %>'>
+                        <a href='/u/<%= data.user.username %>'>
                             <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
                         </a>
     
                         <comment-inner>
                             <comment-header>
                                 <h3>
-                                    <a href='/u/<%= data.thread.user.username %>'><%= data.thread.user.username %></a>
+                                    <a href='/u/<%= data.user.username %>'><%= data.user.username %></a>
                                 </h3>
-                                <date><% const date = new Date(data.thread.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
+                                <date><% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                                 <button>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
@@ -43,12 +43,12 @@
                                 </button>
                             </comment-header>
                             <preview>
-                                <%- data.thread.content %>
+                                <%- data.content %>
                             </preview>
                         </comment-inner>
                     </comment>
 <%
-    for(const comment of data.thread.comments){
+    for(const comment of data.comments){
 %>
                     <comment>
                         <a href='/u/<%= comment.user.username %>'>

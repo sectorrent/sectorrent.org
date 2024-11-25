@@ -1,6 +1,6 @@
 <%
     const mappedCategories = {};
-    data.categories.forEach((category, index) => {
+    categories.forEach((category, index) => {
         mappedCategories[category._id.toString()] = index;
     });
 %>
@@ -8,7 +8,7 @@
 <%- include('../fragments/sidebar') %>
 
 <%
-    for(const category of data.categories){
+    for(const category of categories){
 %>
         <style nonce='<%= nonce %>'>
             row.<%= category.slug %> {
@@ -53,7 +53,7 @@
                         </list-head>
                         <list-body>
 <%
-    for(const category of data.threads){
+    for(const category of data.categories){
 %>
                             <row class='<%= category.slug %>'>
                                 <cell>
@@ -88,7 +88,7 @@
 <%
         for(const category of thread.categories){
 %>
-                                        <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span class='<%= data.categories[mappedCategories[category]].slug %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                                        <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
 <%
         }
 %>

@@ -40,7 +40,6 @@ app.use(cookies());
 
 mongo.connectDatabase(config.database);
 global.mongo = mongo;
-github.getRecentCommits(config);
 
 app.use((req, res, next) => {
 	res.locals.config = config;
@@ -50,6 +49,9 @@ app.use((req, res, next) => {
 
 
 
+(async function initalize(){
+	global.github = await github.getRecentCommits(config);
+}());
 
 const server = http.createServer(app);
 

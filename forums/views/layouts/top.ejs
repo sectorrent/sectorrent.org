@@ -1,6 +1,6 @@
 <%
     const mappedCategories = {};
-    data.categories.forEach((category, index) => {
+    categories.forEach((category, index) => {
         mappedCategories[category._id.toString()] = index;
     });
 %>
@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
 <%
-    for(const thread of data.threads){
+    for(const thread of data){
 %>
                         <tr<% if(thread.pinned){ %> pinned<% } %>>
                             <td>
@@ -51,7 +51,7 @@
 <%
         for(const category of thread.categories){
 %>
-                                    <a href='/c/<%= data.categories[mappedCategories[category]].slug %>'><span class='<%= data.categories[mappedCategories[category]].slug %>'></span><%= data.categories[mappedCategories[category]].title %></a>
+                                    <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
 <%
         }
 %>

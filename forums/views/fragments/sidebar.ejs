@@ -1,5 +1,5 @@
 <%
-    for(const category of data.categories){
+    for(const category of categories){
 %>
         <style nonce='<%= nonce %>'>
             span.<%= category.slug %> {
@@ -16,7 +16,7 @@
             <label for='<%= uuid %>'>Categories</label>
             <container>
 <%
-    for(const category of data.categories){
+    for(const category of categories){
 %>
                 <a href='/c/<%= category.slug %>'><span class='<%= category.slug %>'></span><%= category.title %></a>
 <%

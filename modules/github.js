@@ -55,5 +55,6 @@ exports.getRecentCommits = async (config) => {
 
 	commits.sort((a, b) => new Date(b.committedDate) - new Date(a.committedDate));
 	
-	config.github_commits = commits.slice(0, 10);
+	//config.github_commits = commits.slice(0, 10);
+	return commits.slice(0, 10);
 };
