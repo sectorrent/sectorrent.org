@@ -27,7 +27,7 @@
 <%
     for(const category of categories){
 %>
-                                        <fl-option value='1'><span class='<%= category.slug %>'></span><%= category.title %></fl-option>
+                                        <fl-option value='<%= category._id.toString() %>'><span class='<%= category.slug %>'></span><%= category.title %></fl-option>
 <%
     }
 %>

@@ -245,17 +245,28 @@ exports.getThread = async (req, id) => {
     return data;
 };
 
-exports.postComment = async (req) => {
+exports.postThread = async (req, res) => {
+
 };
 
-exports.putComment = async (req) => {
+exports.putThread = async (req, res, id) => {
+	id = ObjectId.createFromHexString(id);
+
+};
+
+exports.postComment = async (req, res) => {
+};
+
+exports.putComment = async (req, res, id) => {
+	id = ObjectId.createFromHexString(id);
 };
 
 exports.deleteComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 };
 
-exports.getComments = async (req) => {
+exports.getComments = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
 };
 
 function pipeUser(req, v = '$user'){

@@ -9,6 +9,7 @@ const forums = require('./modules/forums');
 const middleware = require('./modules/middleware');
 
 const mainController = require('./controllers/main');
+const accountController = require('./controllers/account');
 
 const app = express();
 
@@ -67,6 +68,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/signin', accountController.getSignIn);
+app.get('/signup', accountController.getSignUp);
+app.get('/forgot-password', accountController.getForgotPassword);
+app.get('/reset-password', accountController.getResetPassword);
 
 app.get('/', mainController.getHome);
 app.get('/latest', mainController.getLatest);
@@ -76,8 +81,3 @@ app.get('/top', mainController.getTop);
 app.get('/c/:slug', mainController.getCategory);
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
-
-app.get('/signin', mainController.getSignIn);
-app.get('/signup', mainController.getSignUp);
-app.get('/forgot-password', mainController.getForgotPassword);
-app.get('/reset-password', mainController.getResetPassword);

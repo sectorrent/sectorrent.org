@@ -7,6 +7,7 @@ const cookies = require('cookie-parser');
 const mongo = require('./modules/mongo');
 
 const mainController = require('./controllers/main');
+const accountController = require('./controllers/account');
 
 const app = express();
 
@@ -88,12 +89,14 @@ app.use([
 	}
 }));
 
-app.post('/signin', express.json(), mainController.postSignIn);
-app.post('/signup', express.json(), mainController.postSignUp);
-app.get('/signout', mainController.getSignOut);
+app.post('/signin', express.json(), accountController.postSignIn);
+app.post('/signup', express.json(), accountController.postSignUp);
+app.get('/signout', accountController.getSignOut);
 
-app.post('/forgot-password', express.json(), mainController.postForgotPassword);
-app.put('/reset-password', express.json(), mainController.putResetPassword);
+app.post('/forgot-password', express.json(), accountController.postForgotPassword);
+app.put('/reset-password', express.json(), accountController.putResetPassword);
+
+app.post('/thread', express.json(), mainController.postThread);
 
 app.get('*', (req, res) => {
 	res.json({
