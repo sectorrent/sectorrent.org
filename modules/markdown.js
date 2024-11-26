@@ -34,13 +34,13 @@ exports.parse = (markdown) => {
                 if(inCodeBlock){
                     codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
                     const previousLine = lines[i+1];
-                    codeLines.push(`<pre language='${codeLanguage}'><copy></copy><code>`+tokenizeLine(codeLanguage, previousLine));
+                    codeLines.push(`<pre language='${codeLanguage}'><code-header>${codeLanguage}<copy></copy></code-header><code>${tokenizeLine(codeLanguage, previousLine)}</code>`);
                     i += 2;
                     continue;
                 }
 
                 codeLanguage = '';
-                codeLines[codeLines.length-1] += '</code></pre>'+line.slice(3);
+                codeLines[codeLines.length-1] += '</pre>'+line.slice(3);
                 processedLines.push.apply(processedLines, codeLines);
                 codeLines = [];
                 i++;
@@ -48,7 +48,7 @@ exports.parse = (markdown) => {
             }
             
             if(inCodeBlock){
-                codeLines.push(tokenizeLine(codeLanguage, line));
+                codeLines.push(`<code>${tokenizeLine(codeLanguage, line)}</code>`);
                 i++;
                 continue;
             }

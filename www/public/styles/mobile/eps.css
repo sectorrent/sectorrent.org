@@ -67,30 +67,36 @@ preview pre {
     width: calc(var(--width) * 1vw);
     max-height: 400px;
     border-radius: 5px;
+    padding: 10px;
     background-color: var(--background-secondary);
     font-family: monospace;
+    counter-reset: lines;
     overflow: auto;
 }
 
-preview pre:before {
+preview pre code-header {
     position: sticky;
-    top: 0;
-    left: 0;
-    display: block;
-    content: attr(language);
-    padding: 5px 10px;
-    font-family: sans-serif;
+    top: -10px;
+    left: -10px;
+    display: flex;
+    align-content: center;
+    margin: -10px -10px 10px -10px;
+    padding: 10px;
     background-color: var(--background-shimmer);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 
-preview pre copy {
-    position: sticky;
-    top: 6px;
-    left: calc(100% - 34px);
+preview pre code-header copy {
     display: block;
     width: 24px;
     height: 24px;
-    margin-top: calc(-24px - 0.4em);;
+    margin-left: auto;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -108,8 +114,18 @@ preview code {
 }
 
 preview pre code {
-    display: block;
-    padding: 10px;
+    padding: 0;
+    counter-increment: lines;
+}
+
+preview pre code:before {
+    display: inline-block;
+    content: counter(lines);
+    min-width: 30px;
+    padding: 0 10px;
+    margin-right: 10px;
+    color: var(--text-secondary);
+    direction: rtl;
 }
 
 preview blockquote {
