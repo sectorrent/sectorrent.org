@@ -79,9 +79,10 @@ preview pre code-header {
     top: -10px;
     left: -10px;
     display: flex;
-    align-content: center;
+    height: 40px;
+    align-items: center;
     margin: -10px -10px 10px -10px;
-    padding: 10px;
+    padding: 0 10px;
     background-color: var(--background-shimmer);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
