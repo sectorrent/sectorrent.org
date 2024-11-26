@@ -79,7 +79,7 @@ exports.getCategory = async (req, res) => {
 	forums.getCategory(req, slug).then((data) => {
 		res.render('layouts/category', {
 			title: 'Category Page',
-			page: 'category',
+			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
 				'category'
@@ -91,7 +91,7 @@ exports.getCategory = async (req, res) => {
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
 			title: 'Category Page',
-			page: 'category',
+			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
 				'category'

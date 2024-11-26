@@ -10,7 +10,7 @@
     }
 %>
         <sidebar>
-            <a href='/' type='topics' selected>Topics</a>
+            <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>Topics</a>
             <a href='/' type='more'>More</a><br>
             <input id='<% let uuid = uniqid(); %><%= uuid %>' type='checkbox' checked>
             <label for='<%= uuid %>'>Categories</label>
@@ -18,7 +18,7 @@
 <%
     for(const category of categories){
 %>
-                <a href='/c/<%= category.slug %>'><span class='<%= category.slug %>'></span><%= category.title %></a>
+                <a href='/c/<%= category.slug %>'<% if(page == `category_${category.slug}`){ %> selected<% } %>><span class='<%= category.slug %>'></span><%= category.title %></a>
 <%
     }
 %>
