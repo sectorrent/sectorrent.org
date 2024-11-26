@@ -300,7 +300,9 @@ function markDownText(line){
                 '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
                 '(\\#[-a-z\\d_]*)?' + // fragment locator
                 '|' +
-                '(\\/[-a-z\\d%_.~+]+(\\/[-a-z\\d%_.~+]+)*\\/?)' + // relative path with optional trailing slash
+                '(\\/[-a-z\\d%_.~+]*)*' + // path
+                '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                '(\\#[-a-z\\d_]*)?' + // fragment locator
                 '|' +
                 '(\\#[-a-z\\d_]*)' + // fragment link
                 ')$',
