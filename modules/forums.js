@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const TypError = require('./type_error');
+const form = require('./form');
 
 exports.getCategories = async () => {
 	global.categories = await global.mongo.getDatabase().collection('categories').aggregate([
@@ -246,6 +247,10 @@ exports.getThread = async (req, id) => {
 };
 
 exports.postThread = async (req, res) => {
+    let check = [
+
+    ];
+
     /*
     result = await global.mongo.getDatabase().collection('threads').insertOne(form.thread);
                         
