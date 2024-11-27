@@ -246,12 +246,27 @@ exports.getThread = async (req, id) => {
 };
 
 exports.postThread = async (req, res) => {
-
+    /*
+    result = await global.mongo.getDatabase().collection('threads').insertOne(form.thread);
+                        
+    if(!result.acknowledged){
+        throw new Error('Failed to add to database.');
+    }
+    */
 };
 
 exports.putThread = async (req, res, id) => {
 	id = ObjectId.createFromHexString(id);
 
+    /*
+    let result = await global.mongo.getDatabase().collection('threads').updateOne({
+        _id: id
+    }, set);
+
+    if(result.matchedCount != 1 && result.modifiedCount != 1){
+        throw new Error('Failed to update media on database');
+    }
+    */
 };
 
 exports.postComment = async (req, res) => {
