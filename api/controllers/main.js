@@ -2,7 +2,6 @@ const forums = require('../modules/forums');
 
 exports.postThread = async (req, res) => {
     forums.postThread(req).then((data) => {
-        console.log(data);
 		res.json({
 			status: 200,
 			status_message: 'Insert was successful',

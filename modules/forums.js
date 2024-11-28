@@ -296,10 +296,7 @@ exports.postThread = async (req, res) => {
     data.views = 0;
     data.created = Long.fromNumber(Date.now());
 
-    console.log(data);
-
-    /*
-    result = await global.mongo.getDatabase().collection('threads').insertOne(form.thread);
+    const result = await global.mongo.getDatabase().collection('threads').insertOne(data);
                         
     if(!result.acknowledged){
         throw new Error('Failed to add to database.');
@@ -309,11 +306,6 @@ exports.postThread = async (req, res) => {
 		message: 'Thread created!',
 		link: `/t/${id.toString()}`
 	};
-    */
-
-    return {
-
-    };
 };
 
 exports.putThread = async (req, res, id) => {
