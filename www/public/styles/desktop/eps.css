@@ -79,28 +79,15 @@ preview table td {
     border-bottom: solid 1px var(--background-secondary);
 }
 
-preview pre {
-    position: relative;
-    display: block;
-    width: calc(var(--width) * 1vw);
-    max-height: 400px;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: var(--background-secondary);
-    font-family: monospace;
-    counter-reset: lines;
-    overflow: auto;
-}
-
-preview pre code-header {
-    position: sticky;
-    top: -10px;
-    left: -10px;
+preview code-header {
     display: flex;
+    width: calc((var(--width) * 1vw) - 20px);
     height: 40px;
     align-items: center;
-    margin: -10px -10px 10px -10px;
     padding: 0 10px;
+    margin-top: 13px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color: var(--background-shimmer);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -111,7 +98,7 @@ preview pre code-header {
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
-preview pre code-header copy {
+preview code-header copy {
     display: block;
     width: 24px;
     height: 24px;
@@ -121,6 +108,21 @@ preview pre code-header copy {
     background-position: center;
     background-image: url(/icons/ic_copy.svg);
     cursor: pointer;
+}
+
+preview pre {
+    position: relative;
+    display: block;
+    width: calc((var(--width) * 1vw) - 20px);
+    max-height: 400px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+    margin: 0 0 13px 0;
+    background-color: var(--background-secondary);
+    font-family: monospace;
+    counter-reset: lines;
+    overflow: auto;
 }
 
 preview code {

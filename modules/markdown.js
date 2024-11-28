@@ -30,7 +30,7 @@ exports.parse = (markdown) => {
                 if(inCodeBlock){
                     codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
                     const previousLine = lines[i+1];
-                    codeLines.push(`<pre language='${codeLanguage}'><code-header>${codeLanguage}<copy></copy></code-header><code>${tokenizeLine(codeLanguage, previousLine)}</code>`);
+                    codeLines.push(`<code-header>${codeLanguage}<copy></copy></code-header><pre language='${codeLanguage}'><code>${tokenizeLine(codeLanguage, previousLine)}</code>`);
                     i += 2;
                     continue;
                 }
@@ -219,7 +219,7 @@ exports.parse = (markdown) => {
         }
 
         const joinedLines = processedLines.join('\n');
-        if(!inCodeBlock && !joinedLines.startsWith('<h') && !joinedLines.startsWith('<pre>')){
+        if(!inCodeBlock && !joinedLines.startsWith('<h') && !joinedLines.startsWith('<code-header>')){
             return `<p>${joinedLines}</p>`;
         }
 
