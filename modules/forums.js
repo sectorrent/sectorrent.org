@@ -195,7 +195,7 @@ exports.getThread = async (req, id) => {
                     },
                     {
                         $sort: {
-                            created: -1
+                            created: 1
                         }
                     },
                     {
