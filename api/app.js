@@ -5,6 +5,8 @@ const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const cookies = require('cookie-parser');
 const mongo = require('./modules/mongo');
+const forums = require('./modules/forums');
+const middleware = require('./modules/middleware');
 
 const mainController = require('./controllers/main');
 const accountController = require('./controllers/account');
@@ -38,6 +40,10 @@ app.use((req, res, next) => {
 	next();
 });
 
+
+(async function initalize(){
+	global.categories = await forums.getCategories();
+})();
 
 const server = http.createServer(app);
 

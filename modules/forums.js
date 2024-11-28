@@ -247,9 +247,41 @@ exports.getThread = async (req, id) => {
 };
 
 exports.postThread = async (req, res) => {
-    let check = [
+    const categories = [];
+    for(const category of global.categories){
+        categories.push(category._id.toString());
+    }
 
+    let check = [
+        {
+            key: 'title',
+            type: 'STRING',
+            required: true,
+			pattern: /^[a-zA-Z0-9\[\]\(\)]+$/,
+            min: 6,
+            max: 160
+        },
+        {
+            key: 'content',
+            type: 'STRING',
+            required: true,
+            min: 16,
+            max: 2000
+        },
+        {
+            key: 'type',
+            type: 'SWITCH',
+            required: true,
+            entries: categories
+        }
     ];
+
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
+
+    console.log(data);
+
+    return {};
 
     /*
     result = await global.mongo.getDatabase().collection('threads').insertOne(form.thread);
