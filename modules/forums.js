@@ -252,12 +252,14 @@ exports.postThread = async (req, res) => {
         categories.push(category._id.toString());
     }
 
+    console.log(req.body);
+
     let check = [
         {
             key: 'title',
             type: 'STRING',
             required: true,
-			pattern: /^[a-zA-Z0-9\[\]\(\)]+$/,
+			pattern: /^[a-zA-Z0-9\[\]\(\) ]+$/,
             min: 6,
             max: 160
         },
@@ -275,6 +277,8 @@ exports.postThread = async (req, res) => {
             entries: categories
         }
     ];
+
+    console.log(check);
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);

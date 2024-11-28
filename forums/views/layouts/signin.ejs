@@ -3,7 +3,7 @@
             <content type='main'>
                 <h1>Welcome back!</h1>
                 <h2>Sign in to your account</h2>
-                <form action='https://api.<%= config.general.domain %>/signin' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/signin' method='POST' target='hiddenFrame'>
                     <input-field title='Email'>
                         <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' />
                     </input-field>
@@ -21,6 +21,9 @@
             </content>
             <iframe name='hiddenFrame'></iframe>
             
+            <script nonce='<%= nonce %>'>
+                const validForm = '<%= id %>';
+            </script>
             <script src='/scripts/form.js'></script>
 
 <%- include('../fragments/footer') %>

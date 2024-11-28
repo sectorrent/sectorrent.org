@@ -12,7 +12,7 @@
                     </a>
 
                     <thread-inner>
-                        <form action='https://api.<%= config.general.domain %>/thread' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/thread' method='POST' target='hiddenFrame'>
                             <input-field title='Title'>
                                 <input type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
                             </input-field>
@@ -46,6 +46,10 @@
                 <iframe name='hiddenFrame'></iframe>
 
                 <script src='/scripts/thread.js'></script>
+                <script nonce='<%= nonce %>'>
+                    const validForm = '<%= id %>';
+                </script>
+                <script src='/scripts/form.js'></script>
             </content>
 
 <%- include('../fragments/footer') %>

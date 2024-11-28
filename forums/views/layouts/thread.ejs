@@ -85,7 +85,7 @@
                     </a>
 
                     <reply-inner>
-                        <form action='https://api.<%= config.general.domain %>/comment' method='POST' onsubmit='onSubmit(event)' target='hiddenFrame'>
+                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/comment' method='POST' target='hiddenFrame'>
                             <%- include('../fragments/editor') %>
 
                             <response></response>
@@ -94,6 +94,10 @@
                         </form>
 
                         <iframe name='hiddenFrame'></iframe>
+                        <script nonce='<%= nonce %>'>
+                            const validForm = '<%= id %>';
+                        </script>
+                        <script src='/scripts/form.js'></script>
                     </reply-inner>
                 </reply>
 <%

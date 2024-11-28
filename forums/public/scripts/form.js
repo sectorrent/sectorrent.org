@@ -1,5 +1,12 @@
 var processing = false;
 
+(function(){
+    const forms = document.querySelectorAll(`form[valid-form='${validForm}']`);
+    for(const form of forms){
+        form.onsubmit = onSubmit
+    }
+}());
+
 function onSubmit(event){
     event.preventDefault();
     if(processing){
