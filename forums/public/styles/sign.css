@@ -140,7 +140,6 @@ input[type='submit']:hover {
 
 response {
 	display: none;
-	font-size: 0.8em;
 	margin: 0px auto;
 	color: var(--error);
 	overflow: hidden;

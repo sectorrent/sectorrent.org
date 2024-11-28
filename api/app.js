@@ -102,6 +102,21 @@ app.get('/signout', accountController.getSignOut);
 app.post('/forgot-password', express.json(), accountController.postForgotPassword);
 app.put('/reset-password', express.json(), accountController.putResetPassword);
 
+app.use([
+	'/thread'
+], async (req, res, next) => {
+	if(await middleware.isSignedIn(req, res.locals.config.token.secret)){
+		next();
+		return;
+	}
+
+	res.json({
+		status: 403,
+		status_message: 'Forbidden'
+	});
+	res.end();
+});
+
 app.post('/thread', express.json(), mainController.postThread);
 
 app.get('*', (req, res) => {

@@ -1,5 +1,6 @@
-const { ObjectId } = require('mongodb');
+const { ObjectId, Long } = require('mongodb');
 const TypError = require('./type_error');
+const middleware = require('./middleware');
 const form = require('./form');
 
 exports.getCategories = async () => {
@@ -252,8 +253,6 @@ exports.postThread = async (req, res) => {
         categories.push(category._id.toString());
     }
 
-    console.log(req.body);
-
     let check = [
         {
             key: 'title',
@@ -271,21 +270,33 @@ exports.postThread = async (req, res) => {
             max: 2000
         },
         {
-            key: 'type',
-            type: 'SWITCH',
+            key: 'categories',
+            type: 'ARRAY',
             required: true,
-            entries: categories
+            min: 0,
+            max: 4,
+            entries: {
+                type: 'SWITCH',
+                required: true,
+                entries: categories
+            }
         }
     ];
-
-    console.log(check);
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
 
-    console.log(data);
+    for(const [index, category] of data.categories.entries()){
+        data.categories[index] = ObjectId.createFromHexString(category);
+    }
 
-    return {};
+    const id = new ObjectId();
+    data._id = id;
+    data.user = middleware.getUserID(req);
+    data.views = 0;
+    data.created = Long.fromNumber(Date.now());
+
+    console.log(data);
 
     /*
     result = await global.mongo.getDatabase().collection('threads').insertOne(form.thread);
@@ -293,7 +304,16 @@ exports.postThread = async (req, res) => {
     if(!result.acknowledged){
         throw new Error('Failed to add to database.');
     }
+    
+    return {
+		message: 'Thread created!',
+		link: `/t/${id.toString()}`
+	};
     */
+
+    return {
+
+    };
 };
 
 exports.putThread = async (req, res, id) => {

@@ -81,3 +81,10 @@ app.get('/top', mainController.getTop);
 app.get('/c/:slug', mainController.getCategory);
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
+
+app.get('*', (req, res) => {
+	res.json({
+		status: 404,
+		status_message: 'Endpoint not found!'
+	});
+});
