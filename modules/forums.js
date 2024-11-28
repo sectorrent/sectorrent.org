@@ -247,7 +247,7 @@ exports.getThread = async (req, id) => {
     return data;
 };
 
-exports.postThread = async (req, res) => {
+exports.postThread = async (req) => {
     const categories = [];
     for(const category of global.categories){
         categories.push(category._id.toString());
@@ -308,7 +308,7 @@ exports.postThread = async (req, res) => {
 	};
 };
 
-exports.putThread = async (req, res, id) => {
+exports.putThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
     /*
@@ -322,10 +322,38 @@ exports.putThread = async (req, res, id) => {
     */
 };
 
-exports.postComment = async (req, res) => {
+exports.postComment = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    let check = [
+        {
+            key: 'content',
+            type: 'STRING',
+            required: true,
+            min: 16,
+            max: 2000
+        }
+    ];
+
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
+
+    data.thread = id;
+    data.user = middleware.getUserID(req);
+    data.created = Long.fromNumber(Date.now());
+
+    const result = await global.mongo.getDatabase().collection('comments').insertOne(data);
+                        
+    if(!result.acknowledged){
+        throw new Error('Failed to add to database.');
+    }
+
+    return {
+		message: 'Comment posted!'
+	};
 };
 
-exports.putComment = async (req, res, id) => {
+exports.putComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 };
 

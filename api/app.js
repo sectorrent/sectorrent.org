@@ -103,7 +103,8 @@ app.post('/forgot-password', express.json(), accountController.postForgotPasswor
 app.put('/reset-password', express.json(), accountController.putResetPassword);
 
 app.use([
-	'/thread'
+	'/thread',
+	'/comment'
 ], async (req, res, next) => {
 	if(await middleware.isSignedIn(req, res.locals.config.token.secret)){
 		next();
@@ -118,6 +119,7 @@ app.use([
 });
 
 app.post('/thread', express.json(), mainController.postThread);
+app.post('/comment', express.json(), mainController.postComment);
 
 app.get('*', (req, res) => {
 	res.json({

@@ -22,10 +22,6 @@ exports.parse = (markdown) => {
         
         while(i < lines.length){
             let line = lines[i];
-
-            if(line.endsWith('  ')){
-                line = line.slice(0, line.length-2)+'<br>';
-            }
             
             //HANDLE CODE BLOCKS
             if(line.startsWith('```')){
@@ -51,6 +47,10 @@ exports.parse = (markdown) => {
                 codeLines.push(`<code>${tokenizeLine(codeLanguage, line)}</code>`);
                 i++;
                 continue;
+            }
+
+            if(line.endsWith('  ')){
+                line = line.slice(0, line.length-2)+'<br>';
             }
 
             //HANDLE SPACES
@@ -168,7 +168,7 @@ exports.parse = (markdown) => {
         }
 
         if(inCodeBlock){
-            codeLines.push('');
+            codeLines.push('<code></code>');
         }
 
         //HANDLE TABLE
