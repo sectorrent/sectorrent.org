@@ -48,7 +48,8 @@
                         </comment-inner>
                     </comment>
 <%
-    for(const comment of data.comments){
+    if(data.comments.total > 0){
+        for(const comment of data.comments.comments){
 %>
                     <comment>
                         <a href='/u/<%= comment.user.username %>'>
@@ -73,6 +74,7 @@
                         </comment-inner>
                     </comment>
 <%
+        }
     }
 %>
                 </comments>

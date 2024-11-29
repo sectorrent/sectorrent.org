@@ -100,6 +100,48 @@ exports.getCategory = async (req, slug) => {
                     },
                     {
                         $limit: 20
+                    },
+                    {
+                        $lookup: {
+                            from: 'comments',
+                            let: {
+                                threadId: '$_id'
+                            },
+                            pipeline: [
+                                {
+                                    $match: {
+                                        $expr: {
+                                            $eq: ['$$threadId', '$thread']
+                                        }
+                                    }
+                                },
+                                {
+                                    $count: 'total'
+                                },
+                                {
+                                    $project: {
+                                        total: true
+                                    }
+                                }
+                            ],
+                            as: 'comments'
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: true,
+                            title: true,
+                            content: true,
+                            pinned: true,
+                            locked: true,
+                            views: true,
+                            categories: true,
+                            created: true,
+                            user: true,
+                            comments: {
+                                $first: '$comments.total'
+                            }
+                        }
                     }
                 ],
                 as: 'threads'
@@ -135,6 +177,48 @@ exports.getLatest = async (req) => {
         },
         {
             $limit: 20
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                let: {
+                    threadId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$threadId', '$thread']
+                            }
+                        }
+                    },
+                    {
+                        $count: 'total'
+                    },
+                    {
+                        $project: {
+                            total: true
+                        }
+                    }
+                ],
+                as: 'comments'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                locked: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $first: '$comments.total'
+                }
+            }
         }
     ]).toArray();
 
@@ -159,6 +243,48 @@ exports.getTop = async (req) => {
         },
         {
             $limit: 20
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                let: {
+                    threadId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$threadId', '$thread']
+                            }
+                        }
+                    },
+                    {
+                        $count: 'total'
+                    },
+                    {
+                        $project: {
+                            total: true
+                        }
+                    }
+                ],
+                as: 'comments'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                locked: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $first: '$comments.total'
+                }
+            }
         }
     ]).toArray();
 
@@ -194,26 +320,46 @@ exports.getThread = async (req, id) => {
                         }
                     },
                     {
-                        $sort: {
-                            created: 1
+                        $facet: {
+                            total: [
+                                {
+                                    $count: 'total'
+                                }
+                            ],
+                            comments: [
+                                {
+                                    $sort: {
+                                        created: 1
+                                    }
+                                },
+                                {
+                                    $skip: 0
+                                },
+                                {
+                                    $limit: 20
+                                },
+                                pipeUser(req),
+                                {
+                                    $project: {
+                                        _id: true,
+                                        content: true,
+                                        created: true,
+                                        pinned: true,
+                                        user: {
+                                            $first: '$user'
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    pipeUser(req),
-                    {
                         $project: {
-                            _id: true,
-                            content: true,
-                            created: true,
-                            pinned: true,
-                            user: {
-                                $first: '$user'
+                            _id: 'comments',
+                            total: {
+                                $first: '$total.total'
                             },
+                            comments: '$comments'
                         }
                     }
                 ],
@@ -233,7 +379,9 @@ exports.getThread = async (req, id) => {
                 user: {
                     $first: '$user'
                 },
-                comments: true
+                comments: {
+                    $first: '$comments'
+                }
             }
         }
     ]).toArray();

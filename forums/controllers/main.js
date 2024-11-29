@@ -121,8 +121,10 @@ exports.getThread = async (req, res) => {
 	forums.getThread(req, id).then((data) => {
 		data.content = markdown.parse(data.content);
 		
-		for(const comment of data.comments){
-			comment.content = markdown.parse(comment.content);
+		if(data.comments.total > 0){
+			for(const comment of data.comments.comments){
+				comment.content = markdown.parse(comment.content);
+			}
 		}
 
 		res.render('layouts/thread', {
