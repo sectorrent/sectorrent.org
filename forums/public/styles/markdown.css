@@ -79,11 +79,11 @@ preview code-header copy {
 preview pre {
     position: relative;
     display: block;
-    width: calc((var(--width) * 1vw) - 400px);
+    width: calc((var(--width) * 1vw) - 380px);
     max-height: 400px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 10px;
+    padding: 10px 0;
     margin: 0 0 13px 0;
     background-color: var(--background-secondary);
     font-family: monospace;
@@ -101,17 +101,20 @@ preview code {
 }
 
 preview pre code {
-    padding: 0;
+    padding: 0 10px 0 0;
     counter-increment: lines;
 }
 
 preview pre code:before {
+    position: sticky;
+    left: 0;
     display: inline-block;
     content: counter(lines);
     min-width: 30px;
     padding: 0 10px;
     margin-right: 10px;
     color: var(--text-secondary);
+    background-color: var(--background-secondary);
     direction: rtl;
 }
 
