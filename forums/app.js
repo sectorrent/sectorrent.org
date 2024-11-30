@@ -45,6 +45,9 @@ global.mongo = mongo;
 app.use(async (req, res, next) => {
 	res.locals.config = config;
 	res.locals.isSignedIn = await middleware.isSignedIn(req, config.token.secret);
+	if(res.locals.isSignedIn){
+		res.locals.user = req.token.payload.data;
+	}
 	next();
 });
 
@@ -85,6 +88,8 @@ app.get('/c/:slug/top', mainController.getCategoryTop);
 
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
+
+app.get('/u/:id', mainController.getUser);
 
 app.get('*', (req, res) => {
 	res.json({

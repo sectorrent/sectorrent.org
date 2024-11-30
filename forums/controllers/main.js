@@ -214,3 +214,16 @@ exports.getThread = async (req, res) => {
 	});
 };
 
+exports.getUser = async (req, res) => {
+	const id = (req.params.id) ? req.params.id : '';
+
+	res.render('layouts/user', {
+		title: 'User Page',
+		page: 'user',
+		uniqid: uuidv4,
+		styles: [
+		],
+		categories: global.categories
+	});
+};
+

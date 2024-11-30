@@ -11,7 +11,13 @@
 %>
         <sidebar>
             <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>Topics</a>
-            <a href='/u/' type='user'<% if(page == 'user'){ %> selected<% } %>>My Posts</a><br>
+<%
+    if(isSignedIn){
+%>
+            <a href='/u/<%= user.username %>' type='user'<% if(page == 'user'){ %> selected<% } %>>My Posts</a><br>
+<%
+    }
+%>
             <a href='/' type='more'>More</a><br>
             <input id='<% let uuid = uniqid(); %><%= uuid %>' type='checkbox' checked>
             <label for='<%= uuid %>'>Categories</label>
