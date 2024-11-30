@@ -234,6 +234,10 @@ sidebar a[type='topics']:before {
     background-image: url(/icons/ic_layers.svg);
 }
 
+sidebar a[type='user']:before {
+    background-image: url(/icons/ic_user.svg);
+}
+
 sidebar a[type='more']:before {
     background-image: url(/icons/ic_menu.svg);
 }
