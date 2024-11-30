@@ -58,6 +58,10 @@ editor-header button {
     cursor: pointer;
 }
 
+editor input[type='radio'][radio='editor-preview']:checked ~ editor-header button {
+    display: none;
+}
+
 comment-header svg,
         editor-header svg {
     display: block;
