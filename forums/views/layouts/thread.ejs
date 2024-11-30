@@ -87,7 +87,7 @@
                     </a>
 
                     <reply-inner>
-                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/comment?id=<%= data._id.toString() %>' method='POST' target='hiddenFrame'>
+                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
                             <%- include('../fragments/editor') %>
 
                             <response></response>

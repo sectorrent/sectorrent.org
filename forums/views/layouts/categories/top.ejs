@@ -1,0 +1,71 @@
+<%
+    const mappedCategories = {};
+    categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+%>
+<%- include('../../fragments/header') %>
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href='/c/<%= slug %>/latest'>Latest</a>
+                        </li>
+                        <li selected>
+                            <a href='/c/<%= slug %>/top'>Top</a>
+                        </li>
+<%
+    if(isSignedIn){
+%>
+                        <filler></filler>
+                        <li>
+                            <a href='/thread'>New Thread</a>
+                        </li>
+<%
+    }
+%>
+                    </ul>
+                </nav>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th class='replies'>Replies</th>
+                            <th class='views'>Views</th>
+                            <th class='activity'>Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<%
+    for(const thread of data){
+%>
+                        <tr<% if(thread.pinned){ %> pinned<% } %>>
+                            <td>
+                                <a href='/t/<%= thread._id.toString() %>'><%= thread.title %></a>
+                                <categories>
+<%
+        for(const category of thread.categories){
+%>
+                                    <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
+<%
+        }
+%>
+                                </categories>
+                                <a href='/t/<%= thread._id.toString() %>'>
+                                    <div><%= thread.content.substr(0, 160) %></div>
+                                </a>
+                            </td>
+                            <td class='replies'><%= thread.comments %></td>
+                            <td class='views'><%= thread.views %></td>
+                            <td class='activity'>1</td>
+                        </tr>
+<%
+    }
+%>
+                    </tbody>
+                </table>
+            </content>
+
+<%- include('../../fragments/footer') %>

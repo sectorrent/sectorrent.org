@@ -4,17 +4,17 @@
         mappedCategories[category._id.toString()] = index;
     });
 %>
-<%- include('../fragments/header') %>
-<%- include('../fragments/sidebar') %>
+<%- include('../../fragments/header') %>
+<%- include('../../fragments/sidebar') %>
 
             <content>
                 <nav>
                     <ul>
-                        <li selected>
-                            <a href='/latest'>Latest</a>
+                        <li>
+                            <a href='/c/<%= slug %>/latest'>Latest</a>
                         </li>
                         <li>
-                            <a href='/top'>Top</a>
+                            <a href='/c/<%= slug %>/top'>Top</a>
                         </li>
 <%
     if(isSignedIn){
@@ -79,4 +79,4 @@
                 </table>
             </content>
 
-<%- include('../fragments/footer') %>
+<%- include('../../fragments/footer') %>

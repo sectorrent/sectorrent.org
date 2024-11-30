@@ -79,6 +79,10 @@ app.get('/top', mainController.getTop);
 //app.get('/:slug/latest', mainController.getLatest);
 //app.get('/:slug/top', mainController.getTop);
 app.get('/c/:slug', mainController.getCategory);
+
+app.get('/c/:slug/latest', mainController.getCategoryLatest);
+app.get('/c/:slug/top', mainController.getCategoryTop);
+
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
 

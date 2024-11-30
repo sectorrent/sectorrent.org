@@ -21,6 +21,8 @@ exports.getHome = async (req, res) => {
 };
 
 exports.getLatest = async (req, res) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
 	forums.getLatest(req).then((data) => {
 		res.render('layouts/latest', {
 			title: 'Latest Page',
@@ -47,6 +49,8 @@ exports.getLatest = async (req, res) => {
 };
 
 exports.getTop = async (req, res) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
 	forums.getTop(req).then((data) => {
 		res.render('layouts/top', {
 			title: 'Top Page',
@@ -77,13 +81,14 @@ exports.getCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 
 	forums.getCategory(req, slug).then((data) => {
-		res.render('layouts/category', {
+		res.render('layouts/categories/category', {
 			title: 'Category Page',
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
 				'category'
 			],
+			slug,
 			categories: global.categories,
 			data
 		});
@@ -96,6 +101,69 @@ exports.getCategory = async (req, res) => {
 			styles: [
 				'category'
 			],
+			slug,
+			categories: global.categories
+		});
+	});
+};
+
+exports.getCategoryLatest = async (req, res) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+	const slug = (req.params.slug) ? req.params.slug : '';
+
+	forums.getLatest(req, slug).then((data) => {
+		res.render('layouts/categories/latest', {
+			title: 'Latest Page',
+			page: `category_${slug}`,
+			uniqid: uuidv4,
+			styles: [
+				'category'
+			],
+			slug,
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		res.render('layouts/error/empty_category', {
+			title: 'Category Page',
+			page: `category_${slug}`,
+			uniqid: uuidv4,
+			styles: [
+				'category'
+			],
+			slug,
+			categories: global.categories
+		});
+	});
+};
+
+exports.getCategoryTop = async (req, res) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+	const slug = (req.params.slug) ? req.params.slug : '';
+
+	forums.getTop(req, slug).then((data) => {
+		res.render('layouts/categories/top', {
+			title: 'Top Page',
+			page: `category_${slug}`,
+			uniqid: uuidv4,
+			styles: [
+				'category'
+			],
+			slug,
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		res.render('layouts/error/empty_category', {
+			title: 'Category Page',
+			page: `category_${slug}`,
+			uniqid: uuidv4,
+			styles: [
+				'category'
+			],
+			slug,
 			categories: global.categories
 		});
 	});
@@ -136,6 +204,7 @@ exports.getThread = async (req, res) => {
 				'markdown',
 				'thread'
 			],
+			id,
 			categories: global.categories,
 			data
 		});
