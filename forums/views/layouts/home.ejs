@@ -73,6 +73,7 @@
                         <list-head>
                             <row>
                                 <cell>Latest</cell>
+                                <cell>Replies</cell>
                             </row>
                         </list-head>
                         <list-body>
@@ -97,7 +98,7 @@
                                         <div><%= thread.content.substr(0, 160) %></div>
                                     </a>
                                 </cell>
-                                <cell>0</cell>
+                                <cell><%= thread.comments %></cell>
                             </row>
 <%
     }

@@ -61,6 +61,48 @@ exports.getHome = async (req) => {
         },
         {
             $limit: 20
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                let: {
+                    threadId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$threadId', '$thread']
+                            }
+                        }
+                    },
+                    {
+                        $count: 'total'
+                    },
+                    {
+                        $project: {
+                            total: true
+                        }
+                    }
+                ],
+                as: 'comments'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                locked: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $first: '$comments.total'
+                }
+            }
         }
     ]).toArray();
 
