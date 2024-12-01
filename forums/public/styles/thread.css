@@ -78,22 +78,31 @@ content comment-header {
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-content comment > a,
-        content reply > a {
+content comment a.user-icon,
+        content reply a.user-icon {
     position: sticky;
     top: 90px;
-    display: block;
-    height: fit-content;
-    cursor: pointer;
-}
-
-content comment > a > img,
-        content reply > a > img {
     display: block;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: solid 2px var(--background-secondary);
+    background-color: var(--background-secondary);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+content comment a.user-icon img,
+        content reply a.user-icon img {
+    display: none;
+    width: 100%;
+    border-radius: 50%;
     background-color: var(--background-shimmer);
+}
+
+content comment a.user-icon img.show,
+        content reply a.user-icon img.show {
+    display: block;
 }
 
 content comment-header h3 {

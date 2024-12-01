@@ -25,20 +25,28 @@ content thread {
     gap: 20px;
 }
 
-content thread > a {
+content thread a.user-icon {
     position: sticky;
     top: 90px;
-    display: block;
-    height: fit-content;
-    cursor: pointer;
-}
-
-content thread > a > img {
     display: block;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: solid 2px var(--background-secondary);
+    background-color: var(--background-secondary);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+content thread a.user-icon img {
+    display: none;
+    width: 100%;
+    border-radius: 50%;
     background-color: var(--background-shimmer);
+}
+
+content thread a.user-icon img.show {
+    display: block;
 }
 
 content thread-inner {

@@ -26,8 +26,8 @@
 
                 <comments>
                     <comment>
-                        <a href='/u/<%= data.user.username %>'>
-                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        <a class='user-icon' href='/u/<%= data.user.username %>'>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.user.username %>' draggable='false' oncontextmenu='return false'>
                         </a>
     
                         <comment-inner>
@@ -52,8 +52,8 @@
         for(const comment of data.comments.comments){
 %>
                     <comment>
-                        <a href='/u/<%= comment.user.username %>'>
-                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                        <a class='user-icon' href='/u/<%= comment.user.username %>'>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= comment.user.username %>' draggable='false' oncontextmenu='return false'>
                         </a>
 
                         <comment-inner>
@@ -82,8 +82,8 @@
     if(isSignedIn){
 %>
                 <reply>
-                    <a href='/u/'>
-                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4'>
+                    <a class='user-icon' href='/u/<%= user.username %>'>
+                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
                     </a>
 
                     <reply-inner>
