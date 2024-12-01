@@ -4,7 +4,7 @@ const markdown = require('../modules/markdown');
 
 exports.getHome = async (req, res) => {
 	forums.getHome(req).then((data) => {
-		res.render('layouts/home', {
+		res.render('layouts/index', {
 			title: 'Home Page',
 			page: 'home',
 			uniqid: uuidv4,
@@ -81,7 +81,7 @@ exports.getCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 
 	forums.getCategory(req, slug).then((data) => {
-		res.render('layouts/categories/category', {
+		res.render('layouts/categories/index', {
 			title: 'Category Page',
 			page: `category_${slug}`,
 			uniqid: uuidv4,
@@ -217,7 +217,7 @@ exports.getThread = async (req, res) => {
 exports.getUser = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 
-	res.render('layouts/user', {
+	res.render('layouts/user/index', {
 		title: 'User Page',
 		page: 'user',
 		uniqid: uuidv4,
