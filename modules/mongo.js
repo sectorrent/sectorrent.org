@@ -15,6 +15,17 @@ exports.connectDatabase = async (config) => {
 	{
 		unique: true
 	});
+
+	await db.collection('users').createIndex({
+		username: 1
+	},
+	{
+		unique: true,
+        collation: {
+			locale: 'en',
+			strength: 2
+		}
+	});
 };
 
 exports.getURI = () => {

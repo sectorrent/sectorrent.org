@@ -256,35 +256,12 @@ exports.signUp = async (req, res) => {
 
 	try{
         msession.startTransaction();
-
-		let data = await global.mongo.getDatabase().collection('users').findOne(
-			{
-				email: req.body.email
-			},
-			{
-				projection: {
-					_id: true
-				}
-			},
-			{
-				msession
-			}
-		);
-	
-		if(data){
-			throw new FieldError([
-				{
-					type: 'email',
-					message: 'Email is already in use.'
-				}
-			]);
-		}
 	
 		const id = new ObjectId();
 		const password = await bcrypt.hash(req.body.password, 13);
 	
 		if(res.locals.config.database.replica_set){
-			data = await global.mongo.getDatabase().collection('users').insertOne(
+			let data = await global.mongo.getDatabase().collection('users').insertOne(
 				{
 					_id: id,
 					email: req.body.email,
@@ -306,7 +283,7 @@ exports.signUp = async (req, res) => {
 			await msession.commitTransaction();
 
 		}else{
-			data = await global.mongo.getDatabase().collection('users').insertOne(
+			let data = await global.mongo.getDatabase().collection('users').insertOne(
 				{
 					_id: id,
 					email: req.body.email,
