@@ -19,7 +19,7 @@
 section {
     display: block;
     position: relative;
-    top: 80px;
+    top: var(--top);
     width: var(--width);
     min-height: calc(100vh - 160px);
 	padding: 40px 15%;

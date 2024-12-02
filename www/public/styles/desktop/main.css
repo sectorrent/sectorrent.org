@@ -1,6 +1,7 @@
 :root {
     --width: 70;
     --min-width: 800px;
+    --top: 80px;
 
     --primary: #994ce0;
     --secondary: #6b339e;
@@ -118,7 +119,7 @@ nav {
 
 header ul {
     display: flex;
-    height: 80px;
+    height: var(--top);
     align-items: center;
     column-gap: 20px;
     padding: 0;
@@ -220,9 +221,9 @@ header li input[type='radio']:checked ~ label.header-close-hover {
 header li label.header-close-hover {
     position: relative;
     display: none;
-    margin-top: -80px;
+    margin-top: calc(var(--top)* -1);
     width: 100%;
-    height: 80px;
+    height: var(--top);
     z-index: 2;
     cursor: pointer;
 }
@@ -303,7 +304,7 @@ header ul input[type='radio'] {
 footer {
     position: relative;
     display: block;
-    top: 80px;
+    top: var(--top);
 	width: calc(var(--width) * 1%);
     min-width: var(--min-width);
     padding: 80px 15% 20px 15%;

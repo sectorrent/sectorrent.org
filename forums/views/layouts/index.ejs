@@ -5,19 +5,20 @@
     });
 %>
 <%- include('../fragments/header') %>
+        <section>
 <%- include('../fragments/sidebar') %>
 
+            <style nonce='<%= nonce %>'>
 <%
     for(const category of categories){
 %>
-        <style nonce='<%= nonce %>'>
-            row.<%= category.slug %> {
-                border-left: solid 6px <%= category.color %>;
-            }
-        </style>
+                row.<%= category.slug %> {
+                    border-left: solid 6px <%= category.color %>;
+                }
 <%
     }
 %>
+            </style>
 
             <content>
                 <nav>

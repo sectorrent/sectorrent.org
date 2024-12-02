@@ -1,5 +1,6 @@
 :root {
     --width: calc(100% - 40px);
+    --top: 60px;
 
     --primary: #994ce0;
     --secondary: #6b339e;
@@ -114,7 +115,7 @@ header ul input[type='radio'] {
 footer {
     position: relative;
     display: block;
-    top: 60px;
+    top: var(--top);
 	width: var(--width);
     padding: 40px 20px;
     font-size: 1em;

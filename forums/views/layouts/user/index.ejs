@@ -1,15 +1,16 @@
 <%- include('../../fragments/header') %>
+        <section>
 <%- include('../../fragments/sidebar') %>
 
-        <content>
-            <user-header>
-                <user>
-                    <img-container>
-                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
-                    </img-container>
-                    <%= data.username %>
-                </user>
-            </user-header>
-        </content>
+            <content>
+                <user-header>
+                    <user>
+                        <img-container>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
+                        </img-container>
+                        <%= data.username %>
+                    </user>
+                </user-header>
+            </content>
 
 <%- include('../../fragments/footer') %>

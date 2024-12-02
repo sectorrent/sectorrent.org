@@ -1,14 +1,14 @@
+        <style nonce='<%= nonce %>'>
 <%
     for(const category of categories){
 %>
-        <style nonce='<%= nonce %>'>
             span.<%= category.slug %> {
                 background-color: <%= category.color %>;
             }
-        </style>
 <%
     }
 %>
+        </style>
         <sidebar>
             <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>Topics</a>
 <%

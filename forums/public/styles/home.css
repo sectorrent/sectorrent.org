@@ -100,6 +100,8 @@ cell {
 
 list cell:nth-child(1) {
     flex: 1;
+    max-width: calc(100% - 50px);
+    overflow: hidden;
 }
 
 list-body cell:nth-child(2) {
@@ -110,7 +112,6 @@ list-body cell:nth-child(2) {
 
 list-body row {
     padding: 10px 0 10px 10px;
-    overflow: hidden;
 }
 
 list-body row:not(:last-child) {

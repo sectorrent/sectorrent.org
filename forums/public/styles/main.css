@@ -1,6 +1,7 @@
 :root {
     --width: 70;
     --min-width: 800px;
+    --top: 80px;
 
     --primary: #994ce0;
     --secondary: #6b339e;
@@ -171,7 +172,7 @@ form {
 section {
     display: flex;
     position: relative;
-    top: 80px;
+    top: var(--top);
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
     min-height: calc(100vh - 80px);
@@ -184,7 +185,7 @@ section {
 
 sidebar {
     position: sticky;
-    top: 80px;
+    top: var(--top);
     display: block;
     width: 250px;
     min-width: 250px;
@@ -288,7 +289,7 @@ sidebar input[type='checkbox']:checked + label + container {
 footer {
     position: relative;
     display: block;
-    top: 80px;
+    top: var(--top);
 	width: calc(var(--width) * 1%);
     min-width: var(--min-width);
     padding: 80px 15% 20px 15%;

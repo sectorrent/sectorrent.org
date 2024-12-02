@@ -498,10 +498,7 @@ exports.getThread = async (req, id) => {
                     $first: '$user'
                 },
                 comments: {
-                    $ifNull: [
-                        { $first: '$comments.total' },
-                        0
-                    ]
+                    $first: '$comments'
                 }
             }
         }

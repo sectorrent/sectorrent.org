@@ -15,7 +15,7 @@ iframe[name='hiddenFrame'] {
 section {
     width: 100%;
     padding: 0 !important;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - var(--top));
     align-items: unset;
     gap: 0;
 }
