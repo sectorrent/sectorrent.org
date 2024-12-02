@@ -110,6 +110,7 @@ list-body cell:nth-child(2) {
 
 list-body row {
     padding: 10px 0 10px 10px;
+    overflow: hidden;
 }
 
 list-body row:not(:last-child) {

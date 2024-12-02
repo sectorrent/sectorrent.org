@@ -65,7 +65,7 @@
 %>
                                 </categories>
                                 <a href='/t/<%= thread._id.toString() %>'>
-                                    <div><%= thread.content.substr(0, 160) %></div>
+                                    <div><%= thread.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
                                 </a>
                             </td>
                             <td class='replies'><%= thread.comments %></td>

@@ -181,7 +181,10 @@ exports.getCategory = async (req, slug) => {
                             created: true,
                             user: true,
                             comments: {
-                                $first: '$comments.total'
+                                $ifNull: [
+                                    { $first: '$comments.total' },
+                                    0
+                                ]
                             }
                         }
                     }
@@ -280,7 +283,10 @@ exports.getLatest = async (req, slug) => {
                             created: true,
                             user: true,
                             comments: {
-                                $first: '$comments.total'
+                                $ifNull: [
+                                    { $first: '$comments.total' },
+                                    0
+                                ]
                             }
                         }
                     }
@@ -379,7 +385,10 @@ exports.getTop = async (req, slug) => {
                             created: true,
                             user: true,
                             comments: {
-                                $first: '$comments.total'
+                                $ifNull: [
+                                    { $first: '$comments.total' },
+                                    0
+                                ]
                             }
                         }
                     }
@@ -489,7 +498,10 @@ exports.getThread = async (req, id) => {
                     $first: '$user'
                 },
                 comments: {
-                    $first: '$comments'
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
                 }
             }
         }
