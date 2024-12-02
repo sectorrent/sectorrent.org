@@ -89,7 +89,7 @@ app.get('/c/:slug/top', mainController.getCategoryTop);
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
 
-app.get('/u/:id', mainController.getUser);
+app.get('/u/:username', mainController.getUser);
 
 app.get('*', (req, res) => {
 	res.json({

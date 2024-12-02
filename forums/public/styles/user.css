@@ -1,0 +1,45 @@
+content {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    padding-bottom: 20px;
+    flex-direction: column;
+}
+
+content user-header {
+    display: block;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+user-header user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+user-header user img-container {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: solid 2px var(--background-secondary);
+    background-color: var(--background-secondary);
+    overflow: hidden;
+}
+
+user-header user img-container img {
+    display: none;
+    width: 100%;
+    border-radius: 50%;
+    background-color: var(--background-shimmer);
+}
+
+user-header user img-container img.show {
+    display: block;
+}
