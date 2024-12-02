@@ -636,6 +636,7 @@ exports.getUserSummary = async (req, username) => {
                 email: true,
                 fname: true,
                 lname: true,
+                avatar: true,
                 created: true
             }
         }
