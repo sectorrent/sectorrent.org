@@ -604,6 +604,13 @@ exports.postComment = async (req, id) => {
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
 
+    const threadExists = await global.mongo.getDatabase().collection('threads').findOne({
+        _id: id
+    });
+    if(!threadExists){
+        throw new Error('Referenced thread does not exist');
+    }
+
     data.thread = id;
     data.user = middleware.getUserID(req);
     data.created = Long.fromNumber(Date.now());
