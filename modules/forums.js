@@ -605,8 +605,10 @@ exports.postComment = async (req, id) => {
     let data = form.checkForm(check, req.body);
 
     const threadExists = await global.mongo.getDatabase().collection('threads').findOne({
-        _id: id
+        _id: id,
+        locked: false
     });
+    
     if(!threadExists){
         throw new Error('Referenced thread does not exist');
     }
