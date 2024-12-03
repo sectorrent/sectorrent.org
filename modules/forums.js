@@ -618,7 +618,7 @@ exports.postComment = async (req, id) => {
     data.created = Long.fromNumber(Date.now());
 
     const result = await global.mongo.getDatabase().collection('comments').insertOne(data);
-                        
+    
     if(!result.acknowledged){
         throw new Error('Failed to add to database.');
     }
