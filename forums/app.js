@@ -77,6 +77,7 @@ app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
 
 app.get('/', mainController.getHome); //redesign
+app.get('/categories', mainController.getCategories);
 app.get('/latest', mainController.getLatest); //redesign
 app.get('/top', mainController.getTop); //redesign
 

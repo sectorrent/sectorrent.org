@@ -214,6 +214,17 @@ exports.getThread = async (req, res) => {
 	});
 };
 
+exports.getCategories = async (req, res) => {
+	res.render('layouts/categories', {
+		title: 'Categories Page',
+		page: 'categories',
+		uniqid: uuidv4,
+		styles: [
+		],
+		categories: global.categories
+	});
+};
+
 exports.getUser = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
 
