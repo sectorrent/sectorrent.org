@@ -18,6 +18,107 @@ exports.getCategoriesList = async () => {
     return categories;
 };
 
+exports.getHome = async (req) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
+	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $lookup: {
+                from: 'threads',
+                let: {
+                    categoryId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $in: ['$$categoryId', '$categories']
+                            }
+                        }
+                    }
+                ],
+                as: 'threads'
+            }
+        },
+        {
+            $addFields: {
+                threads: {
+                    $size: '$threads'
+                }
+            }
+        }
+    ]).toArray();
+
+
+	let latest = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        },
+        {
+            $lookup: {
+                from: 'comments',
+                let: {
+                    threadId: '$_id'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$threadId', '$thread']
+                            }
+                        }
+                    },
+                    {
+                        $count: 'total'
+                    },
+                    {
+                        $project: {
+                            total: true
+                        }
+                    }
+                ],
+                as: 'comments'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                locked: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
+                }
+            }
+        }
+    ]).toArray();
+
+	if(categories.length < 1 || latest.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    return {
+        categories,
+        latest
+    };
+};
+
 exports.getCategory = async (req, slug) => {
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
         {
@@ -316,104 +417,6 @@ exports.getTop = async (req, slug) => {
 	}
 
     return data;
-};
-
-exports.getHome = async (req) => {
-	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
-
-	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $lookup: {
-                from: 'threads',
-                let: {
-                    categoryId: '$_id'
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $in: ['$$categoryId', '$categories']
-                            }
-                        }
-                    }
-                ],
-                as: 'threads'
-            }
-        },
-        {
-            $addFields: {
-                threads: {
-                    $size: '$threads'
-                }
-            }
-        }
-    ]).toArray();
-
-
-	let latest = await global.mongo.getDatabase().collection('threads').aggregate([
-        {
-            $sort: {
-                created: -1
-            }
-        },
-        {
-            $skip: 0
-        },
-        {
-            $limit: 20
-        },
-        {
-            $lookup: {
-                from: 'comments',
-                let: {
-                    threadId: '$_id'
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $eq: ['$$threadId', '$thread']
-                            }
-                        }
-                    },
-                    {
-                        $count: 'total'
-                    },
-                    {
-                        $project: {
-                            total: true
-                        }
-                    }
-                ],
-                as: 'comments'
-            }
-        },
-        {
-            $project: {
-                _id: true,
-                title: true,
-                content: true,
-                pinned: true,
-                locked: true,
-                views: true,
-                categories: true,
-                created: true,
-                user: true,
-                comments: {
-                    $first: '$comments.total'
-                }
-            }
-        }
-    ]).toArray();
-
-	if(categories.length < 1 || latest.length < 1){
-		throw new TypeError(204, 'DB found no enteries...');
-	}
-
-    return {
-        categories,
-        latest
-    };
 };
 
 exports.getCategories = async (req) => {
