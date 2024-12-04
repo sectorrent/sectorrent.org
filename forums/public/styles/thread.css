@@ -223,7 +223,7 @@ comments more-container more {
     background-color: var(--background);
 }
 
-comments button.more {
+comments more button {
     display: block;
     width: fit-content;
     border-radius: 5px;
@@ -237,6 +237,6 @@ comments button.more {
 	transition: background-color 0.3s;
 }
 
-comments button.more:hover {
+comments more button:hover {
     background-color: var(--secondary);
 }
