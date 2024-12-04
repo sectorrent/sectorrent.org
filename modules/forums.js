@@ -657,7 +657,9 @@ exports.postComment = async (req, id) => {
 
     const threadExists = await global.mongo.getDatabase().collection('threads').findOne({
         _id: id,
-        locked: false
+		locked: {
+			$exists: false
+		}
     });
 
     if(!threadExists){
