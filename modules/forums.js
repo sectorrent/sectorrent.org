@@ -66,13 +66,13 @@ exports.getHome = async (req) => {
             $lookup: {
                 from: 'comments',
                 let: {
-                    threadId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $eq: ['$$threadId', '$thread']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
@@ -150,13 +150,13 @@ exports.getCategory = async (req, slug) => {
                         $lookup: {
                             from: 'comments',
                             let: {
-                                threadId: '$_id'
+                                id: '$_id'
                             },
                             pipeline: [
                                 {
                                     $match: {
                                         $expr: {
-                                            $eq: ['$$threadId', '$thread']
+                                            $eq: ['$$id', '$thread']
                                         }
                                     }
                                 },
@@ -253,13 +253,13 @@ exports.getLatest = async (req, slug) => {
                         $lookup: {
                             from: 'comments',
                             let: {
-                                threadId: '$_id'
+                                id: '$_id'
                             },
                             pipeline: [
                                 {
                                     $match: {
                                         $expr: {
-                                            $eq: ['$$threadId', '$thread']
+                                            $eq: ['$$id', '$thread']
                                         }
                                     }
                                 },
@@ -356,13 +356,13 @@ exports.getTop = async (req, slug) => {
                         $lookup: {
                             from: 'comments',
                             let: {
-                                threadId: '$_id'
+                                id: '$_id'
                             },
                             pipeline: [
                                 {
                                     $match: {
                                         $expr: {
-                                            $eq: ['$$threadId', '$thread']
+                                            $eq: ['$$id', '$thread']
                                         }
                                     }
                                 },
@@ -471,13 +471,13 @@ exports.getThread = async (req, id) => {
             $lookup: {
                 from: 'comments',
                 let: {
-                    threadId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $eq: ['$$threadId', '$thread']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
@@ -560,6 +560,17 @@ exports.getThread = async (req, id) => {
 	}
 
     data = data[0];
+
+    global.mongo.getDatabase().collection('threads').updateOne(
+        {
+            _id: id
+        },
+        {
+            $inc: {
+                views: 1
+            }
+        }
+    );
 
     return data;
 };
@@ -653,13 +664,7 @@ exports.putThread = async (req, id) => {
             }
         },
         {
-            $set: {
-                position: req.body.position,
-                watched: Long.fromNumber(Date.now())
-            }
-        },
-        {
-            upsert: true
+            $set: data
         }
     );
 
@@ -717,6 +722,91 @@ exports.postComment = async (req, id) => {
 
 exports.putComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
+    
+    let check = [
+        {
+            key: 'content',
+            type: 'STRING',
+            required: true,
+            min: 16,
+            max: 2000
+        }
+    ];
+
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
+
+    data.modified = Long.fromNumber(Date.now());
+
+	let comment = await global.mongo.getDatabase().collection('comments').aggregate([
+        {
+            $match: {
+                _id: id,
+                user: middleware.getUserID(req)
+            }
+        },
+        {
+            $lookup: {
+                from: 'threads',
+                let: {
+                    id: '$thread'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $eq: ['$$id', '$_id']
+                            }
+                        }
+                    },
+                    {
+                        $project: {
+                            locked: true
+                        }
+                    }
+                ],
+                as: 'threads'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                content: true,
+                created: true,
+                modified: true,
+                pinned: true,
+                thread: {
+                    $first: '$threads'
+                }
+            }
+        }
+    ]).toArray();
+
+	if(comment.length < 1){
+        throw new Error('Referenced comment or thread does not exist');
+	}
+
+    if(comment[0].thread.locked){
+        throw new Error('Referenced thread is locked');
+    }
+
+    const update = await global.mongo.getDatabase().collection('comments').updateOne(
+        {
+            _id: id,
+            user: middleware.getUserID(req)
+        },
+        {
+            $set: data
+        }
+    );
+
+    if(update.modifiedCount != 1){
+        throw new Error('Failed to add to update comment.');
+    }
+
+    return {
+        message: 'Comment updated!'
+    };
 };
 
 exports.deleteComment = async (req, id) => {

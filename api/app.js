@@ -119,7 +119,10 @@ app.use([
 });
 
 app.post('/thread', express.json(), mainController.postThread);
+app.put('/thread', express.json(), mainController.putThread);
+
 app.post('/comment', express.json(), mainController.postComment);
+app.put('/comment', express.json(), mainController.putComment);
 
 app.get('*', (req, res) => {
 	res.json({

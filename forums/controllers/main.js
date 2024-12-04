@@ -202,7 +202,7 @@ exports.getNewThread = async (req, res) => {
 };
 
 exports.getThread = async (req, res) => {
-	const id = (req.params.id) ? req.params.id : '';
+	const id = (req.params.thread_id) ? req.params.thread_id : '';
 	
 	forums.getThread(req, id).then((data) => {
 		data.content = markdown.parse(data.content);

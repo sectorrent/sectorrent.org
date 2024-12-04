@@ -31,6 +31,25 @@ exports.postThread = async (req, res) => {
 	});
 };
 
+exports.putThread = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    forums.putThread(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Update was successful',
+			data: data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};
+
 exports.postComment = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 
@@ -60,6 +79,25 @@ exports.postComment = async (req, res) => {
 				});
 				break;
 		}
+		res.end();
+	});
+};
+
+exports.putComment = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+
+    forums.putComment(req, id, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Update was successful',
+			data: data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
 		res.end();
 	});
 };
