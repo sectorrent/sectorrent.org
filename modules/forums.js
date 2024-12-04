@@ -612,6 +612,7 @@ exports.postThread = async (req) => {
     data.user = middleware.getUserID(req);
     data.views = 0;
     data.created = Long.fromNumber(Date.now());
+    data.modified = data.created;
 
     const result = await global.mongo.getDatabase().collection('threads').insertOne(data);
                         
@@ -627,16 +628,48 @@ exports.postThread = async (req) => {
 
 exports.putThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
+    
+    let check = [
+        {
+            key: 'content',
+            type: 'STRING',
+            required: true,
+            min: 16,
+            max: 2000
+        }
+    ];
 
-    /*
-    let result = await global.mongo.getDatabase().collection('threads').updateOne({
-        _id: id
-    }, set);
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
 
-    if(result.matchedCount != 1 && result.modifiedCount != 1){
-        throw new Error('Failed to update media on database');
+    data.modified = Long.fromNumber(Date.now());
+
+    const update = await global.mongo.getDatabase().collection('thread').updateOne(
+        {
+            _id: id,
+            user: middleware.getUserID(req),
+            locked: {
+                $exists: false
+            }
+        },
+        {
+            $set: {
+                position: req.body.position,
+                watched: Long.fromNumber(Date.now())
+            }
+        },
+        {
+            upsert: true
+        }
+    );
+
+    if(update.modifiedCount != 1){
+        throw new Error('Failed to add to update thread.');
     }
-    */
+
+    return {
+        message: 'Thread updated!'
+    };
 };
 
 exports.postComment = async (req, id) => {
@@ -669,6 +702,7 @@ exports.postComment = async (req, id) => {
     data.thread = id;
     data.user = middleware.getUserID(req);
     data.created = Long.fromNumber(Date.now());
+    data.modified = data.created;
 
     const result = await global.mongo.getDatabase().collection('comments').insertOne(data);
     
