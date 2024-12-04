@@ -52,7 +52,7 @@ app.use(async (req, res, next) => {
 });
 
 (async function initalize(){
-	global.categories = await forums.getCategories();
+	global.categories = await forums.getCategoriesList();
 })();
 
 const server = http.createServer(app);

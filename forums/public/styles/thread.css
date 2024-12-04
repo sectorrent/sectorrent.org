@@ -3,8 +3,8 @@ archive {
     top: 80px;
     display: block;
     width: 100%;
-    height: calc(1.2em + 10px);
-    line-height: calc(1.2em + 10px);
+    height: calc(1.6em + 10px);
+    line-height: calc(1.6em + 10px);
     background-color: #2d2412;
     border-bottom: solid 1px #9e6a03;
     font-weight: bold;
@@ -196,5 +196,47 @@ input[type='submit'] {
 }
 
 input[type='submit']:hover {
+    background-color: var(--secondary);
+}
+
+comments more-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+comments more-container:before {
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    position: absolute;
+    top: 50%;
+    background: var(--background-shimmer);
+    z-index: -1;
+}
+
+comments more-container more {
+    display: inline-block;
+    margin: auto;
+    padding: 0 20px;
+    background-color: var(--background);
+}
+
+comments button.more {
+    display: block;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 11px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--primary);
+	transition: background-color 0.3s;
+}
+
+comments button.more:hover {
     background-color: var(--secondary);
 }

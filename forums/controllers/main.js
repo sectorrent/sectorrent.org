@@ -169,6 +169,24 @@ exports.getCategoryTop = async (req, res) => {
 	});
 };
 
+exports.getCategories = async (req, res) => {
+	forums.getCategories(req).then((data) => {
+		res.render('layouts/categories', {
+			title: 'Categories Page',
+			page: 'categories',
+			uniqid: uuidv4,
+			styles: [
+				'categories'
+			],
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
+	});
+};
+
 exports.getNewThread = async (req, res) => {
 	res.render('layouts/new_thread', {
 		title: 'New Thread Page',
@@ -211,17 +229,6 @@ exports.getThread = async (req, res) => {
 
 	}).catch(function(error){
 		console.log(error);
-	});
-};
-
-exports.getCategories = async (req, res) => {
-	res.render('layouts/categories', {
-		title: 'Categories Page',
-		page: 'categories',
-		uniqid: uuidv4,
-		styles: [
-		],
-		categories: global.categories
 	});
 };
 

@@ -13,7 +13,7 @@
         <archive>This thread has been archived. It is now read-only.</archive>
         <style nonce='<%= nonce %>'>
             :root {
-                --top: calc(1.2em + 90px) !important;
+                --top: calc(1.6em + 90px) !important;
             }
         </style>
 <%
@@ -39,7 +39,7 @@
                 <comments>
                     <comment>
                         <a class='user-icon' href='/u/<%= data.user.username %>'>
-                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.user.username %>' draggable='false' oncontextmenu='return false'>
+                            <img src='<%= data.user.avatar %>' onload='this.className = "show"' title='<%= data.user.username %>' draggable='false' oncontextmenu='return false'>
                         </a>
     
                         <comment-inner>
@@ -60,12 +60,22 @@
                         </comment-inner>
                     </comment>
 <%
+    if(data.comments.total > data.comments.comments.length){
+%>
+                    <more-container>
+                        <more>
+                            <button class='more'>Load More</button>
+                        </more>
+                    </more-container>
+<%
+    }
+
     if(data.comments.total > 0){
         for(const comment of data.comments.comments){
 %>
                     <comment>
                         <a class='user-icon' href='/u/<%= comment.user.username %>'>
-                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= comment.user.username %>' draggable='false' oncontextmenu='return false'>
+                            <img src='<%= comment.user.avatar %>' onload='this.className = "show"' title='<%= comment.user.username %>' draggable='false' oncontextmenu='return false'>
                         </a>
 
                         <comment-inner>
@@ -95,7 +105,7 @@
 %>
                 <reply>
                     <a class='user-icon' href='/u/<%= user.username %>'>
-                        <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
+                        <img src='<%= user.avatar %>' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
                     </a>
 
                     <reply-inner>
