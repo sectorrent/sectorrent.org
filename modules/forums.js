@@ -677,6 +677,25 @@ exports.putThread = async (req, id) => {
     };
 };
 
+exports.deleteThread = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    const threadExists = await global.mongo.getDatabase().collection('threads').deleteOne({
+        _id: id,
+        locked: {
+			$exists: false
+		}
+    });
+
+    if(threadExists.deletedCount != 1){
+        throw new Error('Failed to delete thread');
+    }
+
+    return {
+		message: 'Thread deleted!'
+    };
+};
+
 exports.postComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
@@ -738,7 +757,7 @@ exports.putComment = async (req, id) => {
 
     data.modified = Long.fromNumber(Date.now());
 
-	let comment = await global.mongo.getDatabase().collection('comments').aggregate([
+	let commentExists = await global.mongo.getDatabase().collection('comments').aggregate([
         {
             $match: {
                 _id: id,
@@ -782,11 +801,11 @@ exports.putComment = async (req, id) => {
         }
     ]).toArray();
 
-	if(comment.length < 1){
+	if(commentExists.length < 1){
         throw new Error('Referenced comment or thread does not exist');
 	}
 
-    if(comment[0].thread.locked){
+    if(commentExists[0].thread.locked){
         throw new Error('Referenced thread is locked');
     }
 
@@ -811,6 +830,22 @@ exports.putComment = async (req, id) => {
 
 exports.deleteComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
+
+    const commentExists = await global.mongo.getDatabase().collection('comments').deleteOne({
+        _id: id,
+		user: middleware.getUserID(req),
+        locked: {
+			$exists: false
+		}
+    });
+
+    if(commentExists.deletedCount != 1){
+        throw new Error('Failed to delete comment');
+    }
+
+    return {
+		message: 'Comment deleted!'
+    };
 };
 
 exports.getComments = async (req, id) => {
