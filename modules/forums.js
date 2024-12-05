@@ -682,6 +682,7 @@ exports.deleteThread = async (req, id) => {
 
     const threadExists = await global.mongo.getDatabase().collection('threads').deleteOne({
         _id: id,
+        user: middleware.getUserID(req),
         locked: {
 			$exists: false
 		}
