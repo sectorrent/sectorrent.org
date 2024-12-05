@@ -98,16 +98,25 @@ preview code-header {
                                 supported by Chrome, Edge, Opera and Firefox */
 }
 
-preview code-header copy {
+preview code-header button.copy {
+    display: block;
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+preview code-header button.copy svg {
     display: block;
     width: 24px;
     height: 24px;
-    margin-left: auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(/icons/ic_copy.svg);
-    cursor: pointer;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+preview code-header button.copy:hover svg {
+    fill: var(--primary);
 }
 
 preview pre {
