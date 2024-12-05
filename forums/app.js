@@ -89,6 +89,7 @@ app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);
 
 app.get('/u/:username', mainController.getUser);
+//app.get('/u/:username/edit', mainController.getUser);
 
 app.get('*', (req, res) => {
 	res.json({
