@@ -199,7 +199,7 @@ exports.getNewThread = async (req, res) => {
 			'new-thread'
 		],
 		categories: global.categories,
-		pow: pow.generateChallenge(req, res.locals.config)
+		pow: pow.generateChallenge(req, res)
 	});
 };
 
@@ -227,7 +227,7 @@ exports.getThread = async (req, res) => {
 			id,
 			categories: global.categories,
 			data,
-			pow: pow.generateChallenge(req, res.locals.config)
+			pow: pow.generateChallenge(req, res)
 		});
 
 	}).catch(function(error){

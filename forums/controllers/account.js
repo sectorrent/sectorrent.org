@@ -9,7 +9,7 @@ exports.getSignIn = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(req, res.locals.config)
+		pow: pow.generateChallenge(req, res)
 	});
 };
 
@@ -21,7 +21,7 @@ exports.getSignUp = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(req, res.locals.config)
+		pow: pow.generateChallenge(req, res)
 	});
 };
 
@@ -33,7 +33,7 @@ exports.getForgotPassword = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(req, res.locals.config)
+		pow: pow.generateChallenge(req, res)
 	});
 };
 
@@ -45,6 +45,6 @@ exports.getResetPassword = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(req, res.locals.config)
+		pow: pow.generateChallenge(req, res)
 	});
 };

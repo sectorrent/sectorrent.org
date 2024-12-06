@@ -70,7 +70,7 @@ exports.signIn = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 
-	if(!pow.validateSolution(req, res.locals.config, req.body.pow)){
+	if(!pow.validateSolution(req, res, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -296,7 +296,7 @@ exports.signUp = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 	
-	if(!pow.validateSolution(req, res.locals.config, req.body.pow)){
+	if(!pow.validateSolution(req, res, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 /*
@@ -523,7 +523,7 @@ exports.forgotPassword = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 	
-	if(!pow.validateSolution(req, res.locals.config, req.body.pow)){
+	if(!pow.validateSolution(req, res, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -654,7 +654,7 @@ exports.resetPassword = async (req, res, id) => {
 		throw new Error('Reset link is invalid.');
 	}
 
-	if(!pow.validateSolution(req, res.locals.config, req.body.pow)){
+	if(!pow.validateSolution(req, res, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 

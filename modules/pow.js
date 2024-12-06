@@ -1,54 +1,52 @@
 const crypto = require('crypto');
+//const jwt = require('./jwt');
 //const difficulty = 4;
-const MAX_POW_PER_SESSION = 5;
+const MAX_POW_PER_SESSION = 15;
 
-exports.generateChallenge = (req, config, difficulty = 4) => {
-    /*
-    if(req.session.pow && req.session.pow.length >= MAX_POW_PER_SESSION){
-        req.pow.shift();
+exports.generateChallenge = (req, res, difficulty = 4) => {
+    if(req.session.challenges && req.session.challenges.length > MAX_POW_PER_SESSION){
+        req.session.challenges.splice(req.session.challenges.indexOf(req.session.challenges.length-1, 1));
     }
-    */
 
     const challenge = crypto.randomBytes(16).toString('hex');
-    const hmac = crypto.createHmac('sha256', config.token.pow).update(challenge+difficulty).digest('hex');
+    const hmac = crypto.createHmac('sha256', res.locals.config.token.pow).update(challenge+difficulty).digest('hex');
 
-    if(req.session.pow){
-        /*
-        req.session.pow.push({
+    if(req.session.challenges){
+        req.session.challenges.push(hmac);
+        console.log(req.session);
+        return {
             challenge,
             hmac,
             difficulty
-        });
-        */
-        req.session.pow.push(hmac);
-
-        return { challenge, hmac, difficulty };
+        };
     }
 
-    /*
-    req.session.pow = [
-        {
-            challenge,
-            hmac,
-            difficulty
-        }
+    req.session.challenges = [
+        hmac
     ];
-    */
-    req.session.pow = [ hmac ];
-
-    return { challenge, hmac, difficulty };
+    return {
+        challenge,
+        hmac,
+        difficulty
+    };
 };
 
-exports.validateSolution = (req, config, pow) => {
-    console.log(pow);
-    const index = req.session.pow.indexOf(pow.hmac);
-    if(!req.session.pow || index == -1 ){ //NO POW SAVED - LIKELY NEEDS A RELOAD
+exports.validateSolution = (req, res, pow) => {
+    if(!req.session.challenges){
+        console.log('NO CHALLENGES');
         return false;
     }
 
-    req.session.pow.splice(index, 1); //REMOVE THE GIVEN HMAC
+    try{
+        req.session.challenges.splice(req.session.challenges.indexOf(pow.hmac), 1);
 
-    if(crypto.createHmac('sha256', config.token.pow).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){ //VERIFY VALIDITY OF CHALLENGE
+    }catch(error){
+        console.log('NO REMOVE');
+        return false;
+    }
+
+    if(crypto.createHmac('sha256', res.locals.config.token.pow).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){ //VERIFY VALIDITY OF CHALLENGE
+        console.log('BAD HMAC');
         return false;
     }
 
