@@ -1,20 +1,47 @@
-var processing = false;
+var processing = false, solved = false;
+//var nonce, hash;
 
 (function(){
     const forms = document.querySelectorAll(`form[valid-form='${validForm}']`);
     for(const form of forms){
         form.onsubmit = onSubmit
     }
+    nonce, hash = solveChallenge(pow.challenge, pow.difficulty);
 }());
+
+async function solveChallenge(challenge, difficulty = 4){
+    const encoder = new TextEncoder();
+    let nonce = 0;
+
+    while(true){
+        const buffer = await crypto.subtle.digest('SHA-256', encoder.encode(challenge+nonce));
+
+        const hashArray = Array.from(new Uint8Array(buffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        if(hashHex.startsWith('0'.repeat(difficulty))){
+            window.pow = nonce;
+            //window.hash = hashHex;
+            //return { nonce, hash: hashHex };
+            break;
+        }
+
+        nonce++;
+    }
+}
 
 function onSubmit(event){
     event.preventDefault();
-    if(processing){
+    if(processing && !solved){
         return;
     }
     processing = true;
 
     const formData = formToJSON(event.target);
+    formData.pow = {
+        nonce,
+        hash
+    };
 
     fetch(event.target.getAttribute('action'), {
         method: event.target.getAttribute('method'),

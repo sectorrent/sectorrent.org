@@ -6,8 +6,8 @@ const FieldError = require('./field_error');
 const mailer = require('./mailer');
 const middleware = require('./middleware');
 const form = require('./form');
+const pow = require('./pow');
 const ejs = require('ejs');
-const crypto = require('crypto');
 
 exports.signIn = async (req, res) => {
     let check = [
@@ -30,18 +30,36 @@ exports.signIn = async (req, res) => {
 			required: true,
             min: 6,
             max: 51
-        }/*,
-		{
-            key: 'captcha',
-            type: 'STRING',
-			required: true,
-			pattern: /^[a-zA-Z0-9]+$/,
-            min: 2,
-            max: 10
-		}*/
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hash',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 60,
+					max: 94
+				}
+			]
+		}
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
+
+	if(!pow.validateSolution(req.locals.config, req.body.pow)){
+		throw Error('POW was not valid');
+	}
+
 /*
 	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
 		throw new Error('No captcha found.');
@@ -216,7 +234,28 @@ exports.signUp = async (req, res) => {
 			required: true,
             min: 6,
             max: 51
-        }/*,
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hash',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 60,
+					max: 94
+				}
+			]
+		}/*,
 		{
             key: 'captcha',
             type: 'STRING',
@@ -228,6 +267,10 @@ exports.signUp = async (req, res) => {
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
+	
+	if(!pow.validateSolution(req.locals.config, req.body.pow)){
+		throw Error('POW was not valid');
+	}
 /*
 	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
 		throw new Error('No captcha found.');
@@ -412,10 +455,35 @@ exports.forgotPassword = async (req, res) => {
 			required: true,
             min: 5,
             max: 64
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hash',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 60,
+					max: 94
+				}
+			]
+		}
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
+	
+	if(!pow.validateSolution(req.locals.config, req.body.pow)){
+		throw Error('POW was not valid');
+	}
 
 	const data = await global.mongo.getDatabase().collection('users').findOne(
 		{
@@ -500,6 +568,27 @@ exports.resetPassword = async (req, res, id) => {
 		{
 			key: 'expires',
 			type: 'NUMBER'
+		},
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hash',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 60,
+					max: 94
+				}
+			]
 		}
     ];
 
@@ -507,6 +596,10 @@ exports.resetPassword = async (req, res, id) => {
 
 	if(req.body.expires+15 < parseInt((Date.now()/1000)/60)){
 		throw new Error('Reset link is invalid.');
+	}
+
+	if(!pow.validateSolution(req.locals.config, req.body.pow)){
+		throw Error('POW was not valid');
 	}
 
 	const data = await global.mongo.getDatabase().collection('users').findOne(

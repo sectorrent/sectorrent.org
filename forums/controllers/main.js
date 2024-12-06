@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const forums = require('../modules/forums');
 const markdown = require('../modules/markdown');
+const pow = require('../modules/pow');
 
 exports.getHome = async (req, res) => {
 	forums.getHome(req).then((data) => {
@@ -197,7 +198,8 @@ exports.getNewThread = async (req, res) => {
 			'markdown',
 			'new-thread'
 		],
-		categories: global.categories
+		categories: global.categories,
+		pow: pow.generateChallenge(res.locals.config)
 	});
 };
 
@@ -224,7 +226,8 @@ exports.getThread = async (req, res) => {
 			],
 			id,
 			categories: global.categories,
-			data
+			data,
+			pow: pow.generateChallenge(res.locals.config)
 		});
 
 	}).catch(function(error){

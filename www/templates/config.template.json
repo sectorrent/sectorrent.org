@@ -8,6 +8,7 @@
     },
     "token": {
         "secret": "${TOKEN_SECRET}",
+        "pow": "${TOKEN_POW}",
         "github": "${TOKEN_GITHUB}"
     },
     "database": {

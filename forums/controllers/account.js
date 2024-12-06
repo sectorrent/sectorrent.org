@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const pow = require('../modules/pow');
 
 exports.getSignIn = async (req, res) => {
 	res.render('layouts/signin', {
@@ -7,7 +8,8 @@ exports.getSignIn = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'sign'
-		]
+		],
+		pow: pow.generateChallenge(res)
 	});
 };
 
@@ -18,7 +20,8 @@ exports.getSignUp = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'sign'
-		]
+		],
+		pow: pow.generateChallenge(res)
 	});
 };
 
@@ -29,7 +32,8 @@ exports.getForgotPassword = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'sign'
-		]
+		],
+		pow: pow.generateChallenge(res.locals.config)
 	});
 };
 
@@ -40,6 +44,7 @@ exports.getResetPassword = async (req, res) => {
 		uniqid: uuidv4,
 		styles: [
 			'sign'
-		]
+		],
+		pow: pow.generateChallenge(res.locals.config)
 	});
 };
