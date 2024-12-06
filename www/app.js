@@ -5,7 +5,9 @@ const useragent = require('express-useragent');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const cookies = require('cookie-parser');
-const mongo = require('./modules/mongo');
+const crypto = require('crypto');
+const MongoStore = require('connect-mongo');
+global.mongo = require('./modules/mongo');
 const github = require('./modules/github');
 
 const mainController = require('./controllers/main');
@@ -17,30 +19,34 @@ app.set('views', __dirname+'/views');
 
 app.use(express.static('./public'));
 
-
-const crypto = require('crypto');
-const generateStrongSecret = (length = 32) => {
-	return crypto.randomBytes(length).toString('hex');
-};
-
 const config = require('./config.json');
 
+global.mongo.connectDatabase(config.database);
+
 app.use(session({
-	secret: generateStrongSecret(),
+	secret: config.token.session,
 	resave: false,
+	saveUninitialized: true,
+	store: MongoStore.create({
+		client: global.mongo.getClient(),
+		dbName: config.database.database,
+		collectionName: 'sessions',
+		ttl: 14*24*60*60*1000
+	}),
 	cookie: {
-		domain: '.'+config.general.domain
-	},
-	saveUninitialized: true
+		domain: '.'+config.general.domain,
+		secure: false,
+		maxAge: 24*60*60*1000
+	}
 }));
 
 app.use(cookies());
 
 
-
+/*
 mongo.connectDatabase(config.database);
 global.mongo = mongo;
-
+*/
 app.use((req, res, next) => {
 	res.locals.config = config;
 	next();
