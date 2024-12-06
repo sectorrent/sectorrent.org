@@ -13,7 +13,6 @@ exports.generateChallenge = (req, res, difficulty = 4) => {
 
     if(req.session.challenges){
         req.session.challenges.push(hmac);
-        console.log(req.session);
         return {
             challenge,
             hmac,
@@ -33,7 +32,6 @@ exports.generateChallenge = (req, res, difficulty = 4) => {
 
 exports.validateSolution = (req, res, pow) => {
     if(!req.session.challenges){
-        console.log('NO CHALLENGES');
         return false;
     }
 
@@ -41,12 +39,10 @@ exports.validateSolution = (req, res, pow) => {
         req.session.challenges.splice(req.session.challenges.indexOf(pow.hmac), 1);
 
     }catch(error){
-        console.log('NO REMOVE');
         return false;
     }
 
-    if(crypto.createHmac('sha256', res.locals.config.token.pow).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){ //VERIFY VALIDITY OF CHALLENGE
-        console.log('BAD HMAC');
+    if(crypto.createHmac('sha256', res.locals.config.token.pow).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){
         return false;
     }
 
