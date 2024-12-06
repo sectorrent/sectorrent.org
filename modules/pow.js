@@ -8,7 +8,7 @@ exports.generateChallenge = (req, config, difficulty = 4) => {
     }
 
     const challenge = crypto.randomBytes(16).toString('hex');
-    const hmac = crypto.createHmac('sha256', config.token.pow).update(challenge).digest('hex');
+    const hmac = crypto.createHmac('sha256', config.token.pow).update(challenge+difficulty).digest('hex');
 
     if(req.session.pow){
         /*
@@ -45,7 +45,7 @@ exports.validateSolution = (req, config, pow, difficulty = 4) => {
 
     req.session.pow.splice(index, 1); //REMOVE THE GIVEN HMAC
 
-    if(crypto.createHmac('sha256', config.token.pow).update(pow.challenge).digest('hex') != pow.hmac){ //VERIFY VALIDITY OF CHALLENGE
+    if(crypto.createHmac('sha256', config.token.pow).update(pow.challenge+difficulty).digest('hex') != pow.hmac){ //VERIFY VALIDITY OF CHALLENGE
         return false;
     }
 

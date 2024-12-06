@@ -38,10 +38,7 @@ function onSubmit(event){
     processing = true;
 
     const formData = formToJSON(event.target);
-    formData.pow = {
-        nonce,
-        hash
-    };
+    formData.pow = pow;
 
     fetch(event.target.getAttribute('action'), {
         method: event.target.getAttribute('method'),

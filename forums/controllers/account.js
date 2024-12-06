@@ -9,7 +9,7 @@ exports.getSignIn = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(res)
+		pow: pow.generateChallenge(res.locals.config)
 	});
 };
 
@@ -21,7 +21,7 @@ exports.getSignUp = async (req, res) => {
 		styles: [
 			'sign'
 		],
-		pow: pow.generateChallenge(res)
+		pow: pow.generateChallenge(res.locals.config)
 	});
 };
 
