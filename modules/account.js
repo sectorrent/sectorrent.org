@@ -37,18 +37,32 @@ exports.signIn = async (req, res) => {
             required: true,
             entries: [
 				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
 					key: 'nonce',
 					type: 'NUMBER',
 					required: true,
 					min: 0
 				},
 				{
-					key: 'hash',
+					key: 'hmac',
 					type: 'STRING',
 					required: true,
 					pattern: /^[a-zA-Z0-9]+$/,
-					min: 60,
-					max: 94
+					min: 63,
+					max: 128
 				}
 			]
 		}
@@ -241,18 +255,32 @@ exports.signUp = async (req, res) => {
             required: true,
             entries: [
 				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
 					key: 'nonce',
 					type: 'NUMBER',
 					required: true,
 					min: 0
 				},
 				{
-					key: 'hash',
+					key: 'hmac',
 					type: 'STRING',
 					required: true,
 					pattern: /^[a-zA-Z0-9]+$/,
-					min: 60,
-					max: 94
+					min: 63,
+					max: 128
 				}
 			]
 		}/*,
@@ -462,18 +490,32 @@ exports.forgotPassword = async (req, res) => {
             required: true,
             entries: [
 				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
 					key: 'nonce',
 					type: 'NUMBER',
 					required: true,
 					min: 0
 				},
 				{
-					key: 'hash',
+					key: 'hmac',
 					type: 'STRING',
 					required: true,
 					pattern: /^[a-zA-Z0-9]+$/,
-					min: 60,
-					max: 94
+					min: 63,
+					max: 128
 				}
 			]
 		}
@@ -575,18 +617,32 @@ exports.resetPassword = async (req, res, id) => {
             required: true,
             entries: [
 				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
 					key: 'nonce',
 					type: 'NUMBER',
 					required: true,
 					min: 0
 				},
 				{
-					key: 'hash',
+					key: 'hmac',
 					type: 'STRING',
 					required: true,
 					pattern: /^[a-zA-Z0-9]+$/,
-					min: 60,
-					max: 94
+					min: 63,
+					max: 128
 				}
 			]
 		}

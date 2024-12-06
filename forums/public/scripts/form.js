@@ -6,7 +6,7 @@ var processing = false, solved = false;
     for(const form of forms){
         form.onsubmit = onSubmit
     }
-    nonce, hash = solveChallenge(pow.challenge, pow.difficulty);
+    solveChallenge(pow.challenge, pow.difficulty);
 }());
 
 async function solveChallenge(challenge, difficulty = 4){
@@ -20,7 +20,8 @@ async function solveChallenge(challenge, difficulty = 4){
         const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
         if(hashHex.startsWith('0'.repeat(difficulty))){
-            window.pow = nonce;
+            pow.nonce = nonce;
+            console.log(pow);
             //window.hash = hashHex;
             //return { nonce, hash: hashHex };
             break;
