@@ -145,13 +145,65 @@ content comment-header date {
     font-size: 0.8em;
 }
 
-content comment-header button {
+content comment-header action {
+    position: relative;
     display: block;
-    background: transparent;
-    border: 0;
     margin-left: auto;
-    padding: 0;
     cursor: pointer;
+}
+
+content comment-header action svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+content comment-header action:hover svg {
+    fill: var(--primary);
+}
+
+content comment-header ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    background-color: var(--background-shimmer);
+    box-shadow: 0 0 10px var(--background);
+    overflow: hidden;
+}
+
+content comment-header action:hover ul {
+    display: block;
+}
+
+content comment-header ul li {
+    display: block;
+    width: 150px;
+}
+
+content comment-header action button {
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    color: var(--text-primary);
+    background: transparent;
+    text-align: left;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+content comment-header action li:not(:last-child) button {
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+content comment-header action button:hover {
+    background-color: var(--background-secondary);
 }
 
 reply-inner {

@@ -48,11 +48,35 @@
                                     <a href='/u/<%= data.user.username %>'><%= data.user.username %></a>
                                 </h3>
                                 <date><% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
-                                <button>
+                                <action>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
                                     </svg>
-                                </button>
+
+                                    <ul>
+                                        <li>
+                                            <button class='edit'>Edit thread</button>
+                                        </li>
+<%
+    if(data.locked){
+%>
+                                        <li>
+                                            <button class='unarchive'>Unarchive thread</button>
+                                        </li>
+<%
+    }else{
+%>
+                                        <li>
+                                            <button class='archive'>Archive thread</button>
+                                        </li>
+<%
+    }
+%>
+                                        <li>
+                                            <button class='delete'>Delete thread</button>
+                                        </li>
+                                    </ul>
+                                </action>
                             </comment-header>
                             <preview>
                                 <%- data.content %>
@@ -84,11 +108,20 @@
                                     <a href='/u/<%= comment.user.username %>'><%= comment.user.username %></a>
                                 </h3>
                                 <date><% const date = new Date(comment.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
-                                <button>
+                                <action>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
                                     </svg>
-                                </button>
+
+                                    <ul>
+                                        <li>
+                                            <button class='edit'>Edit comment</button>
+                                        <li>
+                                        </li>
+                                            <button class='delete'>Delete comment</button>
+                                        </li>
+                                    </ul>
+                                </action>
                             </comment-header>
                             <preview>
                                 <%- comment.content %>
