@@ -50,7 +50,10 @@ app.use(async (req, res, next) => {
 	res.locals.config = config;
 	res.locals.isSignedIn = await middleware.isSignedIn(req, config.token.secret);
 	if(res.locals.isSignedIn){
-		res.locals.user = req.token.payload.data;
+		res.locals.user = {
+			id: req.token.payload.id,
+			...req.token.payload.data
+		};
 	}
 	next();
 });
@@ -80,14 +83,14 @@ app.get('/signup', accountController.getSignUp);
 app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
 
-app.get('/', mainController.getHome); //redesign
+app.get('/', mainController.getHome);
 app.get('/categories', mainController.getCategories);
-app.get('/latest', mainController.getLatest); //redesign
-app.get('/top', mainController.getTop); //redesign
+app.get('/latest', mainController.getLatest);
+app.get('/top', mainController.getTop);
 
-app.get('/c/:slug', mainController.getCategory); //redesign
-app.get('/c/:slug/latest', mainController.getCategoryLatest); //redesign
-app.get('/c/:slug/top', mainController.getCategoryTop); //redesign
+app.get('/c/:slug', mainController.getCategory);
+app.get('/c/:slug/latest', mainController.getCategoryLatest);
+app.get('/c/:slug/top', mainController.getCategoryTop);
 
 app.get('/thread', mainController.getNewThread);
 app.get('/t/:id', mainController.getThread);

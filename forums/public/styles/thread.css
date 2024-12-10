@@ -160,7 +160,7 @@ content comment-header action svg {
     transition: fill 0.3s;
 }
 
-content comment-header action:hover svg {
+content comment-header action:hover > svg {
     fill: var(--primary);
 }
 
@@ -183,19 +183,25 @@ content comment-header action:hover ul {
 
 content comment-header ul li {
     display: block;
-    width: 150px;
+    width: 180px;
 }
 
 content comment-header action button {
-    display: block;
+    display: flex;
     width: 100%;
     border: 0;
     padding: 10px;
+    align-items: center;
+    gap: 10px;
     color: var(--text-primary);
     background: transparent;
     text-align: left;
     transition: background-color 0.3s;
     cursor: pointer;
+}
+
+content comment-header action button:hover svg {
+    fill: var(--primary);
 }
 
 content comment-header action li:not(:last-child) button {
