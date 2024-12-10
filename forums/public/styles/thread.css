@@ -122,6 +122,18 @@ content comment a.user-icon img.show,
     display: block;
 }
 
+comment-header action > svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+comment-header action:hover > svg {
+    fill: var(--primary);
+}
+
 content comment-header h3 {
     font-size: 1em;
     margin: 0;
@@ -200,8 +212,12 @@ content comment-header action button {
     cursor: pointer;
 }
 
-content comment-header action button:hover svg {
-    fill: var(--primary);
+content comment-header action button.delete {
+    color: var(--error);
+}
+
+content comment-header action button.delete svg {
+    fill: var(--error);
 }
 
 content comment-header action li:not(:last-child) button {

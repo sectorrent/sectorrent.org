@@ -62,8 +62,7 @@ editor input[type='radio'][radio='editor-preview']:checked ~ editor-header butto
     display: none;
 }
 
-comment-header svg,
-        editor-header svg {
+editor-header svg {
     display: block;
     width: 24px;
     height: 24px;
@@ -71,8 +70,7 @@ comment-header svg,
     transition: fill 0.3s;
 }
 
-comment-header button:hover svg,
-        editor-header button:hover svg {
+editor-header button:hover svg {
     fill: var(--primary);
 }
 
