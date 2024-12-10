@@ -66,6 +66,9 @@
                                             </button>
                                         </li>
 <%
+    }
+
+    if(user.id == data.user._id.toString() || user.role > 1){
         if(data.locked){
 %>
                                         <li>
@@ -152,7 +155,7 @@
 
                                     <ul>
 <%
-        if(user.id == comment.user._id.toString()){
+            if(user.id == comment.user._id.toString()){
 %>
                                         <li>
                                             <button>
@@ -162,6 +165,11 @@
                                                 Edit comment
                                             </button>
                                         <li>
+<%
+            }
+            
+            if(user.id == data.user._id.toString() || user.role > 1){
+%>
                                         </li>
                                             <button class='delete'>
                                                 <svg viewBox='0 0 24 24'>
