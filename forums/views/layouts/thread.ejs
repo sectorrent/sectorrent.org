@@ -55,7 +55,10 @@
 
                                     <ul>
 <%
-    if(user.id == data.user._id.toString() && !data.locked){
+    let deleteReport = false;
+
+    if(isSignedIn){
+        if(user.id == data.user._id.toString() && !data.locked){
 %>
                                         <li>
                                             <a href='/edit/thread/<%= id %>'>
@@ -66,10 +69,10 @@
                                             </a>
                                         </li>
 <%
-    }
+        }
 
-    if(user.id == data.user._id.toString() || user.role > 1){
-        if(data.locked){
+        if(user.id == data.user._id.toString() || user.role > 1){
+            if(data.locked){
 %>
                                         <li>
                                             <button>
@@ -80,7 +83,7 @@
                                             </button>
                                         </li>
 <%
-        }else{
+            }else{
 %>
                                         <li>
                                             <button>
@@ -91,7 +94,9 @@
                                             </button>
                                         </li>
 <%
-        }
+            }
+
+            deleteReport = true;
 %>
                                         <li>
                                             <button class='delete'>
@@ -102,7 +107,10 @@
                                             </button>
                                         </li>
 <%
-    }else{
+        }
+    }
+
+    if(!deleteReport){
 %>
                                         <li>
                                             <button class='delete'>
@@ -155,7 +163,10 @@
 
                                     <ul>
 <%
-            if(user.id == comment.user._id.toString() && !data.locked){
+            let deleteReport = false;
+
+            if(isSignedIn){
+                if(user.id == comment.user._id.toString() && !data.locked){
 %>
                                         <li>
                                             <a href='/edit/comment/<%= comment._id.toString() %>'>
@@ -166,9 +177,10 @@
                                             </a>
                                         <li>
 <%
-            }
+                }
             
-            if(user.id == data.user._id.toString() || user.role > 1){
+                if(user.id == data.user._id.toString() || user.role > 1){
+                    deleteReport = true;
 %>
                                         <li>
                                             <button class='delete'>
@@ -179,7 +191,10 @@
                                             </button>
                                         </li>
 <%
-            }else{
+                }
+            }
+
+            if(!deleteReport){
 %>
                                         <li>
                                             <button class='delete'>

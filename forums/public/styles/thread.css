@@ -139,7 +139,7 @@ content comment-header h3 {
     margin: 0;
 }
 
-content comment-header > a {
+content comment-header h3 a {
     display: block;
     color: var(--text-primary);
     text-decoration: none;
@@ -147,7 +147,7 @@ content comment-header > a {
     cursor: pointer;
 }
 
-content comment-header > a:hover {
+content comment-header h3 a:hover {
     color: var(--primary);
 }
 
@@ -178,15 +178,28 @@ content comment-header action:hover > svg {
 
 content comment-header ul {
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: calc(100% + 5px);
+    right: -15px;
     display: none;
     padding: 0;
     margin: 0;
     border-radius: 5px;
     background-color: var(--background-shimmer);
     box-shadow: 0 0 10px var(--background);
-    overflow: hidden;
+    z-index: 2;
+}
+
+content comment-header action ul:before {
+    display: block;
+    position: absolute;
+    top: -7.5px;
+    right: 18.5px;
+    height: 15px;
+    width: 15px;
+    content: '';
+    background-color: var(--background-shimmer);
+    transform: rotate(45deg);
+    z-index: -2;
 }
 
 content comment-header action:hover ul {
@@ -215,7 +228,7 @@ content comment-header action button {
 
 content comment-header action a {
     display: flex;
-    width: 100%;
+    width: calc(100% - 20px);
     border: 0;
     padding: 10px;
     align-items: center;
@@ -225,6 +238,18 @@ content comment-header action a {
     text-decoration: none;
     transition: background-color 0.3s;
     cursor: pointer;
+}
+
+content comment-header action li:first-child a,
+        content comment-header action li:first-child button {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+content comment-header action li:last-child a,
+        content comment-header action li:last-child button {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 content comment-header action button.delete {
