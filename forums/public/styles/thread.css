@@ -139,7 +139,7 @@ content comment-header h3 {
     margin: 0;
 }
 
-content comment-header a {
+content comment-header > a {
     display: block;
     color: var(--text-primary);
     text-decoration: none;
@@ -147,7 +147,7 @@ content comment-header a {
     cursor: pointer;
 }
 
-content comment-header a:hover {
+content comment-header > a:hover {
     color: var(--primary);
 }
 
@@ -205,9 +205,24 @@ content comment-header action button {
     padding: 10px;
     align-items: center;
     gap: 10px;
+    font-size: 0.8em;
     color: var(--text-primary);
     background: transparent;
     text-align: left;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+content comment-header action a {
+    display: flex;
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8em;
+    color: var(--text-primary);
+    text-decoration: none;
     transition: background-color 0.3s;
     cursor: pointer;
 }
@@ -220,11 +235,13 @@ content comment-header action button.delete svg {
     fill: var(--error);
 }
 
-content comment-header action li:not(:last-child) button {
+content comment-header action li:not(:last-child) a,
+        content comment-header action li:not(:last-child) button {
     border-bottom: solid 1px var(--background-secondary);
 }
 
-content comment-header action button:hover {
+content comment-header action a:hover,
+        content comment-header action button:hover {
     background-color: var(--background-secondary);
 }
 
