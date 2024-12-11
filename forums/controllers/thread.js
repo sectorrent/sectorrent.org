@@ -4,7 +4,7 @@ const markdown = require('../modules/markdown');
 const pow = require('../modules/pow');
 
 exports.getNewThread = async (req, res) => {
-	res.render('layouts/new_thread', {
+	res.render('layouts/threads/new_thread', {
 		title: 'New Thread Page',
 		page: 'new-thread',
 		uniqid: uuidv4,
@@ -21,7 +21,7 @@ exports.getNewThread = async (req, res) => {
 exports.getThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
-	thread.getThread(req, id).then((data) => {
+	thread.getThreadExpanded(req, id).then((data) => {
 		data.content = markdown.parse(data.content);
 		
 		if(data.comments.total > 0){
@@ -30,7 +30,7 @@ exports.getThread = async (req, res) => {
 			}
 		}
 
-		res.render('layouts/thread', {
+		res.render('layouts/threads/thread', {
 			title: 'Thread Page',
 			page: 'thread',
 			uniqid: uuidv4,
@@ -50,3 +50,25 @@ exports.getThread = async (req, res) => {
 	});
 };
 
+exports.getEditThread = async (req, res) => {
+	const id = (req.params.id) ? req.params.id : '';
+	
+	thread.getThread(req, id).then((data) => {
+		res.render('layouts/threads/edit_thread', {
+			title: 'Thread Page',
+			page: 'thread',
+			uniqid: uuidv4,
+			styles: [
+				'editor',
+				'markdown'
+			],
+			id,
+			categories: global.categories,
+			data,
+			pow: pow.generateChallenge(req, res)
+		});
+
+	}).catch(function(error){
+		console.log(error);
+	});
+};

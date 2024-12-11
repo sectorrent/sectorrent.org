@@ -6,7 +6,7 @@
         mappedCategories[category._id.toString()] = index;
     });
 %>
-<%- include('../fragments/header') %>
+<%- include('../../fragments/header') %>
 <%
     if(data.locked){
 %>
@@ -20,7 +20,7 @@
     }
 %>
         <section>
-<%- include('../fragments/sidebar') %>
+<%- include('../../fragments/sidebar') %>
 
             <content>
                 <thread-header>
@@ -230,7 +230,7 @@
 
                     <reply-inner>
                         <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
-                            <%- include('../fragments/editor') %>
+                            <%- include('../../fragments/editor') %>
 
                             <response></response>
                             
@@ -250,4 +250,4 @@
 %>
             </content>
 
-<%- include('../fragments/footer') %>
+<%- include('../../fragments/footer') %>

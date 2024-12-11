@@ -11,6 +11,7 @@ const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
+const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
 
 const app = express();
@@ -128,8 +129,8 @@ app.use([
 app.post('/thread', express.json(), threadController.postThread);
 app.put('/thread', express.json(), threadController.putThread);
 
-app.post('/comment', express.json(), threadController.postComment);
-app.put('/comment', express.json(), threadController.putComment);
+app.post('/comment', express.json(), commentController.postComment);
+app.put('/comment', express.json(), commentController.putComment);
 
 app.get('*', (req, res) => {
 	res.json({

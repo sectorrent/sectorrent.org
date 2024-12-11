@@ -12,6 +12,7 @@ const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
+const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
 
 const app = express();
@@ -98,9 +99,9 @@ app.get('/c/:slug/top', feedController.getCategoryTop);
 
 app.get('/thread', threadController.getNewThread);
 app.get('/t/:id', threadController.getThread);
+app.get('/t/:id/edit', threadController.getEditThread);
 
-app.get('/t/:id/edit', threadController.getThread);
-app.get('/r/:id/edit', threadController.getThread);
+app.get('/r/:id/edit', commentController.getEditComment);
 
 app.get('*', (req, res) => {
 	res.json({
