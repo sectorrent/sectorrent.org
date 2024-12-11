@@ -21,7 +21,7 @@ exports.getNewThread = async (req, res) => {
 exports.getThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
-	thread.getThreadExpanded(req, id).then((data) => {
+	thread.getThread(req, id).then((data) => {
 		data.content = markdown.parse(data.content);
 		
 		if(data.comments.total > 0){
@@ -53,7 +53,7 @@ exports.getThread = async (req, res) => {
 exports.getEditThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
-	thread.getThread(req, id).then((data) => {
+	thread.getEditThread(req, id).then((data) => {
 		res.render('layouts/threads/edit_thread', {
 			title: 'Thread Page',
 			page: 'thread',

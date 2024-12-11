@@ -2,13 +2,16 @@ const { ObjectId, Long } = require('mongodb');
 const middleware = require('./middleware');
 const form = require('./form');
 
-exports.getThread = async (req, id) => {
+exports.getEditThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
 	let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $match: {
-                _id: id
+                _id: id,
+                locked: {
+                    $exists: false
+                }
             }
         },
         pipeUser(req),
@@ -18,7 +21,6 @@ exports.getThread = async (req, id) => {
                 title: true,
                 content: true,
                 pinned: true,
-                locked: true,
                 views: true,
                 categories: true,
                 created: true,
@@ -39,7 +41,7 @@ exports.getThread = async (req, id) => {
     return data;
 };
 
-exports.getThreadExpanded = async (req, id) => {
+exports.getThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
 	let data = await global.mongo.getDatabase().collection('threads').aggregate([

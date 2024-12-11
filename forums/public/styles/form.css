@@ -19,6 +19,36 @@ content thread-header h1 {
     font-size: 1.5em;
 }
 
+thread-header h1:not(:last-child) {
+    margin: 0 0 10px 0;
+}
+
+categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+}
+
+categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+categories a:hover {
+    color: var(--text-primary);
+}
+
+categories a span {
+    width: 12px;
+    height: 12px;
+}
+
 content thread {
     display: flex;
     width: 100%;

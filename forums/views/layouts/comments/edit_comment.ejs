@@ -1,15 +1,32 @@
+<%
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const mappedCategories = {};
+    categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+%>
 <%- include('../../fragments/header') %>
         <section>
 <%- include('../../fragments/sidebar') %>
 
             <content>
                 <thread-header>
-                    <h1>Edit Thread</h1>
+                    <h1><%= data.thread.title %></h1>
+                    <categories>
+<%
+    for(const category of data.thread.categories){
+%>
+                        <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
+<%
+    }
+%>
+                    </categories>
                 </thread-header>
 
                 <thread>
                     <a class='user-icon' href='/u/<%= data.user.username %>'>
-                        <img src='<%= data.user.avatar %>' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
+                        <img src='<%= data.user.avatar %>' onload='this.className = "show"' title='<%= data.user.username %>' draggable='false' oncontextmenu='return false'>
                     </a>
 
                     <thread-inner>

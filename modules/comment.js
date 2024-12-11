@@ -3,7 +3,75 @@ const middleware = require('./middleware');
 const form = require('./form');
 
 exports.getComment = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
 
+	let data = await global.mongo.getDatabase().collection('comments').aggregate([
+        {
+            $match: {
+                _id: id
+            }
+        },
+        pipeUser(req),
+        {
+            $lookup: {
+                from: 'threads',
+                let: {
+                    threadId: '$thread'
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $and: [
+                                {
+                                    $expr: {
+                                        $eq: ['$$threadId', '$_id']
+                                    }
+                                },
+                                {
+                                    locked: {
+                                        $exists: false
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: true,
+                            title: true,
+                            categories: true,
+                            created: true,
+                            modified: true
+                        }
+                    }
+                ],
+                as: 'thread'
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                content: true,
+                created: true,
+                modified: true,
+                pinned: true,
+                user: {
+                    $first: '$user'
+                },
+                thread: {
+                    $first: '$thread'
+                }
+            }
+        }
+    ]).toArray();
+
+	if(data.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    data = data[0];
+
+    return data;
 };
 
 exports.postComment = async (req, id) => {
@@ -161,3 +229,31 @@ exports.deleteComment = async (req, id) => {
 exports.getComments = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 };
+
+function pipeUser(req, v = '$user'){
+    return {
+        $lookup: {
+            from: 'users',
+            let: {
+                userId: v
+            },
+            pipeline: [
+                {
+                    $match: {
+                        $expr: {
+                            $eq: ['$$userId', '$_id']
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        _id: true,
+                        username: true,
+                        avatar: true
+                    }
+                }
+            ],
+            as: 'user'
+        }
+    };
+}
