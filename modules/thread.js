@@ -342,7 +342,7 @@ exports.deleteThreadArchive = async (req, id) => {
     };
 };
 
-async function update(req, id, update){
+async function update(req, id, data){
     const match = {
         _id: id
     };
@@ -351,7 +351,7 @@ async function update(req, id, update){
         match.user = middleware.getUserID(req);
     }
 
-    const update = await global.mongo.getDatabase().collection('threads').updateOne(match, update);
+    const update = await global.mongo.getDatabase().collection('threads').updateOne(match, data);
 
     if(update.modifiedCount != 1){
         throw new Error('Failed to update thread.');
