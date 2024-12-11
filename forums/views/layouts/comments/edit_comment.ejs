@@ -30,7 +30,7 @@
                     </a>
 
                     <thread-inner>
-                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/comment' method='PUT' target='hiddenFrame'>
+                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='PUT' target='hiddenFrame'>
                             <%- include('../../fragments/editor', { placeholder: 'Write a comment using Markdown.', content: data.content }) %>
 
                             <response></response>
@@ -44,7 +44,7 @@
 
                 <script src='/scripts/thread.js'></script>
                 <script nonce='<%= nonce %>'>
-                    const validForm = '<%= id %>';
+                    const validForm = '<%= formId %>';
                     const pow = <%- JSON.stringify(pow) %>;
                 </script>
                 <script src='/scripts/form.js'></script>

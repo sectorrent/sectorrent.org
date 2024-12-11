@@ -239,7 +239,7 @@ exports.putThread = async (req, id) => {
 
     data.modified = Long.fromNumber(Date.now());
 
-    const update = await global.mongo.getDatabase().collection('thread').updateOne(
+    const update = await global.mongo.getDatabase().collection('threads').updateOne(
         {
             _id: id,
             user: middleware.getUserID(req),
@@ -257,7 +257,8 @@ exports.putThread = async (req, id) => {
     }
 
     return {
-        message: 'Thread updated!'
+        message: 'Thread updated!',
+        link: `/t/${id.toString()}`
     };
 };
 

@@ -13,7 +13,7 @@
                     </a>
 
                     <thread-inner>
-                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/thread' method='POST' target='hiddenFrame'>
+                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/thread' method='POST' target='hiddenFrame'>
                             <input-field title='Title'>
                                 <input type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
                             </input-field>
@@ -49,7 +49,7 @@
 
                 <script src='/scripts/thread.js'></script>
                 <script nonce='<%= nonce %>'>
-                    const validForm = '<%= id %>';
+                    const validForm = '<%= formId %>';
                     const pow = <%- JSON.stringify(pow) %>;
                 </script>
                 <script src='/scripts/form.js'></script>

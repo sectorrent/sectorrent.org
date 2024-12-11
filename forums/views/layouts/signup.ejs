@@ -8,7 +8,7 @@
             <content type='main'>
                 <h1>Welcome!</h1>
                 <h2>Let's create your account</h2>
-                <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/signup' method='POST' target='hiddenFrame'>
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/signup' method='POST' target='hiddenFrame'>
                     <field>
                         <input-field title='First Name'>
                             <input type='text' name='fname' required placeholder='First Name' onkeypress='formAdjust(event)' />
@@ -36,7 +36,7 @@
             <iframe name='hiddenFrame'></iframe>
             
             <script nonce='<%= nonce %>'>
-                const validForm = '<%= id %>';
+                const validForm = '<%= formId %>';
                 const pow = <%- JSON.stringify(pow) %>;
             </script>
             <script src='/scripts/form.js'></script>
