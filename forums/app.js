@@ -86,6 +86,7 @@ app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
 
 app.get('/u/:username', accountController.getUser);
+//app.get('/u/:username'/posts, accountController.getUser);
 //app.get('/u/:username'/edit, accountController.getUser);
 
 app.get('/', feedController.getHome);
