@@ -198,7 +198,7 @@ exports.putComment = async (req, id) => {
     );
 
     if(update.modifiedCount != 1){
-        throw new Error('Failed to add to update comment.');
+        throw new Error('Failed to update comment.');
     }
 
     return {

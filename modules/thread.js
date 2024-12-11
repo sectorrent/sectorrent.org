@@ -253,7 +253,7 @@ exports.putThread = async (req, id) => {
     );
 
     if(update.modifiedCount != 1){
-        throw new Error('Failed to add to update thread.');
+        throw new Error('Failed to update thread.');
     }
 
     return {
