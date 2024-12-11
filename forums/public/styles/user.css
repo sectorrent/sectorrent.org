@@ -99,8 +99,6 @@ bio {
     border: solid 1px var(--background-shimmer);
 }
 
-bio:empty:before {
-    display: block;
-    color: var(--error);
-    content: 'This user has not set a bio yet...';
+bio:empty {
+    display: none;
 }
