@@ -40,7 +40,7 @@ Threads
     "user": ObjectId("asdasdasd"),
     "content": "",
     "pinned": true,
-    "locked": true,
+    "archived": true,
     "categories": [
         ObjectId("asdasdasd")
     ],

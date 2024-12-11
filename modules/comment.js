@@ -28,7 +28,7 @@ exports.getComment = async (req, id) => {
                                     }
                                 },
                                 {
-                                    locked: {
+                                    archived: {
                                         $exists: false
                                     }
                                 }
@@ -92,7 +92,7 @@ exports.postComment = async (req, id) => {
 
     const threadExists = await global.mongo.getDatabase().collection('threads').findOne({
         _id: id,
-		locked: {
+		archived: {
 			$exists: false
 		}
     });
@@ -158,7 +158,7 @@ exports.putComment = async (req, id) => {
                     },
                     {
                         $project: {
-                            locked: true
+                            archived: true
                         }
                     }
                 ],
@@ -183,8 +183,8 @@ exports.putComment = async (req, id) => {
         throw new Error('Referenced comment or thread does not exist');
 	}
 
-    if(commentExists[0].thread.locked){
-        throw new Error('Referenced thread is locked');
+    if(commentExists[0].thread.archived){
+        throw new Error('Referenced thread is archived');
     }
 
     const update = await global.mongo.getDatabase().collection('comments').updateOne(
@@ -212,7 +212,7 @@ exports.deleteComment = async (req, id) => {
     const commentExists = await global.mongo.getDatabase().collection('comments').deleteOne({
         _id: id,
 		user: middleware.getUserID(req),
-        locked: {
+        archived: {
 			$exists: false
 		}
     });

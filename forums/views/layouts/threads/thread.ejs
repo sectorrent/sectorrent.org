@@ -8,7 +8,7 @@
 %>
 <%- include('../../fragments/header') %>
 <%
-    if(data.locked){
+    if(data.archived){
 %>
         <archive>This thread has been archived. It is now read-only.</archive>
         <style nonce='<%= nonce %>'>
@@ -58,7 +58,7 @@
     let deleteReport = false;
 
     if(isSignedIn){
-        if(user.id == data.user._id.toString() && !data.locked){
+        if(user.id == data.user._id.toString() && !data.archived){
 %>
                                         <li>
                                             <a href='/t/<%= id %>/edit'>
@@ -72,7 +72,7 @@
         }
 
         if(user.id == data.user._id.toString() || user.role > 1){
-            if(data.locked){
+            if(data.archived){
 %>
                                         <li>
                                             <button>
@@ -166,7 +166,7 @@
             let deleteReport = false;
 
             if(isSignedIn){
-                if(user.id == comment.user._id.toString() && !data.locked){
+                if(user.id == comment.user._id.toString() && !data.archived){
 %>
                                         <li>
                                             <a href='/r/<%= comment._id.toString() %>/edit'>
@@ -221,7 +221,7 @@
 %>
                 </comments>
 <%
-    if(isSignedIn && !data.locked){
+    if(isSignedIn && !data.archived){
 %>
                 <reply>
                     <a class='user-icon' href='/u/<%= user.username %>'>

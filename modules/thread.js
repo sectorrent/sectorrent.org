@@ -9,7 +9,7 @@ exports.getEditThread = async (req, id) => {
         {
             $match: {
                 _id: id,
-                locked: {
+                archived: {
                     $exists: false
                 }
             }
@@ -124,7 +124,7 @@ exports.getThread = async (req, id) => {
                 title: true,
                 content: true,
                 pinned: true,
-                locked: true,
+                archived: true,
                 views: true,
                 categories: true,
                 created: true,
@@ -243,7 +243,7 @@ exports.putThread = async (req, id) => {
         {
             _id: id,
             user: middleware.getUserID(req),
-            locked: {
+            archived: {
                 $exists: false
             }
         },
@@ -267,7 +267,7 @@ exports.deleteThread = async (req, id) => {
     const threadExists = await global.mongo.getDatabase().collection('threads').deleteOne({
         _id: id,
         user: middleware.getUserID(req),
-        locked: {
+        archived: {
 			$exists: false
 		}
     });
