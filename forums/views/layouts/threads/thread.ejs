@@ -230,7 +230,7 @@
 
                     <reply-inner>
                         <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
-                            <%- include('../../fragments/editor') %>
+                            <%- include('../../fragments/editor', { placeholder: 'Write a comment using Markdown.' }) %>
 
                             <response></response>
                             

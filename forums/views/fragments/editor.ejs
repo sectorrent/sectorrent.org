@@ -42,7 +42,7 @@
             </svg>
         </button>
     </editor-header>
-    <textarea name='content' placeholder='Write a comment using Markdown.'></textarea>
+    <textarea name='content' placeholder='<%= placeholder %>'><% if(typeof content !== 'undefined'){ %><%= content %><% } %></textarea>
     <preview></preview>
 
     <script nonce='<%= nonce %>'>

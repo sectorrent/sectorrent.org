@@ -2,4 +2,34 @@
         <section>
 <%- include('../../fragments/sidebar') %>
 
+            <content>
+                <thread-header>
+                    <h1>Edit Thread</h1>
+                </thread-header>
+
+                <thread>
+                    <a class='user-icon' href='/u/<%= data.user.username %>'>
+                        <img src='<%= data.user.avatar %>' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
+                    </a>
+
+                    <thread-inner>
+                        <form valid-form='<% const id = uniqid(); %><%= id %>' action='https://api.<%= config.general.domain %>/thread' method='PUT' target='hiddenFrame'>
+                            <%- include('../../fragments/editor', { placeholder: 'Write a thread using Markdown.', content: data.content }) %>
+
+                            <response></response>
+                            
+                            <input type='submit' value='Submit' />
+                        </form>
+                    </thread-inner>
+                </thread>
+                <iframe name='hiddenFrame'></iframe>
+
+                <script src='/scripts/thread.js'></script>
+                <script nonce='<%= nonce %>'>
+                    const validForm = '<%= id %>';
+                    const pow = <%- JSON.stringify(pow) %>;
+                </script>
+                <script src='/scripts/form.js'></script>
+            </content>
+
 <%- include('../../fragments/footer') %>

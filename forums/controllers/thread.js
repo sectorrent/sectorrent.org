@@ -11,7 +11,7 @@ exports.getNewThread = async (req, res) => {
 		styles: [
 			'editor',
 			'markdown',
-			'new-thread'
+			'form'
 		],
 		categories: global.categories,
 		pow: pow.generateChallenge(req, res)
@@ -60,7 +60,8 @@ exports.getEditThread = async (req, res) => {
 			uniqid: uuidv4,
 			styles: [
 				'editor',
-				'markdown'
+				'markdown',
+				'form'
 			],
 			id,
 			categories: global.categories,

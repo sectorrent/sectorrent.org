@@ -13,7 +13,8 @@ exports.getEditComment = async (req, res) => {
 			uniqid: uuidv4,
 			styles: [
 				'editor',
-				'markdown'
+				'markdown',
+				'form'
 			],
 			id,
 			categories: global.categories,
