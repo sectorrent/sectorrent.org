@@ -43,3 +43,64 @@ user-header user img-container img {
 user-header user img-container img.show {
     display: block;
 }
+
+content nav {
+    display: block;
+    padding: 20px 0 0 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+content ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+content li {
+    display: block;
+}
+
+content li a {
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    border: solid 1px var(--background-shimmer);
+    background-color: var(--background-secondary);
+	transition: background-color 0.3s;
+}
+
+content li a:hover {
+    background-color: var(--background-shimmer);
+}
+
+content li[selected] a {
+    background-color: var(--primary);
+}
+
+bio {
+    display: block;
+    width: calc(100% - 22px);
+    min-height: 250px;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px var(--background-shimmer);
+}
+
+bio:empty:before {
+    display: block;
+    color: var(--error);
+    content: 'This user has not set a bio yet...';
+}

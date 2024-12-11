@@ -10,7 +10,31 @@
                         </img-container>
                         <%= data.username %>
                     </user>
+
+                    <nav>
+                        <ul>
+                            <li selected>
+                                <a href='/u/<%= username %>'>Summary</a>
+                            </li>
+                            <li>
+                                <a href='/u/<%= username %>/posts'>Posts</a>
+                            </li>
+<%
+    if(isSignedIn){
+        if(user.id == data._id.toString()){
+%>
+                            <li>
+                                <a href='/u/<%= username %>/edit'>Edit</a>
+                            </li>
+<%
+        }
+    }
+%>
+                        </ul>
+                    </nav>
                 </user-header>
+
+                <bio><% if(typeof data.bio !== 'undefined'){ %><%- data.bio %><% } %></bio>
             </content>
 
 <%- include('../../fragments/footer') %>

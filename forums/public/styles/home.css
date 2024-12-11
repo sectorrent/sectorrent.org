@@ -122,6 +122,12 @@ list-body row:last-child {
     border-bottom-left-radius: 10px;
 }
 
+list-body h2 {
+    display: block;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+}
 
 list-body a {
     display: block;
@@ -130,11 +136,17 @@ list-body a {
     cursor: pointer;
 }
 
-list-body h2 {
+list[type='latest'] list-body a:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+list-body a svg {
     display: block;
-    font-size: 1em;
-    font-weight: normal;
-    margin: 0;
+    width: 1em;
+    height: 1em;
+    fill: var(--text-primary);
 }
 
 list-body div {
