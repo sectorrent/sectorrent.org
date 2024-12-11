@@ -35,10 +35,11 @@
 
                             <response></response>
                             
-                            <input type='submit' value='Submit' />
+                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
                         </form>
                     </thread-inner>
                 </thread>
+                <label type='submit' for='<%= buttonId %>'>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
                 <script src='/scripts/thread.js'></script>

@@ -265,20 +265,25 @@ response:not(:empty) {
 }
 
 input[type='submit'] {
+    display: none;
+}
+
+label[type='submit'] {
     display: block;
     width: fit-content;
+    height: 18px;
     border-radius: 5px;
     padding: 11px 20px;
     margin-left: auto;
+    line-height: 18px;
     font-size: 1em;
     color: var(--text-primary);
-	border: none;
     text-decoration: none;
     cursor: pointer;
     background-color: var(--primary);
 	transition: background-color 0.3s;
 }
 
-input[type='submit']:hover {
+label[type='submit']:hover {
     background-color: var(--secondary);
 }
