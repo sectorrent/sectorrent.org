@@ -779,6 +779,7 @@ exports.resetPassword = async (req, res, id) => {
 	};
 };
 
+/*
 exports.getAccount = async (req) => {
 	const data = await global.mongo.getDatabase().collection('users').findOne(
 		{
@@ -929,6 +930,7 @@ exports.setAccount = async (req, res) => {
         message: 'Changes saved!'
     };
 };
+*/
 
 exports.getUserSummary = async (req, username) => {
 	let data = await global.mongo.getDatabase().collection('users').aggregate([
@@ -945,7 +947,9 @@ exports.getUserSummary = async (req, username) => {
                 fname: true,
                 lname: true,
                 avatar: true,
-                created: true
+                created: true,
+				role: true,
+				bio: true
             }
         }
     ]).toArray();
