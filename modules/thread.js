@@ -282,6 +282,82 @@ exports.deleteThread = async (req, id) => {
     };
 };
 
+exports.putThreadPin = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    await update(req, id, {
+            $set: {
+                pinned: true
+            }
+        });
+
+    return {
+        message: 'Thread pinned!',
+        link: `/t/${id.toString()}`
+    };
+};
+
+exports.putThreadArchive = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    await update(req, id, {
+            $set: {
+                archived: true
+            }
+        });
+
+    return {
+        message: 'Thread archived!',
+        link: `/t/${id.toString()}`
+    };
+};
+
+exports.deleteThreadPin = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    await update(req, id, {
+            $unset: {
+                pinned: true
+            }
+        });
+
+    return {
+        message: 'Thread unpinned!',
+        link: `/t/${id.toString()}`
+    };
+};
+
+exports.deleteThreadArchive = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    await update(req, id, {
+            $unset: {
+                archived: true
+            }
+        });
+
+    return {
+        message: 'Thread unarchived!',
+        link: `/t/${id.toString()}`
+    };
+};
+
+async function update(req, id, update){
+    const match = {
+        _id: id
+    };
+
+    if(middleware.getRole(req) < 2){
+        match.user = middleware.getUserID(req);
+    }
+
+    const update = await global.mongo.getDatabase().collection('threads').updateOne(match, update);
+
+    if(update.modifiedCount != 1){
+        throw new Error('Failed to update thread.');
+    }
+}
+
 function pipeUser(req, v = '$user'){
     return {
         $lookup: {

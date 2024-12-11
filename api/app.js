@@ -128,6 +128,10 @@ app.use([
 
 app.post('/thread', express.json(), threadController.postThread);
 app.put('/thread', express.json(), threadController.putThread);
+//app.put('/thread/pin', express.json(), threadController.putThreadPin);
+//app.delete('/thread/pin', express.json(), threadController.deleteThreadPin);
+//app.put('/thread/archive', express.json(), threadController.putThreadArchive);
+//app.delete('/thread/archive', express.json(), threadController.deleteThreadArchive);
 
 app.post('/comment', express.json(), commentController.postComment);
 app.put('/comment', express.json(), commentController.putComment);
