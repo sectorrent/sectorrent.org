@@ -10,7 +10,8 @@ global.mongo = require('./modules/mongo');
 const forums = require('./modules/forums');
 const middleware = require('./modules/middleware');
 
-const mainController = require('./controllers/main');
+const feedController = require('./controllers/feed');
+const threadController = require('./controllers/thread');
 const accountController = require('./controllers/account');
 
 const app = express();
@@ -83,20 +84,23 @@ app.get('/signup', accountController.getSignUp);
 app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
 
-app.get('/', mainController.getHome);
-app.get('/categories', mainController.getCategories);
-app.get('/latest', mainController.getLatest);
-app.get('/top', mainController.getTop);
+app.get('/u/:username', accountController.getUser);
+//app.get('/u/:username'/edit, accountController.getUser);
 
-app.get('/c/:slug', mainController.getCategory);
-app.get('/c/:slug/latest', mainController.getCategoryLatest);
-app.get('/c/:slug/top', mainController.getCategoryTop);
+app.get('/', feedController.getHome);
+app.get('/categories', feedController.getCategories);
+app.get('/latest', feedController.getLatest);
+app.get('/top', feedController.getTop);
 
-app.get('/thread', mainController.getNewThread);
-app.get('/t/:id', mainController.getThread);
+app.get('/c/:slug', feedController.getCategory);
+app.get('/c/:slug/latest', feedController.getCategoryLatest);
+app.get('/c/:slug/top', feedController.getCategoryTop);
 
-app.get('/u/:username', mainController.getUser);
-//app.get('/u/:username/edit', mainController.getUser);
+app.get('/thread', threadController.getNewThread);
+app.get('/t/:id', threadController.getThread);
+
+app.get('/t/:id/edit', threadController.getThread);
+app.get('/r/:id/edit', threadController.getThread);
 
 app.get('*', (req, res) => {
 	res.json({

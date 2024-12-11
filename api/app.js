@@ -9,7 +9,8 @@ global.mongo = require('./modules/mongo');
 const forums = require('./modules/forums');
 const middleware = require('./modules/middleware');
 
-const mainController = require('./controllers/main');
+const feedController = require('./controllers/feed');
+const threadController = require('./controllers/thread');
 const accountController = require('./controllers/account');
 
 const app = express();
@@ -124,11 +125,11 @@ app.use([
 	res.end();
 });
 
-app.post('/thread', express.json(), mainController.postThread);
-app.put('/thread', express.json(), mainController.putThread);
+app.post('/thread', express.json(), threadController.postThread);
+app.put('/thread', express.json(), threadController.putThread);
 
-app.post('/comment', express.json(), mainController.postComment);
-app.put('/comment', express.json(), mainController.putComment);
+app.post('/comment', express.json(), threadController.postComment);
+app.put('/comment', express.json(), threadController.putComment);
 
 app.get('*', (req, res) => {
 	res.json({

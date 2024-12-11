@@ -1,7 +1,7 @@
-const forums = require('../modules/forums');
+const thread = require('../modules/thread');
 
 exports.postThread = async (req, res) => {
-    forums.postThread(req).then((data) => {
+    thread.postThread(req).then((data) => {
 		res.json({
 			status: 200,
 			status_message: 'Insert was successful',
@@ -34,7 +34,7 @@ exports.postThread = async (req, res) => {
 exports.putThread = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 	
-    forums.putThread(req, id).then((data) => {
+    thread.putThread(req, id).then((data) => {
 		res.json({
 			status: 200,
 			status_message: 'Update was successful',
@@ -53,7 +53,7 @@ exports.putThread = async (req, res) => {
 exports.postComment = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 
-    forums.postComment(req, id).then((data) => {
+    thread.postComment(req, id).then((data) => {
 		res.json({
 			status: 200,
 			status_message: 'Insert was successful',
@@ -86,7 +86,7 @@ exports.postComment = async (req, res) => {
 exports.putComment = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 
-    forums.putComment(req, id, id).then((data) => {
+    thread.putComment(req, id, id).then((data) => {
 		res.json({
 			status: 200,
 			status_message: 'Update was successful',

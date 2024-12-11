@@ -1,7 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
 const forums = require('../modules/forums');
-const markdown = require('../modules/markdown');
-const pow = require('../modules/pow');
 
 exports.getHome = async (req, res) => {
 	forums.getHome(req).then((data) => {
@@ -179,74 +177,6 @@ exports.getCategories = async (req, res) => {
 			styles: [
 				'categories'
 			],
-			categories: global.categories,
-			data
-		});
-
-	}).catch(function(error){
-		console.log(error);
-	});
-};
-
-exports.getNewThread = async (req, res) => {
-	res.render('layouts/new_thread', {
-		title: 'New Thread Page',
-		page: 'new-thread',
-		uniqid: uuidv4,
-		styles: [
-			'editor',
-			'markdown',
-			'new-thread'
-		],
-		categories: global.categories,
-		pow: pow.generateChallenge(req, res)
-	});
-};
-
-exports.getThread = async (req, res) => {
-	const id = (req.params.id) ? req.params.id : '';
-	
-	forums.getThread(req, id).then((data) => {
-		data.content = markdown.parse(data.content);
-		
-		if(data.comments.total > 0){
-			for(const comment of data.comments.comments){
-				comment.content = markdown.parse(comment.content);
-			}
-		}
-
-		res.render('layouts/thread', {
-			title: 'Thread Page',
-			page: 'thread',
-			uniqid: uuidv4,
-			styles: [
-				'editor',
-				'markdown',
-				'thread'
-			],
-			id,
-			categories: global.categories,
-			data,
-			pow: pow.generateChallenge(req, res)
-		});
-
-	}).catch(function(error){
-		console.log(error);
-	});
-};
-
-exports.getUser = async (req, res) => {
-	const username = (req.params.username) ? req.params.username : '';
-
-	forums.getUserSummary(req, username).then((data) => {
-		res.render('layouts/user/index', {
-			title: 'User Page',
-			page: 'user',
-			uniqid: uuidv4,
-			styles: [
-				'user'
-			],
-			username,
 			categories: global.categories,
 			data
 		});

@@ -10,17 +10,34 @@
 %>
         </style>
         <sidebar>
-            <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>Topics</a>
+            <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z' />
+                </svg>
+                Topics
+            </a>
 <%
     if(isSignedIn){
 %>
-            <a href='/u/<%= user.username %>' type='user'<% if(page == 'user'){ %> selected<% } %>>My Posts</a><br>
+            <a href='/u/<%= user.username %>' type='user'<% if(page == 'user'){ %> selected<% } %>>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z' />
+                </svg>
+                My Posts
+            </a><br>
 <%
     }
 %>
-            <a href='/' type='more'>More</a><br>
+            <a href='/' type='more'>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
+                </svg>
+                More
+            </a><br>
             <input id='<% let uuid = uniqid(); %><%= uuid %>' type='checkbox' checked>
-            <label for='<%= uuid %>'>Categories</label>
+            <label for='<%= uuid %>'>
+                Categories
+            </label>
             <container>
 <%
     for(const category of categories){
@@ -29,6 +46,11 @@
 <%
     }
 %>
-                <a href='/categories' type='all'<% if(page == 'categories'){ %> selected<% } %>>All Categories</a>
+                <a href='/categories' type='all'<% if(page == 'categories'){ %> selected<% } %>>
+                    <svg viewBox='0 0 24 24'>
+                        <path d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z' />
+                    </svg>
+                    All Categories
+                </a>
             </container>
         </sidebar>

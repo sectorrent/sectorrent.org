@@ -929,3 +929,32 @@ exports.setAccount = async (req, res) => {
         message: 'Changes saved!'
     };
 };
+
+exports.getUserSummary = async (req, username) => {
+	let data = await global.mongo.getDatabase().collection('users').aggregate([
+        {
+            $match: {
+                username: username
+            }
+        },
+        {
+            $project: {
+                _id: true,
+                username: true,
+                email: true,
+                fname: true,
+                lname: true,
+                avatar: true,
+                created: true
+            }
+        }
+    ]).toArray();
+
+	if(data.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    data = data[0];
+
+    return data;
+};

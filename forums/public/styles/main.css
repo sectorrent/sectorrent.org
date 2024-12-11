@@ -220,8 +220,7 @@ sidebar label {
     color: var(--text-primary);
 }
 
-sidebar a[type]:before,
-        sidebar label:before {
+sidebar label:before {
     display: inline-block;
     content: '';
     width: 20px;
@@ -231,20 +230,15 @@ sidebar a[type]:before,
     background-position: center;
 }
 
-sidebar a[type='topics']:before {
-    background-image: url(/icons/ic_layers.svg);
+sidebar label:before {
+    background-image: url(/icons/ic_less.svg);
 }
 
-sidebar a[type='user']:before {
-    background-image: url(/icons/ic_user.svg);
-}
-
-sidebar a[type='more']:before {
-    background-image: url(/icons/ic_menu.svg);
-}
-
-sidebar a[type='all']:before {
-    background-image: url(/icons/ic_list.svg);
+sidebar a svg {
+    display: block;
+    width: 1.2em;
+    height: 1.2em;
+    fill: var(--text-primary);
 }
 
 sidebar a[selected] {
@@ -265,10 +259,6 @@ sidebar a span {
 
 sidebar input[type='checkbox'] {
     display: none;
-}
-
-sidebar label:before {
-    background-image: url(/icons/ic_less.svg);
 }
 
 sidebar input[type='checkbox']:checked + label:before {
