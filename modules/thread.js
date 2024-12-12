@@ -282,7 +282,7 @@ exports.deleteThread = async (req, id) => {
     };
 };
 
-exports.putThreadPin = async (req, id) => {
+exports.postThreadPin = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
     await update(req, id, {
@@ -297,7 +297,7 @@ exports.putThreadPin = async (req, id) => {
     };
 };
 
-exports.putThreadArchive = async (req, id) => {
+exports.postThreadArchive = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
     await update(req, id, {
