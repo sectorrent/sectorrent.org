@@ -46,11 +46,4 @@ done < "$CONFIG_FILE"
 
 #cat $OUTPUT_FILE
 
-# Run with nodemon in development mode
-if [ $NODE_ENV == "development" ]; then
-  echo "Starting application with nodemon"
-  npx nodemon app.js
-else
-  echo "Starting application with node"
-  node app.js
-fi
+node app.js
