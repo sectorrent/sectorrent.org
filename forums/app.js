@@ -85,9 +85,9 @@ app.get('/signup', accountController.getSignUp);
 app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
 
-app.get('/u/:username', accountController.getUser);
-//app.get('/u/:username'/posts, accountController.getUser);
-//app.get('/u/:username'/edit, accountController.getUser);
+app.get('/u/:username', accountController.getUserSummary);
+app.get('/u/:username/posts', accountController.getUserPosts);
+app.get('/u/:username/edit', accountController.getUserEdit);
 
 app.get('/', feedController.getHome);
 app.get('/categories', feedController.getCategories);

@@ -249,7 +249,8 @@ function pipeUser(req, v = '$user'){
                     $project: {
                         _id: true,
                         username: true,
-                        avatar: true
+                        avatar: true,
+                        role: true
                     }
                 }
             ],

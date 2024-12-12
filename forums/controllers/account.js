@@ -50,11 +50,53 @@ exports.getResetPassword = async (req, res) => {
 	});
 };
 
-exports.getUser = async (req, res) => {
+exports.getUserSummary = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
 
 	account.getUserSummary(req, username).then((data) => {
 		res.render('layouts/user/index', {
+			title: 'User Page',
+			page: 'user',
+			uniqid: uuidv4,
+			styles: [
+				'user'
+			],
+			username,
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
+	});
+};
+
+exports.getUserPosts = async (req, res) => {
+	const username = (req.params.username) ? req.params.username : '';
+
+	account.getUserSummary(req, username).then((data) => {
+		res.render('layouts/user/posts', {
+			title: 'User Page',
+			page: 'user',
+			uniqid: uuidv4,
+			styles: [
+				'user'
+			],
+			username,
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		console.log(error);
+	});
+};
+
+exports.getUserEdit = async (req, res) => {
+	const username = (req.params.username) ? req.params.username : '';
+
+	account.getUserSummary(req, username).then((data) => {
+		res.render('layouts/user/edit', {
 			title: 'User Page',
 			page: 'user',
 			uniqid: uuidv4,

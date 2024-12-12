@@ -134,21 +134,26 @@ comment-header action:hover > svg {
     fill: var(--primary);
 }
 
-content comment-header h3 {
-    font-size: 1em;
-    margin: 0;
-}
-
-content comment-header h3 a {
-    display: block;
+content comment-header a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: var(--text-primary);
     text-decoration: none;
+    font-weight: bold;
     transition: color 0.3s;
     cursor: pointer;
 }
 
-content comment-header h3 a:hover {
+content comment-header a:hover {
     color: var(--primary);
+}
+
+content comment-header a svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--primary);
 }
 
 content comment-header date {
