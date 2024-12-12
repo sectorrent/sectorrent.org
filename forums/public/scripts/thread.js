@@ -17,3 +17,15 @@ var currentlySelected = 0;
         }
     };
 }());
+
+function onpin(){
+    
+}
+
+function onarchive(){
+    
+}
+
+function ondelete(){
+
+}

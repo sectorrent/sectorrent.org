@@ -3,37 +3,37 @@ textarea.onkeydown = function(e){
         switch(e.key){
             case 'b':
                 e.preventDefault();
-                onBold();
+                onbold();
                 break;
                 
             case 'i':
                 e.preventDefault();
-                onItalic();
+                onitalic();
                 break;
                 
             case 'l':
                 e.preventDefault();
-                onLink();
+                onlink();
                 break;
                 
             case 'q':
                 e.preventDefault();
-                onQuote();
+                onquote();
                 break;
                 
             case 'd':
                 e.preventDefault();
-                onCode();
+                oncode();
                 break;
                 
             case 'k':
                 e.preventDefault();
-                onList();
+                onlist();
                 break;
                 
             case 'o':
                 e.preventDefault();
-                onNumberedList();
+                onnumberedlist();
                 break;
         }
     }
@@ -51,34 +51,34 @@ textarea.onkeydown = function(e){
 };
 
 document.getElementById('button-bold').onclick = function(e){
-    onBold();
+    onbold();
 };
 
 document.getElementById('button-italic').onclick = function(e){
-    onItalic();
+    onitalic();
 };
 
 document.getElementById('button-link').onclick = function(e){
-    onLink();
+    onlink();
 };
 
 document.getElementById('button-quote').onclick = function(e){
-    onQuote();
+    onquote();
 };
 
 document.getElementById('button-code').onclick = function(e){
-    onCode();
+    oncode();
 };
 
 document.getElementById('button-list').onclick = function(e){
-    onList();
+    onlist();
 };
 
 document.getElementById('button-num-list').onclick = function(e){
-    onNumberedList();
+    onnumberedlist();
 };
 
-function onBold(){
+function onbold(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -92,7 +92,7 @@ function onBold(){
     textarea.focus();
 }
 
-function onItalic(){
+function onitalic(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -106,7 +106,7 @@ function onItalic(){
     textarea.focus();
 }
 
-function onLink(){
+function onlink(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -120,7 +120,7 @@ function onLink(){
     textarea.focus();
 }
 
-function onQuote(){
+function onquote(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -134,7 +134,7 @@ function onQuote(){
     textarea.focus();
 }
 
-function onCode(){
+function oncode(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -148,7 +148,7 @@ function onCode(){
     textarea.focus();
 }
 
-function onList(){
+function onlist(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -162,7 +162,7 @@ function onList(){
     textarea.focus();
 }
 
-function onNumberedList(){
+function onnumberedlist(){
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const text = textarea.value;
@@ -174,4 +174,8 @@ function onNumberedList(){
     textarea.selectionStart = textarea.selectionEnd = cursorPosition;
 
     textarea.focus();
+}
+
+function oncopy(){
+    
 }
