@@ -242,14 +242,14 @@ sidebar a svg {
 }
 
 sidebar a[selected] {
-    background-color: #343434;
+    background-color: var(--background-shimmer);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 sidebar a:hover,
         sidebar label:hover {
-    background-color: #343434;
+    background-color: var(--background-shimmer);
 }
 
 sidebar a span {
