@@ -134,7 +134,7 @@ comment-header action:hover > svg {
     fill: var(--primary);
 }
 
-content comment-header a {
+content comment-header > a {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -145,11 +145,11 @@ content comment-header a {
     cursor: pointer;
 }
 
-content comment-header a:hover {
+content comment-header > a:hover {
     color: var(--primary);
 }
 
-content comment-header a svg {
+content comment-header > a svg {
     display: block;
     width: 24px;
     height: 24px;
