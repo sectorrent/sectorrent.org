@@ -1,31 +1,49 @@
-const categorySelector = document.getElementById('category-selector');
-var currentlySelected = 0;
+const archiveThread = document.querySelector('button[action="archive-thread"]');
+const unarchiveThread = document.querySelector('button[action="unarchive-thread"]');
+const pinThread = document.querySelector('button[action="pin-thread"]');
+const unpinThread = document.querySelector('button[action="unpin-thread"]');
+const deleteThread = document.querySelector('button[action="delete-thread"]');
+const reportThread = document.querySelector('button[action="report-thread"]');
 
 (function(){
-    categorySelector.value = categorySelector.querySelector('fl-option').getAttribute('value');
-    categorySelector.onchange = function(e){
-        currentlySelected = e.target.value;
-    };
-
-    categorySelector.firstElementChild.onclick = function(e){
-        if(e.target.getAttribute('value') !== categorySelector.value){
-            categorySelector.setAttribute('label', e.target.textContent);
-            categorySelector.value = e.target.getAttribute('value');
-            categorySelector.selectedIndex = e.target.index;
-            categorySelector.parentElement.firstElementChild.value = categorySelector.value;
-            categorySelector.dispatchEvent(new Event('change'));
-        }
-    };
+    //let selector = document.querySelector('archive-thread');
 }());
 
-function onpin(){
-    
+function oncopy(ele){
 }
 
-function onarchive(){
-    
+if(archiveThread){
+    archiveThread.onclick = function(e){
+        console.log('ARCHIVE');
+    };
 }
 
-function ondelete(){
+if(unarchiveThread){
+    unarchiveThread.onclick = function(e){
+        console.log('UN-ARCHIVE');
+    };
+}
 
+if(pinThread){
+    pinThread.onclick = function(e){
+        console.log('PIN');
+    };
+}
+
+if(unpinThread){
+    unpinThread.onclick = function(e){
+        console.log('UNPIN');
+    };
+}
+
+if(deleteThread){
+    deleteThread.onclick = function(e){
+        console.log('DELETE');
+    };
+}
+
+if(reportThread){
+    reportThread.onclick = function(e){
+        console.log('REPORT');
+    };
 }

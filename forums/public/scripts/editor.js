@@ -175,7 +175,3 @@ function onnumberedlist(){
 
     textarea.focus();
 }
-
-function oncopy(){
-    
-}

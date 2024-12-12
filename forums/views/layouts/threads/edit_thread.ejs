@@ -39,10 +39,9 @@
                         </form>
                     </thread-inner>
                 </thread>
-                <label type='submit' for='<%= buttonId %>'>Comment</label>
+                <label type='submit' for='<%= buttonId %>'>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
-                <script src='/scripts/thread.js'></script>
                 <script nonce='<%= nonce %>'>
                     const validForm = '<%= formId %>';
                     const pow = <%- JSON.stringify(pow) %>;
