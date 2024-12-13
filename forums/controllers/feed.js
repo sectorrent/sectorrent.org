@@ -28,7 +28,8 @@ exports.getLatest = async (req, res) => {
 			page: 'latest',
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			categories: global.categories,
 			data
@@ -40,7 +41,8 @@ exports.getLatest = async (req, res) => {
 			page: 'category',
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			categories: global.categories
 		});
@@ -56,7 +58,8 @@ exports.getTop = async (req, res) => {
 			page: 'top',
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			categories: global.categories,
 			data
@@ -68,7 +71,8 @@ exports.getTop = async (req, res) => {
 			page: 'category',
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			categories: global.categories
 		});
@@ -85,7 +89,8 @@ exports.getCategory = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories,
@@ -98,7 +103,8 @@ exports.getCategory = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories
@@ -116,7 +122,8 @@ exports.getCategoryLatest = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories,
@@ -129,7 +136,8 @@ exports.getCategoryLatest = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories
@@ -147,7 +155,8 @@ exports.getCategoryTop = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories,
@@ -160,7 +169,8 @@ exports.getCategoryTop = async (req, res) => {
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
-				'category'
+				'category',
+				'table'
 			],
 			slug,
 			categories: global.categories

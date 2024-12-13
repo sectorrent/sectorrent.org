@@ -74,13 +74,14 @@ exports.getUserSummary = async (req, res) => {
 exports.getUserPosts = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
 
-	account.getUserSummary(req, username).then((data) => {
+	account.getUserPosts(req, username).then((data) => {
 		res.render('layouts/user/posts', {
 			title: 'User Page',
 			page: 'user',
 			uniqid: uuidv4,
 			styles: [
-				'user'
+				'user',
+				'table'
 			],
 			username,
 			categories: global.categories,

@@ -37,10 +37,35 @@ preview h1,
         preview h4,
         preview h5,
         preview h6 {
+    display: flex;
+    gap: 5px;
     color: var(--text-primary);
     border-bottom: solid 1px var(--background-shimmer);
     padding: 15px 0;
     margin: 0;
+    cursor: pointer;
+}
+
+preview h1 svg,
+        preview h2 svg,
+        preview h3 svg,
+        preview h4 svg,
+        preview h5 svg,
+        preview h6 svg {
+    display: block;
+    width: 0;
+    height: 1em;
+    fill: var(--text-primary);
+    transition: width 0.3s;
+}
+
+preview h1:hover svg,
+        preview h2:hover svg,
+        preview h3:hover svg,
+        preview h4:hover svg,
+        preview h5:hover svg,
+        preview h6:hover svg {
+    width: 1em;
 }
 
 preview strong {

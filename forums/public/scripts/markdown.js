@@ -129,13 +129,13 @@ function markdownToHtml(markdown){
 
                     if(/^=+$/.test(nextLine)){
                         const slug = line.split(/\s/).join('-').toLowerCase();
-                        processedLines.push(`<h1 id='${slug}'>${line}</h1>`);
+                        processedLines.push(`<h1 id='${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</h1>`);
                         i += 2;
                         continue;
     
                     }else if(/^-+$/.test(nextLine)){
                         const slug = line.split(/\s/).join('-').toLowerCase();
-                        processedLines.push(`<h2 id='${slug}'>${line}</h2>`);
+                        processedLines.push(`<h2 id='${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</h2>`);
                         i += 2;
                         continue;
                     }
@@ -145,19 +145,19 @@ function markdownToHtml(markdown){
             //HANDLE HEADERS
             if(line.startsWith('### ')){
                 const slug = line.slice(4).split(/\s/).join('-').toLowerCase();
-                processedLines.push(`<h3 id='${slug}'>${line.slice(4)}</h3>`);
+                processedLines.push(`<h3 id='${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(4)}</h3>`);
                 i++;
                 continue;
 
             }else if(line.startsWith('## ')){
                 const slug = line.slice(3).split(/\s/).join('-').toLowerCase();
-                processedLines.push(`<h2 id='${slug}'>${line.slice(3)}</h2>`);
+                processedLines.push(`<h2 id='${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(3)}</h2>`);
                 i++;
                 continue;
 
             }else if(line.startsWith('# ')){
                 const slug = line.slice(2).split(/\s/).join('-').toLowerCase();
-                processedLines.push(`<h1 id='${slug}'>${line.slice(2)}</h1>`);
+                processedLines.push(`<h1 id='${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(2)}</h1>`);
                 i++;
                 continue;
             }
