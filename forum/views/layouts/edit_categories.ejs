@@ -1,0 +1,17 @@
+<%
+    const mappedCategories = {};
+    categories.forEach((category, index) => {
+        mappedCategories[category._id.toString()] = index;
+    });
+%>
+<%- include('../fragments/header') %>
+        <section>
+<%- include('../fragments/sidebar') %>
+
+            <content>
+
+
+                
+            </content>
+
+<%- include('../fragments/footer') %>

@@ -14,6 +14,7 @@ const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
 const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
+const adminController = require('./controllers/admin');
 
 const app = express();
 
@@ -103,6 +104,23 @@ app.get('/t/:id', threadController.getThread);
 app.get('/t/:id/edit', threadController.getEditThread);
 
 app.get('/r/:id/edit', commentController.getEditComment);
+
+app.use([
+	'/categories/edit'
+], (req, res, next) => {
+	if(res.locals.isSignedIn && res.locals.user.role > 1){
+		next();
+		return;
+	}
+
+	res.json({
+		status: 403,
+		status_message: 'Endpoint not restricted'
+	});
+	res.end();
+});
+
+app.get('/categories/edit', adminController.getEditCategories);
 
 app.get('*', (req, res) => {
 	res.json({
