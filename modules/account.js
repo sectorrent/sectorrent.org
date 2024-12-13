@@ -984,6 +984,11 @@ exports.getUserPosts = async (req, username) => {
                             }
                         }
                     },
+					{
+						$sort: {
+                            created: -1
+						}
+					},
                     {
                         $skip: 0
                     },

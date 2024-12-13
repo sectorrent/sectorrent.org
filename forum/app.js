@@ -123,6 +123,7 @@ app.use([
 app.get('/categories/edit', adminController.getEditCategories);
 
 //MAKE SIDE BAR COLLAPSE IF TOO SMALL
+//LATEST AND TOP are not done very well...
 
 app.get('*', (req, res) => {
 	res.json({

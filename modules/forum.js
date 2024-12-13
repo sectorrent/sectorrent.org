@@ -304,6 +304,14 @@ exports.getLatest = async (req, slug) => {
             $replaceRoot: {
                 newRoot: '$threads'
             }
+        },
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $limit: 20
         }
     ]).toArray();
 
@@ -407,6 +415,14 @@ exports.getTop = async (req, slug) => {
             $replaceRoot: {
                 newRoot: '$threads'
             }
+        },
+        {
+            $sort: {
+                views: -1
+            }
+        },
+        {
+            $limit: 20
         }
     ]).toArray();
 
