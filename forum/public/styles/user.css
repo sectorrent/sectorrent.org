@@ -109,3 +109,9 @@ bio {
 bio:empty {
     display: none;
 }
+
+date {
+    display: block;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}

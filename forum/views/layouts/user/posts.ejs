@@ -31,17 +31,17 @@
                     <nav>
                         <ul>
                             <li>
-                                <a href='/u/<%= username %>'>Summary</a>
+                                <a href='/u/<%= data.username %>'>Summary</a>
                             </li>
                             <li selected>
-                                <a href='/u/<%= username %>/posts'>Posts</a>
+                                <a href='/u/<%= data.username %>/posts'>Posts</a>
                             </li>
 <%
     if(isSignedIn){
         if(user.id == data._id.toString()){
 %>
                             <li>
-                                <a href='/u/<%= username %>/edit'>Edit</a>
+                                <a href='/u/<%= data.username %>/edit'>Edit</a>
                             </li>
 <%
         }

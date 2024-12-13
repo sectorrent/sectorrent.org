@@ -102,11 +102,15 @@ exports.getUserEdit = async (req, res) => {
 			page: 'user',
 			uniqid: uuidv4,
 			styles: [
-				'user'
+				'user',
+				'editor',
+				'markdown',
+				'form'
 			],
 			username,
 			categories: global.categories,
-			data
+			data,
+			pow: pow.generateChallenge(req, res)
 		});
 
 	}).catch(function(error){

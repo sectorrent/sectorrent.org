@@ -26,26 +26,43 @@
                     <nav>
                         <ul>
                             <li>
-                                <a href='/u/<%= username %>'>Summary</a>
+                                <a href='/u/<%= data.username %>'>Summary</a>
                             </li>
                             <li>
-                                <a href='/u/<%= username %>/posts'>Posts</a>
+                                <a href='/u/<%= data.username %>/posts'>Posts</a>
                             </li>
-<%
-    if(isSignedIn){
-        if(user.id == data._id.toString()){
-%>
+
                             <li selected>
-                                <a href='/u/<%= username %>/edit'>Edit</a>
+                                <a href='/u/<%= data.username %>/edit'>Edit</a>
                             </li>
-<%
-        }
-    }
-%>
                         </ul>
                     </nav>
                 </user-header>
+
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/user?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>
+                    <input-field title='Username'>
+                        <input type='text' name='user' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
+                    </input-field>
+
+                    <input-field title='Email'>
+                        <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' value='<%= data.email %>' />
+                    </input-field>
+
+                    <%- include('../../fragments/editor', { placeholder: 'Write a bio using Markdown.', content: (data.bio) ? data.bio : '' }) %>
+
+                    <response></response>
+                            
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                </form>
                 
+                <label type='submit' for='<%= buttonId %>'>Submit</label>
+                <iframe name='hiddenFrame'></iframe>
+
+                <script nonce='<%= nonce %>'>
+                    const validForm = '<%= formId %>';
+                    const pow = <%- JSON.stringify(pow) %>;
+                </script>
+                <script src='/scripts/form.js'></script>
             </content>
 
 <%- include('../../fragments/footer') %>

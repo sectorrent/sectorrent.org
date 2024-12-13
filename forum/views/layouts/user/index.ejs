@@ -1,4 +1,6 @@
 <%
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
     const sideBarId = uniqid();
 %>
 <%- include('../../fragments/header', { sideBarId }) %>
@@ -26,17 +28,17 @@
                     <nav>
                         <ul>
                             <li selected>
-                                <a href='/u/<%= username %>'>Summary</a>
+                                <a href='/u/<%= data.username %>'>Summary</a>
                             </li>
                             <li>
-                                <a href='/u/<%= username %>/posts'>Posts</a>
+                                <a href='/u/<%= data.username %>/posts'>Posts</a>
                             </li>
 <%
     if(isSignedIn){
         if(user.id == data._id.toString()){
 %>
                             <li>
-                                <a href='/u/<%= username %>/edit'>Edit</a>
+                                <a href='/u/<%= data.username %>/edit'>Edit</a>
                             </li>
 <%
         }
@@ -47,6 +49,8 @@
                 </user-header>
 
                 <bio><% if(typeof data.bio !== 'undefined'){ %><%- data.bio %><% } %></bio>
+
+                <date>Joined: <% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
             </content>
 
 <%- include('../../fragments/footer') %>
