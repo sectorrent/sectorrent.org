@@ -58,13 +58,13 @@ services:
     #profiles:
     #  - donotstart
 
-  forums:
+  forum:
     build:
-      context: ./forums
+      context: ./forum
       args:
         RUNTIME: ${RUNTIME}
-    image: sectorrent_org_forums
-    container_name: forums
+    image: sectorrent_org_forum
+    container_name: forum
     environment:
       NODE_ENV: ${NODE_ENV:-production}
     restart: always

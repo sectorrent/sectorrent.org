@@ -187,7 +187,7 @@ References
 
 .. [#theory] http://wiki.theory.org/BitTorrentSpecification
 
-.. [#shad0w] http://forums.degreez.net/viewtopic.php?t=7070
+.. [#shad0w] http://forum.degreez.net/viewtopic.php?t=7070
 
 
 Copyright

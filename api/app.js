@@ -6,7 +6,7 @@ const session = require('express-session');
 const cookies = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 global.mongo = require('./modules/mongo');
-const forums = require('./modules/forums');
+const forum = require('./modules/forum');
 const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 
 
 (async function initalize(){
-	global.categories = await forums.getCategories();
+	global.categories = await forum.getCategories();
 })();
 
 const server = http.createServer(app);

@@ -1,9 +1,9 @@
 /www/node_modules
-/forums/node_modules
+/forum/node_modules
 /api/node_modules
 /env
 /www/config.json
-/forums/config.json
+/forum/config.json
 /database/data
 /database/keyfile
 /nginx/certs

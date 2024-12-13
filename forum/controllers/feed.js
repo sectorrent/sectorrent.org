@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
-const forums = require('../modules/forums');
+const forum = require('../modules/forum');
 
 exports.getHome = async (req, res) => {
-	forums.getHome(req).then((data) => {
+	forum.getHome(req).then((data) => {
 		res.render('layouts/index', {
 			title: 'Home Page',
 			page: 'home',
@@ -22,7 +22,7 @@ exports.getHome = async (req, res) => {
 exports.getLatest = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
-	forums.getLatest(req).then((data) => {
+	forum.getLatest(req).then((data) => {
 		res.render('layouts/latest', {
 			title: 'Latest Page',
 			page: 'latest',
@@ -52,7 +52,7 @@ exports.getLatest = async (req, res) => {
 exports.getTop = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
-	forums.getTop(req).then((data) => {
+	forum.getTop(req).then((data) => {
 		res.render('layouts/top', {
 			title: 'Top Page',
 			page: 'top',
@@ -83,7 +83,7 @@ exports.getCategory = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
 
-	forums.getCategory(req, slug).then((data) => {
+	forum.getCategory(req, slug).then((data) => {
 		res.render('layouts/categories/index', {
 			title: 'Category Page',
 			page: `category_${slug}`,
@@ -116,7 +116,7 @@ exports.getCategoryLatest = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
 
-	forums.getLatest(req, slug).then((data) => {
+	forum.getLatest(req, slug).then((data) => {
 		res.render('layouts/categories/latest', {
 			title: 'Latest Page',
 			page: `category_${slug}`,
@@ -149,7 +149,7 @@ exports.getCategoryTop = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
 
-	forums.getTop(req, slug).then((data) => {
+	forum.getTop(req, slug).then((data) => {
 		res.render('layouts/categories/top', {
 			title: 'Top Page',
 			page: `category_${slug}`,
@@ -179,7 +179,7 @@ exports.getCategoryTop = async (req, res) => {
 };
 
 exports.getCategories = async (req, res) => {
-	forums.getCategories(req).then((data) => {
+	forum.getCategories(req).then((data) => {
 		res.render('layouts/categories', {
 			title: 'Categories Page',
 			page: 'categories',

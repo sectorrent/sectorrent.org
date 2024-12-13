@@ -7,7 +7,7 @@ const cookies = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 const crypto = require('crypto');
 global.mongo = require('./modules/mongo');
-const forums = require('./modules/forums');
+const forum = require('./modules/forum');
 const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
@@ -61,13 +61,13 @@ app.use(async (req, res, next) => {
 });
 
 (async function initalize(){
-	global.categories = await forums.getCategoriesList();
+	global.categories = await forum.getCategoriesList();
 })();
 
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`forums.${config.general.domain} started`);
+	console.log(`forum.${config.general.domain} started`);
 });
 
 
