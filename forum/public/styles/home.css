@@ -27,7 +27,6 @@ content nav {
 content ul {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap; /* TEMPORARY - CHANGE TO DROP DOWN OPTION */
     padding: 0;
     margin: 0 auto;
 }
