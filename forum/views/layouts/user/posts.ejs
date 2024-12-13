@@ -3,8 +3,10 @@
     categories.forEach((category, index) => {
         mappedCategories[category._id.toString()] = index;
     });
+    
+    const sideBarId = uniqid();
 %>
-<%- include('../../fragments/header') %>
+<%- include('../../fragments/header', { sideBarId }) %>
         <section>
 <%- include('../../fragments/sidebar') %>
 
