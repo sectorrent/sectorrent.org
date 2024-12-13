@@ -122,6 +122,8 @@ app.use([
 
 app.get('/categories/edit', adminController.getEditCategories);
 
+//MAKE SIDE BAR COLLAPSE IF TOO SMALL
+
 app.get('*', (req, res) => {
 	res.json({
 		status: 404,
