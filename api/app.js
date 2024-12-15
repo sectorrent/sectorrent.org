@@ -106,6 +106,16 @@ app.get('/signout', accountController.getSignOut);
 app.post('/forgot-password', express.json(), accountController.postForgotPassword);
 app.put('/reset-password', express.json(), accountController.putResetPassword);
 
+app.get('/', feedController.getHome);
+app.get('/home', feedController.getHome);
+app.get('/categories', feedController.getCategories);
+app.get('/latest', feedController.getLatest);
+app.get('/top', feedController.getTop);
+
+app.get('/c/:slug', feedController.getCategory);
+app.get('/c/:slug/latest', feedController.getCategoryLatest);
+app.get('/c/:slug/top', feedController.getCategoryTop);
+
 app.use([
 	'/thread',
 	'/comment',

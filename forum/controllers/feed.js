@@ -195,4 +195,3 @@ exports.getCategories = async (req, res) => {
 		console.log(error);
 	});
 };
-
