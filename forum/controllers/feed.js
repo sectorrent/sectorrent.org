@@ -16,8 +16,8 @@ exports.getHome = async (req, res) => {
 
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
-			title: 'Category Page',
-			page: `category_${slug}`,
+			title: 'Home Page',
+			page: `home`,
 			uniqid: uuidv4,
 			styles: [
 				'category',
@@ -47,8 +47,8 @@ exports.getLatest = async (req, res) => {
 
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
-			title: 'Category Page',
-			page: 'category',
+			title: 'Latest Page',
+			page: 'latest',
 			uniqid: uuidv4,
 			styles: [
 				'category',
@@ -77,8 +77,8 @@ exports.getTop = async (req, res) => {
 
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
-			title: 'Category Page',
-			page: 'category',
+			title: 'Top Page',
+			page: 'top',
 			uniqid: uuidv4,
 			styles: [
 				'category',
@@ -142,7 +142,7 @@ exports.getCategoryLatest = async (req, res) => {
 
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
-			title: 'Category Page',
+			title: 'Latest Page',
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
@@ -175,7 +175,7 @@ exports.getCategoryTop = async (req, res) => {
 
 	}).catch(function(error){
 		res.render('layouts/error/empty_category', {
-			title: 'Category Page',
+			title: 'Top Page',
 			page: `category_${slug}`,
 			uniqid: uuidv4,
 			styles: [
