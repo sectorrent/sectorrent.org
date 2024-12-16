@@ -1,6 +1,7 @@
 const { ObjectId, Long } = require('mongodb');
 const middleware = require('./middleware');
 const form = require('./form');
+const TypError = require('./type_error');
 
 exports.getEditThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);

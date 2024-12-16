@@ -1,5 +1,4 @@
 //const { ObjectId, Long } = require('mongodb');
-const TypError = require('./type_error');
 
 exports.getCategoriesList = async () => {
 	global.categories = await global.mongo.getDatabase().collection('categories').aggregate([
