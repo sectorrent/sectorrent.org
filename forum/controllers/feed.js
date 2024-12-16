@@ -117,6 +117,7 @@ exports.getCategory = async (req, res) => {
 				'category',
 				'table'
 			],
+			slug,
 			categories: global.categories
 		});
 	});
@@ -150,6 +151,7 @@ exports.getCategoryLatest = async (req, res) => {
 				'table'
 			],
 			type: 'latest',
+			slug,
 			categories: global.categories
 		});
 	});
@@ -181,7 +183,8 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
-			type: 'latest',
+			type: 'top',
+			slug,
 			categories: global.categories
 		});
 	});

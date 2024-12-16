@@ -9,10 +9,10 @@
                 <nav>
                     <ul>
                         <li<% if(typeof type != 'undefined' && type == 'latest'){ %> selected<% } %>>
-                            <a href='/latest'>Latest</a>
+                            <a href='<% if(typeof slug != 'undefined'){ %>/c/<%= slug %><% } %>/latest'>Latest</a>
                         </li>
                         <li<% if(typeof type != 'undefined' && type == 'top'){ %> selected<% } %>>
-                            <a href='/top'>Top</a>
+                            <a href='<% if(typeof slug != 'undefined'){ %>/c/<%= slug %><% } %>/top'>Top</a>
                         </li>
 <%
     if(isSignedIn){
