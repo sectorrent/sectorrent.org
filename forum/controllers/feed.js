@@ -15,7 +15,7 @@ exports.getHome = async (req, res) => {
 		});
 
 	}).catch(function(error){
-		res.render('layouts/error/empty_category', {
+		res.render('layouts/error/empty_home', {
 			title: 'Home Page',
 			page: `home`,
 			uniqid: uuidv4,
@@ -53,6 +53,7 @@ exports.getLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			type: 'latest',
 			categories: global.categories
 		});
 	});
@@ -83,6 +84,7 @@ exports.getTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			type: 'top',
 			categories: global.categories
 		});
 	});
@@ -147,6 +149,7 @@ exports.getCategoryLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			type: 'latest',
 			categories: global.categories
 		});
 	});
@@ -178,6 +181,7 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			type: 'latest',
 			categories: global.categories
 		});
 	});
