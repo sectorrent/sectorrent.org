@@ -23,7 +23,6 @@ exports.getHome = async (req, res) => {
 				'category',
 				'table'
 			],
-			slug,
 			categories: global.categories
 		});
 	});
@@ -116,7 +115,6 @@ exports.getCategory = async (req, res) => {
 				'category',
 				'table'
 			],
-			slug,
 			categories: global.categories
 		});
 	});
@@ -149,7 +147,6 @@ exports.getCategoryLatest = async (req, res) => {
 				'category',
 				'table'
 			],
-			slug,
 			categories: global.categories
 		});
 	});
@@ -168,7 +165,6 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
-			slug,
 			categories: global.categories,
 			data
 		});
@@ -182,7 +178,6 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
-			slug,
 			categories: global.categories
 		});
 	});
