@@ -8,7 +8,7 @@
             <content>
                 <nav>
                     <ul>
-                        <li>
+                        <li<% if(typeof type != 'undefined' && type == 'categories'){ %> selected<% } %>>
                             <a href='/categories'>Categories</a>
                         </li>
                         <li>
@@ -21,6 +21,15 @@
     if(isSignedIn){
 %>
                         <filler></filler>
+<%
+        if(user.role > 1){
+%>
+                        <li>
+                            <a href='/categories/edit'>Edit Categories</a>
+                        </li>
+<%
+        }
+%>
                         <li>
                             <a href='/thread'>New Thread</a>
                         </li>

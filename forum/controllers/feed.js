@@ -201,6 +201,16 @@ exports.getCategories = async (req, res) => {
 		});
 
 	}).catch(function(error){
-		console.log(error);
+		res.render('layouts/error/empty_home', {
+			title: 'Home Page',
+			page: `home`,
+			uniqid: uuidv4,
+			styles: [
+				'category',
+				'table'
+			],
+			type: 'categories',
+			categories: global.categories
+		});
 	});
 };
