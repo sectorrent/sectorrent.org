@@ -15,7 +15,17 @@ exports.getHome = async (req, res) => {
 		});
 
 	}).catch(function(error){
-		console.log(error);
+		res.render('layouts/error/empty_category', {
+			title: 'Category Page',
+			page: `category_${slug}`,
+			uniqid: uuidv4,
+			styles: [
+				'category',
+				'table'
+			],
+			slug,
+			categories: global.categories
+		});
 	});
 };
 
