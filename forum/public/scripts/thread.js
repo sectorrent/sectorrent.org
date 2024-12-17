@@ -6,8 +6,6 @@ const deleteThread = document.querySelector('button[action="delete-thread"]');
 const reportThread = document.querySelector('button[action="report-thread"]');
 const comments = document.querySelector('comments');
 
-var loading = false;
-
 (function(){
     let selector = document.querySelectorAll('button[action="delete-comment"]');
     for(const del of selector){
@@ -27,11 +25,11 @@ if(archiveThread){
     archiveThread.onclick = function(e){
         console.log('ARCHIVE');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread/archive?id=${id}`, {
             method: 'POST',
@@ -49,11 +47,11 @@ if(archiveThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -62,11 +60,11 @@ if(unarchiveThread){
     unarchiveThread.onclick = function(e){
         console.log('UN-ARCHIVE');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread/archive?id=${id}`, {
             method: 'DELETE',
@@ -84,11 +82,11 @@ if(unarchiveThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -97,11 +95,11 @@ if(pinThread){
     pinThread.onclick = function(e){
         console.log('PIN');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread/pin?id=${id}`, {
             method: 'POST',
@@ -119,11 +117,11 @@ if(pinThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -132,11 +130,11 @@ if(unpinThread){
     unpinThread.onclick = function(e){
         console.log('UNPIN');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread/pin?id=${id}`, {
             method: 'DELETE',
@@ -154,11 +152,11 @@ if(unpinThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -167,11 +165,11 @@ if(deleteThread){
     deleteThread.onclick = function(e){
         console.log('DELETE');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread?id=${id}`, {
             method: 'DELETE',
@@ -189,11 +187,11 @@ if(deleteThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -202,11 +200,11 @@ if(reportThread){
     reportThread.onclick = function(e){
         console.log('REPORT');
 
-        if(loading){
+        if(processing){
             return;
         }
 
-        loading = true;
+        processing = true;
 
         fetch(`https://api.${window.location.host}/thread/report?id=${id}`, {
             method: 'POST',
@@ -224,11 +222,11 @@ if(reportThread){
                 throw new Error(data.status_message);
             }
 
-            loading = false;
+            processing = false;
 
         }).catch(function(error){
             console.log(error);
-            loading = false;
+            processing = false;
         });
     };
 }
@@ -236,11 +234,11 @@ if(reportThread){
 function ondeletecomment(e){
     console.log('DELETE');
 
-    if(loading){
+    if(processing){
         return;
     }
 
-    loading = true;
+    processing = true;
 
     fetch(`https://api.${window.location.host}/comment?id=${id}`, {
         method: 'DELETE',
@@ -258,22 +256,22 @@ function ondeletecomment(e){
             throw new Error(data.status_message);
         }
 
-        loading = false;
+        processing = false;
 
     }).catch(function(error){
         console.log(error);
-        loading = false;
+        processing = false;
     });
 };
 
 function onreportcomment(e){
     console.log('REPORT');
 
-    if(loading){
+    if(processing){
         return;
     }
 
-    loading = true;
+    processing = true;
 
     fetch(`https://api.${window.location.host}/comment/report?id=${id}`, {
         method: 'POST',
@@ -293,11 +291,11 @@ function onreportcomment(e){
 
         //comment.className = 'reported';
 
-        loading = false;
+        processing = false;
 
     }).catch(function(error){
         console.log(error);
-        loading = false;
+        processing = false;
     });
 };
 
@@ -329,8 +327,8 @@ function onSubmit(event){
     }).then((data) => {
         switch(data.status){
             case 200:
+                textarea.value = '';
                 comments.appendChild(createComment(data.data));
-                //CLEAR WRITE TEXT...
                 return;
 
             default:
@@ -368,6 +366,7 @@ function createComment(data){
     comment.appendChild(userIconLink);
 
     const commentInner = document.createElement('comment-inner');
+    commentInner.className = 'new';
     const commentHeader = document.createElement('comment-header');
 
     const userLink = document.createElement('a');
