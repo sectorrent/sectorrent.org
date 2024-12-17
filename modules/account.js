@@ -11,12 +11,6 @@ const ejs = require('ejs');
 
 exports.signIn = async (req, res) => {
     let check = [
-		{
-			key: 'trap',
-			type: 'BOOLEAN',
-			required: true,
-			match: false
-		},
         {
             key: 'email',
             type: 'EMAIL',
@@ -192,18 +186,12 @@ exports.signIn = async (req, res) => {
 
 	return {
 		message: 'Signed in!',
-		link: '/profile'
+		link: `/`
 	};
 };
 
 exports.signUp = async (req, res) => {
     let check = [
-		{
-			key: 'trap',
-			type: 'BOOLEAN',
-			required: true,
-			match: false
-		},
         {
             key: 'email',
             type: 'EMAIL',
@@ -437,7 +425,7 @@ exports.signUp = async (req, res) => {
 	
 		return {
 			message: 'Signed up!',
-			link: '/'
+			link: `/u/${username}/edit`
 		};
 
 	}catch(error){
@@ -471,12 +459,6 @@ exports.signOut = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
     let check = [
-		{
-			key: 'trap',
-			type: 'BOOLEAN',
-			required: true,
-			match: false
-		},
         {
             key: 'email',
             type: 'EMAIL',
@@ -580,12 +562,6 @@ exports.resetPassword = async (req, res, id) => {
 	id = ObjectId.createFromHexString(id);
 
     let check = [
-		{
-			key: 'trap',
-			type: 'BOOLEAN',
-			required: true,
-			match: false
-		},
         {
             key: 'password',
             type: 'STRING',
