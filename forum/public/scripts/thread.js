@@ -343,6 +343,22 @@ function onSubmit(event){
     });
 }
 
+//COMMENT CREATION TEST
+/*
+comments.appendChild(createComment({
+    user: {
+        username: 'Ted',
+        avatar: '',
+    },
+    content: 'THIS IS A TEST\n\
+-----\n\
+\n\
+**bitch**\n\
+HELLO WORLD',
+    created: 1734070266625
+}));
+*/
+
 function createComment(data){
     const comment = document.createElement('comment');
 
