@@ -5,7 +5,7 @@ exports.postSignIn = async (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Query was successful',
-			data: data
+			data
 		});
 
 	}).catch(function(error){
@@ -36,7 +36,7 @@ exports.postSignUp = async (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Insert was successful',
-			data: data
+			data
 		});
 
 	}).catch(function(error){
@@ -71,7 +71,7 @@ exports.postForgotPassword = (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Query was successful',
-			data: data
+			data
 		});
 
 	}).catch(function(error){
@@ -104,7 +104,7 @@ exports.putResetPassword = (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Update was successful',
-			data: data
+			data
 		});
 
 	}).catch(function(error){

@@ -103,7 +103,8 @@ exports.postComment = async (req, id) => {
 
     data.thread = id;
     data.user = middleware.getUserID(req);
-    data.created = Long.fromNumber(Date.now());
+    const created = Date.now();
+    data.created = Long.fromNumber(created);
     data.modified = data.created;
 
     const result = await global.mongo.getDatabase().collection('comments').insertOne(data);
@@ -113,8 +114,10 @@ exports.postComment = async (req, id) => {
     }
 
     return {
-		message: 'Comment posted!'
-	};
+        ...data,
+        created,
+        modified: created
+    };
 };
 
 exports.putComment = async (req, id) => {
@@ -158,6 +161,7 @@ exports.putComment = async (req, id) => {
                     },
                     {
                         $project: {
+                            _id: true,
                             archived: true
                         }
                     }
@@ -202,7 +206,8 @@ exports.putComment = async (req, id) => {
     }
 
     return {
-        message: 'Comment updated!'
+        message: 'Comment updated!',
+        link: `/t/${commentExists[0].thread._id.toString()}`
     };
 };
 

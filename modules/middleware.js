@@ -112,7 +112,3 @@ exports.getLastName = (req) => {
 exports.getRole = (req) => {
 	return req.token.payload.data.role;
 };
-
-exports.getProfileAvatar = (req) => {
-	return req.profile.payload.data.avatar;
-};

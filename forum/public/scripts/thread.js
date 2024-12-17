@@ -327,7 +327,8 @@ function onSubmit(event){
     }).then((data) => {
         switch(data.status){
             case 200:
-                comments.appendChild(createComment(data));
+                comments.appendChild(createComment(data.data));
+                //CLEAR WRITE TEXT...
                 return;
 
             default:
@@ -343,18 +344,6 @@ function onSubmit(event){
     });
 }
 
-//COMMENT CREATION TEST
-/*
-comments.appendChild(createComment({
-    user: {
-        username: 'Ted',
-        avatar: '',
-    },
-    content: 'THIS IS A TEST',
-    created: 1734070266625
-}));
-*/
-
 function createComment(data){
     const comment = document.createElement('comment');
 
@@ -363,7 +352,7 @@ function createComment(data){
     userIconLink.href = `/u/${data.user.username}`;
 
     const userIcon = document.createElement('img');
-    userIcon.src = data.user.avatar;
+    //userIcon.src = data.user.avatar;
     userIcon.onload = function(e){
         this.className = 'show';
     };
@@ -383,7 +372,11 @@ function createComment(data){
     userLink.href = `/u/${data.user.username}`;
 
     if(data.user.role > 1){
-        //CREATE MODERATOR ICON
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', 'M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z');
+        svg.appendChild(path);
+        userLink.appendChild(svg);
     }
 
     userLink.appendChild(document.createTextNode(data.user.username));

@@ -7,7 +7,10 @@ exports.postComment = async (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Insert was successful',
-			data: data
+			data: {
+				...data,
+				user: req.token.payload.data
+			}
 		});
 
 	}).catch(function(error){
@@ -40,7 +43,7 @@ exports.putComment = async (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Update was successful',
-			data: data
+			data
 		});
 
 	}).catch(function(error){

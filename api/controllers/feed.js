@@ -6,7 +6,7 @@ exports.getHome = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -22,7 +22,7 @@ exports.getLatest = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -38,7 +38,7 @@ exports.getTop = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -55,7 +55,7 @@ exports.getCategory = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -72,7 +72,7 @@ exports.getCategoryLatest = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -89,7 +89,7 @@ exports.getCategoryTop = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
@@ -103,7 +103,7 @@ exports.getCategories = async (req, res) => {
             status: 200,
             status_message: 'Query was successful',
             categories: global.categories,
-            data: data
+            data
         });
 
 	}).catch(function(error){
