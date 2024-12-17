@@ -291,6 +291,8 @@ function onreportcomment(e){
             throw new Error(data.status_message);
         }
 
+        //comment.className = 'reported';
+
         loading = false;
 
     }).catch(function(error){

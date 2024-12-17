@@ -40,6 +40,11 @@ content comment-inner {
     border-radius: 10px;
 }
 
+content comment-inner.reported {
+    background-color: #140000;
+    border: solid 1px #340000;
+}
+
 comments {
     display: flex;
     gap: 30px;
@@ -93,6 +98,11 @@ content comment-header {
     border-top-right-radius: 10px;
     background-color: var(--background-secondary);
     border-bottom: solid 1px var(--background-shimmer);
+}
+
+content comment-inner.reported comment-header {
+    background-color: #240000;
+    border-bottom: solid 1px #340000;
 }
 
 content comment a.user-icon,
