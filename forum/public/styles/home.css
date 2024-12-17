@@ -9,6 +9,7 @@ content {
     width: 100%;
     flex-direction: column;
     gap: 20px;
+    padding-bottom: 30px;
 }
 
 content nav {
