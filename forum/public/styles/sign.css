@@ -149,6 +149,19 @@ response:not(:empty) {
 	display: block;
 }
 
+pow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+pow svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+}
+
 a.button {
     display: block;
     width: fit-content;
