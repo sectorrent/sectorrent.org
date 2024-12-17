@@ -1,6 +1,12 @@
 @media(max-width:1100px) {
     preview pre {
-        width: calc((var(--width) * 1vw) - 109px) !important;
+        width: calc((var(--width) * 1vw) - 97px) !important;
+    }
+}
+
+@media(max-width:800px) {
+    preview pre {
+        width: 624px !important
     }
 }
 
