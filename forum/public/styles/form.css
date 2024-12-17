@@ -156,7 +156,7 @@ field input-field:nth-child(2) {
 }
 
 preview pre {
-    width: calc((var(--width)* 1vw) - 384px) !important;
+    width: calc((var(--width)* 1vw) - 389px) !important;
 }
 
 
