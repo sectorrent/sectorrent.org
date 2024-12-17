@@ -350,11 +350,7 @@ comments.appendChild(createComment({
         username: 'Ted',
         avatar: '',
     },
-    content: 'THIS IS A TEST\n\
------\n\
-\n\
-**bitch**\n\
-HELLO WORLD',
+    content: 'THIS IS A TEST',
     created: 1734070266625
 }));
 */
