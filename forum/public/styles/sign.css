@@ -138,17 +138,6 @@ input[type='submit']:hover {
     background-color: var(--secondary);
 }
 
-response {
-	display: none;
-	margin: 0px auto;
-	color: var(--error);
-	overflow: hidden;
-}
-
-response:not(:empty) {
-	display: block;
-}
-
 pow {
     display: flex;
     align-items: center;
@@ -160,6 +149,17 @@ pow svg {
     width: 24px;
     height: 24px;
     fill: var(--text-primary);
+}
+
+response {
+	display: none;
+	margin: 0px auto;
+	color: var(--error);
+	overflow: hidden;
+}
+
+response:not(:empty) {
+	display: block;
 }
 
 a.button {

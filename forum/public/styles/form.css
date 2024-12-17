@@ -253,6 +253,19 @@ fl-option span {
     height: 16px;
 }
 
+pow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+pow svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+}
+
 response {
 	display: none;
 	margin: 0px auto;
