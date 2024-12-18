@@ -170,6 +170,7 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			slug,
 			categories: global.categories,
 			data
 		});
