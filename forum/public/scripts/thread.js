@@ -329,6 +329,7 @@ function onSubmit(event){
             case 200:
                 textarea.value = '';
                 comments.appendChild(createComment(data.data));
+                //RESET POW...
                 return;
 
             default:
@@ -383,7 +384,7 @@ function createComment(data){
     commentHeader.appendChild(userLink);
 
     const date = document.createElement('date');
-    //date.appendChild(document.createTextNode(data.user.username));
+    date.appendChild(document.createTextNode(timeAgo(new Date(data.created))));
     commentHeader.appendChild(date);
 
     const action = document.createElement('action');
@@ -438,4 +439,29 @@ function createComment(data){
     comment.appendChild(commentInner);
 
     return comment;
+}
+
+function timeAgo(date){
+    const now = new Date();
+    const diff = now-date;
+
+    const seconds = Math.floor(diff/1000);
+    const minutes = Math.floor(seconds/60);
+    const hours = Math.floor(minutes/60);
+    const days = Math.floor(hours/24);
+    const weeks = Math.floor(days/7);
+
+    if(seconds < 60){
+        return 'now';
+    }else if(minutes < 60){
+        return `${minutes} ${minutes === 1 ? 'min' : 'mins'} ago`;
+    }else if(hours < 24){
+        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    }else if(days < 7){
+        return `${days} ${days === 1 ? 'day' : "days"} ago`;
+    }else if(weeks < 4){
+        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+    }else{
+        return date.toLocaleDateString();
+    }
 }

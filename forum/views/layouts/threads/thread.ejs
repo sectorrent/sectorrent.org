@@ -5,6 +5,31 @@
     categories.forEach((category, index) => {
         mappedCategories[category._id.toString()] = index;
     });
+
+    function timeAgo(date){
+        const now = new Date();
+        const diff = now-date;
+
+        const seconds = Math.floor(diff/1000);
+        const minutes = Math.floor(seconds/60);
+        const hours = Math.floor(minutes/60);
+        const days = Math.floor(hours/24);
+        const weeks = Math.floor(days/7);
+
+        if(seconds < 60){
+            return 'now';
+        }else if(minutes < 60){
+            return `${minutes} ${minutes === 1 ? 'min' : 'mins'} ago`;
+        }else if(hours < 24){
+            return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        }else if(days < 7){
+            return `${days} ${days === 1 ? 'day' : "days"} ago`;
+        }else if(weeks < 4){
+            return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+        }else{
+            return date.toLocaleDateString();
+        }
+    }
     
     const sideBarId = uniqid();
 %>
@@ -58,7 +83,7 @@
 %>
                                         <%= data.user.username %>
                                 </a>
-                                <date><% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
+                                <date><%= timeAgo(new Date(data.created)) %></date>
                                 <action>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
@@ -201,7 +226,7 @@
 %>
                                     <%= comment.user.username %>
                                 </a>
-                                <date><% const date = new Date(comment.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
+                                <date><%= timeAgo(new Date(comment.created)) %></date>
                                 <action>
                                     <svg viewBox='0 0 24 24'>
                                         <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />

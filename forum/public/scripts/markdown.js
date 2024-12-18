@@ -377,33 +377,6 @@ function tokenizeLine(language, line){
             tokens = tokenizeJava(line);
             break;
 
-        case 'json':
-            tokens = tokenizeJson(line);
-            break;
-
-        default:
-            return line;
-    }
-    
-    return tokens
-        .map(({ type, value }) => {
-            const className = `code-${type}`;
-            const escapedValue = value
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-            return `<span class='${className}'>${escapedValue}</span>`;
-        })
-        .join('');
-}
-
-function tokenizeLine(language, line){
-    let tokens;
-    switch(language){
-        case 'java':
-            tokens = tokenizeJava(line);
-            break;
-
         case 'rust':
             tokens = tokenizeRust(line);
             break;
