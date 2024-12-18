@@ -95,7 +95,12 @@ section[type='contributions'] container commit > div {
 
 section[type='contributions'] container commit div div {
     color: var(--text-primary);
-    margin-bottom: 5px;
+}
+
+section[type='contributions'] container commit div h3 {
+    margin: 0;
+    color: var(--text-secondary);
+    font-weight: normal;
 }
 
 section[type='contributions'] container commit date {
@@ -104,6 +109,7 @@ section[type='contributions'] container commit date {
 }
 
 section[type='contributions'] container commit a {
+    display: block;
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.8em;

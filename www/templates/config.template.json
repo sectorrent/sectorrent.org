@@ -19,5 +19,8 @@
         "user": "${DB_USER}",
         "password": "${DB_PWD}",
         "database": "${DB_NAME}"
+    },
+    "github": {
+        "username": "${GITHUB_USER}"
     }
 }

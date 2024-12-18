@@ -5,7 +5,7 @@ const githubUrl = 'https://api.github.com/repos/';
 
 exports.getRecentCommits = async (config) => {
 	const query = `query {
-	organization(login: "sectorrent") {
+	organization(login: "${config.github.username}") {
 		repositories(first: 100) {
 			nodes {
 				name
@@ -49,7 +49,10 @@ exports.getRecentCommits = async (config) => {
 		}
 		
 		for(const commit of node.ref.target.history.nodes){
-			commits.push(commit);
+			commits.push({
+				...commit,
+				name: node.name
+			});
 		}
 	}
 

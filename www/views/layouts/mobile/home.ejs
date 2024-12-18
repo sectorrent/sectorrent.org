@@ -70,12 +70,13 @@
 %>
                 <commit>
                     <div>
+                        <h3><%= config.github.username %>/<%= commit.name %></h3>
                         <div>
                             <%= commit.message %>
                         </div>
                         <a href='https://github.com/<%= commit.author.name %>'><%= commit.author.name %></a>
                     </div>
-                    <date><%= timeAgo(commit.committedDate) %></date>
+                    <date><%= timeAgo(new Date(commit.committedDate)) %></date>
                 </commit>
 <%
     }
