@@ -77,6 +77,7 @@ editor-header button:hover svg {
 preview {
     display: block;
     padding: 10px;
+    word-break: break-word;
 }
 
 editor textarea {

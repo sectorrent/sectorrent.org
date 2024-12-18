@@ -29,6 +29,7 @@ section {
 
 preview {
     display: block;
+    word-break: break-word;
 }
 
 preview h1,
