@@ -264,7 +264,8 @@ input[type='checkbox']:checked ~ section sidebar {
     display: block !important;
 }
 
-sidebar a,
+sidebar > a,
+        sidebar container a,
         sidebar label {
     display: flex;
     align-items: center;
@@ -296,20 +297,32 @@ sidebar label:before {
     background-image: url(/icons/ic_less.svg);
 }
 
+sidebar label a {
+    display: block;
+    margin-left: auto;
+}
+
 sidebar a svg {
     display: block;
     width: 1.2em;
     height: 1.2em;
     fill: var(--text-primary);
+    transition: fill 0.3s;
 }
 
-sidebar a[selected] {
+sidebar label a:hover svg {
+    fill: var(--primary);
+}
+
+sidebar a[selected],
+        sidebar label[selected] {
     background-color: var(--background-shimmer);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-sidebar a:hover,
+sidebar > a:hover,
+        sidebar container a:hover,
         sidebar label:hover {
     background-color: var(--background-shimmer);
 }
