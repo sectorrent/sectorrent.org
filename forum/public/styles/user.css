@@ -97,7 +97,7 @@ content li[selected] a {
     background-color: var(--primary);
 }
 
-bio {
+content > preview {
     display: block;
     width: calc(100% - 22px);
     min-height: 250px;
@@ -106,21 +106,13 @@ bio {
     border: solid 1px var(--background-shimmer);
 }
 
-bio:before {
+content > preview:before {
     display: block;
     content: 'Bio';
     font-size: 0.8em;
 }
 
-bio *:first-child {
-    margin-top: 0;
-}
-
-bio *:last-child {
-    margin-bottom: 0;
-}
-
-bio:empty {
+content > preview:empty {
     display: none;
 }
 

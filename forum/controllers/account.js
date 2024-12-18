@@ -64,7 +64,8 @@ exports.getUserSummary = async (req, res) => {
 			page: 'user',
 			uniqid: uuidv4,
 			styles: [
-				'user'
+				'user',
+				'markdown'
 			],
 			username,
 			categories: global.categories,
