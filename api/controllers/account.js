@@ -129,3 +129,34 @@ exports.putResetPassword = (req, res) => {
 		res.end();
 	});
 };
+
+exports.putUser = (req, res) => {
+	account.putUser(req, res).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Update was successful',
+			data
+		});
+
+	}).catch(function(error){
+		switch(error.name){
+			case 'FieldError':
+				res.json({
+					status: 417,
+					status_message: error.message,
+					data: {
+						fields: error.fields
+					}
+				});
+				break;
+
+			default:
+				res.json({
+					status: 400,
+					status_message: error.message
+				});
+				break;
+		}
+		res.end();
+	});
+};

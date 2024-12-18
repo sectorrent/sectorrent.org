@@ -33,7 +33,7 @@
 
                     <thread-inner>
                         <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='PUT' target='hiddenFrame'>
-                            <%- include('../../fragments/editor', { placeholder: 'Write a comment using Markdown.', content: data.content }) %>
+                            <%- include('../../fragments/editor', { name: 'contnet', placeholder: 'Write a comment using Markdown.', content: data.content }) %>
 
                             <response></response>
                             

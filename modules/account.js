@@ -68,15 +68,6 @@ exports.signIn = async (req, res) => {
 		throw Error('POW was not valid');
 	}
 
-/*
-	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
-		throw new Error('No captcha found.');
-	}
-
-	if(crypto.createHmac('sha256', res.locals.config.token.captcha).update(req.body.captcha.toLowerCase()).digest('hex') != req.cookies.captcha){
-		throw new Error('Captcha is invalid.');
-	}
-*/
 	req.body.email = req.body.email.toLowerCase().trim();
 
 	const data = await global.mongo.getDatabase().collection('users').findOne(
@@ -144,45 +135,6 @@ exports.signIn = async (req, res) => {
 
 	req.session.signature = token.split('.')[2];
 	req.session.secret = data.password;
-
-	/*
-	const ip = session.getUserIP(req);
-
-	session.getLocation(req, ip).then(async (location) => {
-		const device = session.getSystemInfo(req);
-
-		global.mongo.getDatabase().collection('sessions').insertOne(
-			{
-				user: data._id,
-				ip: ip,
-				code: location.code,
-				country: location.country,
-				os: device.os,
-				browser: device.browser,
-				created: Long.fromNumber(Date.now())
-			}
-		);
-
-		ejs.renderFile('./emails/new_signin.ejs', {
-			config: res.locals.config,
-			data: {
-				ip: ip,
-				code: location.code,
-				country: location.country,
-				os: device.os,
-				browser: device.browser
-			}
-		}).then((content) => {
-			mailer.mail(res.locals.config.mailer, {
-				name: res.locals.config.general.project_name,
-				email: req.body.email,
-				to_name: data.fname+' '+data.lname,
-				subject: 'New Sign-in',
-				content: content
-			});
-		});
-	});
-	*/
 
 	return {
 		message: 'Signed in!',
@@ -271,15 +223,7 @@ exports.signUp = async (req, res) => {
 					max: 128
 				}
 			]
-		}/*,
-		{
-            key: 'captcha',
-            type: 'STRING',
-			required: true,
-			pattern: /^[a-zA-Z0-9]+$/,
-            min: 2,
-            max: 10
-		}*/
+		}
     ];
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
@@ -287,15 +231,7 @@ exports.signUp = async (req, res) => {
 	if(!pow.validateSolution(req, res, req.body.pow)){
 		throw Error('POW was not valid');
 	}
-/*
-	if(typeof req.cookies.captcha == 'undefined' || !req.cookies.captcha){
-		throw new Error('No captcha found.');
-	}
 
-	if(crypto.createHmac('sha256', res.locals.config.token.captcha).update(req.body.captcha.toLowerCase()).digest('hex') != req.cookies.captcha){
-		throw new Error('Captcha is invalid.');
-	}
-*/
 	if(req.body.password != req.body.rpassword){
 		throw new FieldError([
 			{
@@ -390,38 +326,6 @@ exports.signUp = async (req, res) => {
 	
 		req.session.signature = token.split('.')[2];
 		req.session.secret = password;
-	
-		/*
-		const ip = session.getUserIP(req);
-	
-		session.getLocation(req, ip).then(async (location) => {
-			const device = session.getSystemInfo(req);
-	
-			global.mongo.getDatabase().collection('sessions').insertOne(
-				{
-					user: id,
-					ip: ip,
-					code: location.code,
-					country: location.country,
-					os: device.os,
-					browser: device.browser,
-					created: Long.fromNumber(Date.now())
-				}
-			);
-	
-			ejs.renderFile('./emails/signup.ejs', {
-				config: res.locals.config
-			}).then((content) => {
-				mailer.mail(res.locals.config.mailer, {
-					name: res.locals.config.general.project_name,
-					email: req.body.email,
-					to_name: data.fname+' '+data.lname,
-					subject: 'Sign-up',
-					content: content
-				});
-			});
-		});
-		*/
 	
 		return {
 			message: 'Signed up!',
@@ -710,45 +614,6 @@ exports.resetPassword = async (req, res, id) => {
 	req.session.signature = token.split('.')[2];
 	req.session.secret = password;
 
-	/*
-	const ip = session.getUserIP(req);
-
-	session.getLocation(req, ip).then(async (location) => {
-		const device = session.getSystemInfo(req);
-
-		global.mongo.getDatabase().collection('sessions').insertOne(
-			{
-				user: data._id,
-				ip: ip,
-				code: location.code,
-				country: location.country,
-				os: device.os,
-				browser: device.browser,
-				created: Long.fromNumber(Date.now())
-			}
-		);
-
-		ejs.renderFile('./emails/password_changed.ejs', {
-			config: res.locals.config,
-			data: {
-				ip: ip,
-				code: location.code,
-				country: location.country,
-				os: device.os,
-				browser: device.browser
-			}
-		}).then((content) => {
-			mailer.mail(res.locals.config.mailer, {
-				name: res.locals.config.general.project_name,
-				email: data.email,
-				to_name: data.fname+' '+data.lname,
-				subject: 'Password Changed',
-				content: content
-			});
-		});
-	});
-	*/
-
 	return {
 		message: 'Changes saved.',
 		link: '/'
@@ -937,6 +802,125 @@ exports.getUserSummary = async (req, username) => {
     data = data[0];
 
     return data;
+};
+
+exports.putUser = async (req, res) => {
+    let check = [
+        {
+            key: 'email',
+            type: 'EMAIL',
+			required: true,
+            min: 5,
+            max: 64
+        },
+        {
+            key: 'username',
+            type: 'STRING',
+			required: true,
+			pattern: /^[a-zA-Z0-9_]+$/,
+            min: 2,
+            max: 64
+        },
+        {
+            key: 'bio',
+            type: 'STRING',
+			required: true,
+            min: 16,
+            max: 2000
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
+    ];
+
+    req.body = form.checkForm(check, form.removePrototype(req.body));
+
+	if(!pow.validateSolution(req, res, req.body.pow)){
+		throw Error('POW was not valid');
+	}
+
+	req.body.email = req.body.email.toLowerCase().trim();
+
+	const result = await global.mongo.getDatabase().collection('users').updateOne(
+		{
+			_id: middleware.getUserID(req)
+		},
+		{
+			$set: req.body
+		}
+	);
+
+	if(result.modifiedCount != 1){
+		throw new Error('Unable to save to DB');
+	}
+
+	const expires = parseInt((Date.now()/1000)+(60*60*24*30));
+	const token = jwt.generate({
+		alg: 'HS256',
+		typ: 'jwt'
+	},
+	{
+		id: middleware.getUserID(req),
+		usage: {
+			type: 'ANY'
+		},
+		data: {
+			email: req.body.email,
+			username: req.body.username,
+			fname: middleware.getFirstName(req),
+			lname: middleware.getLastName(req),
+			role: middleware.getRole(req)
+		},
+		exp: expires
+	},
+	res.locals.config.token.secret+jwt.generateOTP(password, parseInt(expires/60)));
+
+	res.cookie('token', token, {
+		maxAge: expires,
+		path: '/',
+		domain: '.'+res.locals.config.general.domain,
+		httpOnly: true,
+		//secure: true
+	});
+
+	req.session.signature = token.split('.')[2];
+	req.session.secret = password;
+
+	return {
+		message: 'Changes saved!'
+	};
 };
 
 exports.getUserPosts = async (req, username) => {

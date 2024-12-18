@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const account = require('../modules/account');
+const markdown = require('../modules/markdown');
 const pow = require('../modules/pow');
 
 exports.getSignIn = async (req, res) => {
@@ -54,6 +55,10 @@ exports.getUserSummary = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
 
 	account.getUserSummary(req, username).then((data) => {
+		if(data.bio){
+			data.bio = markdown.parse(data.bio);
+		}
+
 		res.render('layouts/user/index', {
 			title: 'User Page',
 			page: 'user',

@@ -147,7 +147,7 @@ app.put('/comment', express.json(), commentController.putComment);
 //app.delete('/comment', express.json(), commentController.deleteComment);
 //app.post('/comment/report', express.json(), commentController.postCommentReport);
 
-//app.put('/user', express.json(), accountController.putUser);
+app.put('/user', express.json(), accountController.putUser);
 
 app.get('*', (req, res) => {
 	res.json({

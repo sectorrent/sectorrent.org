@@ -4,7 +4,7 @@ const markdown = require('../modules/markdown');
 const pow = require('../modules/pow');
 
 exports.getNewThread = async (req, res) => {
-	res.render('layouts/threads/new_thread', {
+	res.render('layouts/threads/new', {
 		title: 'New Thread Page',
 		page: 'new-thread',
 		uniqid: uuidv4,
@@ -30,7 +30,7 @@ exports.getThread = async (req, res) => {
 			}
 		}
 
-		res.render('layouts/threads/thread', {
+		res.render('layouts/threads/index', {
 			title: 'Thread Page',
 			page: 'thread',
 			uniqid: uuidv4,
@@ -54,7 +54,7 @@ exports.getEditThread = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
 	thread.getEditThread(req, id).then((data) => {
-		res.render('layouts/threads/edit_thread', {
+		res.render('layouts/threads/edit', {
 			title: 'Thread Page',
 			page: 'thread',
 			uniqid: uuidv4,

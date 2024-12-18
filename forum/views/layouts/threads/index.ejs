@@ -305,7 +305,7 @@
 
                     <reply-inner>
                         <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
-                            <%- include('../../fragments/editor', { placeholder: 'Write a comment using Markdown.' }) %>
+                            <%- include('../../fragments/editor', { name: 'contnet', placeholder: 'Write a comment using Markdown.' }) %>
 
                             <pow>
                                 <svg viewBox='0 0 24 24'>

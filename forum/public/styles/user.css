@@ -106,6 +106,12 @@ bio {
     border: solid 1px var(--background-shimmer);
 }
 
+bio:before {
+    display: block;
+    content: 'Bio';
+    font-size: 0.8em;
+}
+
 bio:empty {
     display: none;
 }
