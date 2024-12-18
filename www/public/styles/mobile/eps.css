@@ -176,19 +176,23 @@ preview blockquote {
     border-left: solid 2px var(--background-shimmer);
 }
 
-preview pre[language='java'] span.code-keyword {
+preview pre[language='java'] span.code-keyword,
+        preview pre[language='rust'] span.code-keyword {
     color: #ff7b72;
 }
 
-preview pre[language='java'] span.code-comment {
+preview pre[language='java'] span.code-comment,
+        preview pre[language='rust'] span.code-comment {
     color: #9198a1;
 }
 
-preview pre[language='java'] span.code-string {
+preview pre[language='java'] span.code-string,
+        preview pre[language='rust'] span.code-string {
     color: #a5d6ff;
 }
 
-preview pre[language='java'] span.code-number {
+preview pre[language='java'] span.code-number,
+        preview pre[language='rust'] span.code-number {
     color: #79c0ff;
 }
 

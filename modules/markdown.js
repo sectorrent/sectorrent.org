@@ -401,15 +401,15 @@ function tokenizeLine(language, line){
         .join('');
 }
 
-function tokenizeRust(line){
-    const regex = /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,|&:<>=_\-+*/%^!~?^,]/g;
+function tokenizeJava(line){
+    const regex = /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,]|\n/g;
 
     const types = {
-        keyword: /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b/,
+        keyword: /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b/,
         comment: /\/\/[^\n]*|\/\*[\s\S]*?\*\//,
         string: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'/,
-        number: /\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/,
-        punctuation: /[{}();,|&:<>=_\-+*/%^!~?^,]/,
+        number: /\b\d+\b/,
+        punctuation: /[{}();,]/
     };
 
     let match;
@@ -444,15 +444,15 @@ function tokenizeRust(line){
     return tokens;
 }
 
-function tokenizeJava(line){
-    const regex = /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,]|\n/g;
+function tokenizeRust(line){
+    const regex = /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b|\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'|\b\d+\b|[{}();,|&:<>=_\-+*/%^!~?^,]/g;
 
     const types = {
-        keyword: /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|if|implements|import|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b/,
+        keyword: /\b(abstract|alignof|as|become|box|break|const|continue|crate|dyn|else|enum|extern|false|fn|for|if|impl|in|let|loop|match|mod|move|mut|not|once|option|panic|priv|pub|ref|return|self|Self|static|struct|super|trait|true|type|unsafe|use|where|while)\b/,
         comment: /\/\/[^\n]*|\/\*[\s\S]*?\*\//,
         string: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)'/,
-        number: /\b\d+\b/,
-        punctuation: /[{}();,]/
+        number: /\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/,
+        punctuation: /[{}();,|&:<>=_\-+*/%^!~?^,]/,
     };
 
     let match;
