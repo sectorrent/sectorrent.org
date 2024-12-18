@@ -80,6 +80,14 @@ preview {
     word-break: break-word;
 }
 
+preview *:first-child {
+    margin-top: 0;
+}
+
+preview *:last-child {
+    margin-bottom: 0;
+}
+
 editor textarea {
     display: none;
     width: calc(100% - 42px);

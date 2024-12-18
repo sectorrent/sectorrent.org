@@ -112,6 +112,14 @@ bio:before {
     font-size: 0.8em;
 }
 
+bio *:first-child {
+    margin-top: 0;
+}
+
+bio *:last-child {
+    margin-bottom: 0;
+}
+
 bio:empty {
     display: none;
 }

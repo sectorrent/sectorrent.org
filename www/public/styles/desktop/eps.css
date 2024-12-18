@@ -32,6 +32,14 @@ preview {
     word-break: break-word;
 }
 
+preview *:first-child {
+    margin-top: 0;
+}
+
+preview *:last-child {
+    margin-bottom: 0;
+}
+
 preview h1,
         preview h2,
         preview h3,
