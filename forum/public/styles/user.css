@@ -100,7 +100,6 @@ content li[selected] a {
 content > preview {
     display: block;
     width: calc(100% - 22px);
-    min-height: 250px;
     padding: 10px;
     border-radius: 10px;
     border: solid 1px var(--background-shimmer);
@@ -110,6 +109,14 @@ content > preview:before {
     display: block;
     content: 'Bio';
     font-size: 0.8em;
+}
+
+preview *:first-child {
+    margin-top: 0;
+}
+
+preview *:last-child {
+    margin-bottom: 0;
 }
 
 content > preview:empty {
