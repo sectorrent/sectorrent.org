@@ -45,8 +45,8 @@ content comment-inner.reported {
 }
 
 content comment-inner.new {
-    background-color: #001400;
-    border: solid 1px #003400;
+    background-color: #000a00;
+    border: solid 1px #002000;
 }
 
 comments {
@@ -110,8 +110,8 @@ content comment-inner.reported comment-header {
 }
 
 content comment-inner.new comment-header {
-    background-color: #002400;
-    border-bottom: solid 1px #003400;
+    background-color: #001000;
+    border-bottom: solid 1px #002000;
 }
 
 content comment a.user-icon,
