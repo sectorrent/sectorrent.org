@@ -366,7 +366,6 @@ function createComment(data){
     comment.appendChild(userIconLink);
 
     const commentInner = document.createElement('comment-inner');
-    commentInner.className = 'new';
     const commentHeader = document.createElement('comment-header');
 
     const userLink = document.createElement('a');
