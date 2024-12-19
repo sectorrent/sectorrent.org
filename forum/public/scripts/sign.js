@@ -1,4 +1,4 @@
-function onSubmit(event){
+function onsubmit(event){
     event.preventDefault();
     if(processing && !solved){
         return;

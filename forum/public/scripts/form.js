@@ -4,7 +4,7 @@ var processing = false, solved = false;
 (function(){
     const forms = document.querySelectorAll(`form[valid-form='${validForm}']`);
     for(const form of forms){
-        form.onsubmit = onSubmit
+        form.onsubmit = onsubmit
     }
 
     solveChallenge(pow.challenge, pow.difficulty);

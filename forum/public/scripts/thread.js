@@ -232,15 +232,15 @@ if(reportThread){
 }
 
 function ondeletecomment(e){
-    console.log('DELETE');
-
     if(processing){
         return;
     }
 
     processing = true;
 
-    fetch(`https://api.${window.location.host}/comment?id=${e.target.getAttribute('comment-id')}`, {
+    const id = e.target.getAttribute('comment-id');
+
+    fetch(`https://api.${window.location.host}/comment?id=${id}`, {
         method: 'DELETE',
         credentials: 'include'
     
@@ -256,6 +256,11 @@ function ondeletecomment(e){
             throw new Error(data.status_message);
         }
 
+        const comment = document.querySelector(`comment[comment-id=${id}`);
+        if(comment){
+            comment.remove();
+        }
+
         processing = false;
 
     }).catch(function(error){
@@ -265,15 +270,15 @@ function ondeletecomment(e){
 };
 
 function onreportcomment(e){
-    console.log('REPORT');
-
     if(processing){
         return;
     }
 
     processing = true;
 
-    fetch(`https://api.${window.location.host}/comment/report?id=${e.target.getAttribute('comment-id')}`, {
+    const id = e.target.getAttribute('comment-id');
+
+    fetch(`https://api.${window.location.host}/comment/report?id=${id}`, {
         method: 'POST',
         credentials: 'include'
     
@@ -289,7 +294,10 @@ function onreportcomment(e){
             throw new Error(data.status_message);
         }
 
-        //comment.className = 'reported';
+        const comment = document.querySelector(`comment[comment-id=${id}`);
+        if(comment){
+            comment.className = 'reported';
+        }
 
         processing = false;
 
@@ -299,7 +307,7 @@ function onreportcomment(e){
     });
 };
 
-function onSubmit(event){
+function onsubmit(event){
     event.preventDefault();
     if(processing && !solved){
         return;
