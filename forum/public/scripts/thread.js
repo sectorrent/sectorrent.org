@@ -240,7 +240,7 @@ function ondeletecomment(e){
 
     processing = true;
 
-    fetch(`https://api.${window.location.host}/comment?id=${id}`, {
+    fetch(`https://api.${window.location.host}/comment?id=${e.target.getAttribute('comment-id')}`, {
         method: 'DELETE',
         credentials: 'include'
     
@@ -273,7 +273,7 @@ function onreportcomment(e){
 
     processing = true;
 
-    fetch(`https://api.${window.location.host}/comment/report?id=${id}`, {
+    fetch(`https://api.${window.location.host}/comment/report?id=${e.target.getAttribute('comment-id')}`, {
         method: 'POST',
         credentials: 'include'
     
