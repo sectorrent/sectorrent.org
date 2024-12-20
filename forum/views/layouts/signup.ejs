@@ -43,7 +43,7 @@
             
             <script nonce='<%= nonce %>'>
                 const validForm = '<%= formId %>';
-                const pow = <%- JSON.stringify(pow) %>;
+                var pow = <%- JSON.stringify(pow) %>;
             </script>
             <script src='/scripts/sign.js'></script>
             <script src='/scripts/form.js'></script>

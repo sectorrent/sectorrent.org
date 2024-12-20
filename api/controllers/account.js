@@ -1,4 +1,5 @@
 const account = require('../modules/account');
+const pow = require('../modules/pow');
 
 exports.postSignIn = async (req, res) => {
 	account.signIn(req, res).then((data) => {
@@ -15,7 +16,8 @@ exports.postSignIn = async (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -23,7 +25,10 @@ exports.postSignIn = async (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
@@ -46,7 +51,8 @@ exports.postSignUp = async (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -54,7 +60,10 @@ exports.postSignUp = async (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
@@ -81,7 +90,8 @@ exports.postForgotPassword = (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -89,7 +99,10 @@ exports.postForgotPassword = (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
@@ -114,7 +127,8 @@ exports.putResetPassword = (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -122,7 +136,10 @@ exports.putResetPassword = (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
@@ -135,7 +152,10 @@ exports.putUser = (req, res) => {
 		res.json({
 			status: 200,
 			status_message: 'Update was successful',
-			data
+			data: {
+				...data,
+				pow: pow.generateChallenge(req, res)
+			}
 		});
 
 	}).catch(function(error){
@@ -145,7 +165,8 @@ exports.putUser = (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -153,7 +174,10 @@ exports.putUser = (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
