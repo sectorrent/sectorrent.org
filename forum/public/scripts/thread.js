@@ -31,7 +31,7 @@ if(archiveThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread/archive?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/archive?id=${id}`, {
             method: 'POST',
             credentials: 'include'
         
@@ -66,7 +66,7 @@ if(unarchiveThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread/archive?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/archive?id=${id}`, {
             method: 'DELETE',
             credentials: 'include'
         
@@ -101,7 +101,7 @@ if(pinThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread/pin?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/pin?id=${id}`, {
             method: 'POST',
             credentials: 'include'
         
@@ -136,7 +136,7 @@ if(unpinThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread/pin?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/pin?id=${id}`, {
             method: 'DELETE',
             credentials: 'include'
         
@@ -171,7 +171,7 @@ if(deleteThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread?id=${id}`, {
             method: 'DELETE',
             credentials: 'include'
         
@@ -206,7 +206,7 @@ if(reportThread){
 
         processing = true;
 
-        fetch(`https://api.${window.location.host}/thread/report?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/report?id=${id}`, {
             method: 'POST',
             credentials: 'include'
         
@@ -240,7 +240,7 @@ function ondeletecomment(e){
 
     const id = e.target.getAttribute('comment-id');
 
-    fetch(`https://api.${window.location.host}/comment?id=${id}`, {
+    fetch(`https://api.${window.location.domain}/comment?id=${id}`, {
         method: 'DELETE',
         credentials: 'include'
     
@@ -278,7 +278,7 @@ function onreportcomment(e){
 
     const id = e.target.getAttribute('comment-id');
 
-    fetch(`https://api.${window.location.host}/comment/report?id=${id}`, {
+    fetch(`https://api.${window.location.domain}/comment/report?id=${id}`, {
         method: 'POST',
         credentials: 'include'
     

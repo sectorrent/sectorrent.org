@@ -291,6 +291,7 @@
     }
 %>
                     <script nonce='<%= nonce %>'>
+                        window.location.domain = '<%= config.general.domain %>';
                         const threadId = '<%= id %>';
                     </script>
                     <script src='/scripts/thread.js'></script>
