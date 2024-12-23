@@ -7,7 +7,7 @@ exports.getEditComment = async (req, res) => {
 	const id = (req.params.id) ? req.params.id : '';
 	
 	comment.getComment(req, id).then((data) => {
-		res.render('layouts/comments/edit_comment', {
+		res.render('layouts/comments/edit', {
 			title: 'Comment Page',
 			page: 'comment',
 			uniqid: uuidv4,

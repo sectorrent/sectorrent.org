@@ -1,4 +1,5 @@
 const comment = require('../modules/comment');
+const pow = require('../modules/pow');
 
 exports.postComment = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
@@ -9,7 +10,8 @@ exports.postComment = async (req, res) => {
 			status_message: 'Insert was successful',
 			data: {
 				...data,
-				user: req.token.payload.data
+				user: req.token.payload.data,
+				pow: pow.generateChallenge(req, res)
 			}
 		});
 
@@ -20,7 +22,8 @@ exports.postComment = async (req, res) => {
 					status: 417,
 					status_message: error.message,
 					data: {
-						fields: error.fields
+						fields: error.fields,
+						pow: pow.generateChallenge(req, res)
 					}
 				});
 				break;
@@ -28,7 +31,10 @@ exports.postComment = async (req, res) => {
 			default:
 				res.json({
 					status: 400,
-					status_message: error.message
+					status_message: error.message,
+					data: {
+						pow: pow.generateChallenge(req, res)
+					}
 				});
 				break;
 		}
@@ -49,7 +55,10 @@ exports.putComment = async (req, res) => {
 	}).catch(function(error){
 		res.json({
 			status: 400,
-			status_message: error.message
+			status_message: error.message,
+			data: {
+				pow: pow.generateChallenge(req, res)
+			}
 		});
 		res.end();
 	});

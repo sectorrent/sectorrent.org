@@ -16,12 +16,23 @@ preview h1,
         preview h4,
         preview h5,
         preview h6 {
-    display: flex;
-    gap: 5px;
+    display: block;
     color: var(--text-primary);
     border-bottom: solid 1px var(--background-shimmer);
     padding: 15px 0;
     margin: 0 0 15px 0;
+}
+
+preview h1 a,
+        preview h2 a,
+        preview h3 a,
+        preview h4 a,
+        preview h5 a,
+        preview h6 a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-primary);
+    text-decoration: none;
     cursor: pointer;
 }
 
@@ -38,12 +49,12 @@ preview h1 svg,
     transition: width 0.3s;
 }
 
-preview h1:hover svg,
-        preview h2:hover svg,
-        preview h3:hover svg,
-        preview h4:hover svg,
-        preview h5:hover svg,
-        preview h6:hover svg {
+preview h1 a:hover svg,
+        preview h2 a:hover svg,
+        preview h3 a:hover svg,
+        preview h4 a:hover svg,
+        preview h5 a:hover svg,
+        preview h6 a:hover svg {
     width: 1em;
 }
 
@@ -51,13 +62,13 @@ preview strong {
     color: var(--text-primary);
 }
 
-preview a {
+preview a.link {
     color: var(--primary);
     text-decoration: none;
     transition: color 0.3s;
 }
 
-preview a:hover {
+preview a.link:hover {
     color: var(--secondary);
 }
 
