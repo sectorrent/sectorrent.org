@@ -207,7 +207,7 @@
     if(data.comments.total > 0){
         for(const comment of data.comments.comments){
 %>
-                    <comment>
+                    <comment comment-id='<%= comment._id.toString() %>'>
                         <a class='user-icon' href='/u/<%= comment.user.username %>'>
                             <img src='<%= comment.user.avatar %>' onload='this.className = "show"' title='<%= comment.user.username %>' draggable='false' oncontextmenu='return false'>
                         </a>

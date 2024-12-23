@@ -256,7 +256,7 @@ function ondeletecomment(e){
             throw new Error(data.status_message);
         }
 
-        const comment = document.querySelector(`comment[comment-id=${id}`);
+        const comment = document.querySelector(`comment[comment-id='${id}'`);
         if(comment){
             comment.remove();
         }
@@ -294,7 +294,7 @@ function onreportcomment(e){
             throw new Error(data.status_message);
         }
 
-        const comment = document.querySelector(`comment[comment-id=${id}`);
+        const comment = document.querySelector(`comment[comment-id='${id}'`);
         if(comment){
             comment.className = 'reported';
         }
