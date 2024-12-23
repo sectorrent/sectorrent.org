@@ -55,10 +55,26 @@ exports.putComment = async (req, res) => {
 	}).catch(function(error){
 		res.json({
 			status: 400,
-			status_message: error.message,
-			data: {
-				pow: pow.generateChallenge(req, res)
-			}
+			status_message: error.message
+		});
+		res.end();
+	});
+};
+
+exports.deleteComment = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+
+    comment.deleteComment(req, id, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
 		});
 		res.end();
 	});
