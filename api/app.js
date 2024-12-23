@@ -144,7 +144,7 @@ app.put('/thread', express.json(), threadController.putThread);
 
 app.post('/comment', express.json(), commentController.postComment);
 app.put('/comment', express.json(), commentController.putComment);
-//app.delete('/comment', express.json(), commentController.deleteComment);
+app.delete('/comment', express.json(), commentController.deleteComment);
 //app.post('/comment/report', express.json(), commentController.postCommentReport);
 
 app.put('/user', express.json(), accountController.putUser);
