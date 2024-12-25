@@ -1,11 +1,6 @@
 <%
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const mappedCategories = {};
-    categories.forEach((category, index) => {
-        mappedCategories[category._id.toString()] = index;
-    });
-
     function timeAgo(date){
         const now = new Date();
         const diff = now-date;
@@ -55,8 +50,9 @@
                     <categories>
 <%
     for(const category of data.categories){
+        const index = categories.indexes.indexOf(category.toString());
 %>
-                        <a href='/c/<%= categories[mappedCategories[category]].slug %>'><span class='<%= categories[mappedCategories[category]].slug %>'></span><%= categories[mappedCategories[category]].title %></a>
+                        <a href='/c/<%= categories.data[index].slug %>'><span class='<%= categories.data[index].slug %>'></span><%= categories.data[index].title %></a>
 <%
     }
 %>

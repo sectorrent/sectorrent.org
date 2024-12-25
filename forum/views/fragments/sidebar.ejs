@@ -1,6 +1,6 @@
         <style nonce='<%= nonce %>'>
 <%
-    for(const category of categories){
+    for(const category of categories.data){
 %>
             span.<%= category.slug %> {
                 background-color: <%= category.color %>;
@@ -51,7 +51,7 @@
             </label>
             <container>
 <%
-    for(const category of categories){
+    for(const category of categories.data){
 %>
                 <a href='/c/<%= category.slug %>'<% if(page == `category_${category.slug}`){ %> selected<% } %>><span class='<%= category.slug %>'></span><%= category.title %></a>
 <%

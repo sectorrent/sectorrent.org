@@ -1,18 +1,27 @@
 //const { ObjectId, Long } = require('mongodb');
 
 exports.getCategoriesList = async () => {
-	global.categories = await global.mongo.getDatabase().collection('categories').aggregate([
+	const data = await global.mongo.getDatabase().collection('categories').aggregate([
         {
             $project: {
                 _id: true,
                 title: true,
                 slug: true,
-                color: true
+                color: true,
+                is_admin: true
             }
         }
     ]).toArray();
 
-    return categories;
+    const indexes = [];
+    for(const category of data){
+        indexes.push(category._id.toString());
+    }
+
+    return {
+        indexes,
+        data
+    };
 };
 
 exports.getHome = async (req) => {

@@ -161,11 +161,6 @@ exports.getThread = async (req, id) => {
 };
 
 exports.postThread = async (req) => {
-    const categories = [];
-    for(const category of global.categories){
-        categories.push(category._id.toString());
-    }
-
     let check = [
         {
             key: 'title',
@@ -191,7 +186,7 @@ exports.postThread = async (req) => {
             entries: {
                 type: 'SWITCH',
                 required: true,
-                entries: categories
+                entries: global.categories.indexes
             }
         }
     ];
@@ -201,6 +196,11 @@ exports.postThread = async (req) => {
 
     for(const [index, category] of data.categories.entries()){
         data.categories[index] = ObjectId.createFromHexString(category);
+
+        const i = global.categories.indexes.indexOf(data.categories[index].toString());
+        if(global.categories.data[i].admin_only && middleware.getRole(req) < 2){
+            throw new Error('Category is only permitted for admins.');
+        }
     }
 
     const id = new ObjectId();

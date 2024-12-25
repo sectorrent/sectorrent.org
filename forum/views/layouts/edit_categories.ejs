@@ -1,9 +1,4 @@
 <%
-    const mappedCategories = {};
-    categories.forEach((category, index) => {
-        mappedCategories[category._id.toString()] = index;
-    });
-
     const sideBarId = uniqid();
 %>
 <%- include('../fragments/header', { sideBarId }) %>

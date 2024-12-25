@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 
 
 (async function initalize(){
-	global.categories = await forum.getCategories();
+	global.categories = await forum.getCategoriesList();
 })();
 
 const server = http.createServer(app);

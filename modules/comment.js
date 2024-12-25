@@ -101,6 +101,14 @@ exports.postComment = async (req, id) => {
         throw new Error('Referenced thread does not exist');
     }
 
+    for(const category of threadExists.categories){
+        const i = global.categories.indexes.indexOf(category.toString());
+
+        if(global.categories.data[i].admin_only && middleware.getRole(req) < 2){
+            throw new Error('Category is only permitted for admins.');
+        }
+    }
+
     data.thread = id;
     data.user = middleware.getUserID(req);
     const created = Date.now();
