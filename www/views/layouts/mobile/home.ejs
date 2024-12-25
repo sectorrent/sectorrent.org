@@ -34,30 +34,16 @@
             <h2>News</h2>
 
             <container>
-                <article>
-                    <h3>SecTorrent</h3>
-                    <div>
-                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                    </div>
-                </article>
-                <article>
-                    <h3>SecTorrent</h3>
-                    <div>
-                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                    </div>
-                </article>
-                <article>
-                    <h3>SecTorrent</h3>
-                    <div>
-                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                    </div>
-                </article>
-                <article>
-                    <h3>SecTorrent</h3>
-                    <div>
-                        The DHT bootstrap server can be used as an introducer to the sectorrent DHT network. Like the ones running at router.sectorrent.com.
-                    </div>
-                </article>
+<%
+    for(const article of data.news){
+%>
+                <a href='https://forum.<%= config.general.domain %>/t/<%= article._id.toString() %>'>
+                    <h3><%= article.title %></h3>
+                    <div><%= article.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
+                </a>
+<%
+    }
+%>
             </container>
         </section>
 

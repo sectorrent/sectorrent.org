@@ -54,3 +54,22 @@ exports.putThread = async (req, res) => {
 		res.end();
 	});
 };
+
+exports.deleteThread = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    thread.deleteThread(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};

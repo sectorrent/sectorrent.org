@@ -1,56 +1,26 @@
 const { v4: uuidv4 } = require('uuid');
+const forum = require('../modules/forum');
 const marked = require('../modules/markdown');
-//const marked = require('marked');
-//const markedHighlight = require('marked-highlight');
-//const hljs = require('highlight.js');
 const fs = require('fs');
 const path = require('path');
 
-/*
-marked.use(markedHighlight.markedHighlight({
-	emptyLangClass: 'hljs',
-	langPrefix: 'hljs language-',
-    highlight(code, lang) {
-		const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-		return hljs.highlight(code, { language }).value;
-    }
-}));
-
-/*
-const commits = [
-	{
-	  message: 'Create README.md',
-	  committedDate: '2024-10-29T04:36:22Z',
-	  author: { name: 'Brad', email: 'brad@bradeagle.com' }
-	},
-	{
-	  message: 'first commit',
-	  committedDate: '2024-10-29T04:35:11Z',
-	  author: { name: 'DrBrad', email: 'brad@bradeagle.com' }
-	},
-	{
-	  message: 'Compose',
-	  committedDate: '2024-11-04T00:01:10Z',
-	  author: { name: 'DrBrad', email: 'brad@bradeagle.com' }
-	},
-	{
-	  message: 'first commit',
-	  committedDate: '2024-11-03T23:45:37Z',
-	  author: { name: 'DrBrad', email: 'brad@bradeagle.com' }
-	}
-];
-*/
 exports.getHome = async (req, res) => {
-	res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/home', {
-		title: 'Home Page',
-		page: 'home',
-		uniqid: uuidv4,
-		styles: [
-			'home'
-		],
-		data: {
-			commits: global.github_commits
-		}
+	forum.getLatest(req, 'news').then((data) => {
+		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/home', {
+			title: 'Home Page',
+			page: 'home',
+			uniqid: uuidv4,
+			styles: [
+				'home'
+			],
+			data: {
+				news: data,
+				commits: global.github_commits
+			}
+		});
+
+	}).catch(function(error){
+		console.log(error);
 	});
 };
 

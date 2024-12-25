@@ -43,21 +43,18 @@ app.use(session({
 app.use(cookies());
 
 
-/*
-mongo.connectDatabase(config.database);
-global.mongo = mongo;
-*/
 app.use((req, res, next) => {
 	res.locals.config = config;
 	next();
 });
 
 
-
-
-(async function initalize(){
+async function initalize(){
 	global.github_commits = await github.getRecentCommits(config);
-}());
+}
+
+setInterval(initalize, 3600000);
+initalize();
 
 const server = http.createServer(app);
 

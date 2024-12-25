@@ -25,30 +25,12 @@
 	:root {
 		--width: 80 !important;
 	}
-
-	header,
-            section {
-		padding: 0 10% !important;
-	}
-
-    footer {
-        padding: 80px 10% 20px 10% !important;
-    }
 }
 
 @media(max-width:1200px) {
 	:root {
 		--width: 90 !important;
 	}
-
-	header,
-            section {
-		padding: 0 5% !important;
-	}
-
-    footer {
-        padding: 80px 5% 20px 5% !important;
-    }
 }
 
 @media(max-width:1100px) {
@@ -122,7 +104,7 @@ header {
     top: 0;
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0 15%;
+	padding: 0 calc(((100 - var(--width)) / 2) * 1%);
     color: var(--text-primary);
     background-color: var(--black);
     z-index: 10;
@@ -235,7 +217,7 @@ section {
     min-height: calc(100vh - 80px);
     align-items: start;
     color: var(--text-secondary);
-	padding: 0 15%;
+	padding: 0 calc(((100 - var(--width)) / 2) * 1%);
     line-height: 1.6em;
     gap: 30px;
 }
@@ -357,7 +339,7 @@ footer {
     top: var(--top);
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
-    padding: 80px 15% 20px 15%;
+    padding: 80px calc(((100 - var(--width)) / 2) * 1%) 20px calc(((100 - var(--width)) / 2) * 1%);
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
