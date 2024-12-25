@@ -266,17 +266,26 @@ exports.putThread = async (req, id) => {
 exports.deleteThread = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
-    const threadExists = await global.mongo.getDatabase().collection('threads').deleteOne({
+    const match = {
         _id: id,
-        user: middleware.getUserID(req),
         archived: {
 			$exists: false
 		}
-    });
+    };
+
+    if(middleware.getRole(req) < 2){
+        match.user = middleware.getUserID(req);
+    }
+
+    const threadExists = await global.mongo.getDatabase().collection('threads').deleteOne(match);
 
     if(threadExists.deletedCount != 1){
         throw new Error('Failed to delete thread');
     }
+
+    await global.mongo.getDatabase().collection('comments').deleteMany({
+        thread: id
+    });
 
     return {
 		message: 'Thread deleted!'
@@ -345,7 +354,10 @@ exports.deleteThreadArchive = async (req, id) => {
 
 async function update(req, id, data){
     const match = {
-        _id: id
+        _id: id,
+        archived: {
+			$exists: false
+		}
     };
 
     if(middleware.getRole(req) < 2){
