@@ -100,7 +100,7 @@ header {
     top: 0;
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0px 15%;
+	padding: 0 15%;
     color: var(--text-primary);
     background-color: var(--black);
     z-index: 10;

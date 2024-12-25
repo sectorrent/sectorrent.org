@@ -122,7 +122,7 @@ header {
     top: 0;
 	width: calc(var(--width) * 1%);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0px 15%;
+	padding: 0 15%;
     color: var(--text-primary);
     background-color: var(--black);
     z-index: 10;
@@ -235,7 +235,7 @@ section {
     min-height: calc(100vh - 80px);
     align-items: start;
     color: var(--text-secondary);
-	padding: 0px 15%;
+	padding: 0 15%;
     line-height: 1.6em;
     gap: 30px;
 }
