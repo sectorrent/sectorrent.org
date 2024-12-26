@@ -3,6 +3,7 @@ section table {
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 10px;
+    word-break: break-all;
 }
 
 /*
