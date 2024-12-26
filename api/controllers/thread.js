@@ -73,3 +73,79 @@ exports.deleteThread = async (req, res) => {
 		res.end();
 	});
 };
+
+exports.postThreadPin = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    thread.postThreadPin(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};
+
+exports.deleteThreadPin = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    thread.deleteThreadPin(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};
+
+exports.postThreadArchive = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    thread.postThreadArchive(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};
+
+exports.deleteThreadArchive = async (req, res) => {
+	const id = (req.query.id) ? req.query.id : '';
+	
+    thread.deleteThreadArchive(req, id).then((data) => {
+		res.json({
+			status: 200,
+			status_message: 'Delete was successful',
+			data
+		});
+
+	}).catch(function(error){
+		res.json({
+			status: 400,
+			status_message: error.message
+		});
+		res.end();
+	});
+};

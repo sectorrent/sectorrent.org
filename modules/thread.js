@@ -288,7 +288,8 @@ exports.deleteThread = async (req, id) => {
     });
 
     return {
-		message: 'Thread deleted!'
+		message: 'Thread deleted!',
+        link: '/'
     };
 };
 
@@ -302,23 +303,7 @@ exports.postThreadPin = async (req, id) => {
         });
 
     return {
-        message: 'Thread pinned!',
-        link: `/t/${id.toString()}`
-    };
-};
-
-exports.postThreadArchive = async (req, id) => {
-	id = ObjectId.createFromHexString(id);
-
-    await update(req, id, {
-            $set: {
-                archived: true
-            }
-        });
-
-    return {
-        message: 'Thread archived!',
-        link: `/t/${id.toString()}`
+        message: 'Thread pinned!'
     };
 };
 
@@ -326,14 +311,27 @@ exports.deleteThreadPin = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
     await update(req, id, {
-            $unset: {
-                pinned: true
-            }
-        });
+        $unset: {
+            pinned: true
+        }
+    });
 
     return {
-        message: 'Thread unpinned!',
-        link: `/t/${id.toString()}`
+        message: 'Thread unpinned!'
+    };
+};
+
+exports.postThreadArchive = async (req, id) => {
+	id = ObjectId.createFromHexString(id);
+
+    await update(req, id, {
+        $set: {
+            archived: true
+        }
+    });
+
+    return {
+        message: 'Thread archived!'
     };
 };
 
@@ -341,23 +339,19 @@ exports.deleteThreadArchive = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
     await update(req, id, {
-            $unset: {
-                archived: true
-            }
-        });
+        $unset: {
+            archived: true
+        }
+    });
 
     return {
-        message: 'Thread unarchived!',
-        link: `/t/${id.toString()}`
+        message: 'Thread unarchived!'
     };
 };
 
 async function update(req, id, data){
     const match = {
-        _id: id,
-        archived: {
-			$exists: false
-		}
+        _id: id
     };
 
     if(middleware.getRole(req) < 2){

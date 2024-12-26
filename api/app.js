@@ -136,10 +136,10 @@ app.use([
 app.post('/thread', express.json(), threadController.postThread);
 app.put('/thread', express.json(), threadController.putThread);
 app.delete('/thread', express.json(), threadController.deleteThread);
-//app.post('/thread/pin', express.json(), threadController.postThreadPin);
-//app.delete('/thread/pin', express.json(), threadController.deleteThreadPin);
-//app.post('/thread/archive', express.json(), threadController.postThreadArchive);
-//app.delete('/thread/archive', express.json(), threadController.deleteThreadArchive);
+app.post('/thread/pin', express.json(), threadController.postThreadPin);
+app.delete('/thread/pin', express.json(), threadController.deleteThreadPin);
+app.post('/thread/archive', express.json(), threadController.postThreadArchive);
+app.delete('/thread/archive', express.json(), threadController.deleteThreadArchive);
 //app.post('/thread/report', express.json(), threadController.postThreadReport);
 
 app.post('/comment', express.json(), commentController.postComment);
