@@ -124,6 +124,7 @@ section[type='news'] container a {
     border: solid 1px var(--background-shimmer);
     border-radius: 5px;
     text-decoration: none;
+    word-break: break-all;
     cursor: pointer;
 }
 

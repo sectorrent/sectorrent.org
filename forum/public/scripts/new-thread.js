@@ -21,4 +21,6 @@ var currentlySelected = 0;
 }());
 
 function oncopy(ele){
+    const code = document.getElementById(ele.getAttribute('copy-id'));
+    navigator.clipboard.writeText(code.textContent);
 }

@@ -51,6 +51,22 @@
                 <preview><% if(typeof data.bio !== 'undefined'){ %><%- data.bio %><% } %></preview>
 
                 <date>Joined: <% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
+                
+                <script nonce='<%= nonce%>'>
+                    (function(){
+                        const selector = document.querySelectorAll('button[action="copy"]');
+                        for(const btn of selector){
+                            btn.onclick = function(e){
+                                oncopy(this);
+                            };
+                        }
+                    }());
+
+                    function oncopy(ele){
+                        const code = document.getElementById(ele.getAttribute('copy-id'));
+                        navigator.clipboard.writeText(code.textContent);
+                    }
+                </script>
             </content>
 
 <%- include('../../fragments/footer') %>

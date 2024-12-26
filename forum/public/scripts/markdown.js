@@ -35,8 +35,9 @@ function markdownToHtml(markdown){
                     codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
                     const previousLine = lines[i+1];
                     
-                    codeLines.push(`<code-header>${getLanguageKey(codeLanguage)}<button class='copy' type='button' onclick='onCopy(this.parentElement)'><svg viewBox='0 0 24 24'><path d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z' /></svg></button></code-header>`);
-                    codeLines.push(`<pre language='${codeLanguage}'><code>${tokenizeLine(codeLanguage, previousLine)}</code>`);
+                    const uuid = uniqid();
+                    codeLines.push(`<code-header>${getLanguageKey(codeLanguage)}<button copy-id='${uuid}' class='copy' type='button' action='copy'><svg viewBox='0 0 24 24'><path d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z' /></svg></button></code-header>`);
+                    codeLines.push(`<pre id='${uuid}' language='${codeLanguage}'><code>${tokenizeLine(codeLanguage, previousLine)}</code>`);
                     i += 2;
                     continue;
                 }
@@ -371,6 +372,22 @@ function markDownText(line){
     return line;
 }
 
+function getLanguageKey(language){
+    switch(language){
+        case 'java':
+            return 'Java';
+
+        case 'rust':
+            return 'Rust';
+
+        case 'json':
+            return 'JSON';
+
+        default:
+            return 'Plain text';
+    }
+}
+
 function tokenizeLine(language, line){
     let tokens;
     switch(language){
@@ -546,3 +563,7 @@ function tokenizeJson(line){
 
     return tokens;
 }
+
+const uniqid = function(){
+    return Date.now().toString(36)+Math.random().toString(36).substr(2);
+};

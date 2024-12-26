@@ -6,6 +6,18 @@
 <%- include('../../fragments/sidebar') %>
 
             <content>
+                <style nonce='<%= nonce %>'>
+                    @media(max-width:1100px) {
+                        preview pre {
+                            width: calc((var(--width)* 1vw) - 110px) !important;
+                        }
+                    }
+
+                    preview pre {
+                        width: calc((var(--width)* 1vw) - 389px);
+                        min-width: 624px !important;
+                    }
+                </style>
                 <thread-header>
                     <h1>New Thread</h1>
                 </thread-header>

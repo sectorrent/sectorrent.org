@@ -155,10 +155,6 @@ field input-field:nth-child(2) {
 	margin-left: 10px;
 }
 
-preview pre {
-    width: calc((var(--width)* 1vw) - 389px) !important;
-}
-
 
 
 

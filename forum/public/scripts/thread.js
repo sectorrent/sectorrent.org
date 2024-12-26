@@ -8,17 +8,26 @@ const comments = document.querySelector('comments');
 
 (function(){
     let selector = document.querySelectorAll('button[action="delete-comment"]');
-    for(const del of selector){
-        del.onclick = ondeletecomment;
+    for(const btn of selector){
+        btn.onclick = ondeletecomment;
     }
     
     selector = document.querySelectorAll('button[action="report-comment"]');
-    for(const rep of selector){
-        rep.onclick = onreportcomment;
+    for(const btn of selector){
+        btn.onclick = onreportcomment;
+    }
+    
+    selector = document.querySelectorAll('button[action="copy"]');
+    for(const btn of selector){
+        btn.onclick = function(e){
+            oncopy(this);
+        };
     }
 }());
 
 function oncopy(ele){
+    const code = document.getElementById(ele.getAttribute('copy-id'));
+    navigator.clipboard.writeText(code.textContent);
 }
 
 if(archiveThread){
