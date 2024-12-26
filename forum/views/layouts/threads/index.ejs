@@ -290,7 +290,6 @@
                         window.location.domain = '<%= config.general.domain %>';
                         const threadId = '<%= id %>';
                     </script>
-                    <script src='/scripts/thread.js'></script>
                 </comments>
 <%
     if(isSignedIn && !data.archived){
@@ -328,6 +327,7 @@
 <%
     }
 %>
+                <script src='/scripts/thread.js'></script>
             </content>
 
 <%- include('../../fragments/footer') %>
