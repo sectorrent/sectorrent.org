@@ -1,10 +1,9 @@
 const archiveThread = document.querySelector('button[action="archive-thread"]');
-const unarchiveThread = document.querySelector('button[action="unarchive-thread"]');
 const pinThread = document.querySelector('button[action="pin-thread"]');
-const unpinThread = document.querySelector('button[action="unpin-thread"]');
 const deleteThread = document.querySelector('button[action="delete-thread"]');
 const reportThread = document.querySelector('button[action="report-thread"]');
 const comments = document.querySelector('comments');
+var processing;
 
 (function(){
     let selector = document.querySelectorAll('button[action="delete-comment"]');
@@ -32,16 +31,14 @@ function oncopy(ele){
 
 if(archiveThread){
     archiveThread.onclick = function(e){
-        console.log('ARCHIVE');
-
         if(processing){
             return;
         }
 
         processing = true;
 
-        fetch(`https://api.${window.location.domain}/thread/archive?id=${id}`, {
-            method: 'POST',
+        fetch(`https://api.${window.location.domain}/thread/archive?id=${threadId}`, {
+            method: archiveThread.getAttribute('method'),
             credentials: 'include'
         
         }).then(response => {
@@ -56,39 +53,18 @@ if(archiveThread){
                 throw new Error(data.status_message);
             }
 
-            processing = false;
+            switch(archiveThread.getAttribute('method')){
+                case 'PUT':
+                    archiveThread.setAttribute('method', 'DELETE');
+                    archiveThread.querySelector('svg path').setAttribute('d', 'M20.55,5.22l-1.39-1.68C18.88,3.21,18.47,3,18,3H6C5.53,3,5.12,3.21,4.85,3.55L3.46,5.22C3.17,5.57,3,6.01,3,6.5V19 c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6.5C21,6.01,20.83,5.57,20.55,5.22z M12,9.5l5.5,5.5H14v2h-4v-2H6.5L12,9.5z M5.12,5 l0.82-1h12l0.93,1H5.12z');
+                    archiveThread.querySelector('span').textContent = 'Unarchive thread';
+                    break;
 
-        }).catch(function(error){
-            console.log(error);
-            processing = false;
-        });
-    };
-}
-
-if(unarchiveThread){
-    unarchiveThread.onclick = function(e){
-        console.log('UN-ARCHIVE');
-
-        if(processing){
-            return;
-        }
-
-        processing = true;
-
-        fetch(`https://api.${window.location.domain}/thread/archive?id=${id}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        
-        }).then(response => {
-            if(!response.ok){
-                throw new Error('Failed to get data');
-            }
-
-            return response.json();
-
-        }).then((data) => {
-            if(data.status != 200){
-                throw new Error(data.status_message);
+                case 'DELETE':
+                    archiveThread.setAttribute('method', 'PUT');
+                    archiveThread.querySelector('svg path').setAttribute('d', 'M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z');
+                    archiveThread.querySelector('span').textContent = 'Archive thread';
+                    break;
             }
 
             processing = false;
@@ -102,16 +78,14 @@ if(unarchiveThread){
 
 if(pinThread){
     pinThread.onclick = function(e){
-        console.log('PIN');
-
         if(processing){
             return;
         }
 
         processing = true;
 
-        fetch(`https://api.${window.location.domain}/thread/pin?id=${id}`, {
-            method: 'POST',
+        fetch(`https://api.${window.location.domain}/thread/pin?id=${threadId}`, {
+            method: pinThread.getAttribute('method'),
             credentials: 'include'
         
         }).then(response => {
@@ -126,39 +100,18 @@ if(pinThread){
                 throw new Error(data.status_message);
             }
 
-            processing = false;
+            switch(pinThread.getAttribute('method')){
+                case 'PUT':
+                    pinThread.setAttribute('method', 'DELETE');
+                    pinThread.querySelector('svg path').setAttribute('d', 'M2,5.27L3.28,4L20,20.72L18.73,22L12.8,16.07V22H11.2V16H6V14L8,12V11.27L2,5.27M16,12L18,14V16H17.82L8,6.18V4H7V2H17V4H16V12Z');
+                    pinThread.querySelector('span').textContent = 'Unpin thread';
+                    break;
 
-        }).catch(function(error){
-            console.log(error);
-            processing = false;
-        });
-    };
-}
-
-if(unpinThread){
-    unpinThread.onclick = function(e){
-        console.log('UNPIN');
-
-        if(processing){
-            return;
-        }
-
-        processing = true;
-
-        fetch(`https://api.${window.location.domain}/thread/pin?id=${id}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        
-        }).then(response => {
-            if(!response.ok){
-                throw new Error('Failed to get data');
-            }
-
-            return response.json();
-
-        }).then((data) => {
-            if(data.status != 200){
-                throw new Error(data.status_message);
+                case 'DELETE':
+                    pinThread.setAttribute('method', 'PUT');
+                    pinThread.querySelector('svg path').setAttribute('d', 'M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z');
+                    pinThread.querySelector('span').textContent = 'Pin thread';
+                    break;
             }
 
             processing = false;
@@ -172,15 +125,14 @@ if(unpinThread){
 
 if(deleteThread){
     deleteThread.onclick = function(e){
-        console.log('DELETE');
-
+        console.log(e.target);
         if(processing){
             return;
         }
 
         processing = true;
 
-        fetch(`https://api.${window.location.domain}/thread?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread?id=${threadId}`, {
             method: 'DELETE',
             credentials: 'include'
         
@@ -207,15 +159,13 @@ if(deleteThread){
 
 if(reportThread){
     reportThread.onclick = function(e){
-        console.log('REPORT');
-
         if(processing){
             return;
         }
 
         processing = true;
 
-        fetch(`https://api.${window.location.domain}/thread/report?id=${id}`, {
+        fetch(`https://api.${window.location.domain}/thread/report?id=${threadId}`, {
             method: 'POST',
             credentials: 'include'
         

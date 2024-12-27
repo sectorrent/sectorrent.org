@@ -74,13 +74,13 @@ exports.deleteThread = async (req, res) => {
 	});
 };
 
-exports.postThreadPin = async (req, res) => {
+exports.putThreadPin = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 	
-    thread.postThreadPin(req, id).then((data) => {
+    thread.putThreadPin(req, id).then((data) => {
 		res.json({
 			status: 200,
-			status_message: 'Delete was successful',
+			status_message: 'Update was successful',
 			data
 		});
 
@@ -112,13 +112,13 @@ exports.deleteThreadPin = async (req, res) => {
 	});
 };
 
-exports.postThreadArchive = async (req, res) => {
+exports.putThreadArchive = async (req, res) => {
 	const id = (req.query.id) ? req.query.id : '';
 	
-    thread.postThreadArchive(req, id).then((data) => {
+    thread.putThreadArchive(req, id).then((data) => {
 		res.json({
 			status: 200,
-			status_message: 'Delete was successful',
+			status_message: 'Update was successful',
 			data
 		});
 
