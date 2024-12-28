@@ -27,21 +27,16 @@
     }
     
     const sideBarId = uniqid();
-%>
-<%- include('../../fragments/header', { sideBarId }) %>
-<%
+    const classes = [];
     if(data.archived){
-%>
-        <archive>This thread has been archived. It is now read-only.</archive>
-        <style nonce='<%= nonce %>'>
-            :root {
-                --top: calc(1.6em + 90px) !important;
-            }
-        </style>
-<%
+        classes.push('archived');
     }
 %>
+<%- include('../../fragments/header', { sideBarId, classes }) %>
+
         <section>
+            <archive>This thread has been archived. It is now read-only.</archive>
+
 <%- include('../../fragments/sidebar') %>
 
             <content>
@@ -292,7 +287,7 @@
                     </script>
                 </comments>
 <%
-    if(isSignedIn && !data.archived){
+    if(isSignedIn/* && !data.archived*/){
 %>
                 <reply>
                     <a class='user-icon' href='/u/<%= user.username %>'>

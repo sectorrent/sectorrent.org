@@ -34,7 +34,7 @@
         <!meta name='theme-color' content='#'>
     </head>
 
-    <body>
+    <body<% if(typeof classes != 'undefined'){ %> class='<%= classes.join(' ') %>'<% } %>>
 <%
     if(typeof sideBarId != 'undefined'){
 %>

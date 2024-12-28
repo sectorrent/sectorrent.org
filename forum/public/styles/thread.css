@@ -4,10 +4,15 @@
     }
 }
 
+body.archived {
+    --top: calc(1.6em + 90px) !important;
+}
+
 archive {
     position: fixed;
     top: 80px;
-    display: block;
+    left: 0;
+    display: none;
     width: 100%;
     height: calc(1.6em + 10px);
     line-height: calc(1.6em + 10px);
@@ -15,7 +20,12 @@ archive {
     border-bottom: solid 1px #9e6a03;
     font-weight: bold;
     text-align: center;
+    color: var(--text-primary);
     z-index: 10;
+}
+
+body.archived archive {
+    display: block;
 }
 
 content {
@@ -36,6 +46,10 @@ content comment,
         content reply {
     display: flex;
     gap: 20px;
+}
+
+body.archived content reply {
+    display: none;
 }
 
 content comment-inner {
@@ -353,6 +367,10 @@ label[type='submit'] {
 
 label[type='submit']:hover {
     background-color: var(--secondary);
+}
+
+body.archived label[type='submit'] {
+    display: none;
 }
 
 comments more-container {

@@ -1,7 +1,7 @@
 
 <editor>
     <input id='<% const writeId = uniqid(); %><%= writeId %>' name='editor-radio' radio='editor-write' type='radio' checked>
-    <input id='<% const previewId = uniqid(); %><%= previewId %>' name='editor-radio' radio='editor-preview' type='radio' onchange='onPreviewSelected(this)'>
+    <input id='<% const previewId = uniqid(); %><%= previewId %>' name='editor-radio' radio='editor-preview' type='radio'>
     <editor-header>
         <label name='editor-write' for='<%= writeId %>'>Write</label>
         <label name='editor-preview' for='<%= previewId %>'>Preview</label>
