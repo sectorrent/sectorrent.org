@@ -127,7 +127,6 @@ if(pinThread){
 
 if(deleteThread){
     deleteThread.onclick = function(e){
-        console.log(e.target);
         if(processing){
             return;
         }
@@ -149,6 +148,8 @@ if(deleteThread){
             if(data.status != 200){
                 throw new Error(data.status_message);
             }
+
+            alert(data.data.message, data.data.link);
 
             processing = false;
 
