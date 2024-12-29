@@ -44,14 +44,17 @@ exports.getNewCategory = async (req, res) => {
 };
 
 exports.getEditCategory = async (req, res) => {
-	forum.getEditCategories(req).then((data) => {
+	const slug = (req.params.slug) ? req.params.slug : '';
+
+	forum.getEditCategory(req, slug).then((data) => {
 		res.render('layouts/admin/categories/edit', {
 			title: 'Category Page',
 			page: 'edit-categories',
 			uniqid: uuidv4,
 			styles: [
-				'categories_edit'
+				'form'
 			],
+			slug,
 			categories: global.categories,
 			data
 		});

@@ -7,9 +7,21 @@
 
             <content>
                 <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/categories/edit' method='PUT' target='hiddenFrame'>
+                    <input-field title='Title'>
+                        <input type='text' name='username' required placeholder='Title' onkeypress='formAdjust(event)' value='<%= data.title %>' />
+                    </input-field>
 
+                    <input-field title='Description'>
+                        <textarea type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'><%= data.description %></textarea>
+                    </input-field>
 
+                    <response></response>
+                            
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
                 </form>
+                
+                <label type='submit' for='<%= buttonId %>'>Submit</label>
+                <iframe name='hiddenFrame'></iframe>
             </content>
 
 <%- include('../../../fragments/footer') %>

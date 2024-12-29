@@ -479,6 +479,20 @@ exports.getCategories = async (req) => {
     return data;
 };
 
+exports.getEditCategory = async (req, slug) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
+	let data = await global.mongo.getDatabase().collection('categories').findOne({
+        slug
+    });
+
+	if(!data){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    return data;
+};
+
 exports.getEditCategories = async (req) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
