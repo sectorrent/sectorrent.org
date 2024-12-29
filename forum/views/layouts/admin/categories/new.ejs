@@ -16,12 +16,14 @@
                             <input type='text' name='username' required placeholder='Title' onkeypress='formAdjust(event)' />
                         </input-field>
 
-                        <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only'>
+                        <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only' required />
                         <label for='<%= checkboxId %>' type='checkbox' description='Only admins are allowed to post.'>
                             <svg viewBox='0 0 24 24'>
                                 <path d='M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z' />
                             </svg>
                         </label>
+
+                        <input type='color' name='color' required />
 
                         <input-field title='Description'>
                             <textarea type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'></textarea>
