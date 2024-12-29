@@ -40,6 +40,14 @@
                     
                 <label type='submit' for='<%= buttonId %>'>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
+
+                <script nonce='<%= nonce %>'>
+                    const colorId = '<%= colorId %>';
+
+                    document.getElementById(colorId).onchange = function(e){
+                        document.querySelector(`label[for='${colorId}'] span`).style.backgroundColor = this.value;
+                    };
+                </script>
             </content>
 
 <%- include('../../../fragments/footer') %>
