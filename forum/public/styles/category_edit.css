@@ -5,14 +5,14 @@ content {
     flex-direction: column;
 }
 
-content thread-header {
+content category-header {
     display: block;
     width: 100%;
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-thread-header h1 {
+category-header h1 {
     margin: 0 0 10px 0;
     color: var(--text-primary);
     font-size: 1.5em;

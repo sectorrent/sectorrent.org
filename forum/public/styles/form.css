@@ -130,7 +130,7 @@ input[type='email'],
 	display: block;
 	width: calc(100% - 32px);
 	padding: 15px;
-	font-size: 0.8em;
+    font-size: 1em;
 	border: none;
 	color: var(--text-primary);
 	background-color: transparent;
@@ -145,7 +145,6 @@ input-field > textarea {
 	width: calc(100% - 32px);
     min-height: 148px;
 	padding: 15px;
-	font-size: 0.8em;
 	border: none;
 	color: var(--text-primary);
 	background-color: transparent;
@@ -176,8 +175,32 @@ field input-field:nth-child(2) {
 }
 
 
+label[type='checkbox'] {
+    display: flex;
+    width: fit-content;
+    height: 30px;
+    align-items: center;
+}
 
+label[type='checkbox']:after {
+    display: block;
+    content: attr(description);
+    color: var(--text-secondary);
+    margin-left: 10px;
+}
 
+label[type='checkbox'] svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-secondary);
+    cursor: pointer;
+}
+
+input[type='checkbox']:checked ~ label[type='checkbox'] path {
+    fill: var(--primary);
+    d: path('M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z');
+}
 
 selector-header {
     display: block;
