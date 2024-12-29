@@ -9,6 +9,47 @@ exports.getEditCategories = async (req, res) => {
 			page: 'edit-categories',
 			uniqid: uuidv4,
 			styles: [
+				'categories'
+			],
+			categories: global.categories,
+			data
+		});
+
+	}).catch(function(error){
+		/*
+		res.render('layouts/error/empty_home', {
+			title: 'Home Page',
+			page: `home`,
+			uniqid: uuidv4,
+			styles: [
+				'category',
+				'table'
+			],
+			type: 'categories',
+			categories: global.categories
+		});
+		*/
+	});
+};
+
+exports.getNewCategory = async (req, res) => {
+	res.render('layouts/admin/categories/new', {
+		title: 'Category Page',
+		page: 'edit-categories',
+		uniqid: uuidv4,
+		styles: [
+		],
+		categories: global.categories
+	});
+};
+
+exports.getEditCategory = async (req, res) => {
+	forum.getEditCategories(req).then((data) => {
+		res.render('layouts/admin/categories/edit', {
+			title: 'Category Page',
+			page: 'edit-categories',
+			uniqid: uuidv4,
+			styles: [
 				'categories_edit'
 			],
 			categories: global.categories,

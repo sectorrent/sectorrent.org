@@ -121,6 +121,8 @@ app.use([
 });
 
 app.get('/categories/edit', adminController.getEditCategories);
+app.get('/categories/new', adminController.getNewCategory);
+app.get('/c/:slug/edit', adminController.getEditCategory);
 
 //MAKE SIDE BAR COLLAPSE IF TOO SMALL
 //LATEST AND TOP are not done very well...
