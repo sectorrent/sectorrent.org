@@ -200,7 +200,12 @@ label[type='checkbox'] svg {
 }
 
 input[type='color'] {
-    display: none;
+    width: 0;
+    height: 0;
+    margin-bottom: -40px;
+    padding: 0;
+    border: 0;
+    opacity: 0;
 }
 
 label[type='color'] span {
