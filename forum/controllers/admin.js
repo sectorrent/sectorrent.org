@@ -52,6 +52,7 @@ exports.getEditCategory = async (req, res) => {
 			page: 'edit-categories',
 			uniqid: uuidv4,
 			styles: [
+				'category_edit',
 				'form'
 			],
 			slug,

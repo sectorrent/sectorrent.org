@@ -128,7 +128,7 @@ input[type='email'],
         input[type='tel'],
         input[type='text'] {
 	display: block;
-	width: calc(100% - 32px);;
+	width: calc(100% - 32px);
 	padding: 15px;
 	font-size: 0.8em;
 	border: none;
@@ -140,10 +140,30 @@ input[type='email'],
 	outline: none;
 }
 
+input-field > textarea {
+	display: block;
+	width: calc(100% - 32px);
+    min-height: 148px;
+	padding: 15px;
+	font-size: 0.8em;
+	border: none;
+	color: var(--text-primary);
+	background-color: transparent;
+	border: solid 1px var(--background-shimmer);
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 1.6em;
+	border-radius: 5px;
+	transition: border 0.3s;
+    resize: vertical;
+	outline: none;
+}
+
 input[type='email']:focus,
         input[type='password']:focus,
         input[type='tel']:focus,
-        input[type='text']:focus {
+        input[type='text']:focus,
+        textarea:focus {
 	border: solid 1px var(--primary);
 }
 
