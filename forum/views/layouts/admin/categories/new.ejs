@@ -6,20 +6,33 @@
 <%- include('../../../fragments/sidebar') %>
 
             <content>
-                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/categories/new' method='PUT' target='hiddenFrame'>
-                    <input-field title='Username'>
-                        <input type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
-                    </input-field>
+                <category-header>
+                    <h1>New Category</h1>
+                </category-header>
 
-                    <input-field title='Email'>
-                        <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' value='<%= data.email %>' />
-                    </input-field>
+                <category>
+                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/categories/edit' method='PUT' target='hiddenFrame'>
+                        <input-field title='Title'>
+                            <input type='text' name='username' required placeholder='Title' onkeypress='formAdjust(event)' />
+                        </input-field>
 
-                    <response></response>
-                            
-                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
-                </form>
-                
+                        <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only'>
+                        <label for='<%= checkboxId %>' type='checkbox' description='Only admins are allowed to post.'>
+                            <svg viewBox='0 0 24 24'>
+                                <path d='M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z' />
+                            </svg>
+                        </label>
+
+                        <input-field title='Description'>
+                            <textarea type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'></textarea>
+                        </input-field>
+
+                        <response></response>
+                                
+                        <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                    </form>
+                </category>
+                    
                 <label type='submit' for='<%= buttonId %>'>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
             </content>
