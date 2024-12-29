@@ -23,7 +23,10 @@
                             </svg>
                         </label>
 
-                        <input type='color' name='color' required />
+                        <input id='<% const colorId = uniqid(); %><%= colorId %>' type='color' name='color' required />
+                        <label for='<%= colorId %>' type='color' description='Select category color.'>
+                            <span></span>
+                        </label>
 
                         <input-field title='Description'>
                             <textarea type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'><%= data.description %></textarea>

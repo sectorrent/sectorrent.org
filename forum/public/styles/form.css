@@ -175,14 +175,16 @@ field input-field:nth-child(2) {
 }
 
 
-label[type='checkbox'] {
+label[type='checkbox'],
+        label[type='color'] {
     display: flex;
     width: fit-content;
     height: 30px;
     align-items: center;
 }
 
-label[type='checkbox']:after {
+label[type='checkbox']:after,
+        label[type='color']:after {
     display: block;
     content: attr(description);
     color: var(--text-secondary);
@@ -194,6 +196,18 @@ label[type='checkbox'] svg {
     width: 24px;
     height: 24px;
     fill: var(--text-secondary);
+    cursor: pointer;
+}
+
+input[type='color'] {
+    display: none;
+}
+
+label[type='color'] span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: solid 1px var(--text-primary);
     cursor: pointer;
 }
 
@@ -262,6 +276,15 @@ input[type='checkbox'].fl-select:checked + label:after {
 input[type='checkbox'].fl-select:checked + label fl-options {
     display: block;
 }
+
+
+
+
+
+
+
+
+
 
 fl-options {
     position: absolute;
