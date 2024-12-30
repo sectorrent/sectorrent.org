@@ -5,6 +5,12 @@
         <section>
 <%- include('../../../fragments/sidebar') %>
 
+            <style nonce='<%= nonce %>'>
+                label[type='color'] span {
+                    background-color: <%= data.color %>;
+                }
+            </style>
+
             <content>
                 <category-header>
                     <h1>Edit Category</h1>
@@ -37,7 +43,7 @@
                         <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
                     </form>
                 </category>
-                    
+                
                 <label type='submit' for='<%= buttonId %>'>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
