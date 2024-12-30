@@ -11,9 +11,9 @@
                 </category-header>
 
                 <category>
-                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/categories/edit' method='PUT' target='hiddenFrame'>
+                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category' method='POST' target='hiddenFrame'>
                         <input-field title='Title'>
-                            <input type='text' name='username' required placeholder='Title' onkeypress='formAdjust(event)' />
+                            <input type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
                         </input-field>
 
                         <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only' required />

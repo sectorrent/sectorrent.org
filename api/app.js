@@ -13,6 +13,7 @@ const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
 const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
+const adminontroller = require('./controllers/admin');
 
 const app = express();
 
@@ -118,6 +119,8 @@ app.get('/c/:slug/top', feedController.getCategoryTop);
 
 app.use([
 	'/thread',
+	'/thread/archive',
+	'/thread/pin',
 	'/comment',
 	'/user'
 ], async (req, res, next) => {
@@ -136,8 +139,6 @@ app.use([
 app.post('/thread', express.json(), threadController.postThread);
 app.put('/thread', express.json(), threadController.putThread);
 app.delete('/thread', express.json(), threadController.deleteThread);
-app.put('/thread/pin', express.json(), threadController.putThreadPin);
-app.delete('/thread/pin', express.json(), threadController.deleteThreadPin);
 app.put('/thread/archive', express.json(), threadController.putThreadArchive);
 app.delete('/thread/archive', express.json(), threadController.deleteThreadArchive);
 //app.post('/thread/report', express.json(), threadController.postThreadReport);
@@ -147,7 +148,33 @@ app.put('/comment', express.json(), commentController.putComment);
 app.delete('/comment', express.json(), commentController.deleteComment);
 //app.post('/comment/report', express.json(), commentController.postCommentReport);
 
+app.delete('/comment', express.json(), commentController.deleteComment);
+
 app.put('/user', express.json(), accountController.putUser);
+
+
+app.use([
+	'/thread/pin',
+	'/category'
+], async (req, res, next) => {
+	if(await middleware.getRole(req) > 1){
+		next();
+		return;
+	}
+
+	res.json({
+		status: 403,
+		status_message: 'Forbidden'
+	});
+	res.end();
+});
+
+app.put('/thread/pin', express.json(), adminontroller.putThreadPin);
+app.delete('/thread/pin', express.json(), adminontroller.deleteThreadPin);
+
+app.post('/category', express.json(), adminontroller.postCategory);
+app.put('/category', express.json(), adminontroller.putCategory);
+app.delete('/category', express.json(), adminontroller.deleteCategory);
 
 app.get('*', (req, res) => {
 	res.json({
