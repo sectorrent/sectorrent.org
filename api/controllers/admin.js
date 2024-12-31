@@ -1,5 +1,6 @@
 const thread = require('../modules/thread');
 const category = require('../modules/category');
+const pow = require('../modules/pow');
 
 exports.putThreadPin = async (req, res) => {
     const id = (req.query.id) ? req.query.id : '';
@@ -48,10 +49,28 @@ exports.postCategory = async (req, res) => {
         });
 
     }).catch(function(error){
-        res.json({
-            status: 400,
-            status_message: error.message
-        });
+        switch(error.name){
+            case 'FieldError':
+                res.json({
+                    status: 417,
+                    status_message: error.message,
+                    data: {
+                        fields: error.fields,
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+    
+            default:
+                res.json({
+                    status: 400,
+                    status_message: error.message,
+                    data: {
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+        }
         res.end();
     });
 };
@@ -67,10 +86,28 @@ exports.putCategory = async (req, res) => {
         });
 
     }).catch(function(error){
-        res.json({
-            status: 400,
-            status_message: error.message
-        });
+        switch(error.name){
+            case 'FieldError':
+                res.json({
+                    status: 417,
+                    status_message: error.message,
+                    data: {
+                        fields: error.fields,
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+    
+            default:
+                res.json({
+                    status: 400,
+                    status_message: error.message,
+                    data: {
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+        }
         res.end();
     });
 };
@@ -86,10 +123,28 @@ exports.deleteCategory = async (req, res) => {
         });
 
     }).catch(function(error){
-        res.json({
-            status: 400,
-            status_message: error.message
-        });
+        switch(error.name){
+            case 'FieldError':
+                res.json({
+                    status: 417,
+                    status_message: error.message,
+                    data: {
+                        fields: error.fields,
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+    
+            default:
+                res.json({
+                    status: 400,
+                    status_message: error.message,
+                    data: {
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+        }
         res.end();
     });
 };

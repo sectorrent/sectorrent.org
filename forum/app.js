@@ -49,26 +49,27 @@ app.use(cookies());
 
 
 
+(async function initalize(){
+	global.categories = await forum.getCategoriesList();
+	global.categories.timeout = new Date().getTime()+60*1000;
+})();
+
 app.use(async (req, res, next) => {
 	res.locals.config = config;
 	res.locals.isSignedIn = await middleware.isSignedIn(req, config.token.secret);
+	
 	if(res.locals.isSignedIn){
 		res.locals.user = {
 			id: req.token.payload.id,
 			...req.token.payload.data
 		};
 	}
+
+	if(global.categories.timeout < new Date().getTime()){
+		global.categories = await forum.getCategoriesList();
+	}
+
 	next();
-});
-
-(async function initalize(){
-	global.categories = await forum.getCategoriesList();
-})();
-
-const server = http.createServer(app);
-
-server.listen(80, () => {
-	console.log(`forum.${config.general.domain} started`);
 });
 
 
@@ -78,7 +79,8 @@ app.use((req, res, next) => {
     res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'; script-src 'self' 'nonce-${nonce}'`);
 
     res.locals.nonce = nonce;
-    next();
+
+	next();
 });
 
 app.get('/signin', accountController.getSignIn);
@@ -132,4 +134,10 @@ app.get('*', (req, res) => {
 		status: 404,
 		status_message: 'Endpoint not found!'
 	});
+});
+
+const server = http.createServer(app);
+
+server.listen(80, () => {
+	console.log(`forum.${config.general.domain} started`);
 });

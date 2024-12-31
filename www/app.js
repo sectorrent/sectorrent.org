@@ -43,12 +43,6 @@ app.use(session({
 app.use(cookies());
 
 
-app.use((req, res, next) => {
-	res.locals.config = config;
-	next();
-});
-
-
 async function initalize(){
 	global.github_commits = await github.getRecentCommits(config);
 }
@@ -56,10 +50,10 @@ async function initalize(){
 setInterval(initalize, 3600000);
 initalize();
 
-const server = http.createServer(app);
 
-server.listen(80, () => {
-	console.log(`${config.general.domain} started`);
+app.use((req, res, next) => {
+	res.locals.config = config;
+	next();
 });
 
 app.use((req, res, next) => {
@@ -79,4 +73,10 @@ app.get('/seps/:id', mainController.getSEP);
 
 app.get('*', (req, res) => {
 	mainController.getError(req, res, 404);
+});
+
+const server = http.createServer(app);
+
+server.listen(80, () => {
+	console.log(`${config.general.domain} started`);
 });

@@ -141,10 +141,18 @@ exports.postCategory = async (req) => {
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
 
-    console.log(data);
-    //HANDLE SLUG
+    data.slug = data.title.toLowerCase().replace(/[\s\t]+/g, '-').replace(/[^a-z0-9\-]+/g, '');
 
-    return {};
+    const result = await global.mongo.getDatabase().collection('categories').insertOne(data);
+                        
+    if(!result.acknowledged){
+        throw new Error('Failed to add to database.');
+    }
+
+    return {
+        message: 'Category created!',
+        link: `/c/${data.slug}/edit`
+    };
 };
 
 exports.putCategory = async (req, id) => {

@@ -217,7 +217,16 @@ function checkBoolean(entry, request){
 
 function checkColor(entry, request){
     const pattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
-    return pattern.test(str);
+    if(!pattern.test(request)){
+        throw new FieldError([
+            {
+                type: entry.key,
+                message: 'requires a hex color.'
+            }
+        ]);
+    }
+
+    return request;
 }
 
 function checkSwitch(entry, request){

@@ -26,6 +26,13 @@ exports.connectDatabase = async (config) => {
 			strength: 2
 		}
 	});
+
+	await db.collection('categories').createIndex({
+		slug: 1
+	},
+	{
+		unique: true
+	});
 };
 
 exports.getURI = () => {

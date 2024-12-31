@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const forum = require('../modules/forum');
 const category = require('../modules/category');
-//const pow = require('../modules/pow');
+const pow = require('../modules/pow');
 
 exports.getEditCategories = async (req, res) => {
 	forum.getEditCategories(req).then((data) => {
@@ -42,7 +42,8 @@ exports.getNewCategory = async (req, res) => {
 			'category_edit',
 			'form'
 		],
-		categories: global.categories
+		categories: global.categories,
+		pow: pow.generateChallenge(req, res)
 	});
 };
 
@@ -60,7 +61,8 @@ exports.getEditCategory = async (req, res) => {
 			],
 			slug,
 			categories: global.categories,
-			data
+			data,
+			pow: pow.generateChallenge(req, res)
 		});
 
 	}).catch(function(error){

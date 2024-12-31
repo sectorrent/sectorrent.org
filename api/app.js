@@ -13,7 +13,7 @@ const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
 const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
-const adminontroller = require('./controllers/admin');
+const adminController = require('./controllers/admin');
 
 const app = express();
 
@@ -40,22 +40,22 @@ app.use(session({
 
 app.use(cookies());
 
-app.use((req, res, next) => {
-	res.locals.config = config;
-	next();
-});
-
 
 (async function initalize(){
 	global.categories = await forum.getCategoriesList();
+	global.categories.timeout = new Date().getTime()+60*1000;
 })();
 
-const server = http.createServer(app);
 
-server.listen(80, () => {
-	console.log(`api.${config.general.domain} started`);
+app.use(async (req, res, next) => {
+	res.locals.config = config;
+	
+	if(global.categories.timeout < new Date().getTime()){
+		global.categories = await forum.getCategoriesList();
+	}
+
+	next();
 });
-
 
 
 app.use((req, res, next) => {
@@ -122,7 +122,10 @@ app.use([
 	'/thread/archive',
 	'/thread/pin',
 	'/comment',
-	'/user'
+	'/user',
+	
+	'/thread/pin',
+	'/category'
 ], async (req, res, next) => {
 	if(await middleware.isSignedIn(req, res.locals.config.token.secret)){
 		next();
@@ -169,16 +172,22 @@ app.use([
 	res.end();
 });
 
-app.put('/thread/pin', express.json(), adminontroller.putThreadPin);
-app.delete('/thread/pin', express.json(), adminontroller.deleteThreadPin);
+app.put('/thread/pin', express.json(), adminController.putThreadPin);
+app.delete('/thread/pin', express.json(), adminController.deleteThreadPin);
 
-app.post('/category', express.json(), adminontroller.postCategory);
-app.put('/category', express.json(), adminontroller.putCategory);
-app.delete('/category', express.json(), adminontroller.deleteCategory);
+app.post('/category', express.json(), adminController.postCategory);
+app.put('/category', express.json(), adminController.putCategory);
+app.delete('/category', express.json(), adminController.deleteCategory);
 
 app.get('*', (req, res) => {
 	res.json({
 		status: 404,
 		status_message: 'Endpoint not found!'
 	});
+});
+
+const server = http.createServer(app);
+
+server.listen(80, () => {
+	console.log(`api.${config.general.domain} started`);
 });
