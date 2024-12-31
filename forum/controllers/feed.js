@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const forum = require('../modules/forum');
+const category = require('../modules/category');
 
 exports.getHome = async (req, res) => {
 	forum.getHome(req).then((data) => {
@@ -94,7 +95,7 @@ exports.getCategory = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
 
-	forum.getCategory(req, slug).then((data) => {
+	category.getCategory(req, slug).then((data) => {
 		res.render('layouts/categories/index', {
 			title: 'Category Page',
 			page: `category_${slug}`,

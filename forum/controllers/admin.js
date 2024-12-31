@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const forum = require('../modules/forum');
+const category = require('../modules/category');
 //const pow = require('../modules/pow');
 
 exports.getEditCategories = async (req, res) => {
@@ -48,7 +49,7 @@ exports.getNewCategory = async (req, res) => {
 exports.getEditCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 
-	forum.getEditCategory(req, slug).then((data) => {
+	category.getEditCategory(req, slug).then((data) => {
 		res.render('layouts/admin/categories/edit', {
 			title: 'Category Page',
 			page: 'edit-categories',

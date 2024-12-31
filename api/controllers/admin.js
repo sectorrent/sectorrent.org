@@ -1,4 +1,5 @@
 const thread = require('../modules/thread');
+const category = require('../modules/category');
 
 exports.putThreadPin = async (req, res) => {
     const id = (req.query.id) ? req.query.id : '';
@@ -39,11 +40,10 @@ exports.deleteThreadPin = async (req, res) => {
 };
 
 exports.postCategory = async (req, res) => {
-    /*
-    thread.postCategory(req).then((data) => {
+    category.postCategory(req).then((data) => {
         res.json({
             status: 200,
-            status_message: 'Delete was successful',
+            status_message: 'Insert was successful',
             data
         });
 
@@ -54,16 +54,15 @@ exports.postCategory = async (req, res) => {
         });
         res.end();
     });
-    */
 };
 
 exports.putCategory = async (req, res) => {
     const id = (req.query.id) ? req.query.id : '';
-    /*
-    thread.putCategory(req, id).then((data) => {
+    
+    category.putCategory(req, id).then((data) => {
         res.json({
             status: 200,
-            status_message: 'Delete was successful',
+            status_message: 'Update was successful',
             data
         });
 
@@ -74,14 +73,12 @@ exports.putCategory = async (req, res) => {
         });
         res.end();
     });
-    */
 };
 
 exports.deleteCategory = async (req, res) => {
     const id = (req.query.id) ? req.query.id : '';
     
-    /*
-    thread.deleteCategory(req, id).then((data) => {
+    category.deleteCategory(req, id).then((data) => {
         res.json({
             status: 200,
             status_message: 'Delete was successful',
@@ -95,5 +92,4 @@ exports.deleteCategory = async (req, res) => {
         });
         res.end();
     });
-    */
 };

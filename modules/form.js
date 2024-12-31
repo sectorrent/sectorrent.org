@@ -72,6 +72,10 @@ exports.checkForm = (form, request) => {
                 case 'BOOLEAN':
                     check = checkBoolean(entry, request[entry.key]);
                     break;
+
+                case 'COLOR':
+                    check = checkColor(entry, request[entry.key]);
+                    break;
             }
 
             if(check != null){
@@ -211,6 +215,11 @@ function checkBoolean(entry, request){
     return value;
 }
 
+function checkColor(entry, request){
+    const pattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
+    return pattern.test(str);
+}
+
 function checkSwitch(entry, request){
     if(!entry.entries.includes(request)){
         if(entry.overwrite){
@@ -273,6 +282,11 @@ function checkArray(entry, request){
                 case 'BOOLEAN':
                     entry.entries.key = `${entry.key} ${key}`;
                     check = checkBoolean(entry.entries, req);
+                    break;
+
+                case 'COLOR':
+                    entry.entries.key = `${entry.key} ${key}`;
+                    check = checkColor(entry.entries, req);
                     break;
             }
 
@@ -362,6 +376,10 @@ function checkObject(entry, request){
 
                 case 'SWITCH':
                     check = checkSwitch(e, request[e.key]);
+                    break;
+
+                case 'COLOR':
+                    check = checkColor(e, request[e.key]);
                     break;
 
                 case 'ARRAY':

@@ -125,100 +125,6 @@ exports.getHome = async (req) => {
     };
 };
 
-exports.getCategory = async (req, slug) => {
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $match: {
-                slug: slug
-            }
-        },
-        {
-            $lookup: {
-                from: 'threads',
-                let: {
-                    categoryId: '$_id'
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $in: ['$$categoryId', '$categories']
-                            }
-                        }
-                    },
-                    {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    {
-                        $lookup: {
-                            from: 'comments',
-                            let: {
-                                id: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $eq: ['$$id', '$thread']
-                                        }
-                                    }
-                                },
-                                {
-                                    $count: 'total'
-                                },
-                                {
-                                    $project: {
-                                        total: true
-                                    }
-                                }
-                            ],
-                            as: 'comments'
-                        }
-                    },
-                    {
-                        $project: {
-                            _id: true,
-                            title: true,
-                            content: true,
-                            pinned: true,
-                            archived: true,
-                            views: true,
-                            categories: true,
-                            created: true,
-                            modified: true,
-                            user: true,
-                            comments: {
-                                $ifNull: [
-                                    { $first: '$comments.total' },
-                                    0
-                                ]
-                            }
-                        }
-                    }
-                ],
-                as: 'threads'
-            }
-        },
-        {
-            $unwind: '$threads'
-        },
-        {
-            $replaceRoot: {
-                newRoot: '$threads'
-            }
-        }
-    ]).toArray();
-
-	if(data.length < 1){
-		throw new TypeError(204, 'DB found no enteries...');
-	}
-
-    return data;
-};
-
 exports.getLatest = async (req, slug) => {
     let match = {};
 
@@ -473,20 +379,6 @@ exports.getCategories = async (req) => {
     ]).toArray();
 
 	if(data.length < 1){
-		throw new TypeError(204, 'DB found no enteries...');
-	}
-
-    return data;
-};
-
-exports.getEditCategory = async (req, slug) => {
-	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
-
-	let data = await global.mongo.getDatabase().collection('categories').findOne({
-        slug
-    });
-
-	if(!data){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
