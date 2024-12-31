@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const forum = require('../modules/forum');
 const account = require('../modules/account');
 const markdown = require('../modules/markdown');
 const pow = require('../modules/pow');
@@ -53,6 +54,7 @@ exports.getResetPassword = async (req, res) => {
 
 exports.getUserSummary = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
+	const categories = await forum.getCategoriesList();
 
 	account.getUserSummary(req, username).then((data) => {
 		if(data.bio){
@@ -68,7 +70,7 @@ exports.getUserSummary = async (req, res) => {
 				'markdown'
 			],
 			username,
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -79,6 +81,7 @@ exports.getUserSummary = async (req, res) => {
 
 exports.getUserPosts = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
+	const categories = await forum.getCategoriesList();
 
 	account.getUserPosts(req, username).then((data) => {
 		res.render('layouts/user/posts', {
@@ -90,7 +93,7 @@ exports.getUserPosts = async (req, res) => {
 				'table'
 			],
 			username,
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -101,6 +104,7 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getUserEdit = async (req, res) => {
 	const username = (req.params.username) ? req.params.username : '';
+	const categories = await forum.getCategoriesList();
 
 	account.getUserSummary(req, username).then((data) => {
 		res.render('layouts/user/edit', {
@@ -114,7 +118,7 @@ exports.getUserEdit = async (req, res) => {
 				'form'
 			],
 			username,
-			categories: global.categories,
+			categories,
 			data,
 			pow: pow.generateChallenge(req, res)
 		});

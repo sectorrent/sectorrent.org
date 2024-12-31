@@ -8,7 +8,7 @@ exports.getCategoriesList = async () => {
                 title: true,
                 slug: true,
                 color: true,
-                is_admin: true
+                admin_only: true
             }
         }
     ]).toArray();

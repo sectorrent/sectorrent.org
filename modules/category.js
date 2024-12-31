@@ -127,7 +127,7 @@ exports.postCategory = async (req) => {
             max: 2000
         },
         {
-            key: 'is_admin',
+            key: 'admin_only',
             type: 'BOOLEAN',
             required: true
         },

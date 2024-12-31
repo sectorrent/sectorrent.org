@@ -5,7 +5,6 @@ exports.getHome = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -21,7 +20,6 @@ exports.getLatest = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -37,7 +35,6 @@ exports.getTop = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -54,7 +51,6 @@ exports.getCategory = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -71,7 +67,6 @@ exports.getCategoryLatest = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -88,7 +83,6 @@ exports.getCategoryTop = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 
@@ -102,7 +96,6 @@ exports.getCategories = async (req, res) => {
         res.json({
             status: 200,
             status_message: 'Query was successful',
-            categories: global.categories,
             data
         });
 

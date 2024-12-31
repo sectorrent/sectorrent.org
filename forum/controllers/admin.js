@@ -4,6 +4,8 @@ const category = require('../modules/category');
 const pow = require('../modules/pow');
 
 exports.getEditCategories = async (req, res) => {
+	const categories = await forum.getCategoriesList();
+
 	forum.getEditCategories(req).then((data) => {
 		res.render('layouts/admin/categories', {
 			title: 'Categories Page',
@@ -12,7 +14,7 @@ exports.getEditCategories = async (req, res) => {
 			styles: [
 				'categories'
 			],
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -34,6 +36,8 @@ exports.getEditCategories = async (req, res) => {
 };
 
 exports.getNewCategory = async (req, res) => {
+	const categories = await forum.getCategoriesList();
+
 	res.render('layouts/admin/categories/new', {
 		title: 'Category Page',
 		page: 'edit-categories',
@@ -42,13 +46,14 @@ exports.getNewCategory = async (req, res) => {
 			'category_edit',
 			'form'
 		],
-		categories: global.categories,
+		categories,
 		pow: pow.generateChallenge(req, res)
 	});
 };
 
 exports.getEditCategory = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
+	const categories = await forum.getCategoriesList();
 
 	category.getEditCategory(req, slug).then((data) => {
 		res.render('layouts/admin/categories/edit', {
@@ -60,7 +65,7 @@ exports.getEditCategory = async (req, res) => {
 				'form'
 			],
 			slug,
-			categories: global.categories,
+			categories,
 			data,
 			pow: pow.generateChallenge(req, res)
 		});

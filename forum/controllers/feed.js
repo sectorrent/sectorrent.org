@@ -3,6 +3,8 @@ const forum = require('../modules/forum');
 const category = require('../modules/category');
 
 exports.getHome = async (req, res) => {
+	const categories = await forum.getCategoriesList();
+
 	forum.getHome(req).then((data) => {
 		res.render('layouts/index', {
 			title: 'Home Page',
@@ -11,7 +13,7 @@ exports.getHome = async (req, res) => {
 			styles: [
 				'home'
 			],
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -24,13 +26,14 @@ exports.getHome = async (req, res) => {
 				'category',
 				'table'
 			],
-			categories: global.categories
+			categories
 		});
 	});
 };
 
 exports.getLatest = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+	const categories = await forum.getCategoriesList();
 
 	forum.getLatest(req).then((data) => {
 		res.render('layouts/latest', {
@@ -41,7 +44,7 @@ exports.getLatest = async (req, res) => {
 				'category',
 				'table'
 			],
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -55,13 +58,14 @@ exports.getLatest = async (req, res) => {
 				'table'
 			],
 			type: 'latest',
-			categories: global.categories
+			categories
 		});
 	});
 };
 
 exports.getTop = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+	const categories = await forum.getCategoriesList();
 
 	forum.getTop(req).then((data) => {
 		res.render('layouts/top', {
@@ -72,7 +76,7 @@ exports.getTop = async (req, res) => {
 				'category',
 				'table'
 			],
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -86,7 +90,7 @@ exports.getTop = async (req, res) => {
 				'table'
 			],
 			type: 'top',
-			categories: global.categories
+			categories
 		});
 	});
 };
@@ -94,6 +98,7 @@ exports.getTop = async (req, res) => {
 exports.getCategory = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
+	const categories = await forum.getCategoriesList();
 
 	category.getCategory(req, slug).then((data) => {
 		res.render('layouts/categories/index', {
@@ -105,7 +110,7 @@ exports.getCategory = async (req, res) => {
 				'table'
 			],
 			slug,
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -119,7 +124,7 @@ exports.getCategory = async (req, res) => {
 				'table'
 			],
 			slug,
-			categories: global.categories
+			categories
 		});
 	});
 };
@@ -127,6 +132,7 @@ exports.getCategory = async (req, res) => {
 exports.getCategoryLatest = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
+	const categories = await forum.getCategoriesList();
 
 	forum.getLatest(req, slug).then((data) => {
 		res.render('layouts/categories/latest', {
@@ -138,7 +144,7 @@ exports.getCategoryLatest = async (req, res) => {
 				'table'
 			],
 			slug,
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -153,7 +159,7 @@ exports.getCategoryLatest = async (req, res) => {
 			],
 			type: 'latest',
 			slug,
-			categories: global.categories
+			categories
 		});
 	});
 };
@@ -161,6 +167,7 @@ exports.getCategoryLatest = async (req, res) => {
 exports.getCategoryTop = async (req, res) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 	const slug = (req.params.slug) ? req.params.slug : '';
+	const categories = await forum.getCategoriesList();
 
 	forum.getTop(req, slug).then((data) => {
 		res.render('layouts/categories/top', {
@@ -172,7 +179,7 @@ exports.getCategoryTop = async (req, res) => {
 				'table'
 			],
 			slug,
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -187,12 +194,14 @@ exports.getCategoryTop = async (req, res) => {
 			],
 			type: 'top',
 			slug,
-			categories: global.categories
+			categories
 		});
 	});
 };
 
 exports.getCategories = async (req, res) => {
+	const categories = await forum.getCategoriesList();
+
 	forum.getCategories(req).then((data) => {
 		res.render('layouts/categories', {
 			title: 'Categories Page',
@@ -201,7 +210,7 @@ exports.getCategories = async (req, res) => {
 			styles: [
 				'categories'
 			],
-			categories: global.categories,
+			categories,
 			data
 		});
 
@@ -215,7 +224,7 @@ exports.getCategories = async (req, res) => {
 				'table'
 			],
 			type: 'categories',
-			categories: global.categories
+			categories
 		});
 	});
 };

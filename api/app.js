@@ -6,7 +6,6 @@ const session = require('express-session');
 const cookies = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 global.mongo = require('./modules/mongo');
-const forum = require('./modules/forum');
 const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
@@ -41,18 +40,8 @@ app.use(session({
 app.use(cookies());
 
 
-(async function initalize(){
-	global.categories = await forum.getCategoriesList();
-	global.categories.timeout = new Date().getTime()+60*1000;
-})();
-
-
 app.use(async (req, res, next) => {
 	res.locals.config = config;
-	
-	if(global.categories.timeout < new Date().getTime()){
-		global.categories = await forum.getCategoriesList();
-	}
 
 	next();
 });
