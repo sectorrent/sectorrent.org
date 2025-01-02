@@ -157,6 +157,50 @@ exports.postCategory = async (req) => {
 
 exports.putCategory = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
+
+    let check = [
+        {
+            key: 'title',
+            type: 'STRING',
+			pattern: /^[a-zA-Z0-9\[\]\(\) ]+$/,
+            min: 2,
+            max: 160
+        },
+        {
+            key: 'description',
+            type: 'STRING',
+            min: 16,
+            max: 2000
+        },
+        {
+            key: 'admin_only',
+            type: 'BOOLEAN'
+        },
+        {
+            key: 'color',
+            type: 'COLOR'
+        }
+    ];
+
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
+    
+    const update = await global.mongo.getDatabase().collection('categories').updateOne(
+        {
+            _id: id
+        },
+        {
+            $set: data
+        }
+    );
+
+    if(update.modifiedCount != 1){
+        throw new Error('Failed to update category.');
+    }
+
+    return {
+        message: 'Category updated!'
+    };
 };
 
 exports.deleteCategory = async (req, id) => {
