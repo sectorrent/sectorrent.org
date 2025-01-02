@@ -246,6 +246,10 @@ content comment-header ul li {
     width: 180px;
 }
 
+body.archived content comment-header ul li[type='edit-thread'] {
+    display: none;
+}
+
 content comment-header action button {
     display: flex;
     width: 100%;
