@@ -374,7 +374,7 @@ label[type='submit']:hover {
     background-color: var(--secondary);
 }
 
-button[type='button'] {
+buttons > button[type='button'] {
     display: block;
     width: fit-content;
     height: 40px;
@@ -389,15 +389,15 @@ button[type='button'] {
 	transition: background-color 0.3s;
 }
 
-button[type='button']:hover {
+buttons > button[type='button']:hover {
     background-color: var(--secondary);
 }
 
-button[action='delete'] {
+buttons > button[action='delete'] {
     color: var(--background);
     background-color: var(--error);
 }
 
-button[action='delete']:hover {
+buttons > button[action='delete']:hover {
     background-color: var(--text-secondary);
 }
