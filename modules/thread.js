@@ -1,5 +1,6 @@
 const { ObjectId, Long } = require('mongodb');
 const middleware = require('./middleware');
+const forum = require('./forum');
 const form = require('./form');
 const TypError = require('./type_error');
 
@@ -161,6 +162,8 @@ exports.getThread = async (req, id) => {
 };
 
 exports.postThread = async (req) => {
+	const categories = await forum.getCategoriesList();
+
     let check = [
         {
             key: 'title',
@@ -186,7 +189,7 @@ exports.postThread = async (req) => {
             entries: {
                 type: 'SWITCH',
                 required: true,
-                entries: global.categories.indexes
+                entries: categories.indexes
             }
         }
     ];
@@ -197,8 +200,8 @@ exports.postThread = async (req) => {
     for(const [index, category] of data.categories.entries()){
         data.categories[index] = ObjectId.createFromHexString(category);
 
-        const i = global.categories.indexes.indexOf(data.categories[index].toString());
-        if(global.categories.data[i].admin_only && middleware.getRole(req) < 2){
+        const i = categories.indexes.indexOf(data.categories[index].toString());
+        if(categories.data[i].admin_only && middleware.getRole(req) < 2){
             throw new Error('Category is only permitted for admins.');
         }
     }

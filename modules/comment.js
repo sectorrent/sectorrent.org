@@ -1,5 +1,6 @@
 const { ObjectId, Long } = require('mongodb');
 const middleware = require('./middleware');
+const forum = require('./forum');
 const form = require('./form');
 
 exports.getComment = async (req, id) => {
@@ -101,10 +102,12 @@ exports.postComment = async (req, id) => {
         throw new Error('Referenced thread does not exist');
     }
 
-    for(const category of threadExists.categories){
-        const i = global.categories.indexes.indexOf(category.toString());
+    const categories = await forum.getCategoriesList();
 
-        if(global.categories.data[i].admin_only && middleware.getRole(req) < 2){
+    for(const category of threadExists.categories){
+        const i = categories.indexes.indexOf(category.toString());
+
+        if(categories.data[i].admin_only && middleware.getRole(req) < 2){
             throw new Error('Category is only permitted for admins.');
         }
     }
