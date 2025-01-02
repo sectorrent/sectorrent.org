@@ -48,13 +48,14 @@
                 <iframe name='hiddenFrame'></iframe>
 
                 <script nonce='<%= nonce %>'>
-                    const colorId = '<%= colorId %>';
                     const validForm = '<%= formId %>';
                     var pow = <%- JSON.stringify(pow) %>;
 
-                    document.getElementById(colorId).onchange = function(e){
-                        document.querySelector(`label[for='${colorId}'] span`).style.backgroundColor = this.value;
-                    };
+                    (function(){
+                        document.getElementById('<%= colorId %>').onchange = function(e){
+                            document.querySelector(`label[for='${colorId}'] span`).style.backgroundColor = this.value;
+                        };
+                    }());
                 </script>
                 <script src='/scripts/form.js'></script>
             </content>

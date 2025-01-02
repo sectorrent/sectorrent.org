@@ -346,6 +346,10 @@ response:not(:empty) {
 	display: block;
 }
 
+buttons {
+    display: flex;
+}
+
 input[type='submit'] {
     display: none;
 }
@@ -368,4 +372,32 @@ label[type='submit'] {
 
 label[type='submit']:hover {
     background-color: var(--secondary);
+}
+
+button[type='button'] {
+    display: block;
+    width: fit-content;
+    height: 40px;
+    border-radius: 5px;
+    padding: 11px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--primary);
+    border: none;
+	transition: background-color 0.3s;
+}
+
+button[type='button']:hover {
+    background-color: var(--secondary);
+}
+
+button[action='delete'] {
+    color: var(--background);
+    background-color: var(--error);
+}
+
+button[action='delete']:hover {
+    background-color: var(--text-secondary);
 }

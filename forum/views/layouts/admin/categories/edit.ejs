@@ -45,24 +45,28 @@
                         </pow>
 
                         <response></response>
-                                
+                        
                         <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
                     </form>
                 </category>
                 
-                <label type='submit' for='<%= buttonId %>'>Submit</label>
+                <buttons>
+                    <button id='<% const deleteId = uniqid() %><%= deleteId %>' type='button' action='delete'>Delete</button>
+                    <label type='submit' for='<%= buttonId %>'>Submit</label>
+                </buttons>
                 <iframe name='hiddenFrame'></iframe>
 
                 <script nonce='<%= nonce %>'>
+                    window.location.domain = '<%= config.general.domain %>';
+                    
+                    const categoryId = '<%= data._id.toString() %>';
                     const colorId = '<%= colorId %>';
                     const validForm = '<%= formId %>';
+                    const deleteId = '<%= deleteId %>';
                     var pow = <%- JSON.stringify(pow) %>;
-
-                    document.getElementById(colorId).onchange = function(e){
-                        document.querySelector(`label[for='${colorId}'] span`).style.backgroundColor = this.value;
-                    };
                 </script>
                 <script src='/scripts/form.js'></script>
+                <script src='/scripts/category.js'></script>
             </content>
 
 <%- include('../../../fragments/footer') %>

@@ -205,4 +205,17 @@ exports.putCategory = async (req, id) => {
 
 exports.deleteCategory = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
+
+    const categoryExists = await global.mongo.getDatabase().collection('categories').deleteOne({
+        _id: id
+    });
+
+    if(categoryExists.deletedCount != 1){
+        throw new Error('Failed to delete category');
+    }
+
+    return {
+        message: 'Category deleted!',
+        link: '/categories/edit'
+    };
 };
