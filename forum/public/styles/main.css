@@ -314,6 +314,10 @@ sidebar a span {
     height: 16px;
 }
 
+sidebar container a:not([type='all']) svg {
+    margin-left: auto;
+}
+
 sidebar input[type='checkbox'] {
     display: none;
 }
