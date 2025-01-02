@@ -20,7 +20,17 @@ exports.getHome = async (req, res) => {
 		});
 
 	}).catch(function(error){
-		console.log(error);
+		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/home', {
+			title: 'Home Page',
+			page: 'home',
+			uniqid: uuidv4,
+			styles: [
+				'home'
+			],
+			data: {
+				commits: global.github_commits
+			}
+		});
 	});
 };
 
