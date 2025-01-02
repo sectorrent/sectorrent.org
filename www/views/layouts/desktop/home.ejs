@@ -29,24 +29,28 @@
             <h1>Resources for <u>P2P</u> developers</h1>
             <description>Securely & Anonymously Torrent!</description>
         </section>
-
+<%
+    if(data.news.length > 0){
+%>
         <section type='news'>
             <h2>News</h2>
 
             <container>
 <%
-    for(const article of data.news){
+        for(const article of data.news){
 %>
                 <a href='https://forum.<%= config.general.domain %>/t/<%= article._id.toString() %>'>
                     <h3><%= article.title %></h3>
                     <div><%= article.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
                 </a>
 <%
-    }
+        }
 %>
             </container>
         </section>
-
+<%
+    }
+%>
         <section type='contributions'>
             <h2>Recent Contributions</h2>
 
