@@ -2,11 +2,8 @@ var processing = false, solved = false;
 //var nonce, hash;
 
 (function(){
-    const forms = document.querySelectorAll(`form[valid-form='${validForm}']`);
-    for(const form of forms){
-        form.onsubmit = onsubmit
-    }
-
+    document.querySelector(`form[valid-form='${validForm}']`).onsubmit = onsubmit;
+    
     solveChallenge(pow.challenge, pow.difficulty);
 }());
 

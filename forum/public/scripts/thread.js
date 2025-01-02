@@ -6,6 +6,10 @@ const comments = document.querySelector('comments');
 var processing;
 
 (function(){
+    if(typeof validForm != 'undefined'){
+        document.querySelector(`form[valid-form='${validForm}']`).onsubmit = onsubmit;
+    }
+
     let selector = document.querySelectorAll('button[action="delete-comment"]');
     for(const btn of selector){
         btn.onclick = ondeletecomment;
