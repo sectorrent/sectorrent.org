@@ -13,6 +13,11 @@ exports.getHome = async (req, res) => {
 			styles: [
 				'home'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum home page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/'
+			},
 			categories,
 			data
 		});
@@ -26,6 +31,11 @@ exports.getHome = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum home page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/'
+			},
 			categories
 		});
 	});
@@ -44,6 +54,11 @@ exports.getLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum latest page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/latest'
+			},
 			categories,
 			data
 		});
@@ -57,6 +72,11 @@ exports.getLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum latest page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/latest'
+			},
 			type: 'latest',
 			categories
 		});
@@ -76,6 +96,11 @@ exports.getTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum top page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/top'
+			},
 			categories,
 			data
 		});
@@ -89,6 +114,11 @@ exports.getTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum top page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/top'
+			},
 			type: 'top',
 			categories
 		});
@@ -109,6 +139,11 @@ exports.getCategory = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}`
+			},
 			slug,
 			categories,
 			data
@@ -123,6 +158,11 @@ exports.getCategory = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}`
+			},
 			slug,
 			categories
 		});
@@ -143,6 +183,11 @@ exports.getCategoryLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} latest page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}/latest`
+			},
 			slug,
 			categories,
 			data
@@ -157,6 +202,11 @@ exports.getCategoryLatest = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} latest page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}/latest`
+			},
 			type: 'latest',
 			slug,
 			categories
@@ -178,6 +228,11 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} top page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}/top`
+			},
 			slug,
 			categories,
 			data
@@ -192,6 +247,11 @@ exports.getCategoryTop = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: `SecTorrent P2P Forum category ${slug} top page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/c/${slug}/top`
+			},
 			type: 'top',
 			slug,
 			categories
@@ -210,6 +270,11 @@ exports.getCategories = async (req, res) => {
 			styles: [
 				'categories'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum categories page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/categories'
+			},
 			categories,
 			data
 		});
@@ -223,6 +288,11 @@ exports.getCategories = async (req, res) => {
 				'category',
 				'table'
 			],
+			meta: {
+				description: 'SecTorrent P2P Forum categories page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/categories'
+			},
 			type: 'categories',
 			categories
 		});

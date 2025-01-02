@@ -13,6 +13,11 @@ exports.getHome = async (req, res) => {
 			styles: [
 				'home'
 			],
+			meta: {
+				description: 'SecTorrent P2P home page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/'
+			},
 			data: {
 				news: data,
 				commits: global.github_commits
@@ -27,6 +32,11 @@ exports.getHome = async (req, res) => {
 			styles: [
 				'home'
 			],
+			meta: {
+				description: 'SecTorrent P2P home page.',
+				keywords: 'p2p torrent secure anonymous relay',
+				path: '/'
+			},
 			data: {
 				commits: global.github_commits
 			}
@@ -48,6 +58,11 @@ exports.getSEP = async (req, res) => {
 			styles: [
 				'eps'
 			],
+			meta: {
+				description: `SecTorrent P2P SEP_${id} page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/seps/${id}`
+			},
 			data: marked.parse(markdown)
 		});
 		res.end();
@@ -71,6 +86,11 @@ exports.getBEP = async (req, res) => {
 			styles: [
 				'eps'
 			],
+			meta: {
+				description: `SecTorrent P2P BEP_${id} page.`,
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/beps/${id}`
+			},
 			data: marked.parse(markdown)
 		});
 		res.end();

@@ -16,6 +16,11 @@ exports.getNewThread = async (req, res) => {
 			'markdown',
 			'form'
 		],
+		meta: {
+			description: 'SecTorrent P2P Forum new thread page.',
+			keywords: 'p2p torrent secure anonymous relay',
+			path: '/thread'
+		},
 		categories,
 		pow: pow.generateChallenge(req, res)
 	});
@@ -43,6 +48,11 @@ exports.getThread = async (req, res) => {
 				'markdown',
 				'thread'
 			],
+			meta: {
+				description: data.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, ''),
+				keywords: 'p2p torrent secure anonymous relay',
+				path: `/t/${id}`
+			},
 			id,
 			categories,
 			data,

@@ -12,6 +12,11 @@ exports.getSignIn = async (req, res) => {
 		styles: [
 			'sign'
 		],
+		meta: {
+			description: 'SecTorrent P2P Forum sign in page.',
+			keywords: 'p2p torrent secure anonymous relay',
+			path: '/signin'
+		},
 		pow: pow.generateChallenge(req, res)
 	});
 };
@@ -24,6 +29,11 @@ exports.getSignUp = async (req, res) => {
 		styles: [
 			'sign'
 		],
+		meta: {
+			description: 'SecTorrent P2P Forum sign up page.',
+			keywords: 'p2p torrent secure anonymous relay',
+			path: '/signup'
+		},
 		pow: pow.generateChallenge(req, res)
 	});
 };
@@ -36,6 +46,11 @@ exports.getForgotPassword = async (req, res) => {
 		styles: [
 			'sign'
 		],
+		meta: {
+			description: 'SecTorrent P2P Forum forgot password page.',
+			keywords: 'p2p torrent secure anonymous relay',
+			path: '/forgot-password'
+		},
 		pow: pow.generateChallenge(req, res)
 	});
 };
