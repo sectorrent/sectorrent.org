@@ -225,13 +225,15 @@ exports.putComment = async (req, id) => {
 exports.deleteComment = async (req, id) => {
 	id = ObjectId.createFromHexString(id);
 
-    const commentExists = await global.mongo.getDatabase().collection('comments').deleteOne({
-        _id: id,
-		user: middleware.getUserID(req),
-        archived: {
-			$exists: false
-		}
-    });
+    const match = {
+        _id: id
+    };
+
+    if(middleware.getRole(req) < 2){
+        match.user = middleware.getUserID(req);
+    }
+
+    const commentExists = await global.mongo.getDatabase().collection('comments').deleteOne(match);
 
     if(commentExists.deletedCount != 1){
         throw new Error('Failed to delete comment');

@@ -956,6 +956,32 @@ exports.getUserPosts = async (req, username) => {
                         $limit: 20
                     },
 					{
+						$lookup: {
+							from: 'comments',
+							let: {
+								id: '$_id'
+							},
+							pipeline: [
+								{
+									$match: {
+										$expr: {
+											$eq: ['$$id', '$thread']
+										}
+									}
+								},
+								{
+									$count: 'total'
+								},
+								{
+									$project: {
+										total: true
+									}
+								}
+							],
+							as: 'comments'
+						}
+					},
+					{
 						$project: {
                             _id: true,
                             title: true,
@@ -965,7 +991,13 @@ exports.getUserPosts = async (req, username) => {
                             views: true,
                             categories: true,
                             created: true,
-                            modified: true
+                            modified: true,
+							comments: {
+								$ifNull: [
+									{ $first: '$comments.total' },
+									0
+								]
+							}
 						}
 					}
                 ],
