@@ -40,6 +40,41 @@ exports.deleteThreadPin = async (req, res) => {
     });
 };
 
+exports.putCategories = async (req, res) => {
+    category.putCategories(req).then((data) => {
+        res.json({
+            status: 200,
+            status_message: 'Update was successful',
+            data
+        });
+
+    }).catch(function(error){
+        switch(error.name){
+            case 'FieldError':
+                res.json({
+                    status: 417,
+                    status_message: error.message,
+                    data: {
+                        fields: error.fields,
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+    
+            default:
+                res.json({
+                    status: 400,
+                    status_message: error.message,
+                    data: {
+                        pow: pow.generateChallenge(req, res)
+                    }
+                });
+                break;
+        }
+        res.end();
+    });
+};
+
 exports.postCategory = async (req, res) => {
     category.postCategory(req).then((data) => {
         res.json({
@@ -129,8 +164,7 @@ exports.deleteCategory = async (req, res) => {
                     status: 417,
                     status_message: error.message,
                     data: {
-                        fields: error.fields,
-                        pow: pow.generateChallenge(req, res)
+                        fields: error.fields
                     }
                 });
                 break;
@@ -138,10 +172,7 @@ exports.deleteCategory = async (req, res) => {
             default:
                 res.json({
                     status: 400,
-                    status_message: error.message,
-                    data: {
-                        pow: pow.generateChallenge(req, res)
-                    }
+                    status_message: error.message
                 });
                 break;
         }

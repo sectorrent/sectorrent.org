@@ -312,6 +312,7 @@ sidebar > a:hover,
 sidebar a span {
     width: 16px;
     height: 16px;
+    border-radius: 16px;
 }
 
 sidebar container a:not([type='all']) svg {

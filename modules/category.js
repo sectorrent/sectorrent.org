@@ -1,6 +1,64 @@
 const { ObjectId, Long } = require('mongodb');
 const form = require('./form');
 
+exports.getEditCategories = async (req) => {
+	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
+
+	let data = await global.mongo.getDatabase().collection('categories').find().sort({ index: 1 }).toArray();
+
+	if(data.length < 1){
+		throw new TypeError(204, 'DB found no enteries...');
+	}
+
+    return data;
+};
+
+exports.putCategories = async (req) => {
+    let check = [
+        {
+            key: 'categories',
+            type: 'ARRAY',
+            required: true,
+            min: 0,
+            entries: {
+                type: 'STRING',
+                required: true,
+                min: 2,
+                max: 160,
+                pattern: /^[a-zA-Z0-9]+$/
+            }
+        }
+    ];
+
+    req.body = form.removePrototype(req.body);
+    let data = form.checkForm(check, req.body);
+
+    const updates = data.categories.map((id, index) => {
+        return {
+            updateOne: {
+                filter: {
+                    _id: ObjectId.createFromHexString(id)
+                },
+                update: {
+                    $set: {
+                        index
+                    }
+                }
+            }
+        };
+    });
+
+    const update = await global.mongo.getDatabase().collection('categories').bulkWrite(updates);
+
+    if(update.modifiedCount < 1){
+        throw new Error('Failed to update categories.');
+    }
+
+    return {
+        message: 'Category order changed!'
+    };
+};
+
 exports.getEditCategory = async (req, slug) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 

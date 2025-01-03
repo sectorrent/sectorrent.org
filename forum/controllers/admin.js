@@ -6,7 +6,7 @@ const pow = require('../modules/pow');
 exports.getEditCategories = async (req, res) => {
 	const categories = await forum.getCategoriesList();
 
-	forum.getEditCategories(req).then((data) => {
+	category.getEditCategories(req).then((data) => {
 		res.render('layouts/admin/categories', {
 			title: 'Categories Page',
 			page: 'edit-categories',

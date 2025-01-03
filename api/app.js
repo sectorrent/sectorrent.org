@@ -114,6 +114,7 @@ app.use([
 	'/user',
 	
 	'/thread/pin',
+	'/categories',
 	'/category'
 ], async (req, res, next) => {
 	if(await middleware.isSignedIn(req, res.locals.config.token.secret)){
@@ -147,6 +148,7 @@ app.put('/user', express.json(), accountController.putUser);
 
 app.use([
 	'/thread/pin',
+	'/categories',
 	'/category'
 ], async (req, res, next) => {
 	if(await middleware.getRole(req) > 1){
@@ -163,6 +165,8 @@ app.use([
 
 app.put('/thread/pin', express.json(), adminController.putThreadPin);
 app.delete('/thread/pin', express.json(), adminController.deleteThreadPin);
+
+app.put('/categories', express.json(), adminController.putCategories);
 
 app.post('/category', express.json(), adminController.postCategory);
 app.put('/category', express.json(), adminController.putCategory);

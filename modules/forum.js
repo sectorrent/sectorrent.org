@@ -3,6 +3,11 @@
 exports.getCategoriesList = async () => {
 	const data = await global.mongo.getDatabase().collection('categories').aggregate([
         {
+            $sort: {
+                index: 1
+            }
+        },
+        {
             $project: {
                 _id: true,
                 title: true,
@@ -28,6 +33,11 @@ exports.getHome = async (req) => {
 	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
 
 	let categories = await global.mongo.getDatabase().collection('categories').aggregate([
+        {
+            $sort: {
+                index: 1
+            }
+        },
         {
             $lookup: {
                 from: 'threads',
@@ -352,6 +362,11 @@ exports.getCategories = async (req) => {
 
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
         {
+            $sort: {
+                index: 1
+            }
+        },
+        {
             $lookup: {
                 from: 'threads',
                 let: {
@@ -377,18 +392,6 @@ exports.getCategories = async (req) => {
             }
         }
     ]).toArray();
-
-	if(data.length < 1){
-		throw new TypeError(204, 'DB found no enteries...');
-	}
-
-    return data;
-};
-
-exports.getEditCategories = async (req) => {
-	//const skip = (req.query.skip) ? parseInt(req.query.skip) : -1;
-
-	let data = await global.mongo.getDatabase().collection('categories').find().toArray();
 
 	if(data.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
