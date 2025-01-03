@@ -126,6 +126,7 @@ section table td categories a:hover {
 section table td categories a span {
     width: 12px;
     height: 12px;
+    border-radius: 12px;
 }
 
 section table td div {

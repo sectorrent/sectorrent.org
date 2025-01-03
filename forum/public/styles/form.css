@@ -47,6 +47,7 @@ categories a:hover {
 categories a span {
     width: 12px;
     height: 12px;
+    border-radius: 12px;
 }
 
 content thread {
@@ -320,6 +321,7 @@ fl-option:hover {
 fl-option span {
     width: 16px;
     height: 16px;
+    border-radius: 16px;
 }
 
 pow {
