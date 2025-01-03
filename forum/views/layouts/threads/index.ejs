@@ -227,7 +227,7 @@
             let deleteReport = false;
 
             if(isSignedIn){
-                if(user.id == comment.user._id && !data.archived){
+                if(user.id == comment.user._id.toString() && !data.archived){
 %>
                                         <li>
                                             <a href='/r/<%= comment._id.toString() %>/edit'>
