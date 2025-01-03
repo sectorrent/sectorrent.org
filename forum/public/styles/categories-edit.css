@@ -1,0 +1,30 @@
+list row {
+    transition: opacity 0.3s;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+list-body cell:nth-child(2) {
+    cursor: grab;
+}
+
+cell svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+}
+
+row:active {
+    cursor: grabbing;
+}
+
+row.over {
+    opacity: 0.5;
+}
+  

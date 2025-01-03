@@ -82,7 +82,7 @@ list row {
     align-items: center;
 }
 
-cell {
+list cell {
     display: block;
 }
 

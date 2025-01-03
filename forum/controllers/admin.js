@@ -12,9 +12,12 @@ exports.getEditCategories = async (req, res) => {
 			page: 'edit-categories',
 			uniqid: uuidv4,
 			styles: [
-				'categories'
+				'categories',
+				'categories-edit',
+				'form'
 			],
 			categories,
+			pow: pow.generateChallenge(req, res),
 			data
 		});
 
@@ -43,7 +46,7 @@ exports.getNewCategory = async (req, res) => {
 		page: 'edit-categories',
 		uniqid: uuidv4,
 		styles: [
-			'category_edit',
+			'category-edit',
 			'form'
 		],
 		categories,
@@ -61,7 +64,7 @@ exports.getEditCategory = async (req, res) => {
 			page: 'edit-categories',
 			uniqid: uuidv4,
 			styles: [
-				'category_edit',
+				'category-edit',
 				'form'
 			],
 			slug,
