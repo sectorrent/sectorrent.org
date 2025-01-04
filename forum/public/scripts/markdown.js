@@ -130,10 +130,11 @@ function markdownToHtml(markdown){
                     nextLine = lines[i+1].trim();
 
                     if(/^=+$/.test(nextLine)){
-                        const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                        const isUsed = processedLines.length > 0;
                         if(isUsed){
                             processedLines.push('</p>');
                         }
+                        const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                         processedLines.push(`<h1 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h1>`);
                         i += 2;
 
@@ -143,10 +144,11 @@ function markdownToHtml(markdown){
                         continue;
     
                     }else if(/^-+$/.test(nextLine)){
-                        const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                        const isUsed = processedLines.length > 0;
                         if(isUsed){
                             processedLines.push('</p>');
                         }
+                        const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                         processedLines.push(`<h2 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h2>`);
                         i += 2;
 
@@ -160,10 +162,11 @@ function markdownToHtml(markdown){
 
             //HANDLE HEADERS
             if(line.startsWith('### ')){
-                const slug = line.slice(4).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                const isUsed = processedLines.length > 0;
                 if(isUsed){
                     processedLines.push('</p>');
                 }
+                const slug = line.slice(4).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                 processedLines.push(`<h3 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(4)}</a></h3>`);
                 i++;
 
@@ -173,10 +176,11 @@ function markdownToHtml(markdown){
                 continue;
 
             }else if(line.startsWith('## ')){
-                const slug = line.slice(3).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                const isUsed = processedLines.length > 0;
                 if(isUsed){
                     processedLines.push('</p>');
                 }
+                const slug = line.slice(3).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                 processedLines.push(`<h2 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(3)}</a></h2>`);
                 i++;
 
