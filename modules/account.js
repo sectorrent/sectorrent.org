@@ -871,6 +871,8 @@ exports.putUser = async (req, res) => {
 		throw Error('POW was not valid');
 	}
 
+	delete req.body.pow;
+
 	req.body.email = req.body.email.toLowerCase().trim();
 
 	const result = await global.mongo.getDatabase().collection('users').updateOne(
