@@ -291,7 +291,7 @@ exports.parse = (markdown) => {
 };
 
 function wrapLinks(input){
-    var urlRegex = /(?<![\(\[])https?:\/\/[^\s]+/gi;
+    var urlRegex = /(?<![\(\[])(https?:\/\/[^\s"']+)/gi;
     return input.replace(urlRegex, function(url){
         return `<a class='link' href="${url}">${url}</a>`;
     });
