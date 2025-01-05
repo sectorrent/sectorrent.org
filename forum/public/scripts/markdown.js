@@ -32,7 +32,7 @@ function markdownToHtml(markdown){
                         processedLines[processedLines.length-1] += '</p>';
                     }
 
-                    codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).toLowerCase();
+                    codeLanguage = (line.slice(3) == '') ? 'plain' : line.slice(3).split(' ')[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
                     const previousLine = lines[i+1];
                     
                     const uuid = uniqid();
