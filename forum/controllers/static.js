@@ -12,7 +12,7 @@ exports.getRules = async (req, res) => {
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');
 
-		res.render('layouts/rules', {
+		res.render('layouts/static', {
 			title: 'Rules Page',
 			page: 'rules',
 			uniqid: uuidv4,

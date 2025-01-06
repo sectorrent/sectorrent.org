@@ -157,6 +157,11 @@ header li.button a:hover {
     background-color: var(--secondary);
 }
 
+header li.user a {
+    border-radius: 50%;
+    background-color: var(--background-shimmer);
+}
+
 header li span {
     color: var(--primary);
 }
@@ -166,14 +171,17 @@ header li.navigation label {
     cursor: pointer;
 }
 
-header li label svg {
+header li a svg,
+        header li label svg {
     display: block;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     fill: var(--text-primary);
+    transition: fill 0.3s;
 }
 
-header li label svg:hover {
+header li a:hover svg,
+        header li label:hover svg {
     fill: var(--primary);
 }
 
@@ -259,10 +267,6 @@ sidebar > a,
     border-bottom-left-radius: 5px;
     transition: background-color 0.3s;
     cursor: pointer;
-}
-
-sidebar label {
-    color: var(--text-primary);
 }
 
 sidebar label:before {
