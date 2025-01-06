@@ -1,7 +1,7 @@
 :root {
     --width: 70;
     --min-width: 800px;
-    --top: 80px;
+    --top: 60px;
 
     --primary: #994ce0;
     --secondary: #6b339e;
@@ -125,7 +125,7 @@ header li a,
     height: 30px;
     line-height: 30px;
     color: var(--text-primary);
-    padding: 25px 15px;
+    padding: 15px;
     text-decoration: none;
     z-index: 2;
     transition: background-color 0.2s;
@@ -290,7 +290,7 @@ footer {
     display: block;
     top: var(--top);
 	width: calc(var(--width) * 1%);
-	min-width: calc(var(--min-width) - 80px);
+	min-width: calc(var(--min-width) - var(--top));
     padding: 80px calc(((100 - var(--width)) / 2) * 1%) 20px calc(((100 - var(--width)) / 2) * 1%);
     font-size: 1em;
     background-color: var(--black);

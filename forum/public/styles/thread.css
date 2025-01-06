@@ -5,12 +5,12 @@
 }
 
 body.archived {
-    --top: calc(1.6em + 90px) !important;
+    --top: calc(1.6em + 60px) !important;
 }
 
 archive {
     position: fixed;
-    top: 80px;
+    top: 60px;
     left: 0;
     display: none;
     width: 100%;
