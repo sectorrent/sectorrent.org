@@ -153,7 +153,7 @@ header li input[type='radio']:checked ~ label.header, header li[selected] {
 
 header li.home a {
     font-weight: 700;
-    font-size: 1.8em;
+    font-size: 1.5em;
 }
 
 header li.button a {
