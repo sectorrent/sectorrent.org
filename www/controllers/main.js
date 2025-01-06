@@ -46,7 +46,7 @@ exports.getHome = async (req, res) => {
 
 exports.getSEP = async (req, res) => {
     const id = req.params.id;
-	const p = path.resolve('./eps/sectorrent/sep_'+id+'.md');
+	const p = path.resolve('./static/sectorrent/sep_'+id+'.md');
 
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');
@@ -74,7 +74,7 @@ exports.getSEP = async (req, res) => {
 
 exports.getBEP = async (req, res) => {
     const id = req.params.id;
-	const p = path.resolve('./eps/bittorrent/bep_'+id+'.md');
+	const p = path.resolve('./static/bittorrent/bep_'+id+'.md');
 
 	if(fs.existsSync(p)){
 		const markdown = fs.readFileSync(p, 'utf-8');

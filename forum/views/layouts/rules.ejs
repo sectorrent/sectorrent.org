@@ -1,0 +1,13 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../fragments/sidebar') %>
+
+            <content>
+                <preview>
+                    <%- data %>
+                </preview>
+            </content>
+
+<%- include('../fragments/footer') %>

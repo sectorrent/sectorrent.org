@@ -13,6 +13,7 @@ const feedController = require('./controllers/feed');
 const threadController = require('./controllers/thread');
 const commentController = require('./controllers/comment');
 const accountController = require('./controllers/account');
+const otherController = require('./controllers/other');
 const adminController = require('./controllers/admin');
 
 const app = express();
@@ -74,6 +75,8 @@ app.get('/signin', accountController.getSignIn);
 app.get('/signup', accountController.getSignUp);
 app.get('/forgot-password', accountController.getForgotPassword);
 app.get('/reset-password', accountController.getResetPassword);
+
+app.get('/rules', otherController.getRules);
 
 app.get('/u/:username', accountController.getUserSummary);
 app.get('/u/:username/posts', accountController.getUserPosts);
