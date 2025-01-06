@@ -5,7 +5,7 @@
 <%- include('../../fragments/sidebar') %>
 
             <content>
-                <user-header>
+                <content-header>
                     <user>
                         <img-container>
                             <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
@@ -36,7 +36,7 @@
                             </li>
                         </ul>
                     </nav>
-                </user-header>
+                </content-header>
 
                 <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/user' method='PUT' target='hiddenFrame'>
                     <input-field title='Username'>

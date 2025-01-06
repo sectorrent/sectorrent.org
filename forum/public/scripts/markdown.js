@@ -95,23 +95,43 @@ function markdownToHtml(markdown){
 
             //HANDLE BULLET LISTS
             if(/^[-+*] /.test(line)){
+                const isUsed = processedLines.length > 0;
+                if(isUsed){
+                    processedLines.push('</p>');
+                }
+                
                 let listItems = [];
                 while(i < lines.length && /^[-+*] /.test(lines[i])){
                     listItems.push(`<li>${lines[i].slice(2)}</li>`);
                     i++;
                 }
                 processedLines.push(`<ul>${listItems.join('')}</ul>`);
+                
+                if(lines.length > i){
+                    processedLines.push('<p>');
+                }
+
                 continue;
             }
 
             //HANDLE NUMBERED
             if(/^\d+\.\s/.test(line)){
+                const isUsed = processedLines.length > 0;
+                if(isUsed){
+                    processedLines.push('</p>');
+                }
+
                 let listItems = [];
                 while(i < lines.length && /^\d+\.\s/.test(lines[i])){
                     listItems.push(`<li>${lines[i].slice(lines[i].indexOf(' ')+1)}</li>`);
                     i++;
                 }
                 processedLines.push(`<ol>${listItems.join('')}</ol>`);
+
+                if(lines.length > i){
+                    processedLines.push('<p>');
+                }
+
                 continue;
             }
 
@@ -278,7 +298,7 @@ function markdownToHtml(markdown){
 
         const joinedLines = processedLines.join('\n');
         if(!inCodeBlock && !joinedLines.startsWith('<code-header>')){
-            if(joinedLines.startsWith('<h')){
+            if(joinedLines.startsWith('<h') || joinedLines.startsWith('<ol') || joinedLines.startsWith('<ul')){
                 return `${joinedLines}</p>`;
             }
             return `<p>${joinedLines}</p>`;

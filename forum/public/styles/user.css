@@ -6,7 +6,7 @@ content {
     flex-direction: column;
 }
 
-content user-header {
+content content-header {
     display: block;
     gap: 20px;
     width: 100%;
@@ -14,7 +14,7 @@ content user-header {
     border-bottom: solid 1px var(--background-shimmer);
 }
 
-user-header user {
+content-header user {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -23,7 +23,7 @@ user-header user {
     font-weight: bold;
 }
 
-user-header user img-container {
+content-header user img-container {
     display: block;
     width: 56px;
     height: 56px;
@@ -33,18 +33,18 @@ user-header user img-container {
     overflow: hidden;
 }
 
-user-header user img-container img {
+content-header user img-container img {
     display: none;
     width: 100%;
     border-radius: 50%;
     background-color: var(--background-shimmer);
 }
 
-user-header user img-container img.show {
+content-header user img-container img.show {
     display: block;
 }
 
-user-header user svg {
+content-header user svg {
     display: block;
     width: 30px;
     height: 30px;
@@ -107,7 +107,7 @@ content > preview {
 
 content > preview:before {
     display: block;
-    content: 'Bio';
+    content: attr(label);
     font-size: 0.8em;
 }
 

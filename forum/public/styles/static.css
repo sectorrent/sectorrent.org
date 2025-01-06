@@ -17,3 +17,17 @@ content-header h1 {
     color: var(--text-primary);
     font-size: 1.5em;
 }
+
+content > preview {
+    display: block;
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px var(--background-shimmer);
+}
+
+content > preview:before {
+    display: block;
+    content: attr(label);
+    font-size: 0.8em;
+}

@@ -17,6 +17,7 @@ exports.getRules = async (req, res) => {
 			page: 'rules',
 			uniqid: uuidv4,
 			styles: [
+				'static',
 				'markdown'
 			],
 			meta: {
@@ -25,6 +26,7 @@ exports.getRules = async (req, res) => {
 				path: '/rules'
 			},
 			categories,
+			header: 'Rules',
 			data: marked.parse(markdown)
 		});
 		res.end();

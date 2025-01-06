@@ -5,7 +5,7 @@
 <%- include('../../fragments/sidebar') %>
 
             <content>
-                <user-header>
+                <content-header>
                     <user>
                         <img-container>
                             <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
@@ -43,7 +43,7 @@
 %>
                         </ul>
                     </nav>
-                </user-header>
+                </content-header>
 
 <%
     if(data.threads.length > 0){

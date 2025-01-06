@@ -11,9 +11,9 @@
             </style>
 
             <content>
-                <category-header>
+                <content-header>
                     <h1>Edit Category</h1>
-                </category-header>
+                </content-header>
 
                 <category>
                     <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>

@@ -7,7 +7,7 @@
 <%- include('../../fragments/sidebar') %>
 
             <content>
-                <user-header>
+                <content-header>
                     <user>
                         <img-container>
                             <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
@@ -45,9 +45,9 @@
 %>
                         </ul>
                     </nav>
-                </user-header>
+                </content-header>
 
-                <preview><% if(typeof data.bio !== 'undefined'){ %><%- data.bio %><% } %></preview>
+                <preview label='Bio'><% if(typeof data.bio !== 'undefined'){ %><%- data.bio %><% } %></preview>
 
                 <date>Joined: <% const date = new Date(data.created); %><%= months[date.getUTCMonth()]+' '+date.getUTCDate()+', '+date.getFullYear() %></date>
                 

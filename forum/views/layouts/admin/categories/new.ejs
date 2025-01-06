@@ -5,9 +5,9 @@
 <%- include('../../../fragments/sidebar') %>
 
             <content>
-                <category-header>
+                <content-header>
                     <h1>New Category</h1>
-                </category-header>
+                </content-header>
 
                 <category>
                     <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category' method='POST' target='hiddenFrame'>
