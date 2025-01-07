@@ -121,7 +121,7 @@ nav {
     white-space: nowrap;
 }
 
-header ul {
+header nav > ul {
     display: flex;
     height: 60px;
     align-items: center;
@@ -157,11 +157,6 @@ header li.button a:hover {
     background-color: var(--secondary);
 }
 
-header li.user a {
-    border-radius: 50%;
-    background-color: var(--background-shimmer);
-}
-
 header li span {
     color: var(--primary);
 }
@@ -171,8 +166,7 @@ header li.navigation label {
     cursor: pointer;
 }
 
-header li a svg,
-        header li label svg {
+header li label svg {
     display: block;
     width: 32px;
     height: 32px;
@@ -180,13 +174,91 @@ header li a svg,
     transition: fill 0.3s;
 }
 
-header li.user a svg {
-    fill: var(--black);
-}
-
 header li label:hover svg {
     fill: var(--primary);
 }
+
+
+
+
+
+header li.account {
+    font-size: 0.8em;
+}
+
+header li.account button {
+    position: relative;
+    display: flex;
+    width: 32px;
+    padding: 0;
+    gap: 10px;
+    color: var(--text-primary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    overflow-x: hidden;
+    transition: width 0.1s;
+    z-index: 2;
+}
+
+header li.account:hover button {
+    width: 195px;
+}
+
+header li.account button svg {
+    display: block;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    fill: var(--black);
+    background-color: var(--text-primary);
+    border-radius: 32px;
+}
+
+header li.account ul {
+    display: block;
+    position: absolute;
+    top: -100%;
+    width: 220px;
+    margin-left: -12px;
+    opacity: 0;
+    visibility: hidden;
+    padding: calc(32px + 2em) 0 0 0;
+    background-color: var(--background-secondary);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: top 0.3s, opacity 0.3s;
+}
+
+header li.account:hover ul {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+}
+
+header li.account ul li {
+    display: block;
+}
+
+header li.account ul li a {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+}
+
+header li.account ul li:last-child a {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+header li.account ul li a:hover {
+    background-color: var(--background-shimmer);
+}
+
+
 
 alert {
     position: fixed;
@@ -206,6 +278,12 @@ alert:not(:empty) {
     display: block;
 }
 
+divider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--background-shimmer);
+}
 
 filler {
     flex: 1 1 1e-09px;
