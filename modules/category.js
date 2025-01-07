@@ -242,6 +242,8 @@ exports.putCategory = async (req, id) => {
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+
+    data.slug = data.title.toLowerCase().replace(/[\s\t]+/g, '-').replace(/[^a-z0-9\-]+/g, '');
     
     const update = await global.mongo.getDatabase().collection('categories').updateOne(
         {
