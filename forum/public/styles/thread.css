@@ -21,7 +21,7 @@ archive {
     font-weight: bold;
     text-align: center;
     color: var(--text-primary);
-    z-index: 10;
+    z-index: 1;
 }
 
 body.archived archive {
