@@ -178,7 +178,7 @@ exports.postThread = async (req) => {
             type: 'STRING',
             required: true,
             min: 16,
-            max: 2000
+            max: 20000
         },
         {
             key: 'categories',
@@ -234,7 +234,7 @@ exports.putThread = async (req, id) => {
             type: 'STRING',
             required: true,
             min: 16,
-            max: 2000
+            max: 20000
         }
     ];
 
