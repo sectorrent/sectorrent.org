@@ -17,7 +17,8 @@
                         <span>PoW verification in progress.</span>
                     </pow>
                     <response></response>
-                    <input type='submit' value='Sign In' />
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    <label type='submit' for='<%= buttonId %>' disabled>Sign In</label>
                 </form>
             </content>
             <content type='sub'>

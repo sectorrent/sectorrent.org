@@ -58,10 +58,10 @@
 
                     <response></response>
                             
-                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
                 </form>
                 
-                <label type='submit' for='<%= buttonId %>'>Submit</label>
+                <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
                 <script nonce='<%= nonce %>'>

@@ -376,6 +376,11 @@ label[type='submit']:hover {
     background-color: var(--secondary);
 }
 
+label[type='submit'][disabled] {
+    color: var(--background);
+    background-color: var(--text-secondary);
+}
+
 buttons > button[type='button'] {
     display: block;
     width: fit-content;

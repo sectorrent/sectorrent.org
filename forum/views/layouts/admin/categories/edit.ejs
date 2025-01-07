@@ -46,13 +46,13 @@
 
                         <response></response>
                         
-                        <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                        <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
                     </form>
                 </category>
                 
                 <buttons>
                     <button id='<% const deleteId = uniqid() %><%= deleteId %>' type='button' action='delete'>Delete</button>
-                    <label type='submit' for='<%= buttonId %>'>Submit</label>
+                    <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                 </buttons>
                 <iframe name='hiddenFrame'></iframe>
 

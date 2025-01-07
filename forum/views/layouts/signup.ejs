@@ -36,7 +36,8 @@
                         <span>PoW verification in progress.</span>
                     </pow>
                     <response></response>
-                    <input type='submit' value='Sign Up' />
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    <label type='submit' for='<%= buttonId %>' disabled>Sign Up</label>
                 </form>
             </content>
             <iframe name='hiddenFrame'></iframe>

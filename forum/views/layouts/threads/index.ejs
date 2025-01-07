@@ -306,7 +306,7 @@
 
                             <response></response>
                             
-                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
                         </form>
                         <iframe name='hiddenFrame'></iframe>
 
@@ -317,7 +317,7 @@
                         <script src='/scripts/form.js'></script>
                     </reply-inner>
                 </reply>
-                <label type='submit' for='<%= buttonId %>'>Comment</label>
+                <label type='submit' for='<%= buttonId %>' disabled>Comment</label>
 <%
     }
 %>

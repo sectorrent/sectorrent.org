@@ -42,9 +42,11 @@
                                         <fl-option value='0'>Select Category</fl-option>
 <%
     for(const category of categories.data){
+        if(!categories.data.admin_only || user.role > 2){
 %>
                                         <fl-option value='<%= category._id.toString() %>'><span class='<%= category.slug %>'></span><%= category.title %></fl-option>
 <%
+        }
     }
 %>
                                     </fl-options>
@@ -62,11 +64,11 @@
 
                             <response></response>
                             
-                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' />
+                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
                         </form>
                     </thread-inner>
                 </thread>
-                <label type='submit' for='<%= buttonId %>'>Submit</label>
+                <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
                 <script src='/scripts/new-thread.js'></script>
