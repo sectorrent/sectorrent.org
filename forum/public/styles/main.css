@@ -323,6 +323,7 @@ sidebar {
     color: var(--text-secondary);
     border-right: solid 1px var(--background-secondary);
     background-color: var(--background);
+    overflow-y: auto;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
