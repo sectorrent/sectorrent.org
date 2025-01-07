@@ -194,6 +194,7 @@ header li.account button {
     gap: 10px;
     color: var(--text-primary);
     background-color: transparent;
+    font-weight: bold;
     border: none;
     cursor: pointer;
     align-items: center;
