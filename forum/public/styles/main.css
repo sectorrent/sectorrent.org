@@ -272,7 +272,7 @@ alert {
     border-bottom: solid 1px #9e6a03;
     font-weight: bold;
     text-align: center;
-    z-index: 10;
+    z-index: 1;
 }
 
 alert:not(:empty) {
