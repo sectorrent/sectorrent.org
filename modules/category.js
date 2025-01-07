@@ -177,7 +177,7 @@ exports.getCategory = async (req, slug) => {
 
     data = data[0];
 
-	if(data.length < 1){
+	if(data.threads.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
@@ -283,7 +283,7 @@ exports.getCategoryLatest = async (req, slug) => {
 
     data = data[0];
 
-	if(data.length < 1){
+	if(data.threads.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
