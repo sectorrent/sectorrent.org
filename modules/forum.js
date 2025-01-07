@@ -135,17 +135,8 @@ exports.getHome = async (req) => {
     };
 };
 
-exports.getLatest = async (req, slug) => {
-    let match = {};
-
-    if(slug){
-        match.slug = slug;
-    }
-
+exports.getLatest = async (req) => {
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $match: match
-        },
         {
             $lookup: {
                 from: 'threads',
@@ -228,14 +219,6 @@ exports.getLatest = async (req, slug) => {
             $replaceRoot: {
                 newRoot: '$threads'
             }
-        },
-        {
-            $sort: {
-                created: -1
-            }
-        },
-        {
-            $limit: 20
         }
     ]).toArray();
 
@@ -246,17 +229,8 @@ exports.getLatest = async (req, slug) => {
     return data;
 };
 
-exports.getTop = async (req, slug) => {
-    let match = {};
-
-    if(slug){
-        match.slug = slug;
-    }
-
+exports.getTop = async (req) => {
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
-        {
-            $match: match
-        },
         {
             $lookup: {
                 from: 'threads',
@@ -339,14 +313,6 @@ exports.getTop = async (req, slug) => {
             $replaceRoot: {
                 newRoot: '$threads'
             }
-        },
-        {
-            $sort: {
-                views: -1
-            }
-        },
-        {
-            $limit: 20
         }
     ]).toArray();
 

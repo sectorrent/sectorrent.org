@@ -140,8 +140,8 @@ exports.getCategory = async (req, res) => {
 				'table'
 			],
 			meta: {
-				description: `SecTorrent P2P Forum category ${slug} page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				description: data.description,
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}`
 			},
 			slug,
@@ -160,7 +160,7 @@ exports.getCategory = async (req, res) => {
 			],
 			meta: {
 				description: `SecTorrent P2P Forum category ${slug} page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}`
 			},
 			slug,
@@ -174,7 +174,7 @@ exports.getCategoryLatest = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 	const categories = await forum.getCategoriesList();
 
-	forum.getLatest(req, slug).then((data) => {
+	category.getCategoryLatest(req, slug).then((data) => {
 		res.render('layouts/categories/latest', {
 			title: 'Latest Page',
 			page: `category_${slug}`,
@@ -184,8 +184,8 @@ exports.getCategoryLatest = async (req, res) => {
 				'table'
 			],
 			meta: {
-				description: `SecTorrent P2P Forum category ${slug} latest page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				description: `Latest ${data.description}`,
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}/latest`
 			},
 			slug,
@@ -204,7 +204,7 @@ exports.getCategoryLatest = async (req, res) => {
 			],
 			meta: {
 				description: `SecTorrent P2P Forum category ${slug} latest page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}/latest`
 			},
 			type: 'latest',
@@ -219,7 +219,7 @@ exports.getCategoryTop = async (req, res) => {
 	const slug = (req.params.slug) ? req.params.slug : '';
 	const categories = await forum.getCategoriesList();
 
-	forum.getTop(req, slug).then((data) => {
+	category.getCategoryTop(req, slug).then((data) => {
 		res.render('layouts/categories/top', {
 			title: 'Top Page',
 			page: `category_${slug}`,
@@ -229,8 +229,8 @@ exports.getCategoryTop = async (req, res) => {
 				'table'
 			],
 			meta: {
-				description: `SecTorrent P2P Forum category ${slug} top page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				description: `Top ${data.description}`,
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}/top`
 			},
 			slug,
@@ -249,7 +249,7 @@ exports.getCategoryTop = async (req, res) => {
 			],
 			meta: {
 				description: `SecTorrent P2P Forum category ${slug} top page.`,
-				keywords: 'p2p torrent secure anonymous relay',
+				keywords: `p2p torrent secure anonymous relay ${slug}`,
 				path: `/c/${slug}/top`
 			},
 			type: 'top',

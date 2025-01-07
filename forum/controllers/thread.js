@@ -31,8 +31,6 @@ exports.getThread = async (req, res) => {
 	const categories = await forum.getCategoriesList();
 	
 	thread.getThread(req, id).then((data) => {
-		data.content = markdown.parse(data.content);
-		
 		if(data.comments.total > 0){
 			for(const comment of data.comments.comments){
 				comment.content = markdown.parse(comment.content);
@@ -55,7 +53,10 @@ exports.getThread = async (req, res) => {
 			},
 			id,
 			categories,
-			data,
+			data: {
+				...data,
+				content: markdown.parse(data.content)
+			},
 			pow: pow.generateChallenge(req, res)
 		});
 
