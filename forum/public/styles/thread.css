@@ -5,7 +5,7 @@
 }
 
 body.archived {
-    --top: calc(1.6em + 60px) !important;
+    --top: calc(1.6em + 70px) !important;
 }
 
 archive {
