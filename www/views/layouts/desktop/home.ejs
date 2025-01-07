@@ -37,7 +37,7 @@
 
             <container>
 <%
-        for(const article of data.news){
+        for(const article of data.news.threads){
 %>
                 <a href='https://forum.<%= config.general.domain %>/t/<%= article._id.toString() %>'>
                     <h3><%= article.title %></h3>

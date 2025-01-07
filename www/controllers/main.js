@@ -1,11 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
-const forum = require('../modules/forum');
+const category = require('../modules/category');
 const marked = require('../modules/markdown');
 const fs = require('fs');
 const path = require('path');
 
 exports.getHome = async (req, res) => {
-	forum.getLatest(req, 'news').then((data) => {
+	category.getCategoryLatest(req, 'news').then((data) => {
 		res.render('layouts/'+((req.useragent.isMobile) ? 'mobile' : 'desktop')+'/home', {
 			title: 'Home Page',
 			page: 'home',
