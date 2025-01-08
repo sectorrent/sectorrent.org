@@ -54,16 +54,17 @@
 }
 
 @media(max-width:800px) {
+    /*
 	header,
             section {
 		padding: 0 40px !important;
 	}
+    */
 
     footer {
         padding: 80px 40px 20px 40px !important;
     }
 }
-
 html {
     color: var(--text-primary);
     background-color: var(--background);

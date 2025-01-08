@@ -1,10 +1,15 @@
-/*
 @media(max-width:1100px) {
     preview pre {
-        width: calc((var(--width) * 1vw) - 108px) !important;
+        width: calc(100vw - 150px) !important;
     }
 }
-*/
+
+@media(max-width:800px) {
+    preview pre {
+        width: 666px !important;
+    }
+}
+
 body.archived {
     --top: calc(1.6em + 70px) !important;
 }
@@ -435,9 +440,8 @@ comments more button {
 comments more button:hover {
     background-color: var(--secondary);
 }
-/*
+
 preview pre {
-    width: calc((var(--width) * 1vw) - 380px);
-    min-width: 624px !important;
+    width: calc(100vw - 402px);
+    max-width: 904px;
 }
-*/
