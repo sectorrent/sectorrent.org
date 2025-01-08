@@ -1,83 +1,32 @@
-@media(max-width:1500px) {
-	section[type='header'] {
-		padding: 140px 10% !important;
-	}
-
-	section {
-		padding: 40px 10% !important;
-	}
-
-    section:nth-of-type(2) {
-        padding: 80px 10% 40px 10% !important;
-    }
-    
-    section:last-of-type {
-        padding: 40px 10% 80px 10% !important;
-    }
-}
-
-@media(max-width:1200px) {
-	section[type='header'] {
-		padding: 140px 5% !important;
-	}
-
-	section {
-		padding: 40px 5% !important;
-	}
-
-    section:nth-of-type(2) {
-        padding: 80px 5% 40px 5% !important;
-    }
-    
-    section:last-of-type {
-        padding: 40px 5% 80px 5% !important;
-    }
-}
-
-@media(max-width:800px) {
-	section[type='header'] {
-		padding: 140px 40px !important;
-	}
-
-	section {
-		padding: 40px 40px !important;
-	}
-
-    section:nth-of-type(2) {
-        padding: 80px 40px 40px 40px !important;
-    }
-    
-    section:last-of-type {
-        padding: 40px 40px 80px 40px !important;
-    }
-}
-
 section {
     display: block;
     position: relative;
     top: 60px;
-    width: calc(var(--width) * 1%);
-	padding: 40px 15%;
+    width: calc(100% - 40px);
+    max-width: calc(var(--max-content-width) - 40px);
+	padding: 40px 20px;
+    margin: auto;
     line-height: 1.6em;
 }
 
 section[type='header'] {
     display: flex;
+    max-width: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-	padding: 140px 15%;
+	padding: 140px 20px;
     line-height: unset;
     text-align: center;
     background-color: var(--background-secondary);
 }
 
 section:nth-of-type(2) {
-	padding: 80px 15% 40px 15%;
+	padding: 80px 20px 40px 20px;
 }
 
 section:last-of-type {
-	padding: 40px 15% 80px 15%;
+	padding: 40px 20px 80px 20px;
 }
 
 section h1 {

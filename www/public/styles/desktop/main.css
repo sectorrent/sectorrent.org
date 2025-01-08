@@ -1,6 +1,6 @@
 :root {
-    --width: 70;
     --min-width: 800px;
+    --max-content-width: 1000px;
     --top: 60px;
 
     --primary: #994ce0;
@@ -19,28 +19,6 @@
     --ripple: #666666;
     --good: #53bd39;
     --error: #f55442;
-}
-
-@media(max-width:1500px) {
-	:root {
-		--width: 80 !important;
-	}
-}
-
-@media(max-width:1200px) {
-	:root {
-		--width: 90 !important;
-	}
-}
-
-@media(max-width:800px) {
-	header {
-		padding: 0 40px !important;
-	}
-
-    footer {
-        padding: 80px 40px 20px 40px !important;
-    }
 }
 
 html {
@@ -82,9 +60,9 @@ body {
 header {
     position: fixed;
     top: 0;
-	width: calc(var(--width) * 1%);
+	width: calc(100% - 40px);
 	min-width: calc(var(--min-width) - 80px);
-	padding: 0 calc(((100 - var(--width)) / 2) * 1%);
+	padding: 0 20px;
     color: var(--text-primary);
     background-color: var(--black);
     z-index: 10;
@@ -238,7 +216,8 @@ header li input[type='radio']:checked ~ dropdown-container {
 
 header li dropdown {
     display: flex;
-    width: calc(var(--width) * 1%);
+    width: calc(100% - 40px);
+    max-width: var(--max-content-width);
     height: 100%;
     margin: auto;
 }
@@ -287,18 +266,22 @@ header ul input[type='radio'] {
 
 footer {
     position: relative;
-    display: block;
+    display: flex;
     top: var(--top);
-	width: calc(var(--width) * 1%);
-	min-width: calc(var(--min-width) - var(--top));
-    padding: 80px calc(((100 - var(--width)) / 2) * 1%) 20px calc(((100 - var(--width)) / 2) * 1%);
+	width: calc(100% - 80px);
+	min-width: calc(var(--min-width) - 80px);
+    padding: 80px 40px 20px 40px;
     font-size: 1em;
     background-color: var(--black);
     border-top: solid 3px var(--primary);
+    align-items: center;
+    flex-direction: column;
 }
 
 footer nav {
     display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
     margin-bottom: 60px;
 }
 
@@ -356,9 +339,9 @@ footer li a:hover {
 footer year {
     display: block;
     width: 100%;
+    max-width: var(--max-content-width);
     height: 30px;
     padding-top: 20px;
-    margin: auto;
     color: var(--white);
     border-top: solid 1px var(--white);
     line-height: 30px;
