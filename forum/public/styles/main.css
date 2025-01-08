@@ -1,6 +1,7 @@
 :root {
     --width: 70;
     --min-width: 800px;
+    --max-content-width: 1000px;
     --top: 60px;
 
     --primary: #994ce0;
@@ -102,9 +103,9 @@ body {
 header {
     position: fixed;
     top: 0;
-	width: calc(var(--width) * 1%);
-	min-width: calc(var(--min-width) - 80px);
-	padding: 0 calc(((100 - var(--width)) / 2) * 1%);
+	width: calc(100% - 40px);
+	min-width: calc(var(--min-width) - 40px);
+	padding: 0 20px;
     color: var(--text-primary);
     background-color: var(--black);
     z-index: 10;
@@ -302,14 +303,12 @@ section {
     display: flex;
     position: relative;
     top: var(--top);
-	width: calc(var(--width) * 1%);
-	min-width: calc(var(--min-width) - var(--top));
+	width: 100%;
+	min-width: var(--min-width);
     min-height: calc(100vh - var(--top));
     align-items: start;
     color: var(--text-secondary);
-	padding: 0 calc(((100 - var(--width)) / 2) * 1%);
     line-height: 1.6em;
-    gap: 30px;
 }
 
 sidebar {
@@ -346,8 +345,6 @@ sidebar > a,
     color: var(--text-secondary);
     text-decoration: none;
     padding: 6px 20px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     transition: background-color 0.3s;
     cursor: pointer;
 }
@@ -386,8 +383,6 @@ sidebar label a:hover svg {
 sidebar a[selected],
         sidebar label[selected] {
     background-color: var(--background-shimmer);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 
 sidebar > a:hover,

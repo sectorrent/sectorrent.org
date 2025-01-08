@@ -1,5 +1,6 @@
 section table {
-    flex: 1;
+    width: 100%;
+    max-width: var(--max-content-width);
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 10px;

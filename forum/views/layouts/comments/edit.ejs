@@ -40,10 +40,10 @@
                             <response></response>
                             
                             <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                            <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                         </form>
                     </thread-inner>
                 </thread>
-                <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                 <iframe name='hiddenFrame'></iframe>
 
                 <script nonce='<%= nonce %>'>

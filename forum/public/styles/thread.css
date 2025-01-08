@@ -1,9 +1,10 @@
+/*
 @media(max-width:1100px) {
     preview pre {
         width: calc((var(--width) * 1vw) - 108px) !important;
     }
 }
-
+*/
 body.archived {
     --top: calc(1.6em + 70px) !important;
 }
@@ -30,14 +31,17 @@ body.archived archive {
 
 content {
     display: flex;
-    width: 100%;
+    width: calc(100% - 40px);
     gap: 30px;
+    padding: 0 20px;
+    align-items: center;
     flex-direction: column;
 }
 
 content content-header {
     display: block;
     width: 100%;
+    max-width: var(--max-content-width);
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
 }
@@ -46,6 +50,11 @@ content comment,
         content reply {
     display: flex;
     gap: 20px;
+}
+
+content reply {
+    width: 100%;
+    max-width: var(--max-content-width);
 }
 
 body.archived content reply {
@@ -66,6 +75,8 @@ content comment-inner.reported {
 
 comments {
     display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
     gap: 30px;
     flex-direction: column;
     padding-bottom: 30px;
@@ -424,8 +435,9 @@ comments more button {
 comments more button:hover {
     background-color: var(--secondary);
 }
-
+/*
 preview pre {
     width: calc((var(--width) * 1vw) - 380px);
     min-width: 624px !important;
 }
+*/

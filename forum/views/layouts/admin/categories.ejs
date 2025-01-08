@@ -66,6 +66,7 @@
                     <response></response>
                     
                     <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
                 </form>
 
                 <iframe name='hiddenFrame'></iframe>
@@ -75,8 +76,6 @@
                     var pow = <%- JSON.stringify(pow) %>;
                 </script>
                 <script src='/scripts/form.js'></script>
-
-                <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
 
                 <script src='/scripts/categories.js'></script>
             </content>

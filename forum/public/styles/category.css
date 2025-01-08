@@ -1,13 +1,16 @@
 content {
     display: flex;
-    width: 100%;
-    flex-direction: column;
+    width: calc(100% - 40px);
     gap: 20px;
-    padding-bottom: 30px;
+    padding: 0 20px 30px 20px;
+    align-items: center;
+    flex-direction: column;
 }
 
 content nav {
     display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
     -webkit-touch-callout: none; /* iOS Safari */

@@ -1,14 +1,16 @@
 content {
     display: flex;
-    width: 100%;
+    width: calc(100% - 40px);
     gap: 30px;
-    padding-bottom: 30px;
+    padding: 0 20px 30px 20px;
+    align-items: center;
     flex-direction: column;
 }
 
 content content-header {
     display: block;
     width: 100%;
+    max-width: var(--max-content-width);
     padding: 20px 0;
     border-bottom: solid 1px var(--background-shimmer);
 }
@@ -50,9 +52,16 @@ categories a span {
     border-radius: 12px;
 }
 
+content category {
+    display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
+}
+
 content thread {
     display: flex;
     width: 100%;
+    max-width: var(--max-content-width);
     gap: 20px;
 }
 
@@ -88,8 +97,10 @@ content thread-inner {
 
 form {
     display: flex;
-	flex-direction: column;
+    width: 100%;
+    max-width: var(--max-content-width);
     gap: 30px;
+	flex-direction: column;
 }
 
 iframe[name='hiddenFrame'] {
@@ -350,6 +361,8 @@ response:not(:empty) {
 
 buttons {
     display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
 }
 
 input[type='submit'] {

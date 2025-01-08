@@ -1,9 +1,10 @@
+/*
 @media(max-width:1100px) {
     preview pre {
         width: calc((var(--width) * 1vw) - 36px) !important;
     }
 }
-
+*/
 preview h1,
         preview h2,
         preview h3,
@@ -130,7 +131,7 @@ preview code-header button.copy:hover svg {
 preview pre {
     position: relative;
     display: block;
-    width: calc((var(--width) * 1vw) - 314px);
+    width: 100%;/*calc((var(--width) * 1vw) - 314px);*/
     min-width: 698px;
     max-height: 400px;
     border-bottom-left-radius: 5px;
