@@ -907,7 +907,7 @@ exports.putUser = async (req, res) => {
 		},
 		exp: expires
 	},
-	res.locals.config.token.secret+jwt.generateOTP(password, parseInt(expires/60)));
+	res.locals.config.token.secret+jwt.generateOTP(req.session.secret, parseInt(expires/60)));
 
 	res.cookie('token', token, {
 		maxAge: expires,
@@ -918,7 +918,6 @@ exports.putUser = async (req, res) => {
 	});
 
 	req.session.signature = token.split('.')[2];
-	req.session.secret = password;
 
 	return {
 		message: 'Changes saved!'
