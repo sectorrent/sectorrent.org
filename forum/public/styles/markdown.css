@@ -137,7 +137,7 @@ preview pre {
     position: relative;
     display: block;
     width: calc(100vw - 328px);
-    max-width: 978px;
+    max-width: calc(var(--max-content-width) - 22px);
     max-height: 400px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
