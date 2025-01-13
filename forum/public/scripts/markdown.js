@@ -155,7 +155,7 @@ function markdownToHtml(markdown){
                             processedLines.push('</p>');
                         }
                         const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-                        processedLines.push(`<h1 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h1>`);
+                        processedLines.push(`<h1 id='${slug}'><a href='#${slug}' target='_blank'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h1>`);
                         i += 2;
 
                         if(lines.length > i){
@@ -169,7 +169,7 @@ function markdownToHtml(markdown){
                             processedLines.push('</p>');
                         }
                         const slug = line.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-                        processedLines.push(`<h2 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h2>`);
+                        processedLines.push(`<h2 id='${slug}'><a href='#${slug}' target='_blank'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line}</a></h2>`);
                         i += 2;
 
                         if(lines.length > i){
@@ -187,7 +187,7 @@ function markdownToHtml(markdown){
                     processedLines.push('</p>');
                 }
                 const slug = line.slice(4).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-                processedLines.push(`<h3 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(4)}</a></h3>`);
+                processedLines.push(`<h3 id='${slug}'><a href='#${slug}' target='_blank'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(4)}</a></h3>`);
                 i++;
 
                 if(lines.length > i){
@@ -201,7 +201,7 @@ function markdownToHtml(markdown){
                     processedLines.push('</p>');
                 }
                 const slug = line.slice(3).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-                processedLines.push(`<h2 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(3)}</a></h2>`);
+                processedLines.push(`<h2 id='${slug}'><a href='#${slug}' target='_blank'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(3)}</a></h2>`);
                 i++;
 
                 if(lines.length > i){
@@ -215,7 +215,7 @@ function markdownToHtml(markdown){
                     processedLines.push('</p>');
                 }
                 const slug = line.slice(2).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-                processedLines.push(`<h1 id='${slug}'><a href='#${slug}'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(2)}</a></h1>`);
+                processedLines.push(`<h1 id='${slug}'><a href='#${slug}' target='_blank'><svg viewBox='0 0 24 24'><path d='M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h4v4H4v2h4v4h2v-4h4v4h2v-4h4v-2h-4v-4h4zm-6 4h-4v-4h4v4z' /></svg>${line.slice(2)}</a></h1>`);
                 i++;
                 
                 if(lines.length > i){
@@ -313,14 +313,14 @@ function markdownToHtml(markdown){
 function wrapLinks(input){
     var urlRegex = /(?<![\(\[])(https?:\/\/[^\s"']+)/gi;
     return input.replace(urlRegex, function(url){
-        return `<a class='link' href="${url}">${url}</a>`;
+        return `<a class='link' href="${url}" target='_blank'>${url}</a>`;
     });
 }
 
 function wrapEmails(input){
     var emailRegex = /([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
     return input.replace(emailRegex, function(url){
-        return `<a class='link' href="mailto:${url}">${url}</a>`;
+        return `<a class='link' href="mailto:${url}" target='_blank'>${url}</a>`;
     });
 }
 
@@ -393,7 +393,7 @@ function markDownText(line){
                 break;
             }
 
-            const linkHtml = `<a class='link' href="${url}">${linkText}</a>`;
+            const linkHtml = `<a class='link' href="${url}" target='_blank'>${linkText}</a>`;
 
             line = line.slice(0, startText)+linkHtml+line.slice(endUrl+1);
 
