@@ -185,215 +185,175 @@ exports.getCategory = async (req, slug) => {
 };
 
 exports.getCategoryLatest = async (req, slug) => {
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
+    let category = await global.mongo.getDatabase().collection('categories').findOne({
+        slug
+    });
+
+    if(!category){
+		throw new TypeError(404, "Category doesn't exist.");
+    }
+
+    let threads = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $match: {
-                slug
+                categories: category._id
             }
         },
         {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        },
+        {
             $lookup: {
-                from: 'threads',
+                from: 'comments',
                 let: {
-                    categoryId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $in: ['$$categoryId', '$categories']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
                     {
-                        $sort: {
-                            created: -1
-                        }
-                    },
-                    {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    {
-                        $lookup: {
-                            from: 'comments',
-                            let: {
-                                id: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $eq: ['$$id', '$thread']
-                                        }
-                                    }
-                                },
-                                {
-                                    $count: 'total'
-                                },
-                                {
-                                    $project: {
-                                        total: true
-                                    }
-                                }
-                            ],
-                            as: 'comments'
-                        }
+                        $count: 'total'
                     },
                     {
                         $project: {
-                            _id: true,
-                            title: true,
-                            content: true,
-                            pinned: true,
-                            archived: true,
-                            views: true,
-                            categories: true,
-                            created: true,
-                            modified: true,
-                            user: true,
-                            comments: {
-                                $ifNull: [
-                                    { $first: '$comments.total' },
-                                    0
-                                ]
-                            }
+                            total: true
                         }
                     }
                 ],
-                as: 'threads'
+                as: 'comments'
             }
         },
         {
             $project: {
                 _id: true,
                 title: true,
-                slug: true,
-                description: true,
-                threads: '$threads'
+                content: true,
+                pinned: true,
+                archived: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
+                }
             }
         }
     ]).toArray();
 
-	if(data.length < 1){
-		throw new TypeError(404, "Category doesn't exist.");
-	}
-
-    data = data[0];
-
-	if(data.threads.length < 1){
+	if(threads.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
-    return data;
+    return {
+        _id: category._id,
+        title: category.title,
+        slug: category.slug,
+        description: category.description,
+        threads
+    };
 };
 
 exports.getCategoryTop = async (req, slug) => {
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
+	let category = await global.mongo.getDatabase().collection('categories').findOne({
+        slug
+    });
+
+    if(!category){
+		throw new TypeError(404, "Category doesn't exist.");
+    }
+
+    let threads = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $match: {
-                slug
+                categories: category._id
             }
         },
         {
+            $sort: {
+                views: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        },
+        {
             $lookup: {
-                from: 'threads',
+                from: 'comments',
                 let: {
-                    categoryId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $in: ['$$categoryId', '$categories']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
                     {
-                        $sort: {
-                            views: -1
-                        }
-                    },
-                    {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    {
-                        $lookup: {
-                            from: 'comments',
-                            let: {
-                                id: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $eq: ['$$id', '$thread']
-                                        }
-                                    }
-                                },
-                                {
-                                    $count: 'total'
-                                },
-                                {
-                                    $project: {
-                                        total: true
-                                    }
-                                }
-                            ],
-                            as: 'comments'
-                        }
+                        $count: 'total'
                     },
                     {
                         $project: {
-                            _id: true,
-                            title: true,
-                            content: true,
-                            pinned: true,
-                            archived: true,
-                            views: true,
-                            categories: true,
-                            created: true,
-                            modified: true,
-                            user: true,
-                            comments: {
-                                $ifNull: [
-                                    { $first: '$comments.total' },
-                                    0
-                                ]
-                            }
+                            total: true
                         }
                     }
                 ],
-                as: 'threads'
+                as: 'comments'
             }
         },
         {
             $project: {
                 _id: true,
                 title: true,
-                slug: true,
-                description: true,
-                threads: '$threads'
+                content: true,
+                pinned: true,
+                archived: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
+                }
             }
         }
     ]).toArray();
 
-	if(data.length < 1){
-		throw new TypeError(404, "Category doesn't exist.");
-	}
-
-    data = data[0];
-
-	if(data.threads.length < 1){
+	if(threads.length < 1){
 		throw new TypeError(204, 'DB found no enteries...');
 	}
 
-    return data;
+    return {
+        _id: category._id,
+        title: category.title,
+        slug: category.slug,
+        description: category.description,
+        threads
+    };
 };
 
 exports.postCategory = async (req) => {

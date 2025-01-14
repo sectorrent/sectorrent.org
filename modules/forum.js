@@ -136,88 +136,61 @@ exports.getHome = async (req) => {
 };
 
 exports.getLatest = async (req) => {
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
+    let data = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                created: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        },
         {
             $lookup: {
-                from: 'threads',
+                from: 'comments',
                 let: {
-                    categoryId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $in: ['$$categoryId', '$categories']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
                     {
-                        $sort: {
-                            created: -1
-                        }
-                    },
-                    {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    {
-                        $lookup: {
-                            from: 'comments',
-                            let: {
-                                id: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $eq: ['$$id', '$thread']
-                                        }
-                                    }
-                                },
-                                {
-                                    $count: 'total'
-                                },
-                                {
-                                    $project: {
-                                        total: true
-                                    }
-                                }
-                            ],
-                            as: 'comments'
-                        }
+                        $count: 'total'
                     },
                     {
                         $project: {
-                            _id: true,
-                            title: true,
-                            content: true,
-                            pinned: true,
-                            archived: true,
-                            views: true,
-                            categories: true,
-                            created: true,
-                            modified: true,
-                            user: true,
-                            comments: {
-                                $ifNull: [
-                                    { $first: '$comments.total' },
-                                    0
-                                ]
-                            }
+                            total: true
                         }
                     }
                 ],
-                as: 'threads'
+                as: 'comments'
             }
         },
         {
-            $unwind: '$threads'
-        },
-        {
-            $replaceRoot: {
-                newRoot: '$threads'
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                archived: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
+                }
             }
         }
     ]).toArray();
@@ -230,88 +203,61 @@ exports.getLatest = async (req) => {
 };
 
 exports.getTop = async (req) => {
-	let data = await global.mongo.getDatabase().collection('categories').aggregate([
+    let data = await global.mongo.getDatabase().collection('threads').aggregate([
+        {
+            $sort: {
+                views: -1
+            }
+        },
+        {
+            $skip: 0
+        },
+        {
+            $limit: 20
+        },
         {
             $lookup: {
-                from: 'threads',
+                from: 'comments',
                 let: {
-                    categoryId: '$_id'
+                    id: '$_id'
                 },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $in: ['$$categoryId', '$categories']
+                                $eq: ['$$id', '$thread']
                             }
                         }
                     },
                     {
-                        $sort: {
-                            views: -1
-                        }
-                    },
-                    {
-                        $skip: 0
-                    },
-                    {
-                        $limit: 20
-                    },
-                    {
-                        $lookup: {
-                            from: 'comments',
-                            let: {
-                                id: '$_id'
-                            },
-                            pipeline: [
-                                {
-                                    $match: {
-                                        $expr: {
-                                            $eq: ['$$id', '$thread']
-                                        }
-                                    }
-                                },
-                                {
-                                    $count: 'total'
-                                },
-                                {
-                                    $project: {
-                                        total: true
-                                    }
-                                }
-                            ],
-                            as: 'comments'
-                        }
+                        $count: 'total'
                     },
                     {
                         $project: {
-                            _id: true,
-                            title: true,
-                            content: true,
-                            pinned: true,
-                            archived: true,
-                            views: true,
-                            categories: true,
-                            created: true,
-                            modified: true,
-                            user: true,
-                            comments: {
-                                $ifNull: [
-                                    { $first: '$comments.total' },
-                                    0
-                                ]
-                            }
+                            total: true
                         }
                     }
                 ],
-                as: 'threads'
+                as: 'comments'
             }
         },
         {
-            $unwind: '$threads'
-        },
-        {
-            $replaceRoot: {
-                newRoot: '$threads'
+            $project: {
+                _id: true,
+                title: true,
+                content: true,
+                pinned: true,
+                archived: true,
+                views: true,
+                categories: true,
+                created: true,
+                user: true,
+                comments: {
+                    $ifNull: [
+                        { $first: '$comments.total' },
+                        0
+                    ]
+                }
             }
         }
     ]).toArray();
