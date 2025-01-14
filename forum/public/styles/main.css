@@ -39,6 +39,11 @@
     sidebar a[selected] {
         border-radius: 5px;
     }
+
+    input[type='checkbox']:checked ~ section content {
+        max-height: calc(100vh - var(--top));
+        overflow: hidden;
+    }
 }
 
 html {
@@ -300,6 +305,7 @@ sidebar {
     border-right: solid 1px var(--background-secondary);
     background-color: var(--background);
     overflow-y: auto;
+    z-index: 12;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */

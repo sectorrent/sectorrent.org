@@ -27,6 +27,7 @@ content {
     align-items: center;
 	text-align: center;
     gap: 20px;
+    padding: 30px 20px;
 }
 
 content[type='main'] {
@@ -118,6 +119,20 @@ field input-field:nth-child(1) {
 
 field input-field:nth-child(2) {
 	margin-left: 10px;
+}
+
+content div {
+    text-align: left;
+}
+
+content div a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s;
+}
+
+content div a:hover {
+    color: var(--primary);
 }
 
 input[type='submit'] {
