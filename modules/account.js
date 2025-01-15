@@ -329,7 +329,7 @@ exports.signUp = async (req, res) => {
 	
 		return {
 			message: 'Signed up!',
-			link: `/u/${username}/edit`
+			link: `/u/${req.body.username}/edit`
 		};
 
 	}catch(error){
