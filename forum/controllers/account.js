@@ -56,6 +56,10 @@ exports.getForgotPassword = async (req, res) => {
 };
 
 exports.getResetPassword = async (req, res) => {
+	const id = req.query.id;
+	const otp = req.query.c;
+	const expires = req.query.e;
+
 	res.render('layouts/reset_password', {
 		title: 'Reset Password Page',
 		page: 'reset-password',
@@ -63,6 +67,11 @@ exports.getResetPassword = async (req, res) => {
 		styles: [
 			'sign'
 		],
+		data: {
+			id,
+			otp,
+			expires
+		},
 		pow: pow.generateChallenge(req, res)
 	});
 };

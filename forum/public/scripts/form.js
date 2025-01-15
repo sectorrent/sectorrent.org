@@ -114,7 +114,7 @@ function onsubmit(event){
         switch(data.status){
             case 200:
                 alert(data.data.message, data.data.link);
-                return;
+                break;
 
             case 400:
                 processing = false;
@@ -125,6 +125,7 @@ function onsubmit(event){
                 document.querySelector('response').textContent = data.status_message;
                 pow = data.data.pow;
                 solveChallenge(pow.challenge, pow.difficulty);
+                break;
 
             case 417:
                 processing = false;
@@ -139,6 +140,7 @@ function onsubmit(event){
                 document.querySelector('pow span').textContent = 'PoW verification in progress.';
                 pow = data.data.pow;
                 solveChallenge(pow.challenge, pow.difficulty);
+                break;
 
             default:
                 processing = false;

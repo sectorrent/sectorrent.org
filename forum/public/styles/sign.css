@@ -22,6 +22,7 @@ section {
 
 content {
     display: flex;
+    width: 100%;
 	flex-direction: column;
 	justify-content: center;
     align-items: center;
@@ -88,6 +89,11 @@ input-field:focus-within:before {
     color: var(--primary);
 }
 
+input-field[error]:before {
+	content: attr(error);
+    color: var(--error);
+}
+
 input[type='email'],
         input[type='password'],
         input[type='tel'],
@@ -111,6 +117,13 @@ input[type='email']:focus,
         input[type='tel']:focus,
         input[type='text']:focus {
 	border: solid 1px var(--primary);
+}
+
+input-field[error] input[type='email'],
+        input-field[error] input[type='password'],
+        input-field[error] input[type='tel'],
+        input-field[error] input[type='text'] {
+    border: solid 1px var(--error);
 }
 
 field input-field:nth-child(1) {
