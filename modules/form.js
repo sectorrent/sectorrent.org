@@ -254,47 +254,47 @@ function checkArray(entry, request){
         try{
             switch(entry.entries.type){
                 case 'STRING':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkString(entry.entries, req);
                     break;
 
                 case 'NUMBER':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkNumber(entry.entries, req);
                     break;
 
                 case 'EMAIL':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkEmail(entry.entries, req);
                     break;
 
                 case 'DATE':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkDate(entry.entries, req);
                     break;
 
                 case 'SWITCH':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkSwitch(entry.entries, req);
                     break;
 
                 case 'ARRAY':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkArray(entry.entries, req);
                     break;
 
                 case 'OBJECT':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkObject(entry.entries, req);
                     break;
 
                 case 'BOOLEAN':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkBoolean(entry.entries, req);
                     break;
 
                 case 'COLOR':
-                    entry.entries.key = `${entry.key} ${key}`;
+                    entry.entries.key = `${entry.key}[${key}]`;
                     check = checkColor(entry.entries, req);
                     break;
             }

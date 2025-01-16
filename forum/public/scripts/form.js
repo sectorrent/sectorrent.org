@@ -131,7 +131,13 @@ function onsubmit(event){
                 processing = false;
                 if(data.data.fields){
                     for(const key of data.data.fields){
-                        document.querySelector("input[key='"+key.type+"']").parentElement.setAttribute('error', key.message);
+                        const match = key.type.matches(/^([a-zA-Z].*)\[([0-9]).*?\]$/);
+                        if(match){
+                            document.querySelectorAll(`[key='${match[2]}']`)[parseInt(match[2])].parentElement.setAttribute('error', key.message);;
+                            continue;
+                        }
+
+                        document.querySelector(`[key='${key.type}']`).parentElement.setAttribute('error', key.message);
                     }
                 }
                 document.querySelector('input[type="submit"]').disabled = true;
