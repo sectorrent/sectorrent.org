@@ -248,7 +248,9 @@ input[type='checkbox']:checked ~ label[type='checkbox'] path {
 
 selector-input {
     display: block;
-    width: 100%;
+    width: calc(100% - 2px);
+    border-radius: 5px;
+    border: solid 1px transparent;
 }
 
 selector-input[error] {
