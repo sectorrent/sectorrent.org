@@ -5,6 +5,10 @@ editor {
     border-radius: 10px;
 }
 
+editor[error] {
+    border: solid 1px var(--error);
+}
+
 editor input[type='radio'] {
     display: none;
 }

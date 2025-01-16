@@ -131,7 +131,7 @@ function onsubmit(event){
                 processing = false;
                 if(data.data.fields){
                     for(const key of data.data.fields){
-                        document.querySelector("input[name='"+key.type+"']").parentElement.setAttribute('error', key.message);
+                        document.querySelector("input[key='"+key.type+"']").parentElement.setAttribute('error', key.message);
                     }
                 }
                 document.querySelector('input[type="submit"]').disabled = true;

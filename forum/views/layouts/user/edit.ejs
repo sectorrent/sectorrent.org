@@ -40,11 +40,11 @@
 
                 <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/user' method='PUT' target='hiddenFrame'>
                     <input-field title='Username'>
-                        <input type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
+                        <input key='username' type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
                     </input-field>
 
                     <input-field title='Email'>
-                        <input type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' value='<%= data.email %>' />
+                        <input key='email' type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' value='<%= data.email %>' />
                     </input-field>
 
                     <%- include('../../fragments/editor', { name: 'bio', placeholder: 'Write a bio using Markdown.', content: (data.bio) ? data.bio : '' }) %>

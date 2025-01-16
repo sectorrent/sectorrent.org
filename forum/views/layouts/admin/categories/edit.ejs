@@ -18,7 +18,7 @@
                 <category>
                     <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>
                         <input-field title='Title'>
-                            <input type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' value='<%= data.title %>' />
+                            <input key='title' type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' value='<%= data.title %>' />
                         </input-field>
 
                         <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only'<% if(data.admin_only){ %> checked<% } %>>
@@ -34,7 +34,7 @@
                         </label>
 
                         <input-field title='Description'>
-                            <textarea type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'><%= data.description %></textarea>
+                            <textarea key='description' type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'><%= data.description %></textarea>
                         </input-field>
 
                         <pow>
