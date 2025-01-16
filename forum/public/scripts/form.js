@@ -131,7 +131,7 @@ function onsubmit(event){
                 processing = false;
                 if(data.data.fields){
                     for(const key of data.data.fields){
-                        const match = key.type.matches(/^([a-zA-Z].*)\[([0-9]).*?\]$/);
+                        const match = key.type.match(/^([a-zA-Z].*)\[([0-9]).*?\]$/);
                         if(match){
                             document.querySelectorAll(`[key='${match[2]}']`)[parseInt(match[2])].parentElement.setAttribute('error', key.message);;
                             continue;
