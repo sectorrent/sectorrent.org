@@ -2,6 +2,7 @@ const { ObjectId, Long } = require('mongodb');
 const middleware = require('./middleware');
 const forum = require('./forum');
 const form = require('./form');
+const pow = require('./pow');
 const TypError = require('./type_error');
 
 exports.getEditThread = async (req, id) => {
@@ -191,11 +192,50 @@ exports.postThread = async (req) => {
                 required: true,
                 entries: categories.indexes
             }
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
     ];
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+    
+    if(!pow.validateSolution(req, res, data)){
+        throw Error('POW was not valid');
+    }
 
     for(const [index, category] of data.categories.entries()){
         data.categories[index] = ObjectId.createFromHexString(category);
@@ -235,11 +275,50 @@ exports.putThread = async (req, id) => {
             required: true,
             min: 16,
             max: 20000
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
     ];
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+    
+    if(!pow.validateSolution(req, res, data)){
+        throw Error('POW was not valid');
+    }
 
     data.modified = Long.fromNumber(Date.now());
 

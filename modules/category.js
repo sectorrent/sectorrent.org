@@ -27,11 +27,50 @@ exports.putCategories = async (req) => {
                 max: 160,
                 pattern: /^[a-zA-Z0-9]+$/
             }
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
     ];
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+    
+    if(!pow.validateSolution(req, res, data)){
+        throw Error('POW was not valid');
+    }
 
     const updates = data.categories.map((id, index) => {
         return {
@@ -382,11 +421,50 @@ exports.postCategory = async (req) => {
             key: 'color',
             type: 'COLOR',
             required: true
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
     ];
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+    
+    if(!pow.validateSolution(req, res, data)){
+        throw Error('POW was not valid');
+    }
 
     data.slug = data.title.toLowerCase().replace(/[\s\t]+/g, '-').replace(/[^a-z0-9\-]+/g, '');
 
@@ -426,11 +504,50 @@ exports.putCategory = async (req, id) => {
         {
             key: 'color',
             type: 'COLOR'
-        }
+        },
+        {
+            key: 'pow',
+            type: 'OBJECT',
+            required: true,
+            entries: [
+				{
+					key: 'challenge',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 31,
+					max: 64
+				},
+				{
+					key: 'difficulty',
+					type: 'NUMBER',
+					required: true,
+					min: 1
+				},
+				{
+					key: 'nonce',
+					type: 'NUMBER',
+					required: true,
+					min: 0
+				},
+				{
+					key: 'hmac',
+					type: 'STRING',
+					required: true,
+					pattern: /^[a-zA-Z0-9]+$/,
+					min: 63,
+					max: 128
+				}
+			]
+		}
     ];
 
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
+    
+    if(!pow.validateSolution(req, res, data)){
+        throw Error('POW was not valid');
+    }
 
     data.slug = data.title.toLowerCase().replace(/[\s\t]+/g, '-').replace(/[^a-z0-9\-]+/g, '');
     
