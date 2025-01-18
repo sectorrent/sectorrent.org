@@ -135,7 +135,7 @@ exports.getHome = async (req) => {
     };
 };
 
-exports.getLatest = async (req) => {
+exports.getLatest = async (req, skip = 0) => {
     let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $sort: {
@@ -202,7 +202,7 @@ exports.getLatest = async (req) => {
     return data;
 };
 
-exports.getTop = async (req) => {
+exports.getTop = async (req, skip = 0) => {
     let data = await global.mongo.getDatabase().collection('threads').aggregate([
         {
             $sort: {

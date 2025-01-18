@@ -112,7 +112,7 @@ exports.getEditCategory = async (req, slug) => {
     return data;
 };
 
-exports.getCategory = async (req, slug) => {
+exports.getCategory = async (req, slug, skip = 0) => {
 	let data = await global.mongo.getDatabase().collection('categories').aggregate([
         {
             $match: {
@@ -223,7 +223,7 @@ exports.getCategory = async (req, slug) => {
     return data;
 };
 
-exports.getCategoryLatest = async (req, slug) => {
+exports.getCategoryLatest = async (req, slug, skip = 0) => {
     let category = await global.mongo.getDatabase().collection('categories').findOne({
         slug
     });
@@ -309,7 +309,7 @@ exports.getCategoryLatest = async (req, slug) => {
     };
 };
 
-exports.getCategoryTop = async (req, slug) => {
+exports.getCategoryTop = async (req, slug, skip = 0) => {
 	let category = await global.mongo.getDatabase().collection('categories').findOne({
         slug
     });
