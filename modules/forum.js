@@ -143,7 +143,7 @@ exports.getLatest = async (req, skip = 0) => {
             }
         },
         {
-            $skip: 0
+            $skip: skip
         },
         {
             $limit: 20
@@ -210,7 +210,7 @@ exports.getTop = async (req, skip = 0) => {
             }
         },
         {
-            $skip: 0
+            $skip: skip
         },
         {
             $limit: 20

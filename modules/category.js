@@ -134,7 +134,7 @@ exports.getCategory = async (req, slug, skip = 0) => {
                         }
                     },
                     {
-                        $skip: 0
+                        $skip: skip
                     },
                     {
                         $limit: 20
@@ -244,7 +244,7 @@ exports.getCategoryLatest = async (req, slug, skip = 0) => {
             }
         },
         {
-            $skip: 0
+            $skip: skip
         },
         {
             $limit: 20
@@ -330,7 +330,7 @@ exports.getCategoryTop = async (req, slug, skip = 0) => {
             }
         },
         {
-            $skip: 0
+            $skip: skip
         },
         {
             $limit: 20
