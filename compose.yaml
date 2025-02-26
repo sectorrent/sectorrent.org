@@ -50,7 +50,7 @@ services:
       NODE_ENV: production
     restart: always
     volumes:
-      - ./env:/env
+      - .env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:
@@ -69,7 +69,7 @@ services:
       NODE_ENV: ${NODE_ENV:-production}
     restart: always
     volumes:
-      - ./env:/env
+      - .env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:
@@ -88,7 +88,7 @@ services:
       NODE_ENV: ${NODE_ENV:-production}
     restart: always
     volumes:
-      - ./env:/env
+      - .env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:

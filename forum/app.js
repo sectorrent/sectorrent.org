@@ -7,6 +7,7 @@ const cookies = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 const crypto = require('crypto');
 global.mongo = require('./modules/mongo');
+require('dotenv').config();
 const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');

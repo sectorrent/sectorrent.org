@@ -8,6 +8,7 @@ const cookies = require('cookie-parser');
 const crypto = require('crypto');
 const MongoStore = require('connect-mongo');
 global.mongo = require('./modules/mongo');
+require('dotenv').config();
 const github = require('./modules/github');
 
 const mainController = require('./controllers/main');
