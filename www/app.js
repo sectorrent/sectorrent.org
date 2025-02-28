@@ -20,22 +20,20 @@ app.set('views', __dirname+'/views');
 
 app.use(express.static('./public'));
 
-const config = require('./config.json');
-
-global.mongo.connectDatabase(config.database);
+global.mongo.connectDatabase();
 
 app.use(session({
-	secret: config.token.session,
+	secret: process.env.SESSION_TOKEN,
 	resave: false,
 	saveUninitialized: true,
 	store: MongoStore.create({
 		client: global.mongo.getClient(),
-		dbName: config.database.database,
+		dbName: process.env.DB_DATABASE,
 		collectionName: 'sessions',
 		ttl: 14*24*60*60*1000
 	}),
 	cookie: {
-		domain: '.'+config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		secure: false,
 		maxAge: 24*60*60*1000
 	}
@@ -45,22 +43,16 @@ app.use(cookies());
 
 
 async function initalize(){
-	global.github_commits = await github.getRecentCommits(config);
+	global.github_commits = await github.getRecentCommits();
 }
 
 setInterval(initalize, 3600000);
 initalize();
 
-
-app.use((req, res, next) => {
-	res.locals.config = config;
-	next();
-});
-
 app.use((req, res, next) => {
     const nonce = crypto.randomBytes(16).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-    res.setHeader('Content-Security-Policy', `default-src 'self' *.${config.general.domain}; style-src 'self' 'nonce-${nonce}'`);
+    res.setHeader('Content-Security-Policy', `default-src 'self' *.${process.env.DOMAIN}; style-src 'self' 'nonce-${nonce}'`);
 
     res.locals.nonce = nonce;
     next();
@@ -79,5 +71,5 @@ app.get('*', (req, res) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`${config.general.domain} started`);
+	console.log(`${process.env.DOMAIN} started`);
 });
