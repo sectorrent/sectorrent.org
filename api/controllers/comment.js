@@ -11,7 +11,7 @@ exports.postComment = async (req, res) => {
 			data: {
 				...data,
 				user: req.token.payload.data,
-				pow: pow.generateChallenge(req, res)
+				pow: pow.generateChallenge(req)
 			}
 		});
 
@@ -23,7 +23,7 @@ exports.postComment = async (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -33,7 +33,7 @@ exports.postComment = async (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;

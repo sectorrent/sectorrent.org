@@ -3,9 +3,9 @@ const axios = require('axios');
 const graphUrl = 'https://api.github.com/graphql';
 const githubUrl = 'https://api.github.com/repos/';
 
-exports.getRecentCommits = async (config) => {
+exports.getRecentCommits = async () => {
 	const query = `query {
-	organization(login: "${config.github.username}") {
+	organization(login: "${process.env.GITHUB_USERNAME}") {
 		repositories(first: 100) {
 			nodes {
 				name
@@ -36,7 +36,7 @@ exports.getRecentCommits = async (config) => {
 
 	let response = await axios.post(graphUrl, payload, {
 		headers: {
-			'Authorization': `bearer ${config.token.github}`,
+			'Authorization': `bearer ${process.env.GITHUB_TOKEN}`,
 			'Content-Type': 'application/json'
 		}
 	});
@@ -58,6 +58,5 @@ exports.getRecentCommits = async (config) => {
 
 	commits.sort((a, b) => new Date(b.committedDate) - new Date(a.committedDate));
 	
-	//config.github_commits = commits.slice(0, 10);
 	return commits.slice(0, 10);
 };

@@ -27,7 +27,7 @@
                     </a>
 
                     <thread-inner>
-                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/thread?id=<%= id %>' method='PUT' target='hiddenFrame'>
+                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/thread?id=<%= id %>' method='PUT' target='hiddenFrame'>
                             <%- include('../../fragments/editor', { name: 'content', placeholder: 'Write a thread using Markdown.', content: data.content }) %>
 
                             <pow>

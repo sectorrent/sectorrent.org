@@ -6,13 +6,13 @@
                     <title>NAVIGATION</title>
                     <ul>
                         <li>
-                            <a href='https://<%= config.general.domain %>'>Home</a>
+                            <a href='https://<%= process.env.DOMAIN %>'>Home</a>
                         </li>
                         <li>
-                            <a href='https://<%= config.general.domain %>/beps/0000'>BEPs</a>
+                            <a href='https://<%= process.env.DOMAIN %>/beps/0000'>BEPs</a>
                         </li>
                         <li>
-                            <a href='https://<%= config.general.domain %>/seps/0000'>SEPs</a>
+                            <a href='https://<%= process.env.DOMAIN %>/seps/0000'>SEPs</a>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
                             <a href='/'>Forum</a>
                         </li>
                         <li>
-                            <a href='https://<%= config.general.domain %>/contact'>Contact</a>
+                            <a href='https://<%= process.env.DOMAIN %>/contact'>Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -60,7 +60,7 @@
                     </a>
                 </div>
             </nav>
-            <year>Copyright © 2024 <b><%= config.general.project_name %><span>.org</span></b></year>
+            <year>Copyright © 2024 <b><%= process.env.PROJECT_NAME %><span>.org</span></b></year>
         </footer>
     </body>
 </html>

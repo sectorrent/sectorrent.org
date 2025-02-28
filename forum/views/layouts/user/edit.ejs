@@ -38,7 +38,7 @@
                     </nav>
                 </content-header>
 
-                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/user' method='PUT' target='hiddenFrame'>
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/user' method='PUT' target='hiddenFrame'>
                     <input-field title='Username'>
                         <input key='username' type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
                     </input-field>

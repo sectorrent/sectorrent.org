@@ -52,17 +52,17 @@ exports.subscribe = async (req) => {
     };
 };
 
-exports.send = async (subscription, payload, config) => {
+exports.send = async (subscription, payload) => {
     payload = JSON.stringify(payload);
     
     const url = new URL(subscription.endpoint).origin.replace(/\//g, '\/');
     console.log(url);
 
-    const [x, y] = jwk.decodePublicKey(config.notifications.web.public_key);
+    const [x, y] = jwk.decodePublicKey(process.env.NOTIFICATIONS_WEB_PUBKEY);
     const applicationJWK = {
         x: x,
         y: y,
-        d: jwk.decodePrivateKey(config.notifications.web.private_key)
+        d: jwk.decodePrivateKey(process.env.NOTIFICATIONS_WEB_PRIVKEY)
     };
 
     const expiration = Math.floor(Date.now()/1000)+(12*60*60); // 12 hours
@@ -74,7 +74,7 @@ exports.send = async (subscription, payload, config) => {
         {
             aud: url,
             exp: expiration,
-            sub: `mailto:admin@${config.general.domain}`
+            sub: `mailto:admin@${process.env.DOMAIN}`
         },
         crypto.createPrivateKey(jwk.privateToPEM(applicationJWK))
     );
@@ -122,7 +122,7 @@ exports.send = async (subscription, payload, config) => {
                 'Content-Encoding': 'aes128gcm',
                 'Content-Length': fullCipherText.length,
                 'Authorization': `WebPush ${token}`,
-                'Crypto-Key': `p256ecdsa=${config.notifications.web.public_key}`
+                'Crypto-Key': `p256ecdsa=${process.env.NOTIFICATIONS_WEB_PUBKEY}`
             }
         });
         //const statusCode = response.status;

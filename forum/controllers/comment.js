@@ -21,7 +21,7 @@ exports.getEditComment = async (req, res) => {
 			id,
 			categories,
 			data,
-			pow: pow.generateChallenge(req, res)
+			pow: pow.generateChallenge(req)
 		});
 
 	}).catch(function(error){

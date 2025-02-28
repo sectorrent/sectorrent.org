@@ -6,6 +6,7 @@ const session = require('express-session');
 const cookies = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 global.mongo = require('./modules/mongo');
+require('dotenv').config();
 const middleware = require('./modules/middleware');
 
 const feedController = require('./controllers/feed');
@@ -16,35 +17,26 @@ const adminController = require('./controllers/admin');
 
 const app = express();
 
-const config = require('./config.json');
-
-mongo.connectDatabase(config.database);
+mongo.connectDatabase();
 
 app.use(session({
-	secret: config.token.session,
+	secret: process.env.SESSION_TOKEN,
 	resave: false,
 	saveUninitialized: true,
 	store: MongoStore.create({
 		client: global.mongo.getClient(),
-		dbName: config.database.database,
+		dbName: process.env.DB_NAME,
 		collectionName: 'sessions',
 		ttl: 14*24*60*60*1000
 	}),
 	cookie: {
-		domain: '.'+config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		secure: false,
 		maxAge: 24*60*60*1000
 	}
 }));
 
 app.use(cookies());
-
-
-app.use(async (req, res, next) => {
-	res.locals.config = config;
-
-	next();
-});
 
 
 app.use((req, res, next) => {
@@ -54,7 +46,7 @@ app.use((req, res, next) => {
 	if(origin){
 		res.setHeader('Access-Control-Allow-Origin', origin);
 	}else{
-		res.setHeader('Access-Control-Allow-Origin', 'https://'+res.locals.config.general.domain);
+		res.setHeader('Access-Control-Allow-Origin', 'https://'+process.env.DOMAIN);
 	}
 
 	//res.setHeader('Access-Control-Allow-Origin', [  ]);
@@ -117,7 +109,7 @@ app.use([
 	'/categories',
 	'/category'
 ], async (req, res, next) => {
-	if(await middleware.isSignedIn(req, res.locals.config.token.secret)){
+	if(await middleware.isSignedIn(req, process.env.SECRET_TOKEN)){
 		next();
 		return;
 	}
@@ -182,5 +174,5 @@ app.get('*', (req, res) => {
 const server = http.createServer(app);
 
 server.listen(80, () => {
-	console.log(`api.${config.general.domain} started`);
+	console.log(`api.${process.env.DOMAIN} started`);
 });

@@ -27,7 +27,7 @@
                     </a>
 
                     <thread-inner>
-                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='PUT' target='hiddenFrame'>
+                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/comment?id=<%= id %>' method='PUT' target='hiddenFrame'>
                             <%- include('../../fragments/editor', { name: 'content', placeholder: 'Write a comment using Markdown.', content: data.content }) %>
 
                             <pow>

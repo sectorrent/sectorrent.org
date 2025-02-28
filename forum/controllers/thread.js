@@ -22,7 +22,7 @@ exports.getNewThread = async (req, res) => {
 			path: '/thread'
 		},
 		categories,
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -57,7 +57,7 @@ exports.getThread = async (req, res) => {
 				...data,
 				content: markdown.parse(data.content)
 			},
-			pow: pow.generateChallenge(req, res)
+			pow: pow.generateChallenge(req)
 		});
 
 	}).catch(function(error){
@@ -82,7 +82,7 @@ exports.getEditThread = async (req, res) => {
 			id,
 			categories,
 			data,
-			pow: pow.generateChallenge(req, res)
+			pow: pow.generateChallenge(req)
 		});
 
 	}).catch(function(error){

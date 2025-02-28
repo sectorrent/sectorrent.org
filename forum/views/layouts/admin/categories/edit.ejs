@@ -16,7 +16,7 @@
                 </content-header>
 
                 <category>
-                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>
+                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/category?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>
                         <input-field title='Title'>
                             <input key='title' type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' value='<%= data.title %>' />
                         </input-field>
@@ -57,7 +57,7 @@
                 <iframe name='hiddenFrame'></iframe>
 
                 <script nonce='<%= nonce %>'>
-                    window.location.domain = '<%= config.general.domain %>';
+                    window.location.domain = '<%= process.env.DOMAIN %>';
                     
                     const categoryId = '<%= data._id.toString() %>';
                     const colorId = '<%= colorId %>';

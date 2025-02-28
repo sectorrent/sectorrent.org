@@ -10,7 +10,7 @@
                 </content-header>
 
                 <category>
-                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/category' method='POST' target='hiddenFrame'>
+                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/category' method='POST' target='hiddenFrame'>
                         <input-field title='Title'>
                             <input key='title' type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
                         </input-field>

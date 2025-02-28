@@ -7,3 +7,4 @@
 /database/data
 /database/keyfile
 /nginx/certs
+.env

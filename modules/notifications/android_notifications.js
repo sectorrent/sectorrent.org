@@ -36,7 +36,7 @@ exports.subscribe = async (req) => {
     };
 };
 
-exports.send = async (subscription, payload, config, serverToken) => {
+exports.send = async (subscription, payload, serverToken) => {
     payload.message.token = subscription.token;
     payload.message.android = {
         notification: {
@@ -47,7 +47,7 @@ exports.send = async (subscription, payload, config, serverToken) => {
 
     try{
         const response = await axios.post(
-            `https://fcm.googleapis.com/v1/projects/${config.notifications.android.project_id}/messages:send`,
+            `https://fcm.googleapis.com/v1/projects/${process.env.NOTIFICATIONS_ANDROID_PROJECT_ID}/messages:send`,
             payload,
             {
                 headers: {
@@ -62,7 +62,7 @@ exports.send = async (subscription, payload, config, serverToken) => {
     }catch(error){
         switch(error.response.status){
             case 401:
-                await this.generateServerToken(config);
+                await this.generateServerToken();
                 break;
 
             case 404:
@@ -77,7 +77,7 @@ exports.send = async (subscription, payload, config, serverToken) => {
     }
 };
 
-exports.generateServerToken = async (config) => {
+exports.generateServerToken = async () => {
     const time = Math.floor(Date.now()/1000);
 
     const token = generateJWT(
@@ -86,18 +86,18 @@ exports.generateServerToken = async (config) => {
             alg: 'RS256'
         },
         {
-            iss: config.notifications.android.client_email,
+            iss: process.env.NOTIFICATIONS_ANDROID_CLIENT_EMAIL,
             scope: 'https://www.googleapis.com/auth/firebase.messaging',
-            aud: config.notifications.android.token_uri,
+            aud: process.env.NOTIFICATIONS_ANDROID_TOKEN_URI,
             exp: time+3600,
             iat: time
         },
-        crypto.createPrivateKey(config.notifications.android.private_key)
+        crypto.createPrivateKey(process.env.NOTIFICATIONS_ANDROID_PRIVKEY)
     );
 
     try{
         const response = await axios.post(
-            config.notifications.android.token_uri,
+            process.env.NOTIFICATIONS_ANDROID_TOKEN_URI,
             `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${token}`,
             {
                 headers: {

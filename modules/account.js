@@ -64,7 +64,7 @@ exports.signIn = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 
-	if(!pow.validateSolution(req, res, req.body.pow)){
+	if(!pow.validateSolution(req, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -123,12 +123,12 @@ exports.signIn = async (req, res) => {
 		},
 		exp: expires
 	},
-	res.locals.config.token.secret+jwt.generateOTP(data.password, parseInt(expires/60)));
+	process.env.SECRET_TOKEN+jwt.generateOTP(data.password, parseInt(expires/60)));
 
 	res.cookie('token', token, {
 		maxAge: expires,
 		path: '/',
-		domain: '.'+res.locals.config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		httpOnly: true,
 		//secure: true
 	});
@@ -228,7 +228,7 @@ exports.signUp = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 	
-	if(!pow.validateSolution(req, res, req.body.pow)){
+	if(!pow.validateSolution(req, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -255,7 +255,7 @@ exports.signUp = async (req, res) => {
 		const id = new ObjectId();
 		const password = await bcrypt.hash(req.body.password, 13);
 	
-		if(res.locals.config.database.replica_set){
+		if(process.env.DB_REPLICA){
 			let data = await global.mongo.getDatabase().collection('users').insertOne(
 				{
 					_id: id,
@@ -314,12 +314,12 @@ exports.signUp = async (req, res) => {
 			},
 			exp: expires
 		},
-		res.locals.config.token.secret+jwt.generateOTP(password, parseInt(expires/60)));
+		process.env.SECRET_TOKEN+jwt.generateOTP(password, parseInt(expires/60)));
 	
 		res.cookie('token', token, {
 			maxAge: expires,
 			path: '/',
-			domain: '.'+res.locals.config.general.domain,
+			domain: '.'+process.env.SECRET_TOKEN,
 			httpOnly: true,
 			//secure: true
 		});
@@ -353,9 +353,9 @@ exports.signOut = async (req, res) => {
 		res.status(200).json({
 			status: 403,
 			status_message: 'Forbidden'
-		}).cookie('token', '', { path: '/', domain: '.'+res.locals.config.general.domain, maxAge: 0 })
-		.cookie('profile', '', { path: '/', domain: '.'+res.locals.config.general.domain, maxAge: 0 })
-		.cookie('connect.sid', '', { path: '/', domain: '.'+res.locals.config.general.domain, maxAge: 0 });
+		}).cookie('token', '', { path: '/', domain: '.'+process.env.DOMAIN, maxAge: 0 })
+		.cookie('profile', '', { path: '/', domain: '.'+process.env.DOMAIN, maxAge: 0 })
+		.cookie('connect.sid', '', { path: '/', domain: '.'+process.env.DOMAIN, maxAge: 0 });
 		
 		res.end();
     });
@@ -409,7 +409,7 @@ exports.forgotPassword = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 	
-	if(!pow.validateSolution(req, res, req.body.pow)){
+	if(!pow.validateSolution(req, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -440,15 +440,14 @@ exports.forgotPassword = async (req, res) => {
 	const otp = jwt.generateOTP(data.password, expires);
 
 	ejs.renderFile('./emails/reset_password.ejs', {
-		config: res.locals.config,
 		data: {
 			id: data._id.toString(),
 			otp: otp,
 			expires: expires
 		}
 	}).then(async (content) => {
-		mailer.mail(res.locals.config.mailer, {
-			name: res.locals.config.general.project_name,
+		mailer.mail({
+			name: process.env.PROJECT_NAME,
 			email: req.body.email,
 			to_name: data.fname+' '+data.lname,
 			subject: 'Reset Password',
@@ -534,7 +533,7 @@ exports.resetPassword = async (req, res, id) => {
 		throw new Error('Reset link is invalid.');
 	}
 
-	if(!pow.validateSolution(req, res, req.body.pow)){
+	if(!pow.validateSolution(req, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -601,12 +600,12 @@ exports.resetPassword = async (req, res, id) => {
 		},
 		exp: expires
 	},
-	res.locals.config.token.secret+jwt.generateOTP(password, parseInt(expires/60)));
+	process.env.SECRET_TOKEN+jwt.generateOTP(password, parseInt(expires/60)));
 
 	res.cookie('token', token, {
 		maxAge: expires,
 		path: '/',
-		domain: '.'+res.locals.config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		httpOnly: true,
 		//secure: true
 	});
@@ -754,12 +753,12 @@ exports.setAccount = async (req, res) => {
 		},
 		exp: expires
 	},
-	res.locals.config.token.secret+jwt.generateOTP(current.password, parseInt(expires/60)));
+	process.env.SECRET_TOKEN+jwt.generateOTP(current.password, parseInt(expires/60)));
 
 	res.cookie('token', token, {
 		maxAge: expires,
 		path: '/',
-		domain: '.'+res.locals.config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		httpOnly: true,
 		//secure: true
 	});
@@ -867,7 +866,7 @@ exports.putUser = async (req, res) => {
 
     req.body = form.checkForm(check, form.removePrototype(req.body));
 
-	if(!pow.validateSolution(req, res, req.body.pow)){
+	if(!pow.validateSolution(req, req.body.pow)){
 		throw Error('POW was not valid');
 	}
 
@@ -907,12 +906,12 @@ exports.putUser = async (req, res) => {
 		},
 		exp: expires
 	},
-	res.locals.config.token.secret+jwt.generateOTP(req.session.secret, parseInt(expires/60)));
+	process.env.SECRET_TOKEN+jwt.generateOTP(req.session.secret, parseInt(expires/60)));
 
 	res.cookie('token', token, {
 		maxAge: expires,
 		path: '/',
-		domain: '.'+res.locals.config.general.domain,
+		domain: '.'+process.env.DOMAIN,
 		httpOnly: true,
 		//secure: true
 	});

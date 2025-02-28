@@ -2,9 +2,10 @@ const { MongoClient } = require('mongodb');
 
 let uri, client, db;
 
-exports.connectDatabase = async (config) => {
-	uri = 'mongodb://'+((config.user && config.password) ? config.user+':'+encodeURIComponent(config.password)+'@' : '')+config.host+':'+config.port+'/'+config.database;
-	
+exports.connectDatabase = async () => {
+	const uri = 'mongodb://'+((process.env.DB_USERNAME && process.env.DB_PASSWORD) ? process.env.DB_USERNAME+':'+encodeURIComponent(process.env.DB_PASSWORD)+'@' : '')+process.env.DB_HOST+':'+process.env.DB_PORT+'/'+process.env.DB_NAME;
+	console.log(uri);
+
 	client = new MongoClient(uri, { });
 	client.connect();
 	db = client.db();

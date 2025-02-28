@@ -13,7 +13,7 @@ services:
     restart: always
     networks:
       sectorrent:
-        ipv4_address: 10.5.0.2
+        ipv4_address: 10.10.0.2
     #profiles:
     #  - donotstart
 
@@ -42,57 +42,51 @@ services:
   web:
     build:
       context: ./www
-      args:
-        RUNTIME: ${RUNTIME}
     image: sectorrent_org_www
     container_name: www
     environment:
       NODE_ENV: production
     restart: always
     volumes:
-      - ./env:/env
+      - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:
-        ipv4_address: 10.5.0.3
+        ipv4_address: 10.10.0.3
     #profiles:
     #  - donotstart
 
   forum:
     build:
       context: ./forum
-      args:
-        RUNTIME: ${RUNTIME}
     image: sectorrent_org_forum
     container_name: forum
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
+      NODE_ENV: production
     restart: always
     volumes:
-      - ./env:/env
+      - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:
-        ipv4_address: 10.5.0.4
+        ipv4_address: 10.10.0.4
     #profiles:
     #  - donotstart
 
   api:
     build:
       context: ./api
-      args:
-        RUNTIME: ${RUNTIME}
     image: sectorrent_org_api
     container_name: api
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
+      NODE_ENV: production
     restart: always
     volumes:
-      - ./env:/env
+      - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
       sectorrent:
-        ipv4_address: 10.5.0.5
+        ipv4_address: 10.10.0.5
     #profiles:
     #  - donotstart
 
@@ -103,6 +97,6 @@ networks:
     attachable: true
     ipam:
      config:
-       - subnet: 10.5.0.0/24
+       - subnet: 10.10.0.0/24
   lan:
     driver: bridge

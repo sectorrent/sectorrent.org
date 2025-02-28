@@ -3,13 +3,13 @@ const crypto = require('crypto');
 //const difficulty = 4;
 const MAX_POW_PER_SESSION = 15;
 
-exports.generateChallenge = (req, res, difficulty = 4) => {
+exports.generateChallenge = (req, difficulty = 4) => {
     if(req.session.challenges && req.session.challenges.length > MAX_POW_PER_SESSION){
         req.session.challenges.splice(req.session.challenges.indexOf(req.session.challenges.length-1, 1));
     }
 
     const challenge = crypto.randomBytes(16).toString('hex');
-    const hmac = crypto.createHmac('sha256', res.locals.config.token.pow).update(challenge+difficulty).digest('hex');
+    const hmac = crypto.createHmac('sha256', process.env.POW_TOKEN).update(challenge+difficulty).digest('hex');
 
     if(req.session.challenges){
         req.session.challenges.push(hmac);
@@ -30,7 +30,7 @@ exports.generateChallenge = (req, res, difficulty = 4) => {
     };
 };
 
-exports.validateSolution = (req, res, pow) => {
+exports.validateSolution = (req, pow) => {
     if(!req.session.challenges){
         return false;
     }
@@ -42,7 +42,7 @@ exports.validateSolution = (req, res, pow) => {
         return false;
     }
 
-    if(crypto.createHmac('sha256', res.locals.config.token.pow).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){
+    if(crypto.createHmac('sha256', process.env.POW_TOKEN).update(pow.challenge+pow.difficulty).digest('hex') != pow.hmac){
         return false;
     }
 
