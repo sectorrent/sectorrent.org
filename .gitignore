@@ -1,7 +1,6 @@
 /www/node_modules
 /forum/node_modules
 /api/node_modules
-/env
 /www/config.json
 /forum/config.json
 /database/data
