@@ -8,7 +8,7 @@
             <content type='main'>
                 <h1>Welcome!</h1>
                 <h2>Let's create your account</h2>
-                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= config.general.domain %>/signup' method='POST' target='hiddenFrame'>
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/signup' method='POST' target='hiddenFrame'>
                     <field>
                         <input-field title='First Name'>
                             <input key='fname' type='text' name='fname' required placeholder='First Name' onkeypress='formAdjust(event)' />

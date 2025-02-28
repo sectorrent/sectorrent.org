@@ -17,7 +17,7 @@ exports.getEditCategories = async (req, res) => {
 				'form'
 			],
 			categories,
-			pow: pow.generateChallenge(req, res),
+			pow: pow.generateChallenge(req),
 			data
 		});
 
@@ -49,7 +49,7 @@ exports.getNewCategory = async (req, res) => {
 			'form'
 		],
 		categories,
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -69,7 +69,7 @@ exports.getEditCategory = async (req, res) => {
 			slug,
 			categories,
 			data,
-			pow: pow.generateChallenge(req, res)
+			pow: pow.generateChallenge(req)
 		});
 
 	}).catch(function(error){

@@ -40,7 +40,7 @@
 <%
         for(const article of data.news.threads){
 %>
-                <a href='https://forum.<%= config.general.domain %>/t/<%= article._id.toString() %>'>
+                <a href='https://forum.<%= process.env.DOMAIN %>/t/<%= article._id.toString() %>'>
                     <h3><%= article.title %></h3>
                     <div><%= article.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
                 </a>
@@ -62,7 +62,7 @@
 %>
                 <commit>
                     <div>
-                        <h3><%= config.github.username %>/<%= commit.name %></h3>
+                        <h3><%= process.env.GITHUB_USERNAME %>/<%= commit.name %></h3>
                         <div>
                             <%= commit.message %>
                         </div>

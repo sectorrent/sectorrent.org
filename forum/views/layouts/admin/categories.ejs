@@ -25,7 +25,7 @@
                     </ul>
                 </nav>
 
-                <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= config.general.domain %>/categories' method='PUT' target='hiddenFrame'>
+                <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= process.env.DOMAIN %>/categories' method='PUT' target='hiddenFrame'>
                     <list>
                         <list-head>
                             <row>

@@ -34,9 +34,5 @@ RUN npm install --production
 # Copy the rest of the source files into the image.
 COPY . .
 
-ARG RUNTIME=dev
-ENV RUNTIME=${RUNTIME}
-
-RUN chmod +x config.sh
-
-CMD ["/bin/sh", "config.sh", "RUNTIME=${RUNTIME}"]
+# Run the application.
+CMD node app.js

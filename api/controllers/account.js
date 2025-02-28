@@ -17,7 +17,7 @@ exports.postSignIn = async (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -27,7 +27,7 @@ exports.postSignIn = async (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -52,7 +52,7 @@ exports.postSignUp = async (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -62,7 +62,7 @@ exports.postSignUp = async (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -91,7 +91,7 @@ exports.postForgotPassword = (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -101,7 +101,7 @@ exports.postForgotPassword = (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -128,7 +128,7 @@ exports.putResetPassword = (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -138,7 +138,7 @@ exports.putResetPassword = (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -154,7 +154,7 @@ exports.putUser = (req, res) => {
 			status_message: 'Update was successful',
 			data: {
 				...data,
-				pow: pow.generateChallenge(req, res)
+				pow: pow.generateChallenge(req)
 			}
 		});
 
@@ -166,7 +166,7 @@ exports.putUser = (req, res) => {
 					status_message: error.message,
 					data: {
 						fields: error.fields,
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;
@@ -176,7 +176,7 @@ exports.putUser = (req, res) => {
 					status: 400,
 					status_message: error.message,
 					data: {
-						pow: pow.generateChallenge(req, res)
+						pow: pow.generateChallenge(req)
 					}
 				});
 				break;

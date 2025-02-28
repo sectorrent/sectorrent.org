@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title><%= config.general.project_name %></title>
+        <title><%= process.env.PROJECT_NAME %></title>
         <link rel='shortcut icon' href='/favicon.svg'>
         <link rel='stylesheet' href='/styles/mobile/main.css'>
 <%
@@ -22,14 +22,14 @@
 
         <meta name='twitter:title' content='<%= title %>' />
         <meta name='twitter:description' content='<%= meta.description %>' />
-        <meta name='twitter:image' content='https://forum.<%= config.general.domain %>/favicon.svg' />
+        <meta name='twitter:image' content='https://forum.<%= process.env.DOMAIN %>/favicon.svg' />
         <meta name='twitter:card' content='summary'>
 
         <meta property='og:title' content='<%= title %>' />
         <meta property='og:description' content='<%= meta.description %>' />
         <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://<%= config.general.domain+meta.path %>' />
-        <meta property='og:image' content='https://<%= config.general.domain %>/favicon.svg' />
+        <meta property='og:url' content='https://<%= process.env.DOMAIN+meta.path %>' />
+        <meta property='og:image' content='https://<%= process.env.DOMAIN %>/favicon.svg' />
 <%
     }else{
 %>

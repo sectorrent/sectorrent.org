@@ -136,18 +136,18 @@ exports.deleteNotify = async (req, id) => {
     return data;
 };
 
-exports.sendToGroup = async (subscriptions, payload, config) => {
-    const token = await android.generateServerToken(config);
+exports.sendToGroup = async (subscriptions, payload) => {
+    const token = await android.generateServerToken();
 
     for(const subscription of subscriptions){
         try{
             switch(subscription.type){
                 case 'android':
-                    await android.send(subscription, payload, config, token);
+                    await android.send(subscription, payload, token);
                     break;
 
                 case 'web':
-                    await web.send(subscription, payload, config);
+                    await web.send(subscription, payload);
                     break;
             }
         }catch(error){
@@ -155,14 +155,14 @@ exports.sendToGroup = async (subscriptions, payload, config) => {
     }
 };
 
-exports.send = async (subscription, payload, config) => {
+exports.send = async (subscription, payload) => {
     switch(subscription.type){
         case 'android':
-            await android.send(subscription, payload, config, await android.generateServerToken(config));
+            await android.send(subscription, payload, await android.generateServerToken());
             break;
 
         case 'web':
-            await web.send(subscription, payload, config);
+            await web.send(subscription, payload);
             break;
     }
 

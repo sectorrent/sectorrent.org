@@ -17,7 +17,7 @@ exports.getSignIn = async (req, res) => {
 			keywords: 'p2p torrent secure anonymous relay',
 			path: '/signin'
 		},
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -34,7 +34,7 @@ exports.getSignUp = async (req, res) => {
 			keywords: 'p2p torrent secure anonymous relay',
 			path: '/signup'
 		},
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -51,7 +51,7 @@ exports.getForgotPassword = async (req, res) => {
 			keywords: 'p2p torrent secure anonymous relay',
 			path: '/forgot-password'
 		},
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -72,7 +72,7 @@ exports.getResetPassword = async (req, res) => {
 			otp,
 			expires
 		},
-		pow: pow.generateChallenge(req, res)
+		pow: pow.generateChallenge(req)
 	});
 };
 
@@ -144,7 +144,7 @@ exports.getUserEdit = async (req, res) => {
 			username,
 			categories,
 			data,
-			pow: pow.generateChallenge(req, res)
+			pow: pow.generateChallenge(req)
 		});
 
 	}).catch(function(error){

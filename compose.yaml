@@ -62,7 +62,7 @@ services:
     image: sectorrent_org_forum
     container_name: forum
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
+      NODE_ENV: production
     restart: always
     volumes:
       - ./.env:/usr/src/app/.env
@@ -70,8 +70,8 @@ services:
     networks:
       sectorrent:
         ipv4_address: 10.10.0.4
-    profiles:
-      - donotstart
+    #profiles:
+    #  - donotstart
 
   api:
     build:
@@ -79,7 +79,7 @@ services:
     image: sectorrent_org_api
     container_name: api
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
+      NODE_ENV: production
     restart: always
     volumes:
       - ./.env:/usr/src/app/.env
@@ -87,8 +87,8 @@ services:
     networks:
       sectorrent:
         ipv4_address: 10.10.0.5
-    profiles:
-      - donotstart
+    #profiles:
+    #  - donotstart
 
 networks:
   sectorrent:

@@ -68,7 +68,7 @@ exports.putCategories = async (req) => {
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
     
-    if(!pow.validateSolution(req, res, data)){
+    if(!pow.validateSolution(req, data)){
         throw Error('POW was not valid');
     }
 
@@ -462,7 +462,7 @@ exports.postCategory = async (req) => {
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
     
-    if(!pow.validateSolution(req, res, data)){
+    if(!pow.validateSolution(req, data)){
         throw Error('POW was not valid');
     }
 
@@ -545,7 +545,7 @@ exports.putCategory = async (req, id) => {
     req.body = form.removePrototype(req.body);
     let data = form.checkForm(check, req.body);
     
-    if(!pow.validateSolution(req, res, data)){
+    if(!pow.validateSolution(req, data)){
         throw Error('POW was not valid');
     }
 

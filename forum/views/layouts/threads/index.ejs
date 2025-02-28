@@ -281,7 +281,7 @@
     }
 %>
                     <script nonce='<%= nonce %>'>
-                        window.location.domain = '<%= config.general.domain %>';
+                        window.location.domain = '<%= process.env.DOMAIN %>';
                         const threadId = '<%= id %>';
                     </script>
                 </comments>
@@ -294,7 +294,7 @@
                     </a>
 
                     <reply-inner>
-                        <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= config.general.domain %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
+                        <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= process.env.DOMAIN %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
                             <%- include('../../fragments/editor', { name: 'content', placeholder: 'Write a comment using Markdown.' }) %>
 
                             <pow>
