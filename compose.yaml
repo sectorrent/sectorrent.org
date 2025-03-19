@@ -32,10 +32,10 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
     command:
-     - /bin/sh
-     - -c
-     - |
-      mongod --bind_ip_all
+      - /bin/sh
+      - -c
+      - |
+        mongod --bind_ip_all
     #profiles:
     #  - donotstart
 
@@ -96,7 +96,7 @@ networks:
     driver: bridge
     attachable: true
     ipam:
-     config:
-       - subnet: 10.10.0.0/24
+      config:
+        - subnet: 10.10.0.0/24
   lan:
     driver: bridge
