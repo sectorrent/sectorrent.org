@@ -203,7 +203,7 @@ function checkDate(entry, request){
 function checkBoolean(entry, request){
     const value = (typeof request !== 'undefined' && (request == 'on' || request));
 
-    if(entry.match && value != match){
+    if(entry.match && value != request.match){
         throw new FieldError([
             {
                 type: entry.key,
