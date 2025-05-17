@@ -5,7 +5,7 @@ const githubUrl = 'https://api.github.com/repos/';
 
 exports.getRecentCommits = async () => {
 	const query = `query {
-	organization(login: "${process.env.GITHUB_USERNAME}") {
+	organization(login: "${process.env.GITHUB_USER}") {
 		repositories(first: 100) {
 			nodes {
 				name
