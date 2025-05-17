@@ -1,22 +1,4 @@
 services:
-  nginx:
-    build:
-      context: ./nginx
-    image: nginx
-    container_name: sectorrent_org_nginx
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./nginx/certs:/etc/nginx/certs
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    restart: always
-    networks:
-      sectorrent:
-        ipv4_address: 10.10.0.2
-    #profiles:
-    #  - donotstart
-
   database:
     image: mongo
     container_name: sectorrent_org_database
@@ -44,6 +26,8 @@ services:
       context: ./www
     image: sectorrent_org_www
     container_name: www
+    ports:
+      - 8000:80
     environment:
       NODE_ENV: production
     restart: always
@@ -51,8 +35,7 @@ services:
       - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
-      sectorrent:
-        ipv4_address: 10.10.0.3
+      - lan
     #profiles:
     #  - donotstart
 
@@ -61,6 +44,8 @@ services:
       context: ./forum
     image: sectorrent_org_forum
     container_name: forum
+    ports:
+      - 8001:80
     environment:
       NODE_ENV: production
     restart: always
@@ -68,8 +53,7 @@ services:
       - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
-      sectorrent:
-        ipv4_address: 10.10.0.4
+      - lan
     #profiles:
     #  - donotstart
 
@@ -78,6 +62,8 @@ services:
       context: ./api
     image: sectorrent_org_api
     container_name: api
+    ports:
+      - 8002:80
     environment:
       NODE_ENV: production
     restart: always
@@ -85,18 +71,10 @@ services:
       - ./.env:/usr/src/app/.env
       - ./modules:/usr/src/app/modules
     networks:
-      sectorrent:
-        ipv4_address: 10.10.0.5
+      - lan
     #profiles:
     #  - donotstart
 
 networks:
-  sectorrent:
-    #external: true
-    driver: bridge
-    attachable: true
-    ipam:
-      config:
-        - subnet: 10.10.0.0/24
   lan:
     driver: bridge
