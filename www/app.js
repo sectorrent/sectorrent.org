@@ -23,7 +23,7 @@ app.use(express.static('./public'));
 global.mongo.connectDatabase();
 
 app.use(session({
-	secret: process.env.SESSION_TOKEN,
+	secret: process.env.TOKEN_SESSION,
 	resave: false,
 	saveUninitialized: true,
 	store: MongoStore.create({
