@@ -319,7 +319,7 @@ exports.signUp = async (req, res) => {
 		res.cookie('token', token, {
 			maxAge: expires,
 			path: '/',
-			domain: '.'+process.env.SECRET_TOKEN,
+			domain: '.'+process.env.DOMAIN,
 			httpOnly: true,
 			//secure: true
 		});
