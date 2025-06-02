@@ -1,0 +1,38 @@
+<%- include('../fragments/header') %>
+        <section>
+            <content type='main'>
+                <h1>Welcome back!</h1>
+                <h2>Sign in to your account</h2>
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/signin' method='POST' target='hiddenFrame'>
+                    <input-field title='Email'>
+                        <input key='email' type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <input-field title='Password'>
+                        <input key='password' type='password' name='password' required placeholder='Password' onkeypress='formAdjust(event)' />
+                    </input-field>
+                    <div>Need an account? <a href='/signup'>Sign Up</a><br>Forgot password? <a href='/forgot-password'>Forgot Password</a></div>
+                    <pow>
+                        <svg viewBox='0 0 24 24'>
+                            <path d='M18 12A6.41 6.41 0 0 1 20.87 12.67A11.63 11.63 0 0 0 21 11V5L12 1L3 5V11C3 16.55 6.84 21.74 12 23C12.35 22.91 12.7 22.8 13 22.68A6.42 6.42 0 0 1 11.5 18.5A6.5 6.5 0 0 1 18 12M18 14.5V13L15.75 15.25L18 17.5V16A2.5 2.5 0 0 1 20.24 19.62L21.33 20.71A4 4 0 0 0 18 14.5M18 21A2.5 2.5 0 0 1 15.76 17.38L14.67 16.29A4 4 0 0 0 18 22.5V24L20.25 21.75L18 19.5Z' />
+                        </svg>
+                        <span>PoW verification in progress.</span>
+                    </pow>
+                    <response></response>
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    <label type='submit' for='<%= buttonId %>' disabled>Sign In</label>
+                </form>
+            </content>
+            <content type='sub'>
+                <h1>New Here?</h1>
+                <h2>Sign up and join the discussion!</h2>
+                <a class='button' href='/signup'>Sign Up</a>
+            </content>
+            <iframe name='hiddenFrame'></iframe>
+            
+            <script nonce='<%= nonce %>'>
+                const validForm = '<%= formId %>';
+                var pow = <%- JSON.stringify(pow) %>;
+            </script>
+            <script src='/scripts/form.js'></script>
+
+<%- include('../fragments/footer') %>

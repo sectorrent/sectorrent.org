@@ -1,0 +1,188 @@
+@media(max-width:1200px) {
+    list {
+        width: 100% !important;
+    }
+}
+
+content {
+    display: flex;
+    width: calc(100% - 40px);
+    gap: 20px;
+    padding: 0 20px 30px 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
+content nav {
+    display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-shimmer);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+content ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+content nav li {
+    display: block;
+}
+
+content li a {
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    border: solid 1px var(--background-shimmer);
+    background-color: var(--background-secondary);
+	transition: background-color 0.3s;
+}
+
+content li a:hover {
+    background-color: var(--background-shimmer);
+}
+
+content li[selected] a {
+    background-color: var(--primary);
+}
+
+lists {
+    display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+list {
+    display: block;
+    width: calc(50% - 12px);
+    height: fit-content;
+    border: solid 1px var(--background-shimmer);
+    border-radius: 10px;
+}
+
+list-head,
+        list-body {
+    display: block;
+}
+
+list-head {
+    color: var(--text-secondary);
+    height: 39px;
+    padding: 0 10px;
+    background-color: var(--background-secondary);
+    border-bottom: solid 1px var(--background-shimmer);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+list row {
+    display: flex;
+    height: inherit;
+    align-items: center;
+}
+
+cell {
+    display: block;
+}
+
+list cell:nth-child(1) {
+    flex: 1;
+    max-width: calc(100% - 50px);
+    overflow: hidden;
+}
+
+list-body cell:nth-child(2) {
+    width: 50px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+list-body row {
+    padding: 10px 0 10px 10px;
+}
+
+list-body row:not(:last-child) {
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+list-body row:last-child {
+    border-bottom-left-radius: 10px;
+}
+
+list-body h2 {
+    display: block;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+}
+
+list-body a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+list[type='latest'] list-body a:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+list-body a svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: var(--text-primary);
+}
+
+list-body div {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+list-body categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+list-body categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+list-body categories a:hover {
+    color: var(--text-primary);
+}
+
+list-body categories a span {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}

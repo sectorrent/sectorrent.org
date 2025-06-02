@@ -1,0 +1,198 @@
+:root {
+    --width: calc(100% - 40px);
+    --top: 60px;
+
+    --primary: #994ce0;
+    --secondary: #6b339e;
+
+    --background: #141414;
+    --background-secondary: #242424;
+    --background-shimmer: #343434;
+    
+    --text-primary: #e6e6e6;
+    --text-secondary: #b3b3b3;
+
+    --white: #efefef;
+    --black: #000000;
+    
+    --ripple: #666666;
+    --good: #53bd39;
+    --error: #f55442;
+}
+/*
+@media(max-width:1500px) {
+	:root {
+		--width: 80% !important;
+	}
+
+	header,
+            section {
+		padding: 0px 10% !important;
+	}
+}
+*/
+
+html {
+    color: var(--text-primary);
+    background-color: var(--background);
+    font-size: 1em;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--primary) transparent;
+}
+
+::selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    color: var(--black);
+    background: var(--primary);
+    text-shadow: none;
+}
+
+body {
+    margin: 0;
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+	width: var(--width);
+	padding: 0 20px;
+    color: var(--text-primary);
+    background-color: var(--black);
+    z-index: 10;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+nav {
+    white-space: nowrap;
+}
+
+header ul {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+header li {
+    display: inline-block;
+}
+
+header li svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+
+filler {
+    flex: 1 1 1e-09px;
+}
+
+form {
+    margin: 0;
+}
+
+header ul input[type='radio'] {
+    display: none;
+}
+
+
+footer {
+    position: relative;
+    display: block;
+    top: var(--top);
+	width: var(--width);
+    padding: 40px 20px;
+    font-size: 1em;
+    background-color: var(--black);
+    border-top: solid 3px var(--primary);
+}
+
+footer nav {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+footer nav div {
+    flex: 1;
+}
+
+footer nav div[type='social'] {
+    display: flex;
+    gap: 20px;
+}
+
+footer nav div[type='social'] svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+footer nav div[type='social'] a:hover svg {
+    fill: var(--primary);
+}
+
+footer title {
+    display: block;
+    color: var(--text-primary);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+footer li {
+    display: block;
+    padding: 2px 0;
+}
+
+footer li a {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+footer li a:hover {
+    color: var(--primary);
+}
+
+footer year {
+    display: block;
+    width: 100%;
+    height: 30px;
+    padding-top: 20px;
+    margin: auto;
+    color: var(--white);
+    border-top: solid 1px var(--white);
+    line-height: 30px;
+    font-size: 0.8em;
+}
+
+footer year span {
+    color: var(--primary);
+}

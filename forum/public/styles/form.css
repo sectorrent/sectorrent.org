@@ -1,0 +1,441 @@
+content {
+    display: flex;
+    width: calc(100% - 40px);
+    gap: 30px;
+    padding: 0 20px 30px 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
+content content-header {
+    display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+content content-header h1 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.5em;
+}
+
+content-header h1:not(:last-child) {
+    margin: 0 0 10px 0;
+}
+
+categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+}
+
+categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+categories a:hover {
+    color: var(--text-primary);
+}
+
+categories a span {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}
+
+content category {
+    display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
+}
+
+content thread {
+    display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
+    gap: 20px;
+}
+
+content thread a.user-icon {
+    position: sticky;
+    top: calc(var(--top) + 10px);
+    display: block;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 2px var(--background-secondary);
+    background-color: var(--background-secondary);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+content thread a.user-icon img {
+    display: none;
+    width: 100%;
+    border-radius: 50%;
+    background-color: var(--background-shimmer);
+}
+
+content thread a.user-icon img.show {
+    display: block;
+}
+
+content thread-inner {
+    display: block;
+    flex: 1;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
+    gap: 30px;
+	flex-direction: column;
+}
+
+iframe[name='hiddenFrame'] {
+    display: none;
+}
+
+field {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+input-field {
+	position: relative;
+    display: block;
+	width: 100%;
+}
+
+input-field:before {
+    position: absolute;
+    top: -0.4em;
+    left: 10px;
+    padding: 0 10px;
+    line-height: 0.8em;
+	content: attr(title);
+    background-color: var(--background);
+    font-size: 0.8em;
+	transition: color 0.3s;
+}
+
+input-field:focus-within:before {
+    color: var(--primary);
+}
+
+input-field[error]:before {
+	content: attr(error);
+    color: var(--error);
+}
+
+input[type='email'],
+        input[type='password'],
+        input[type='tel'],
+        input[type='text'] {
+	display: block;
+	width: calc(100% - 32px);
+	padding: 15px;
+    font-size: 1em;
+	border: none;
+	color: var(--text-primary);
+	background-color: transparent;
+	border: solid 1px var(--background-shimmer);
+	border-radius: 5px;
+	transition: border 0.3s;
+	outline: none;
+}
+
+input-field > textarea {
+	display: block;
+	width: calc(100% - 32px);
+    min-height: 148px;
+	padding: 15px;
+	border: none;
+	color: var(--text-primary);
+	background-color: transparent;
+	border: solid 1px var(--background-shimmer);
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 1.6em;
+	border-radius: 5px;
+	transition: border 0.3s;
+    resize: vertical;
+	outline: none;
+}
+
+input[type='email']:focus,
+        input[type='password']:focus,
+        input[type='tel']:focus,
+        input[type='text']:focus,
+        textarea:focus {
+	border: solid 1px var(--primary);
+}
+
+input-field[error] input[type='email'],
+        input-field[error] input[type='password'],
+        input-field[error] input[type='tel'],
+        input-field[error] input[type='text'] {
+    border: solid 1px var(--error);
+}
+
+field input-field:nth-child(1) {
+	margin-right: 10px;
+}
+
+field input-field:nth-child(2) {
+	margin-left: 10px;
+}
+
+
+label[type='checkbox'],
+        label[type='color'] {
+    display: flex;
+    width: fit-content;
+    height: 30px;
+    align-items: center;
+}
+
+label[type='checkbox']:after,
+        label[type='color']:after {
+    display: block;
+    content: attr(description);
+    color: var(--text-secondary);
+    margin-left: 10px;
+}
+
+label[type='checkbox'] svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-secondary);
+    cursor: pointer;
+}
+
+input[type='color'] {
+    width: 0;
+    height: 0;
+    margin-bottom: -40px;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+}
+
+label[type='color'] span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: solid 1px var(--text-primary);
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+input[type='checkbox']:checked ~ label[type='checkbox'] path {
+    fill: var(--primary);
+    d: path('M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z');
+}
+
+selector-input {
+    display: block;
+    width: calc(100% - 2px);
+    border-radius: 5px;
+    border: solid 1px var(--background-secondary);
+}
+
+selector-input[error] {
+    border: solid 1px var(--error);
+}
+
+input[type='checkbox'].fl-select + label {
+    position: relative;
+    display: flex;
+    width: calc(100% - 36px);
+    flex: 1;
+    padding: 13px 18px;
+    align-items: center;
+    font-size: 1em;
+    line-height: 16px;
+    color: var(--text-primary);
+    background-color: var(--background-secondary);
+    border-radius: 5px;
+    z-index: 2;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+input[type='checkbox'].fl-select:checked + label {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+input[type='checkbox'].fl-select {
+    display: none;
+}
+
+input[type='checkbox'].fl-select + label:before {
+    content: attr(label);
+}
+
+input[type='checkbox'].fl-select + label:after {
+    display: inline-block;
+    content: '';
+    width: 1em;
+    height: 1em;
+    margin-left: auto;
+    background-image: url(/icons/ic_less.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input[type='checkbox'].fl-select:checked + label:after {
+    background-image: url(/icons/ic_more.svg);
+}
+
+input[type='checkbox'].fl-select:checked + label fl-options {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+fl-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: nowrap;
+    background-color: var(--background-shimmer);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+fl-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+}
+
+fl-option:hover {
+    background-color: var(--background-secondary);
+}
+
+fl-option span {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+}
+
+pow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+pow svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+}
+
+response {
+	display: none;
+	margin: 0px auto;
+	color: var(--error);
+	overflow: hidden;
+}
+
+response:not(:empty) {
+	display: block;
+}
+
+buttons {
+    display: flex;
+    width: 100%;
+    max-width: var(--max-content-width);
+}
+
+input[type='submit'] {
+    display: none;
+}
+
+label[type='submit'] {
+    display: block;
+    width: fit-content;
+    height: 18px;
+    border-radius: 5px;
+    padding: 11px 20px;
+    margin-left: auto;
+    line-height: 18px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--primary);
+	transition: background-color 0.3s;
+}
+
+label[type='submit']:hover {
+    background-color: var(--secondary);
+}
+
+label[type='submit'][disabled] {
+    color: var(--background);
+    background-color: var(--text-secondary);
+}
+
+buttons > button[type='button'] {
+    display: block;
+    width: fit-content;
+    height: 40px;
+    border-radius: 5px;
+    padding: 11px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--primary);
+    border: none;
+	transition: background-color 0.3s;
+}
+
+buttons > button[type='button']:hover {
+    background-color: var(--secondary);
+}
+
+buttons > button[action='delete'] {
+    color: var(--background);
+    background-color: var(--error);
+}
+
+buttons > button[action='delete']:hover {
+    background-color: var(--text-secondary);
+}

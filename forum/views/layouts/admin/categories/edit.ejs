@@ -1,0 +1,72 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../../../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../../../fragments/sidebar') %>
+
+            <style nonce='<%= nonce %>'>
+                label[type='color'] span {
+                    background-color: <%= data.color %>;
+                }
+            </style>
+
+            <content>
+                <content-header>
+                    <h1>Edit Category</h1>
+                </content-header>
+
+                <category>
+                    <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/category?id=<%= data._id.toString() %>' method='PUT' target='hiddenFrame'>
+                        <input-field title='Title'>
+                            <input key='title' type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' value='<%= data.title %>' />
+                        </input-field>
+
+                        <input id='<% const checkboxId = uniqid(); %><%= checkboxId %>' type='checkbox' name='admin_only'<% if(data.admin_only){ %> checked<% } %>>
+                        <label for='<%= checkboxId %>' type='checkbox' description='Only admins are allowed to post.'>
+                            <svg viewBox='0 0 24 24'>
+                                <path d='M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z' />
+                            </svg>
+                        </label>
+
+                        <input id='<% const colorId = uniqid(); %><%= colorId %>' type='color' name='color' required value='<%= data.color %>' />
+                        <label for='<%= colorId %>' type='color' description='Select category color.'>
+                            <span></span>
+                        </label>
+
+                        <input-field title='Description'>
+                            <textarea key='description' type='description' name='description' required placeholder='Description' onkeypress='formAdjust(event)'><%= data.description %></textarea>
+                        </input-field>
+
+                        <pow>
+                            <svg viewBox='0 0 24 24'>
+                                <path d='M18 12A6.41 6.41 0 0 1 20.87 12.67A11.63 11.63 0 0 0 21 11V5L12 1L3 5V11C3 16.55 6.84 21.74 12 23C12.35 22.91 12.7 22.8 13 22.68A6.42 6.42 0 0 1 11.5 18.5A6.5 6.5 0 0 1 18 12M18 14.5V13L15.75 15.25L18 17.5V16A2.5 2.5 0 0 1 20.24 19.62L21.33 20.71A4 4 0 0 0 18 14.5M18 21A2.5 2.5 0 0 1 15.76 17.38L14.67 16.29A4 4 0 0 0 18 22.5V24L20.25 21.75L18 19.5Z' />
+                            </svg>
+                            <span>PoW verification in progress.</span>
+                        </pow>
+
+                        <response></response>
+                        
+                        <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    </form>
+                </category>
+                
+                <buttons>
+                    <button id='<% const deleteId = uniqid() %><%= deleteId %>' type='button' action='delete'>Delete</button>
+                    <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
+                </buttons>
+                <iframe name='hiddenFrame'></iframe>
+
+                <script nonce='<%= nonce %>'>
+                    window.location.domain = '<%= process.env.DOMAIN %>';
+                    
+                    const categoryId = '<%= data._id.toString() %>';
+                    const colorId = '<%= colorId %>';
+                    const validForm = '<%= formId %>';
+                    const deleteId = '<%= deleteId %>';
+                    var pow = <%- JSON.stringify(pow) %>;
+                </script>
+                <script src='/scripts/form.js'></script>
+                <script src='/scripts/category.js'></script>
+            </content>
+
+<%- include('../../../fragments/footer') %>

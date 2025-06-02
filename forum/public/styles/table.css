@@ -1,0 +1,136 @@
+section table {
+    width: 100%;
+    max-width: var(--max-content-width);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    word-break: break-all;
+}
+
+/*
+section thead {
+    border: solid 1px var(--background-shimmer);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/*
+section thead tr {
+    border-bottom: solid 4px var(--background-shimmer);
+}
+*/
+
+thead th {
+    background-color: var(--background-secondary);
+    border-top: solid 1px var(--background-shimmer);
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+    border-left: solid 1px var(--background-shimmer);
+}
+
+thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+    border-right: solid 1px var(--background-shimmer);
+}
+
+tbody tr td {
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+tbody tr td:first-child {
+    border-left: solid 1px var(--background-shimmer);
+}
+
+tbody tr td:last-child {
+    border-right: solid 1px var(--background-shimmer);
+}
+
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+
+section table th {
+    /*
+    color: var(--text-secondary);*/
+    height: 18px;
+    line-height: 18px;
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 10px;
+}
+
+section table .replies,
+        section table .views,
+        section table .activity {
+    width: 100px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+section table td {
+    padding: 10px;
+    /*border-bottom: solid 1px var(--background-secondary);*/
+}
+
+section table td > a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+section table td > a:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+section table td > a > svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: var(--text-primary);
+}
+
+section table td categories {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+section table td categories a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    align-items: center;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+section table td categories a:hover {
+    color: var(--text-primary);
+}
+
+section table td categories a span {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}
+
+section table td div {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}

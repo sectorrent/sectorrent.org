@@ -1,0 +1,219 @@
+@media(max-width:1100px) {
+    preview pre {
+        width: calc(100vw - 77px) !important;
+    }
+}
+
+@media(max-width:800px) {
+    preview pre {
+        width: 738px !important;
+    }
+}
+
+preview h1,
+        preview h2,
+        preview h3,
+        preview h4,
+        preview h5,
+        preview h6 {
+    display: block;
+    color: var(--text-primary);
+    border-bottom: solid 1px var(--background-shimmer);
+    padding: 15px 0;
+    margin: 0 0 15px 0;
+}
+
+preview h1 a,
+        preview h2 a,
+        preview h3 a,
+        preview h4 a,
+        preview h5 a,
+        preview h6 a {
+    display: flex;
+    gap: 5px;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+preview h1 svg,
+        preview h2 svg,
+        preview h3 svg,
+        preview h4 svg,
+        preview h5 svg,
+        preview h6 svg {
+    display: block;
+    width: 0;
+    height: 1em;
+    fill: var(--text-primary);
+    transition: width 0.3s;
+}
+
+preview h1 a:hover svg,
+        preview h2 a:hover svg,
+        preview h3 a:hover svg,
+        preview h4 a:hover svg,
+        preview h5 a:hover svg,
+        preview h6 a:hover svg {
+    width: 1em;
+}
+
+preview strong {
+    color: var(--text-primary);
+}
+
+preview a.link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+preview a.link:hover {
+    color: var(--secondary);
+}
+
+preview table {
+    flex: 1;
+    border-collapse: collapse;
+}
+
+preview thead tr {
+    border-bottom: solid 2px var(--background-shimmer);
+}
+
+preview table th {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px;
+}
+
+preview table td {
+    padding: 20px;
+    border-bottom: solid 1px var(--background-secondary);
+}
+
+preview code-header {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    padding: 0 10px;
+    margin-top: 13px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: var(--background-shimmer);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+preview code-header button.copy {
+    display: block;
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+preview code-header button.copy svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+    transition: fill 0.3s;
+}
+
+preview code-header button.copy:hover svg {
+    fill: var(--primary);
+}
+
+preview pre {
+    position: relative;
+    display: block;
+    width: calc(100vw - 328px);
+    max-width: calc(var(--max-content-width) - 22px);
+    max-height: 400px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px 0;
+    margin: 0 0 13px 0;
+    background-color: var(--background-secondary);
+    font-family: monospace;
+    counter-reset: lines;
+    overflow: auto;
+}
+
+preview code {
+    display: inline-block;
+    padding: 0 5px;
+    color: var(--text-primary);
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+    font-family: monospace;
+}
+
+preview pre code {
+    padding: 0 10px 0 0;
+    counter-increment: lines;
+}
+
+preview pre code:before {
+    position: sticky;
+    left: 0;
+    display: inline-block;
+    content: counter(lines);
+    min-width: 30px;
+    padding: 0 10px;
+    margin-right: 10px;
+    color: var(--text-secondary);
+    background-color: var(--background-secondary);
+    direction: rtl;
+}
+
+preview blockquote {
+    display: block;
+    margin: 0;
+    padding: 0 15px;
+    border-left: solid 2px var(--background-shimmer);
+}
+
+preview pre[language='java'] span.code-keyword,
+        preview pre[language='rust'] span.code-keyword {
+    color: #ff7b72;
+}
+
+preview pre[language='java'] span.code-comment,
+        preview pre[language='rust'] span.code-comment {
+    color: #9198a1;
+}
+
+preview pre[language='java'] span.code-string,
+        preview pre[language='rust'] span.code-string {
+    color: #a5d6ff;
+}
+
+preview pre[language='java'] span.code-number,
+        preview pre[language='rust'] span.code-number {
+    color: #79c0ff;
+}
+
+
+preview pre[language='json'] span.code-key {
+    color: #7ee787;
+}
+
+preview pre[language='json'] span.code-string {
+    color: #a5d6ff;
+}
+
+preview pre[language='json'] span.code-number,
+        preview pre[language='json'] span.code-boolean,
+        preview pre[language='json'] span.code-null {
+    color: #79c0ff;
+}

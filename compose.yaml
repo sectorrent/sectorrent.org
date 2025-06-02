@@ -1,0 +1,80 @@
+services:
+  database:
+    image: mongo
+    container_name: sectorrent_org_database
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/data/db:/data/db
+      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - lan
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mongod --bind_ip_all
+    #profiles:
+    #  - donotstart
+
+  web:
+    build:
+      context: ./www
+    image: sectorrent_org_www
+    container_name: www
+    ports:
+      - 8000:80
+    environment:
+      NODE_ENV: production
+    restart: always
+    volumes:
+      - ./.env:/usr/src/app/.env
+      - ./modules:/usr/src/app/modules
+    networks:
+      - lan
+    #profiles:
+    #  - donotstart
+
+  forum:
+    build:
+      context: ./forum
+    image: sectorrent_org_forum
+    container_name: forum
+    ports:
+      - 8001:80
+    environment:
+      NODE_ENV: production
+    restart: always
+    volumes:
+      - ./.env:/usr/src/app/.env
+      - ./modules:/usr/src/app/modules
+    networks:
+      - lan
+    #profiles:
+    #  - donotstart
+
+  api:
+    build:
+      context: ./api
+    image: sectorrent_org_api
+    container_name: api
+    ports:
+      - 8002:80
+    environment:
+      NODE_ENV: production
+    restart: always
+    volumes:
+      - ./.env:/usr/src/app/.env
+      - ./modules:/usr/src/app/modules
+    networks:
+      - lan
+    #profiles:
+    #  - donotstart
+
+networks:
+  lan:
+    driver: bridge

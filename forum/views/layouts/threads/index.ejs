@@ -1,0 +1,327 @@
+<%
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    function timeAgo(date){
+        const now = new Date();
+        const diff = now-date;
+
+        const seconds = Math.floor(diff/1000);
+        const minutes = Math.floor(seconds/60);
+        const hours = Math.floor(minutes/60);
+        const days = Math.floor(hours/24);
+        const weeks = Math.floor(days/7);
+
+        if(seconds < 60){
+            return 'now';
+        }else if(minutes < 60){
+            return `${minutes} ${minutes === 1 ? 'min' : 'mins'} ago`;
+        }else if(hours < 24){
+            return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        }else if(days < 7){
+            return `${days} ${days === 1 ? 'day' : "days"} ago`;
+        }else if(weeks < 4){
+            return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+        }else{
+            return date.toLocaleDateString();
+        }
+    }
+    
+    const sideBarId = uniqid();
+    const classes = [];
+    if(data.archived){
+        classes.push('archived');
+    }
+%><%- include('../../fragments/header', { sideBarId, classes }) %>
+
+        <section>
+            <archive>This thread has been archived. It is now read-only.</archive>
+
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <content-header>
+                    <h1><%= data.title %></h1>
+                    <categories>
+<%
+    for(const category of data.categories){
+        const index = categories.indexes.indexOf(category.toString());
+%>
+                        <a href='/c/<%= categories.data[index].slug %>'><span class='<%= categories.data[index].slug %>'></span><%= categories.data[index].title %></a>
+<%
+    }
+%>
+                    </categories>
+                </content-header>
+
+                <comments>
+                    <comment>
+                        <a class='user-icon' href='/u/<%= data.user.username %>'>
+                            <img src='<%= data.user.avatar %>' onload='this.className = "show"' title='<%= data.user.username %>' draggable='false' oncontextmenu='return false'>
+                        </a>
+    
+                        <comment-inner>
+                            <comment-header>
+                                <a href='/u/<%= data.user.username %>'>
+<%
+    if(data.user.role > 1){
+%>
+                                    <svg viewBox='0 0 24 24'>
+                                        <path d='M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z' />
+                                    </svg>
+<%
+    }
+%>
+                                        <%= data.user.username %>
+                                </a>
+                                <date><%= timeAgo(new Date(data.created)) %></date>
+                                <action>
+                                    <svg viewBox='0 0 24 24'>
+                                        <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
+                                    </svg>
+
+                                    <ul>
+<%
+    let deleteReport = false;
+
+    if(isSignedIn){
+        if(user.id == data.user._id.toString()/* && !data.archived*/){
+%>
+                                        <li type='edit-thread'>
+                                            <a href='/t/<%= id %>/edit'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' />
+                                                </svg>
+                                                Edit thread
+                                            </a>
+                                        </li>
+<%
+        }
+
+        if(user.id == data.user._id.toString() || user.role > 1){
+            if(data.archived){
+%>
+                                        <li>
+                                            <button action='archive-thread' method='DELETE' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M20.55,5.22l-1.39-1.68C18.88,3.21,18.47,3,18,3H6C5.53,3,5.12,3.21,4.85,3.55L3.46,5.22C3.17,5.57,3,6.01,3,6.5V19 c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V6.5C21,6.01,20.83,5.57,20.55,5.22z M12,9.5l5.5,5.5H14v2h-4v-2H6.5L12,9.5z M5.12,5 l0.82-1h12l0.93,1H5.12z' />
+                                                </svg>
+                                                <span>Unarchive thread</span>
+                                            </button>
+                                        </li>
+<%
+            }else{
+%>
+                                        <li>
+                                            <button action='archive-thread' method='PUT' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z' />
+                                                </svg>
+                                                <span>Archive thread</span>
+                                            </button>
+                                        </li>
+<%
+            }
+
+            if(user.role > 1){
+                if(data.pinned){
+%>
+                                        <li>
+                                            <button action='pin-thread' method='DELETE' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M2,5.27L3.28,4L20,20.72L18.73,22L12.8,16.07V22H11.2V16H6V14L8,12V11.27L2,5.27M16,12L18,14V16H17.82L8,6.18V4H7V2H17V4H16V12Z' />
+                                                </svg>
+                                                <span>Unpin thread</span>
+                                            </button>
+                                        </li>
+<%
+                }else{
+%>
+                                        <li>
+                                            <button action='pin-thread' method='PUT' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z' />
+                                                </svg>
+                                                <span>Pin thread</span>
+                                            </button>
+                                        </li>
+<%
+                }
+            }
+
+            deleteReport = true;
+%>
+                                        <li>
+                                            <button class='delete' action='delete-thread' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z' />
+                                                </svg>
+                                                <span>Delete thread</span>
+                                            </button>
+                                        </li>
+<%
+        }
+    }
+
+    if(!deleteReport){
+%>
+                                        <li>
+                                            <button class='delete' action='report-thread' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z' />
+                                                </svg>
+                                                <span>Report thread</span>
+                                            </button>
+                                        </li>
+<%
+    }
+%>
+                                    </ul>
+                                </action>
+                            </comment-header>
+                            <preview>
+                                <%- data.content %>
+                            </preview>
+                        </comment-inner>
+                    </comment>
+<%
+    if(data.comments.total > data.comments.comments.length){
+%>
+                    <more-container>
+                        <more>
+                            <button>Load More</button>
+                        </more>
+                    </more-container>
+<%
+    }
+
+    if(data.comments.total > 0){
+        for(const comment of data.comments.comments){
+%>
+                    <comment comment-id='<%= comment._id.toString() %>'>
+                        <a class='user-icon' href='/u/<%= comment.user.username %>'>
+                            <img src='<%= comment.user.avatar %>' onload='this.className = "show"' title='<%= comment.user.username %>' draggable='false' oncontextmenu='return false'>
+                        </a>
+
+                        <comment-inner>
+                            <comment-header>
+                                <a href='/u/<%= comment.user.username %>'>
+<%
+    if(comment.user.role > 1){
+%>
+                                    <svg viewBox='0 0 24 24'>
+                                        <path d='M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z' />
+                                    </svg>
+<%
+    }
+%>
+                                    <%= comment.user.username %>
+                                </a>
+                                <date><%= timeAgo(new Date(comment.created)) %></date>
+                                <action>
+                                    <svg viewBox='0 0 24 24'>
+                                        <path d='M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
+                                    </svg>
+
+                                    <ul>
+<%
+            let deleteReport = false;
+
+            if(isSignedIn){
+                if(user.id == comment.user._id.toString() && !data.archived){
+%>
+                                        <li>
+                                            <a href='/r/<%= comment._id.toString() %>/edit'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' />
+                                                </svg>
+                                                Edit comment
+                                            </a>
+                                        </li>
+<%
+                }
+            
+                if(user.id == comment.user._id.toString() || user.role > 1){
+                    deleteReport = true;
+%>
+                                        <li>
+                                            <button comment-id='<%= comment._id.toString() %>' class='delete' action='delete-comment' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z' />
+                                                </svg>
+                                                Delete comment
+                                            </button>
+                                        </li>
+<%
+                }
+            }
+
+            if(!deleteReport){
+%>
+                                        <li>
+                                            <button comment-id='<%= comment._id.toString() %>' class='delete' action='report-comment' type='button'>
+                                                <svg viewBox='0 0 24 24'>
+                                                    <path d='M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z' />
+                                                </svg>
+                                                Report comment
+                                            </button>
+                                        </li>
+<%
+            }
+%>
+                                    </ul>
+                                </action>
+                            </comment-header>
+                            <preview>
+                                <%- comment.content %>
+                            </preview>
+                        </comment-inner>
+                    </comment>
+<%
+        }
+    }
+%>
+                    <script nonce='<%= nonce %>'>
+                        window.location.domain = '<%= process.env.DOMAIN %>';
+                        const threadId = '<%= id %>';
+                    </script>
+                </comments>
+<%
+    if(isSignedIn/* && !data.archived*/){
+%>
+                <reply>
+                    <a class='user-icon' href='/u/<%= user.username %>'>
+                        <img src='<%= user.avatar %>' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
+                    </a>
+
+                    <reply-inner>
+                        <form valid-form='<% const uuid = uniqid(); %><%= uuid %>' action='https://api.<%= process.env.DOMAIN %>/comment?id=<%= id %>' method='POST' target='hiddenFrame'>
+                            <%- include('../../fragments/editor', { name: 'content', placeholder: 'Write a comment using Markdown.' }) %>
+
+                            <pow>
+                                <svg viewBox='0 0 24 24'>
+                                    <path d='M18 12A6.41 6.41 0 0 1 20.87 12.67A11.63 11.63 0 0 0 21 11V5L12 1L3 5V11C3 16.55 6.84 21.74 12 23C12.35 22.91 12.7 22.8 13 22.68A6.42 6.42 0 0 1 11.5 18.5A6.5 6.5 0 0 1 18 12M18 14.5V13L15.75 15.25L18 17.5V16A2.5 2.5 0 0 1 20.24 19.62L21.33 20.71A4 4 0 0 0 18 14.5M18 21A2.5 2.5 0 0 1 15.76 17.38L14.67 16.29A4 4 0 0 0 18 22.5V24L20.25 21.75L18 19.5Z' />
+                                </svg>
+                                <span>PoW verification in progress.</span>
+                            </pow>
+
+                            <response></response>
+                            
+                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                            <label type='submit' for='<%= buttonId %>' disabled>Comment</label>
+                        </form>
+                        <iframe name='hiddenFrame'></iframe>
+
+                        <script nonce='<%= nonce %>'>
+                            const validForm = '<%= uuid %>';
+                            var pow = <%- JSON.stringify(pow) %>;
+                        </script>
+                        <script src='/scripts/form.js'></script>
+                    </reply-inner>
+                </reply>
+<%
+    }
+%>
+                <script src='/scripts/thread.js'></script>
+            </content>
+
+<%- include('../../fragments/footer') %>

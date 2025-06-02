@@ -1,0 +1,79 @@
+<%- include('../../fragments/mobile/header') %>
+<%
+    function timeAgo(date){
+        const now = new Date();
+        const diff = now-date;
+
+        const seconds = Math.floor(diff/1000);
+        const minutes = Math.floor(seconds/60);
+        const hours = Math.floor(minutes/60);
+        const days = Math.floor(hours/24);
+        const weeks = Math.floor(days/7);
+
+        if(seconds < 60){
+            return 'now';
+        }else if(minutes < 60){
+            return `${minutes} ${minutes === 1 ? 'min' : 'mins'} ago`;
+        }else if(hours < 24){
+            return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        }else if(days < 7){
+            return `${days} ${days === 1 ? 'day' : "days"} ago`;
+        }else if(weeks < 4){
+            return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+        }else{
+            return date.toLocaleDateString();
+        }
+    }
+%>
+        <section type='header'>
+            <h1>Resources for <u>P2P</u> developers</h1>
+            <description>Securely & Anonymously Torrent!</description>
+        </section>
+<%
+    if(typeof data.news != 'undefined'){
+%>
+
+        <section type='news'>
+            <h2>News</h2>
+
+            <container>
+<%
+        for(const article of data.news.threads){
+%>
+                <a href='https://forum.<%= process.env.DOMAIN %>/t/<%= article._id.toString() %>'>
+                    <h3><%= article.title %></h3>
+                    <div><%= article.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
+                </a>
+<%
+        }
+%>
+            </container>
+        </section>
+<%
+    }
+%>
+
+        <section type='contributions'>
+            <h2>Recent Contributions</h2>
+
+            <container>
+<%
+    for(const commit of data.commits){
+%>
+                <commit>
+                    <div>
+                        <h3><%= process.env.GITHUB_USERNAME %>/<%= commit.name %></h3>
+                        <div>
+                            <%= commit.message %>
+                        </div>
+                        <a href='https://github.com/<%= commit.author.name %>'><%= commit.author.name %></a>
+                    </div>
+                    <date><%= timeAgo(new Date(commit.committedDate)) %></date>
+                </commit>
+<%
+    }
+%>
+            </container>
+        </section>
+
+<%- include('../../fragments/mobile/footer') %>

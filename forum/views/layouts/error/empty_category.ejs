@@ -1,0 +1,32 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <nav>
+                    <ul>
+                        <li<% if(typeof type != 'undefined' && type == 'latest'){ %> selected<% } %>>
+                            <a href='<% if(typeof slug != 'undefined'){ %>/c/<%= slug %><% } %>/latest'>Latest</a>
+                        </li>
+                        <li<% if(typeof type != 'undefined' && type == 'top'){ %> selected<% } %>>
+                            <a href='<% if(typeof slug != 'undefined'){ %>/c/<%= slug %><% } %>/top'>Top</a>
+                        </li>
+<%
+    if(isSignedIn){
+%>
+                        <filler></filler>
+                        <li>
+                            <a href='/thread'>New Thread</a>
+                        </li>
+<%
+    }
+%>
+                    </ul>
+                </nav>
+
+
+            </content>
+
+<%- include('../../fragments/footer') %>

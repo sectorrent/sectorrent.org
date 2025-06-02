@@ -1,0 +1,74 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <content-header>
+                    <user>
+                        <img-container>
+                            <img src='https://avatars.githubusercontent.com/u/20123198?v=4' onload='this.className = "show"' title='<%= data.username %>' draggable='false' oncontextmenu='return false'>
+                        </img-container>
+<%
+    if(data.role > 1){
+%>
+                        <svg viewBox='0 0 24 24'>
+                            <path d='M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z' />
+                        </svg>
+<%
+    }
+%>
+                        <%= data.username %>
+                    </user>
+
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href='/u/<%= data.username %>'>Summary</a>
+                            </li>
+                            <li>
+                                <a href='/u/<%= data.username %>/posts'>Posts</a>
+                            </li>
+
+                            <li selected>
+                                <a href='/u/<%= data.username %>/edit'>Edit</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </content-header>
+
+                <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/user' method='PUT' target='hiddenFrame'>
+                    <input-field title='Username'>
+                        <input key='username' type='text' name='username' required placeholder='Username' onkeypress='formAdjust(event)' value='<%= data.username %>' />
+                    </input-field>
+
+                    <input-field title='Email'>
+                        <input key='email' type='email' name='email' required placeholder='Email' onkeypress='formAdjust(event)' value='<%= data.email %>' />
+                    </input-field>
+
+                    <%- include('../../fragments/editor', { name: 'bio', placeholder: 'Write a bio using Markdown.', content: (data.bio) ? data.bio : '' }) %>
+
+                    <pow>
+                        <svg viewBox='0 0 24 24'>
+                            <path d='M18 12A6.41 6.41 0 0 1 20.87 12.67A11.63 11.63 0 0 0 21 11V5L12 1L3 5V11C3 16.55 6.84 21.74 12 23C12.35 22.91 12.7 22.8 13 22.68A6.42 6.42 0 0 1 11.5 18.5A6.5 6.5 0 0 1 18 12M18 14.5V13L15.75 15.25L18 17.5V16A2.5 2.5 0 0 1 20.24 19.62L21.33 20.71A4 4 0 0 0 18 14.5M18 21A2.5 2.5 0 0 1 15.76 17.38L14.67 16.29A4 4 0 0 0 18 22.5V24L20.25 21.75L18 19.5Z' />
+                        </svg>
+                        <span>PoW verification in progress.</span>
+                    </pow>
+
+                    <response></response>
+                            
+                    <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                    <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
+                </form>
+                
+                <iframe name='hiddenFrame'></iframe>
+
+                <script nonce='<%= nonce %>'>
+                    const validForm = '<%= formId %>';
+                    var pow = <%- JSON.stringify(pow) %>;
+                </script>
+                <script src='/scripts/form.js'></script>
+            </content>
+
+<%- include('../../fragments/footer') %>

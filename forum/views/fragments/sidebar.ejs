@@ -1,0 +1,61 @@
+        <style nonce='<%= nonce %>'>
+<%
+    for(const category of categories.data){
+%>
+            span.<%= category.slug %> {
+                background-color: <%= category.color %>;
+            }
+<%
+    }
+%>
+        </style>
+        <sidebar>
+            <a href='/' type='topics'<% if(page == 'home'){ %> selected<% } %>>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z' />
+                </svg>
+                Topics
+            </a><br>
+            <a href='/rules' type='rules'<% if(page == 'rules'){ %> selected<% } %>>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M2.3,20.28L11.9,10.68L10.5,9.26L9.78,9.97C9.39,10.36 8.76,10.36 8.37,9.97L7.66,9.26C7.27,8.87 7.27,8.24 7.66,7.85L13.32,2.19C13.71,1.8 14.34,1.8 14.73,2.19L15.44,2.9C15.83,3.29 15.83,3.92 15.44,4.31L14.73,5L16.15,6.43C16.54,6.04 17.17,6.04 17.56,6.43C17.95,6.82 17.95,7.46 17.56,7.85L18.97,9.26L19.68,8.55C20.07,8.16 20.71,8.16 21.1,8.55L21.8,9.26C22.19,9.65 22.19,10.29 21.8,10.68L16.15,16.33C15.76,16.72 15.12,16.72 14.73,16.33L14.03,15.63C13.63,15.24 13.63,14.6 14.03,14.21L14.73,13.5L13.32,12.09L3.71,21.7C3.32,22.09 2.69,22.09 2.3,21.7C1.91,21.31 1.91,20.67 2.3,20.28M20,19A2,2 0 0,1 22,21V22H12V21A2,2 0 0,1 14,19H20Z' />
+                </svg>
+                Rules
+            </a><br>
+            <a href='/' type='more'>
+                <svg viewBox='0 0 24 24'>
+                    <path d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />
+                </svg>
+                More
+            </a><br>
+            <input id='<% let uuid = uniqid(); %><%= uuid %>' type='checkbox' checked>
+            <label for='<%= uuid %>'<% if(page == 'edit-categories'){ %> selected<% } %>>
+                Categories
+<%
+    if(isSignedIn && user.role > 1){
+%>
+                <a href='/categories/edit'>
+                    <svg viewBox='0 0 24 24'>
+                        <path d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z' />
+                    </svg>
+                </a>
+<%
+    }
+%>
+            </label>
+            <container>
+<%
+    for(const category of categories.data){
+%>
+                <a href='/c/<%= category.slug %>'<% if(page == `category_${category.slug}`){ %> selected<% } %>><span class='<%= category.slug %>'></span><%= category.title %><% if(category.admin_only){ %><svg viewBox='0 0 24 24'><path d='M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z' /></svg><% } %></a>
+<%
+    }
+%>
+                <a href='/categories' type='all'<% if(page == 'categories'){ %> selected<% } %>>
+                    <svg viewBox='0 0 24 24'>
+                        <path d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z' />
+                    </svg>
+                    All Categories
+                </a>
+            </container>
+        </sidebar>

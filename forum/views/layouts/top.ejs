@@ -1,0 +1,83 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../fragments/sidebar') %>
+
+            <content>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href='/categories'>Categories</a>
+                        </li>
+                        <li>
+                            <a href='/latest'>Latest</a>
+                        </li>
+                        <li selected>
+                            <a href='/top'>Top</a>
+                        </li>
+<%
+    if(isSignedIn){
+%>
+                        <filler></filler>
+                        <li>
+                            <a href='/thread'>New Thread</a>
+                        </li>
+<%
+    }
+%>
+                    </ul>
+                </nav>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th class='replies'>Replies</th>
+                            <th class='views'>Views</th>
+                            <th class='activity'>Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<%
+    for(const thread of data){
+%>
+                        <tr<% if(thread.pinned){ %> pinned<% } %>>
+                            <td>
+                                <a href='/t/<%= thread._id.toString() %>'>
+<%
+        if(thread.archived){
+%>
+                                        <svg viewBox='0 0 24 24'>
+                                            <path d='M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z' />
+                                        </svg>
+<%
+        }
+%>
+                                        <%= thread.title %>
+                                    </a>
+                                <categories>
+<%
+        for(const category of thread.categories){
+            const index = categories.indexes.indexOf(category.toString());
+%>
+                                    <a href='/c/<%= categories.data[index].slug %>'><span class='<%= categories.data[index].slug %>'></span><%= categories.data[index].title %></a>
+<%
+        }
+%>
+                                </categories>
+                                <a href='/t/<%= thread._id.toString() %>'>
+                                    <div><%= thread.content.substr(0, 160).replace(/[^a-zA-Z0-9 ']/g, '') %></div>
+                                </a>
+                            </td>
+                            <td class='replies'><%= thread.comments %></td>
+                            <td class='views'><%= thread.views %></td>
+                            <td class='activity'>1</td>
+                        </tr>
+<%
+    }
+%>
+                    </tbody>
+                </table>
+            </content>
+
+<%- include('../fragments/footer') %>

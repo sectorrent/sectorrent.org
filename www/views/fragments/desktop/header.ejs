@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title><%= process.env.PROJECT_NAME %></title>
+        <link rel='shortcut icon' href='/favicon.svg'>
+        <link rel='stylesheet' href='/styles/desktop/main.css'>
+<%
+    if(typeof styles !== 'undefined'){
+        for(const style of styles){
+%>
+        <link rel='stylesheet' href='/styles/desktop/<%= style %>.css'>
+<%
+        }
+    }
+
+    if(typeof meta !== 'undefined'){
+%>
+        <meta name='title' content='<%= title %>' />
+        <meta name='description' content='<%= meta.description %>' />
+        <meta name='keywords' content='<%= meta.keywords %>' />
+
+        <meta name='twitter:title' content='<%= title %>' />
+        <meta name='twitter:description' content='<%= meta.description %>' />
+        <meta name='twitter:image' content='https://forum.<%= process.env.DOMAIN %>/favicon.svg' />
+        <meta name='twitter:card' content='summary'>
+
+        <meta property='og:title' content='<%= title %>' />
+        <meta property='og:description' content='<%= meta.description %>' />
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='https://<%= process.env.DOMAIN+meta.path %>' />
+        <meta property='og:image' content='https://<%= process.env.DOMAIN %>/favicon.svg' />
+<%
+    }else{
+%>
+        <meta name='robots' content='noindex'>
+        <meta name='googlebot' content='noindex'>
+<%
+    }
+%>
+        <meta name='theme-color' content='#994ce0'>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li class='home'>
+                        <a href='/'>
+                            <%= process.env.PROJECT_NAME %><span>.org</span>
+                        </a>
+                    </li>
+                    <li<% if(page == 'seps' || page == 'beps'){ %> selected<% } %>>
+                        <input id='<% const uuid = uniqid(); %><%= uuid %>' name='header' type='radio'>
+                        <dropdown-container>
+                            <dropdown>
+                                <links>
+                                    <h3>Extension Protocols</h3>
+                                    <a href='/beps/0000'>BitTorrent EPs (Archive)</a>
+                                    <a href='/seps/0000'>SecTorrent EPs</a>
+                                </links>
+                            </dropdown>
+                        </dropdown-container>
+                        <label class='header' for='<%= uuid %>'>Extension Protocols</label>
+                        <label class='close-header' for='close'></label>
+                        <label class='header-close-hover' for='close'></label>
+                    </li>
+                    <li>
+                        <a href='https://forum.<%= process.env.DOMAIN %>'>Forum</a>
+                    </li>
+                    <input id='close' name='header' type='radio'>
+                </ul>
+            </nav>
+        </header>
+        

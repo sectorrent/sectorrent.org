@@ -1,0 +1,135 @@
+content {
+    display: flex;
+    width: calc(100% - 40px);
+    gap: 30px;
+    padding: 0 20px 30px 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
+content content-header {
+    display: block;
+    gap: 20px;
+    width: 100%;
+    max-width: var(--max-content-width);
+    padding: 20px 0;
+    border-bottom: solid 1px var(--background-shimmer);
+}
+
+content-header user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+content-header user img-container {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: solid 2px var(--background-secondary);
+    background-color: var(--background-secondary);
+    overflow: hidden;
+}
+
+content-header user img-container img {
+    display: none;
+    width: 100%;
+    border-radius: 50%;
+    background-color: var(--background-shimmer);
+}
+
+content-header user img-container img.show {
+    display: block;
+}
+
+content-header user svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    fill: var(--primary);
+}
+
+content nav {
+    display: block;
+    padding: 20px 0 0 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+content ul {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+content nav li {
+    display: block;
+}
+
+content li a {
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    border: solid 1px var(--background-shimmer);
+    background-color: var(--background-secondary);
+	transition: background-color 0.3s;
+}
+
+content li a:hover {
+    background-color: var(--background-shimmer);
+}
+
+content li[selected] a {
+    background-color: var(--primary);
+}
+
+content > preview {
+    display: block;
+    width: calc(100% - 22px);
+    max-width: calc(var(--max-content-width) - 22px);
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px var(--background-shimmer);
+}
+
+content > preview:before {
+    display: block;
+    content: attr(label);
+    font-size: 0.8em;
+}
+
+preview *:first-child {
+    margin-top: 0;
+}
+
+preview *:last-child {
+    margin-bottom: 0;
+}
+
+content > preview:empty {
+    display: none;
+}
+
+date {
+    display: block;
+    width: 100%;
+    max-width: var(--max-content-width);
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}

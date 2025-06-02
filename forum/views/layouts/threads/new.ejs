@@ -1,0 +1,88 @@
+<%
+    const sideBarId = uniqid();
+%><%- include('../../fragments/header', { sideBarId }) %>
+        <section>
+<%- include('../../fragments/sidebar') %>
+
+            <content>
+                <style nonce='<%= nonce %>'>
+                    @media(max-width:1100px) {
+                        preview pre {
+                            width: calc(100vw - 150px) !important;
+                        }
+                    }
+
+                    @media(max-width:800px) {
+                        preview pre {
+                            width: 666px !important;
+                        }
+                    }
+
+                    preview pre {
+                        width: calc(100vw - 402px);
+                        max-width: calc(var(--max-content-width) - 96px);
+                    }
+                </style>
+                
+                <content-header>
+                    <h1>New Thread</h1>
+                </content-header>
+
+                <thread>
+                    <a class='user-icon' href='/u/<%= user.username %>'>
+                        <img src='<%= user.avatar %>' onload='this.className = "show"' title='<%= user.username %>' draggable='false' oncontextmenu='return false'>
+                    </a>
+
+                    <thread-inner>
+                        <form valid-form='<% const formId = uniqid(); %><%= formId %>' action='https://api.<%= process.env.DOMAIN %>/thread' method='POST' target='hiddenFrame'>
+                            <input-field title='Title'>
+                                <input key='title' type='text' name='title' required placeholder='Title' onkeypress='formAdjust(event)' />
+                            </input-field>
+
+                            <selector-input>
+                                <input key='categories' name='categories[]' type='hidden' value='0' />
+                                <input id='category-selector-toggle' type='checkbox' class='fl-select'>
+
+                                <label id='category-selector' for='category-selector-toggle' label='Select Category'>
+                                    <fl-options>
+                                        <fl-option value='0'>Select Category</fl-option>
+<%
+    for(const category of categories.data){
+        if(!categories.data.admin_only || user.role > 2){
+%>
+                                        <fl-option value='<%= category._id.toString() %>'><span class='<%= category.slug %>'></span><%= category.title %></fl-option>
+<%
+        }
+    }
+%>
+                                    </fl-options>
+                                </label>
+                            </selector-input>
+
+                            <%- include('../../fragments/editor', { name: 'content', placeholder: 'Write a thread using Markdown.' }) %>
+
+                            <pow>
+                                <svg viewBox='0 0 24 24'>
+                                    <path d='M18 12A6.41 6.41 0 0 1 20.87 12.67A11.63 11.63 0 0 0 21 11V5L12 1L3 5V11C3 16.55 6.84 21.74 12 23C12.35 22.91 12.7 22.8 13 22.68A6.42 6.42 0 0 1 11.5 18.5A6.5 6.5 0 0 1 18 12M18 14.5V13L15.75 15.25L18 17.5V16A2.5 2.5 0 0 1 20.24 19.62L21.33 20.71A4 4 0 0 0 18 14.5M18 21A2.5 2.5 0 0 1 15.76 17.38L14.67 16.29A4 4 0 0 0 18 22.5V24L20.25 21.75L18 19.5Z' />
+                                </svg>
+                                <span>PoW verification in progress.</span>
+                            </pow>
+
+                            <response></response>
+                            
+                            <input id='<% const buttonId = uniqid() %><%= buttonId %>' type='submit' disabled />
+                            <label type='submit' for='<%= buttonId %>' disabled>Submit</label>
+                        </form>
+                    </thread-inner>
+                </thread>
+                <iframe name='hiddenFrame'></iframe>
+
+                <script src='/scripts/new-thread.js'></script>
+                <script nonce='<%= nonce %>'>
+                    const validForm = '<%= formId %>';
+                    var pow = <%- JSON.stringify(pow) %>;
+                </script>
+                <script src='/scripts/form.js'></script>
+            </content>
+
+<%- include('../../fragments/footer') %>
